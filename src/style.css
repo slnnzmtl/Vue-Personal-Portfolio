@@ -1,11 +1,44 @@
+
+@import "tailwindcss";
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Define variables first */
 :root {
-  font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
+  --purple: #AA00C8;
+  --purple-light: #C933DD;
+  --purple-dark: #8A00A3;
+  --purple-alpha-10: rgba(170, 0, 200, 0.1);
+  --purple-alpha-20: rgba(170, 0, 200, 0.2);
+  --purple-alpha-50: rgba(170, 0, 200, 0.5);
+
+  --cyan: #00EEFF;
+  --cyan-light: #33F2FF;
+  --cyan-dark: #00BFD1;
+  --cyan-alpha-10: rgba(0, 238, 255, 0.1);
+  --cyan-alpha-20: rgba(0, 238, 255, 0.2);
+  --cyan-alpha-50: rgba(0, 238, 255, 0.5);
+
+  --blue: #0800FF;
+  --blue-light: #3933FF;
+  --blue-dark: #0600CC;
+  --blue-alpha-10: rgba(8, 0, 255, 0.1);
+  --blue-alpha-20: rgba(8, 0, 255, 0.2);
+  --blue-alpha-50: rgba(8, 0, 255, 0.5);
+
+  --background: #0a0a0a;
+  --text: rgba(255, 255, 255, 0.87);
+  --text-secondary: var(--purple);
+  --border: rgba(255, 255, 255, 0.1);
+
+  font-family: 'Fira Code', monospace;
   line-height: 1.5;
   font-weight: 400;
 
   color-scheme: light dark;
-  color: rgba(255, 255, 255, 0.87);
-  background-color: #242424;
+  color: var(--text);
+  background-color: var(--background);
 
   font-synthesis: none;
   text-rendering: optimizeLegibility;
@@ -15,11 +48,11 @@
 
 a {
   font-weight: 500;
-  color: #646cff;
+  color: var(--blue);
   text-decoration: inherit;
 }
 a:hover {
-  color: #535bf2;
+  color: var(--blue-alpha-10);
 }
 
 body {
@@ -47,7 +80,7 @@ button {
   transition: border-color 0.25s;
 }
 button:hover {
-  border-color: #646cff;
+  border-color: var(--blue);
 }
 button:focus,
 button:focus-visible {
@@ -61,17 +94,17 @@ button:focus-visible {
 #app {
   max-width: 1280px;
   margin: 0 auto;
-  padding: 2rem;
+  /* padding: 2rem; */
   text-align: center;
 }
 
 @media (prefers-color-scheme: light) {
   :root {
-    color: #213547;
+    color: var(--blue-dark);
     background-color: #ffffff;
   }
   a:hover {
-    color: #747bff;
+    color: var(--blue-light);
   }
   button {
     background-color: #f9f9f9;
