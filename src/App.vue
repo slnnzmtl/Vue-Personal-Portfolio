@@ -8,7 +8,6 @@ const { openModal } = useModal();
 <template>
   <BackgroundWrapper>
     <NavigationMenu />
-    <button @click="openModal">Open Modal</button>
     <router-view />
   </BackgroundWrapper>
 </template>

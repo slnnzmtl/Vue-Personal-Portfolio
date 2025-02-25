@@ -1,8 +1,8 @@
 <template>
-  <div class="main-view max-w-screen-xl mx-auto mt-20">
-    <FaceScreen />
-    <SkillsScreen id="skills-screen" />
-    <ProjectsScreen id="projects-screen" />
+  <div class="main-view mt-20">
+    <FaceScreen class="max-w-screen-xl mx-auto" />
+    <SkillsScreen class="max-w-screen-xl mx-auto" id="skills-screen" />
+    <ProjectsScreen class="max-w-screen-xl mx-auto" id="projects-screen" />
   </div>
 </template>
 
