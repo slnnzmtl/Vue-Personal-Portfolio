@@ -29,7 +29,7 @@
 
   --background: #0a0a0a;
   --text: rgba(255, 255, 255, 0.87);
-  --text-secondary: var(--purple);
+  --text-secondary: var(--purple-light);
   --border: rgba(255, 255, 255, 0.1);
 
   font-family: 'Fira Code', monospace;
@@ -44,15 +44,6 @@
   text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-}
-
-a {
-  font-weight: 500;
-  color: var(--blue);
-  text-decoration: inherit;
-}
-a:hover {
-  color: var(--blue-alpha-10);
 }
 
 body {
