@@ -7,15 +7,6 @@
     <div class="light-effects">
       <div class="light-group" v-for="i in 2" :key="i">
         <div 
-          class="light light-1" 
-          :style="{ 
-            transform: `translate(
-              ${mousePos.x * 0.02}px,
-              ${mousePos.y * 0.02}px
-            )`
-          }"
-        ></div>
-        <div 
           class="light light-2" 
           :style="{ 
             transform: `translate(
@@ -124,21 +115,23 @@ onUnmounted(() => {
 .light {
   position: absolute;
   border-radius: 50%;
-  filter: blur(100px);
+  filter: blur(10vh);
   contain: layout paint;
   opacity: 0.3;
   mix-blend-mode: screen;
   will-change: transform;
   
-  transform: translate(x, y) scale(s);
+  /* Use responsive sizes */
+  width: 10vw; /* Base size for mobile */
+  height: 10vw; /* Base size for mobile */
 }
 
 .light-2 {
   background: #0800FF;
-  width: 600px;
-  height: 600px;
+  width: 60vh; /* Adjusted for larger screens */
+  height: 60vh; /* Adjusted for larger screens */
   top: 50%;
-  right: -200px;
+  right: -20vw; /* Adjusted for proportional positioning */
   animation: float2 25s ease-in-out infinite,
              pulse 9s ease-in-out infinite,
              scale 12s ease-in-out infinite;
@@ -146,9 +139,9 @@ onUnmounted(() => {
 
 .light-3 {
   background: #00EEFF;
-  width: 400px;
-  height: 400px;
-  bottom: -100px;
+  width: 40vh; /* Adjusted for larger screens */
+  height: 40vh; /* Adjusted for larger screens */
+  bottom: -10vw; /* Adjusted for proportional positioning */
   left: 30%;
   animation: float3 22s ease-in-out infinite,
              pulse 8s ease-in-out infinite,
@@ -157,8 +150,8 @@ onUnmounted(() => {
 
 .light-4 {
   background: #FF00EA;
-  width: 450px;
-  height: 450px;
+  width: 45vh; /* Adjusted for larger screens */
+  height: 45vh; /* Adjusted for larger screens */
   top: 30%;
   left: 20%;
   animation: float4 23s ease-in-out infinite,
@@ -204,5 +197,28 @@ onUnmounted(() => {
 @keyframes float4 {
   0%, 100% { transform: translate(0, 0); }
   50% { transform: translate(-75px, 75px); }
+}
+
+/* Media Queries for Mobile Adjustments */
+@media (max-width: 640px) {
+  .light {
+    width: 15vw; /* Increase size for mobile */
+    height: 15vw; /* Increase size for mobile */
+  }
+
+  .light-2 {
+    width: 50vh; /* Adjust size for mobile */
+    height: 50vh; /* Adjust size for mobile */
+  }
+
+  .light-3 {
+    width: 30vh; /* Adjust size for mobile */
+    height: 30vh; /* Adjust size for mobile */
+  }
+
+  .light-4 {
+    width: 35vh; /* Adjust size for mobile */
+    height: 35vh; /* Adjust size for mobile */
+  }
 }
 </style> 
