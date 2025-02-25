@@ -1,5 +1,7 @@
 export { default as BackgroundWrapper } from './BackgroundWrapper.vue'
 export { default as FaceScreen } from './FaceScreen/FaceScreen.vue'
 export { default as ProjectsScreen } from './ProjectsScreen/ProjectsScreen.vue'
+export { default as SkillsScreen } from './SkillsScreen/SkillsScreen.vue'
+export { default as ProjectCard } from './ProjectCard/ProjectCard.vue'
 export { default as Avatar } from './Avatar.vue'
 export { default as NavigationMenu } from './NavigationMenu.vue'
