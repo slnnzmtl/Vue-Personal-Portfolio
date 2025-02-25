@@ -1,5 +1,6 @@
 <script setup lang="ts">
 import { ref } from 'vue';
+import { Glass } from '@components/ui';
 
 interface Props {
   name: string
@@ -17,8 +18,9 @@ const handleImageLoad = () => {
 </script>
 
 <template>
-  <div class="project-card">
-    <div class="project-card__glass"></div>
+  <Glass
+    class="project-card"
+  >
     <div class="project-card__image">
       <div v-if="isImageLoading" class="image-loader shimmer"></div>
       <img 
@@ -36,7 +38,7 @@ const handleImageLoad = () => {
         <span class="project-card__link-arrow">→</span>
       </a>
     </div>
-  </div>
+  </Glass>
 </template>
 
 <style scoped lang="scss">
@@ -47,9 +49,6 @@ const handleImageLoad = () => {
   position: relative;
   border-radius: 1rem;
   overflow: hidden;
-  background: rgba(255, 255, 255, 0.05);
-  backdrop-filter: blur(10px);
-  border: 1px solid rgba(255, 255, 255, 0.1);
   transition: transform 0.3s ease;
 
   &:hover {
@@ -58,17 +57,6 @@ const handleImageLoad = () => {
     .project-card__link-arrow {
       transform: translateX(5px);
     }
-  }
-
-  &__glass {
-    position: absolute;
-    inset: 0;
-    background: linear-gradient(
-      135deg,
-      rgba(255, 255, 255, 0.1),
-      rgba(255, 255, 255, 0.05)
-    );
-    z-index: 0;
   }
 
   &__image {

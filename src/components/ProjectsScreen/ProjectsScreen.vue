@@ -4,8 +4,11 @@ import { ProjectViewer } from '../ProjectViewer'
 
 <template>
   <div class="projects-screen">
-    <p class="text-xl sm:text-4xl font-bold mb-16">
+    <p class="text-xl sm:text-4xl font-bold mb-8">
       Projects
+    </p>
+    <p class="text-lg sm:text-xl mb-16">
+      Here, you'll find projects I've built or contributed to. Use the filters below to explore projects based on the tech stack you're interested in.
     </p>
     <ProjectViewer />
   </div>

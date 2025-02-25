@@ -16,6 +16,8 @@ const smoothScroll = (event: MouseEvent, targetId: string) => {
         <a href="#projects-screen" @click="smoothScroll($event, 'projects-screen')">#projects</a>
         <a href="#skills-screen" @click="smoothScroll($event, 'skills-screen')">#technologies</a>
       </div>
+
+      
     </div>
   </nav>
 </template>
