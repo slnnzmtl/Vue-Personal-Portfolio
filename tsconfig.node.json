@@ -11,14 +11,21 @@
     "allowImportingTsExtensions": true,
     "isolatedModules": true,
     "moduleDetection": "force",
-    "noEmit": true,
+    "noEmit": false,
+    "composite": true,
+    "emitDeclarationOnly": true,
+
+
+    "outDir": "./dist",
+    "rootDir": "./",
 
     /* Linting */
     "strict": true,
     "noUnusedLocals": true,
     "noUnusedParameters": true,
     "noFallthroughCasesInSwitch": true,
-    "noUncheckedSideEffectImports": true
+    "noUncheckedSideEffectImports": true,
+    
   },
   "include": ["vite.config.ts"]
 }

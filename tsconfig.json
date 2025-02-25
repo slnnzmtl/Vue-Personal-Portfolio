@@ -1,7 +1,21 @@
 {
-  "files": [],
   "references": [
-    { "path": "./tsconfig.app.json" },
     { "path": "./tsconfig.node.json" }
-  ]
+  ],
+  "include": [
+    "src/**/*.ts",
+    "src/**/*.tsx",
+    "src/**/*.vue",
+    "src/types/**/*.d.ts"
+  ],
+  "compilerOptions": {
+    "paths": {
+      "@/*": ["./src/*"],
+      "@assets/*": ["./src/assets/*"],
+      "@components": ["./src/components"],
+      "@components/*": ["./src/components/*"],
+      "@composables": ["./src/composables"]
+    },
+    "noEmit": true,
+  },
 }
