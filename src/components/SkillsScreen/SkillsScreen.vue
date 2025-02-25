@@ -1,9 +1,9 @@
 <template>
   <section class="skills-screen">
-    <p class="text-3xl sm:text-4xl font-bold mb-8">Technology stack</p>
-    <p class="text-lg sm:text-xl mb-16">I work with many technologies, covering every detail of web development.</p>
+    <p class="text-2xl sm:text-4xl font-bold mb-8">Technology stack</p>
+    <p class="text-lg sm:text-xl mb-8">I work with many technologies, covering every detail of web development.</p>
 
-    <div class="flex gap-4 sm:max-h-[600px] justify-between w-full">
+    <div class="flex flex-wrap  gap-4 sm:max-h-[600px] justify-between w-full">
       <SkillCard title="Core">
         <ul>
           <li>JavaScript</li>
