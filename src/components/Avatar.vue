@@ -18,9 +18,11 @@ import MaleAvatar from '../assets/male-avatar.svg'
   background-size: 200% 200%;
   animation: gradient-rotate 6s ease-in-out infinite;
   border-radius: 50%;
-  width: 300px;
-  height: 300px;
+  max-width: 400px;
+  max-height: 400px;
   overflow: hidden;
+  display: flex;
+  flex-shrink: 0;
 }
 
 .glassmorphic-effect {
@@ -34,7 +36,7 @@ import MaleAvatar from '../assets/male-avatar.svg'
 }
 
 .male-avatar {
-  min-width: 300px;
+  min-width: 100%;
   border-radius: 50%;
   box-sizing: border-box;
   overflow: hidden;
