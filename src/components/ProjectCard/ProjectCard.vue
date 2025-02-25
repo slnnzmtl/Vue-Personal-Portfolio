@@ -1,64 +1,122 @@
 <script setup lang="ts">
-import { ref } from 'vue';
+import { computed, ref } from 'vue';
 import { Glass } from '@components/ui';
-import type { Project } from '../ProjectsScreen/projectsData';
+import type { Project } from '@stores/projectTypes';
+import { Tags } from '../Tags';
 
 interface Props {
-  project: Project
-  selectedFilters: string[]
+  project: Project;
+  selectedFilters: string[];
+  type: 'list' | 'grid';
+  active: boolean;
 }
 
-const props = defineProps<Props>()
+const props = defineProps<Props>();
 const isImageLoading = ref(true);
+const isExpanded = ref(false);
+
+const isGridLayout = computed(() => props.type === 'grid');
+const activeClass = computed(() => {
+  return props.active ? 'active' : '' 
+});
+
+
+const expandedClass = computed(() => {
+  return isExpanded || props.active  ? 'expanded' : ''
+});
 
 const handleImageLoad = () => {
   isImageLoading.value = false;
 };
+
+const expand = () => {
+  isExpanded.value = true;
+};
+
+const collapse = () => {
+  isExpanded.value = false;
+};
 </script>
 
 <template>
-  <Glass
-    class="project-card"
+  <Glass 
+    v-if="isGridLayout" 
+    :class="`project-card flex flex-col relative radius-md overflow-hidden ${activeClass}`"
   >
     <div class="project-card__image">
       <div v-if="isImageLoading" class="image-loader shimmer"></div>
       <img 
-        :src="props.project?.image" 
-        :alt="props.project?.name"
+        :src="project?.image" 
+        :alt="project?.name"
         @load="handleImageLoad"
         :class="{ 'image-loaded': !isImageLoading }"
       />
     </div>
-    <div class="project-card__content">
-      <h2 class="project-card__title text-lg sm:text-xl">{{ props.project?.name }}</h2>
-      <p class="project-card__description text-sm sm:text-base">{{ props.project?.description }}</p>
+    
+    <div class="project-card__content flex flex-col gap-4 p-4 text-left">
+      <h2 class="project-card__title text-lg sm:text-xl">{{ project?.name }}</h2>
+      <p class="project-card__description text-sm sm:text-base">{{ project?.description }}</p>
       
-      <div class="tags">
-        <span 
-          v-for="tech in props.project?.technologies" 
-          :key="tech" 
-          :class="['tag', { 'highlighted': props.selectedFilters.includes(tech) }]"
-        >
-          {{ tech }}
-        </span>
-      </div>
+      <Tags 
+        :technologies="project?.technologies" 
+        :selectedFilters="selectedFilters" 
+      />
 
-      <a :href="props.project?.url" target="_blank" class="project-card__link">
+      <a :href="project?.url" target="_blank" class="project-card__link">
         Read more
         <span class="project-card__link-arrow">→</span>
       </a>
     </div>
   </Glass>
+
+  <Glass 
+    v-else 
+    :class="`project-card project-card--list relative radius-md overflow-hidden p-4 ${activeClass} ${expandedClass}`"
+    @mouseover="expand"
+    @mouseleave="collapse"
+  >
+    <div class="flex gap-4">
+      <div class="project-card__image">
+        <div v-if="isImageLoading" class="image-loader shimmer"></div>
+        <img 
+          :src="project?.image" 
+          :alt="project?.name"
+          @load="handleImageLoad"
+          :class="{ 'image-loaded': !isImageLoading }"
+        />
+      </div>
+
+      <div class="flex flex-col gap-2 justify-around flex-grow">
+        <h2 class="project-card__title text-lg sm:text-xl">{{ project?.name }}</h2>
+
+        <Tags 
+          :technologies="project?.technologies" 
+          :selectedFilters="selectedFilters" 
+        />
+      </div>
+    </div>
+    
+    <div class="project-card__content">
+      <p class="project-card__description text-sm sm:text-base py-4">{{ project?.description }}</p>
+    </div>
+  </Glass>
 </template>
 
 <style scoped lang="scss">
+:root {
+  --card-transition: 0.3s ease;
+  --spacing-sm: 0.5rem;
+  --spacing-md: 1rem;
+}
+
 .project-card {
-  display: flex;
-  flex-direction: column;
-  position: relative;
-  border-radius: 1rem;
-  overflow: hidden;
-  transition: transform 0.3s ease;
+  transition: all .3s ease;
+  cursor: pointer;
+
+  &.active {
+    background: var(--cyan-alpha-10);
+    transform: translateX(5px);
+  }
 
   &:hover {
     transform: translateY(-5px);
@@ -68,9 +126,39 @@ const handleImageLoad = () => {
     }
   }
 
+  &--list {
+    &:hover {
+      transform: translateX(5px);
+    }
+
+    .project-card__image {
+      height: auto;
+      width: 20%;
+      max-width: 120px;
+      min-width: 80px;
+      object-fit: cover;
+      overflow: hidden;
+      border-radius: var(--radius-lg);
+    }
+
+    .project-card__content {
+      max-height: 0;
+      overflow: hidden;
+      opacity: 0;
+      transition: max-height 0.3s ease, opacity 0.3s ease, padding 0.3s ease;
+    }
+
+    &.expanded {
+      .project-card__content {
+        max-height: 200px;
+        opacity: 1;
+      }
+    }
+  }
+
   &__image {
     position: relative;
-    height: 250px;
+    height: 300px; 
     overflow: hidden;
     z-index: 1;
 
@@ -78,7 +166,7 @@ const handleImageLoad = () => {
       width: 100%;
       height: 100%;
       object-fit: cover;
-      transition: opacity 0.3s ease;
+      transition: opacity var(--card-transition);
       opacity: 0;
 
       &.image-loaded {
@@ -92,40 +180,38 @@ const handleImageLoad = () => {
     flex-direction: column;
     justify-content: space-between;
     position: relative;
-    padding: 1.5rem;
     z-index: 1;
     flex-grow: 1;
   }
 
   &__title {
-    font-size: 1.5rem;
     font-weight: 600;
     color: var(--text);
-    margin-bottom: 0.5rem;
+    margin-bottom: var(--spacing-sm);
   }
 
   &__description {
     color: var(--text-secondary);
-    margin-bottom: 1.5rem;
-    line-height: 1.6;
+    margin-bottom: var(--spacing-md);
+    line-height: 1.4;
   }
 
   &__link {
-    margin-top: 2rem;
+    margin-top: var(--spacing-md);
     display: inline-flex;
     align-items: center;
     color: var(--cyan);
     text-decoration: none;
     font-weight: 500;
-    transition: color 0.3s ease;
+    transition: color var(--card-transition);
 
     &:hover {
       color: var(--cyan-light);
     }
 
     &-arrow {
-      margin-left: 0.5rem;
-      transition: transform 0.3s ease;
+      margin-left: .5rem;
+      transition: transform 0.3s;
     }
   }
 }
@@ -150,20 +236,5 @@ const handleImageLoad = () => {
 @keyframes shimmer {
   0% { background-position: 200% 0; }
   100% { background-position: -200% 0; }
-}
-
-.tag {
-  display: inline-block;
-  background-color: rgba(255, 255, 255, 0.2);
-  color: var(--text);
-  border-radius: 4px;
-  padding: 0.25rem 0.5rem;
-  margin-right: 0.5rem;
-  font-size: 0.875rem;
-
-  &.highlighted {
-    background-color: var(--cyan);
-    color: var(--background);
-  }
 }
 </style>

@@ -78,11 +78,9 @@ onUnmounted(() => {
 });
 </script>
 
-<style scoped>
+<style scoped lang="scss">
 .background-wrapper {
   position: relative;
-  min-height: 100vh;
-  max-width: 100vw;
   width: 100%;
 }
 

@@ -10,10 +10,11 @@ const smoothScroll = (event: MouseEvent, targetId: string) => {
 
 <template>
   <nav>
-    <div class="nav-content max-w-screen-xl mx-auto">
+    <div class="nav-content max-w-screen-xl 2xl:max-w-screen-2xl mx-auto">
       <div class="nav-links">
         <router-link to="/">About Me</router-link>
-        <a href="#projects-screen" @click="smoothScroll($event, 'projects-screen')">#projects</a>
+        <router-link to="/projects">Projects</router-link>
+        <!-- <a href="#projects-screen" @click="smoothScroll($event, 'projects-screen')">#projects</a> -->
         <a href="#skills-screen" @click="smoothScroll($event, 'skills-screen')">#technologies</a>
       </div>
 
