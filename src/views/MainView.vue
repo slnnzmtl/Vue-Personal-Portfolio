@@ -7,5 +7,5 @@
 </template>
 
 <script setup lang="ts">
-import { FaceScreen, SkillsScreen, ProjectsScreen } from '../components';
+import { FaceScreen, SkillsScreen, ProjectsScreen } from '@components';
 </script> 

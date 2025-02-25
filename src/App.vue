@@ -1,10 +1,14 @@
 <script setup lang="ts">
-import { BackgroundWrapper, NavigationMenu } from './components';
+import { BackgroundWrapper, NavigationMenu } from '@components';
+import { useModal } from '@composables';
+
+const { openModal } = useModal();
 </script>
 
 <template>
   <BackgroundWrapper>
     <NavigationMenu />
+    <button @click="openModal">Open Modal</button>
     <router-view />
   </BackgroundWrapper>
 </template>
