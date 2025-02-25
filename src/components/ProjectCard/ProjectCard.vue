@@ -1,12 +1,11 @@
 <script setup lang="ts">
 import { ref } from 'vue';
 import { Glass } from '@components/ui';
+import type { Project } from '../ProjectsScreen/projectsData';
 
 interface Props {
-  name: string
-  description: string
-  url: string
-  image: string
+  project: Project
+  selectedFilters: string[]
 }
 
 const props = defineProps<Props>()
@@ -24,17 +23,28 @@ const handleImageLoad = () => {
     <div class="project-card__image">
       <div v-if="isImageLoading" class="image-loader shimmer"></div>
       <img 
-        :src="props.image" 
-        :alt="props.name"
+        :src="props.project?.image" 
+        :alt="props.project?.name"
         @load="handleImageLoad"
         :class="{ 'image-loaded': !isImageLoading }"
       />
     </div>
     <div class="project-card__content">
-      <h2 class="project-card__title text-lg sm:text-xl">{{ props.name }}</h2>
-      <p class="project-card__description text-sm sm:text-base">{{ props.description }}</p>
-      <a :href="props.url" target="_blank" class="project-card__link">
-        Visit Website
+      <h2 class="project-card__title text-lg sm:text-xl">{{ props.project?.name }}</h2>
+      <p class="project-card__description text-sm sm:text-base">{{ props.project?.description }}</p>
+      
+      <div class="tags">
+        <span 
+          v-for="tech in props.project?.technologies" 
+          :key="tech" 
+          :class="['tag', { 'highlighted': props.selectedFilters.includes(tech) }]"
+        >
+          {{ tech }}
+        </span>
+      </div>
+
+      <a :href="props.project?.url" target="_blank" class="project-card__link">
+        Read more
         <span class="project-card__link-arrow">→</span>
       </a>
     </div>
@@ -45,7 +55,6 @@ const handleImageLoad = () => {
 .project-card {
   display: flex;
   flex-direction: column;
-  height: 100%;
   position: relative;
   border-radius: 1rem;
   overflow: hidden;
@@ -61,7 +70,7 @@ const handleImageLoad = () => {
 
   &__image {
     position: relative;
-    height: 200px;
+    height: 250px;
     overflow: hidden;
     z-index: 1;
 
@@ -102,7 +111,7 @@ const handleImageLoad = () => {
   }
 
   &__link {
-    margin-top: auto;
+    margin-top: 2rem;
     display: inline-flex;
     align-items: center;
     color: var(--cyan);
@@ -141,5 +150,20 @@ const handleImageLoad = () => {
 @keyframes shimmer {
   0% { background-position: 200% 0; }
   100% { background-position: -200% 0; }
+}
+
+.tag {
+  display: inline-block;
+  background-color: rgba(255, 255, 255, 0.2);
+  color: var(--text);
+  border-radius: 4px;
+  padding: 0.25rem 0.5rem;
+  margin-right: 0.5rem;
+  font-size: 0.875rem;
+
+  &.highlighted {
+    background-color: var(--cyan);
+    color: var(--background);
+  }
 }
 </style>
