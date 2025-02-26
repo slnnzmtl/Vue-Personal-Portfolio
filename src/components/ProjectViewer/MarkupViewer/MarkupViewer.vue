@@ -1,7 +1,7 @@
 <template>
   <Glass class="markup-content p-4">
     <div v-if="activeProject" v-html="renderedContent" class="markup-content__render rounded-lg"></div>
-    <div v-else class="placeholder">
+    <div v-else class="placeholder flex items-center justify-center h-full">
       <p>Please select a project to view its details.</p>
     </div>
   </Glass>
