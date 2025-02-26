@@ -1,1 +1,1 @@
-export { default as SkillsScreen } from './SkillsScreen.vue'
+export { default as SkillsScreen } from "./SkillsScreen.vue";

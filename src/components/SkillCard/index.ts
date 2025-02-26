@@ -1,1 +1,1 @@
-export { default as SkillCard } from './SkillCard.vue'; 
+export { default as SkillCard } from "./SkillCard.vue";

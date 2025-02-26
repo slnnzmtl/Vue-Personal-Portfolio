@@ -1,1 +1,1 @@
-export { default as FilterPanel } from './FilterPanel.vue'
+export { default as FilterPanel } from "./FilterPanel.vue";

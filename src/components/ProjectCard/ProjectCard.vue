@@ -72,8 +72,6 @@ const collapse = () => {
   <Glass 
     v-else 
     :class="`project-card project-card--list relative radius-md overflow-hidden p-4 ${activeClass} ${expandedClass}`"
-    @mouseover="expand"
-    @mouseleave="collapse"
   >
     <div class="flex gap-4">
       <div class="project-card__image">

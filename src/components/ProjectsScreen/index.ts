@@ -1,1 +1,1 @@
-export { default as ProjectsScreen } from './ProjectsScreen.vue'
+export { default as ProjectsScreen } from "./ProjectsScreen.vue";

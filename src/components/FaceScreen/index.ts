@@ -1,5 +1,3 @@
-import FaceScreen from './FaceScreen.vue'
+import FaceScreen from "./FaceScreen.vue";
 
-export {
-  FaceScreen
-}
+export { FaceScreen };

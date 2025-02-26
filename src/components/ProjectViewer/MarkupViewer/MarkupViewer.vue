@@ -26,7 +26,7 @@ const renderedContent = computed(() => {
 </script>
 
 <style lang="scss">
-@import "@styles/mixins/_scrollbar.scss";
+@use "@styles/mixins/_scrollbar.scss";
 .markup-content {
   overflow-y: auto;
   text-align: left;

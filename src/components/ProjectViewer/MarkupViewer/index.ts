@@ -1,1 +1,1 @@
-export { default as MarkupViewer } from './MarkupViewer.vue';
+export { default as MarkupViewer } from "./MarkupViewer.vue";
