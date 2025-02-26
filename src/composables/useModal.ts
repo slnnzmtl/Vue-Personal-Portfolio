@@ -1,19 +1,19 @@
-import { ref } from 'vue';
+import { ref } from "vue";
 
 export default function useModal() {
-    const isVisible = ref(false);
+  const isVisible = ref(false);
 
-    const openModal = () => {
-        isVisible.value = true;
-    };
+  const openModal = () => {
+    isVisible.value = true;
+  };
 
-    const closeModal = () => {
-        isVisible.value = false;
-    };
+  const closeModal = () => {
+    isVisible.value = false;
+  };
 
-    return {
-        isVisible,
-        openModal,
-        closeModal,
-    };
-} 
+  return {
+    isVisible,
+    openModal,
+    closeModal,
+  };
+}
