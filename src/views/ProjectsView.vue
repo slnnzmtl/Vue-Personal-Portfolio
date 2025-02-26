@@ -32,7 +32,7 @@
 import { computed, defineComponent, ref, watch } from "vue";
 import { useProjectsStore } from "../stores/projectsStore";
 import { MarkupViewer, FilterPanel, ProjectList } from "@components";
-import { Project } from "@/stores/projectTypes";
+import { Project } from "@stores/projectTypes";
 import { useRoute } from 'vue-router';
 
 const projectsStore = useProjectsStore();
