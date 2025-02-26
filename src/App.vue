@@ -13,9 +13,7 @@ const { openModal } = useModal();
 </template>
 
 <style lang="scss">
-/* Ensure text is readable on the background */
 :root {
   color: #fff;
-
 }
 </style>
