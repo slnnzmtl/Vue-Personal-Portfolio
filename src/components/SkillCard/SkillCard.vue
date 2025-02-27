@@ -7,7 +7,7 @@ defineProps<{
 
 <template>
   <GlassMaterial class="skill-card">
-    <h2 class="skill-card__title">{{ title }}</h2>
+    <h3 class="skill-card__title">{{ title }}</h3>
     <div class="skill-card__content">
       <slot></slot>
     </div>
@@ -22,8 +22,6 @@ defineProps<{
   padding: 1.5rem;
 
   &__title {
-    font-size: 1.5rem;
-    font-weight: 600;
     color: var(--cyan);
     margin-bottom: 1rem;
   }
@@ -37,7 +35,6 @@ defineProps<{
       li {
         color: var(--text);
         margin-bottom: 0.5rem;
-        font-size: 1rem;
         opacity: 0.8;
         transition: opacity 0.3s ease;
 

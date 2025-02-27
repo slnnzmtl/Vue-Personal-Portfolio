@@ -78,7 +78,13 @@ export default defineComponent({
     margin-right: 0.5rem;
     margin-bottom: 0.5rem;
     cursor: pointer;
-    transition: background-color 0.3s;
+    transition:
+      background-color 0.3s,
+      transform 0.3s;
+
+    &:hover {
+      transform: translateY(-2px);
+    }
 
     &.active {
       background-color: var(--cyan);
