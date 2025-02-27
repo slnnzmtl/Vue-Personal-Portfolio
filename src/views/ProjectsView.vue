@@ -1,6 +1,6 @@
 <template>
   <transition name="fade" mode="out-in">
-    <div class="grid grid-cols-1 lg:grid-cols-3 gap-8 ml-6 mr-6">
+    <div class="grid grid-cols-1 lg:grid-cols-3 gap-16 ml-6 mr-6">
       <div class="text-left">
         <p class="text-2xl sm:text-4xl font-bold mb-8">Projects</p>
         <p class="text-lg sm:text-xl mb-8">
@@ -8,18 +8,13 @@
           explore projects based on the tech stack you're interested in.
         </p>
 
-        <FilterPanel
-          :technologies="projectsStore.technologies"
+        <ControlPanel
+          :tags="projectsStore.tags"
           :selectedFilters="selectedFilters"
-          @onFilterChange="projectFilterChange"
-        />
-
-        <ProjectList
           :projects="filteredProjects"
           :activeProject="activeProject"
-          :selectedFilters="selectedFilters"
+          @onFilterChange="projectFilterChange"
           @project-clicked="onActiveProjectChange"
-          type="list"
         />
       </div>
 
@@ -30,9 +25,9 @@
 
 <script lang="ts" setup>
 import { computed, defineComponent, ref, watch } from "vue";
-import { useProjectsStore } from "../stores/projectsStore";
-import { MarkupViewer, FilterPanel, ProjectList } from "@components";
-import { Project } from "@stores/projectTypes";
+import { useProjectsStore } from "@/stores/projectsStore";
+import { MarkupViewer, FilterPanel, ProjectList, ControlPanel } from "@/components";
+import { Project } from "@/stores/projectTypes";
 import { useRoute } from 'vue-router';
 
 const projectsStore = useProjectsStore();
@@ -46,7 +41,7 @@ const filteredProjects = computed(() => {
     return projectsStore.projects;
   }
   return projectsStore.projects.filter((project) =>
-    project.technologies.some((tech) => selectedFilters.value.includes(tech))
+    project.tags.some((tech) => selectedFilters.value.includes(tech))
   );
 });
 
