@@ -11,7 +11,6 @@ import globalComponents from "./components/global-components";
 const app = createApp(App);
 const pinia = createPinia();
 
-
 app.use(globalComponents);
 
 app.use(router);

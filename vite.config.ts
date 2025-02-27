@@ -2,6 +2,7 @@ import { defineConfig } from "vite";
 import tailwindcss from "@tailwindcss/vite";
 import vue from "@vitejs/plugin-vue";
 import { fileURLToPath, URL } from "node:url";
+import path from "path";
 
 export default defineConfig({
   plugins: [tailwindcss(), vue()],
@@ -21,6 +22,14 @@ export default defineConfig({
       "@/stores": fileURLToPath(new URL("./src/stores", import.meta.url)),
       "@/modals": fileURLToPath(new URL("./src/modals", import.meta.url)),
       "@/assets": fileURLToPath(new URL("./src/assets", import.meta.url)),
+      "@": path.resolve(__dirname, "./src"),
+    },
+  },
+  css: {
+    preprocessorOptions: {
+      scss: {
+        additionalData: `@use "@/styles/mixins/_scrollbar.scss";`,
+      },
     },
   },
 });
