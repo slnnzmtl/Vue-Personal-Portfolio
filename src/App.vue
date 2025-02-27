@@ -27,5 +27,6 @@ export default defineComponent({
 <style lang="scss">
 :root {
   color: #fff;
+  @extend %scrollbar-tidy;
 }
 </style>

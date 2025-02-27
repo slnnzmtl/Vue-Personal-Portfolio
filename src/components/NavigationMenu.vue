@@ -2,7 +2,7 @@
 import { HireMeButton } from "@/components/ui";
 import { useModalService } from "@/composables";
 import { ModalKey } from "@/modals/types";
-import { defineComponent } from "vue";
+import { defineComponent, ref } from "vue";
 
 export default defineComponent({
   name: "NavigationMenu",
@@ -11,6 +11,11 @@ export default defineComponent({
   },
   setup() {
     const { openModal } = useModalService();
+    const isMenuOpen = ref(false);
+
+    const toggleMenu = () => {
+      isMenuOpen.value = !isMenuOpen.value;
+    };
 
     const smoothScroll = (event: MouseEvent, targetId: string) => {
       event.preventDefault();
@@ -25,6 +30,8 @@ export default defineComponent({
     };
 
     return {
+      isMenuOpen,
+      toggleMenu,
       onModalOpen,
       smoothScroll,
     };
@@ -33,15 +40,21 @@ export default defineComponent({
 </script>
 
 <template>
-  <nav>
+  <nav :class="{ 'menu-open': isMenuOpen }">
     <div class="nav-content max-w-screen-xl 2xl:max-w-screen-2xl mx-auto">
+      <button class="burger-button" @click="toggleMenu">
+        <span></span>
+        <span></span>
+        <span></span>
+      </button>
+
       <div class="nav-links">
-        <router-link to="/">About Me</router-link>
-        <router-link to="/projects">Projects</router-link>
-        <router-link to="/blog">Blog</router-link>
+        <router-link to="/" @click="isMenuOpen = false">About Me</router-link>
+        <router-link to="/projects" @click="isMenuOpen = false">Projects</router-link>
+        <router-link to="/blog" @click="isMenuOpen = false">Blog</router-link>
       </div>
 
-      <div class="flex items-center justify-end w-full">
+      <div class="hire-button">
         <HireMeButton @click="onModalOpen" />
       </div>
     </div>
@@ -54,21 +67,21 @@ nav {
   position: fixed;
   top: 10px;
   right: 0;
-  height: 60px;
+  height: 100%;
+  max-height: 60px;
   z-index: 100;
   width: 100%;
-
   display: flex;
   justify-content: flex-end;
 
   .nav-content {
     display: flex;
     align-items: center;
+    justify-content: space-between;
     height: 100%;
     width: 100%;
     position: relative;
-
-    transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
     background: rgba(255, 255, 255, 0.05);
     backdrop-filter: blur(10px);
     border-radius: 30px;
@@ -76,32 +89,38 @@ nav {
     padding: 0 1rem;
   }
 
-  .nav-icon {
-    display: none;
-    align-items: center;
-    justify-content: center;
-    width: 40px;
-    height: 40px;
-    cursor: pointer;
-    color: var(--text);
-    transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+  .burger-button {
+    position: absolute;
+    top: 20px;
+    left: 20px;
 
-    &:hover {
-      color: var(--cyan);
+    display: none;
+    flex-direction: column;
+    justify-content: space-between;
+    width: 24px;
+    height: 20px;
+    background: transparent;
+    border: none;
+    cursor: pointer;
+    z-index: 10;
+
+    span {
+      width: 100%;
+      height: 2px;
+      background-color: var(--text);
+      transition: all 0.3s ease;
     }
   }
 
   .nav-links {
     display: flex;
     gap: 3rem;
-    transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
 
     a {
       color: var(--text);
       text-decoration: none;
       font-weight: 500;
       transition: color 0.3s ease;
-      min-width: max-content;
 
       &:hover {
         color: var(--cyan);
@@ -113,47 +132,56 @@ nav {
     }
   }
 
-  &.collapsed {
-    .nav-content {
-      width: 60px;
-      overflow: hidden;
+  @media (max-width: 768px) {
+    .burger-button {
+      display: flex;
     }
 
-    .nav-icon {
-      display: flex;
+    .nav-content {
+      align-items: flex-start;
+      padding: 1rem 1rem;
+      height: 100%;
+      max-height: 60px;
     }
 
     .nav-links {
       display: none;
-      transform: translateX(-20px);
-
-      * {
-        min-width: max-content;
-        visibility: hidden;
-      }
+      width: 100%;
+      flex-direction: column;
+      gap: 1.5rem;
+      margin-top: 1rem;
+      align-items: center;
     }
 
-    &:hover {
-      .nav-content {
-        width: 400px;
-        padding: 0 2rem;
-      }
+    .hire-button {
+      position: absolute;
+      top: 10px;
+      right: 18px;
+    }
 
-      .nav-icon {
-        display: none;
-        transform: translateX(-100%);
+    &.menu-open {
+      height: max-content;
+
+      .nav-content {
+        height: 100%;
+        max-height: 1000px;
       }
 
       .nav-links {
         display: flex;
-        transform: translateX(0);
-        justify-content: space-between;
-        gap: 1rem;
-        width: 100%;
+      }
 
-        * {
-          visibility: visible;
-          transition: all 1s cubic-bezier(0.4, 0, 0.2, 1);
+      .burger-button {
+        span {
+          &:first-child {
+            transform: translateY(9px) rotate(45deg);
+          }
+          &:nth-child(2) {
+            opacity: 0;
+          }
+          &:last-child {
+            transform: translateY(-9px) rotate(-45deg);
+          }
         }
       }
     }
