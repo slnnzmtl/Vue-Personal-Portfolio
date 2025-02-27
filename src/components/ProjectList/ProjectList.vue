@@ -26,10 +26,10 @@
 </template>
 
 <script lang="ts" setup>
-import { ref, computed, defineProps } from 'vue';
-import { ProjectCard, CardPlaceholder } from '@components/ProjectCard'; // Adjust the import path as necessary
-import { Button } from '@components/ui';
-import { Project } from '@stores/projectTypes';
+import { ref, computed, defineProps, defineEmits } from 'vue';
+import { ProjectCard, CardPlaceholder } from '@/components/ProjectCard'; // Adjust the import path as necessary
+import { Button } from '@/components/ui';
+import { Project } from '@/stores/projectTypes';
 
 const props = defineProps<{
   projects: Project[];
@@ -56,7 +56,7 @@ const filteredProjects = computed(() => {
     return props.projects;
   }
   return props.projects.filter(project =>
-    project.technologies.some(tech => props.selectedFilters.includes(tech))
+    project.tags.some(tech => props.selectedFilters.includes(tech))
   );
 });
 
@@ -79,12 +79,10 @@ const loadMore = () => {
   }
 };
 
-// Determine layout class based on type prop
 const layoutClass = computed(() => {
-  return props.type === 'grid' ? 'grid md:grid-cols-2 lg:grid-cols-3 items-start gap-4' : 'flex flex-col gap-2';
+  return props.type === 'grid' ? 'grid md:grid-cols-2 lg:grid-cols-3 items-start gap-4' : 'flex flex-col gap-4';
 });
 
-// Transition name based on layout type
 const transitionName = computed(() => {
   return props.type === 'grid' ? 'fade' : 'fade';
 });

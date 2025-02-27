@@ -26,9 +26,9 @@
 
 <script lang="ts" setup>
 import { ref, computed, defineProps } from 'vue';
-import { ProjectCard, CardPlaceholder } from './ProjectCard';
-import { Button } from '@components/ui';
-import { Project } from '@stores/projectTypes';
+import { ProjectCard, CardPlaceholder } from '@/components/ProjectCard';
+import { Button } from '@/components/ui';
+import { Project } from '@/stores/projectTypes';
 
 const props = defineProps<{
   projects: Project[];

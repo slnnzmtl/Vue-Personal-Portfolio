@@ -1,8 +1,7 @@
 <script setup lang="ts">
 import { computed, ref } from 'vue';
-import { Glass } from '@components/ui';
-import type { Project } from '@stores/projectTypes';
-import { Tags } from '../Tags';
+import { Tags, Glass } from '@/components';
+import type { Project } from '@/stores/projectTypes';
 
 interface Props {
   project: Project;
@@ -47,18 +46,18 @@ const collapse = () => {
       <div v-if="isImageLoading" class="image-loader shimmer"></div>
       <img 
         :src="project?.image" 
-        :alt="project?.name"
+        :alt="project?.title"
         @load="handleImageLoad"
         :class="{ 'image-loaded': !isImageLoading }"
       />
     </div>
     
     <div class="project-card__content flex flex-col gap-4 p-4 text-left">
-      <h2 class="project-card__title text-lg sm:text-xl">{{ project?.name }}</h2>
+      <h2 class="project-card__title text-lg sm:text-xl">{{ project?.title }}</h2>
       <p class="project-card__description text-sm sm:text-base">{{ project?.description }}</p>
       
       <Tags 
-        :technologies="project?.technologies" 
+        :tags="project?.tags" 
         :selectedFilters="selectedFilters" 
       />
 
@@ -78,17 +77,17 @@ const collapse = () => {
         <div v-if="isImageLoading" class="image-loader shimmer"></div>
         <img 
           :src="project?.image" 
-          :alt="project?.name"
+          :alt="project?.title"
           @load="handleImageLoad"
           :class="{ 'image-loaded': !isImageLoading }"
         />
       </div>
 
       <div class="flex flex-col gap-2 justify-around flex-grow">
-        <h2 class="project-card__title text-lg sm:text-xl">{{ project?.name }}</h2>
+        <h2 class="project-card__title text-lg sm:text-xl">{{ project?.title }}</h2>
 
         <Tags 
-          :technologies="project?.technologies" 
+          :tags="project?.tags" 
           :selectedFilters="selectedFilters" 
         />
       </div>
@@ -113,7 +112,6 @@ const collapse = () => {
 
   &.active {
     background: var(--cyan-alpha-10);
-    transform: translateX(5px);
   }
 
   &:hover {
@@ -125,7 +123,12 @@ const collapse = () => {
   }
 
   &--list {
-    &:hover {
+    &.active {
+      background: var(--cyan-alpha-10);
+      transform: translateX(20px);
+    }
+
+    &:hover:not(.active) {
       transform: translateX(5px);
     }
 

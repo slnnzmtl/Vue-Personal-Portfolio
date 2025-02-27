@@ -1,17 +1,16 @@
 <script lang="ts" setup>
 import { computed, ref } from 'vue';
-import { ProjectList } from '../ProjectList'
-import { projects } from '@stores/projectTypes';
-import { FilterPanel } from '@components/FilterPanel';
 import { useRouter } from 'vue-router';
+import { projects } from '@/stores/projectTypes';
+import { FilterPanel, ProjectList } from '@/components';
 
 const router = useRouter();
 
 const selectedFilters = ref<string[]>([]);
 
-const technologies = computed(() => {
+const tags = computed(() => {
   return projects ? projects.reduce((acc, project) => {
-    project.technologies.forEach(tech => {
+    project.tags.forEach(tech => {
       if (!acc.includes(tech)) {
         acc.push(tech);
       }
@@ -40,7 +39,7 @@ const onProjectClick = (projectId: number) => {
     </p>
   
     <FilterPanel 
-      :technologies="technologies" 
+      :tags="tags" 
       :selectedFilters="selectedFilters" 
       @onFilterChange="projectFilterChange"
     />
