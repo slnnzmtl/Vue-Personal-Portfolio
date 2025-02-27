@@ -1,17 +1,17 @@
 <script setup lang="ts">
-import { Glass } from '@/components/ui'; // Correct usage
+import { GlassMaterial } from "@/components/ui";
 defineProps<{
   title: string;
 }>();
 </script>
 
 <template>
-  <Glass class="skill-card">
+  <GlassMaterial class="skill-card">
     <h2 class="skill-card__title">{{ title }}</h2>
     <div class="skill-card__content">
       <slot></slot>
     </div>
-  </Glass>
+  </GlassMaterial>
 </template>
 
 <style scoped lang="scss">
@@ -20,7 +20,6 @@ defineProps<{
   flex-direction: column;
   flex-grow: 1;
   padding: 1.5rem;
-
 
   &__title {
     font-size: 1.5rem;
@@ -49,4 +48,4 @@ defineProps<{
     }
   }
 }
-</style> 
+</style>

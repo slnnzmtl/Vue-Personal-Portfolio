@@ -1,38 +1,35 @@
 <script lang="ts">
-  import { useModal } from '@/composables';
-  import { HireFormModal } from '@/modals';
-  import { Button, HireMeButton } from '@/components/ui';
-  import { defineComponent, inject } from 'vue';
+import { HireMeButton } from "@/components/ui";
+import { useModalService } from "@/composables";
+import { ModalKey } from "@/modals/types";
+import { defineComponent } from "vue";
 
-  export default defineComponent({
-    components: {
-      Button,
-      HireMeButton
-    },
-    setup() {
-      const { openModal, closeModal } = useModal()
+export default defineComponent({
+  name: "NavigationMenu",
+  components: {
+    HireMeButton,
+  },
+  setup() {
+    const { openModal } = useModalService();
 
-      const smoothScroll = (event: MouseEvent, targetId: string) => {
-        event.preventDefault();
-        const targetElement = document.getElementById(targetId);
-        if (targetElement) {
-          targetElement.scrollIntoView({ behavior: 'smooth' });
-        }
-      };
-
-      return {
-        openModal,
-        closeModal,
-        smoothScroll,
+    const smoothScroll = (event: MouseEvent, targetId: string) => {
+      event.preventDefault();
+      const targetElement = document.getElementById(targetId);
+      if (targetElement) {
+        targetElement.scrollIntoView({ behavior: "smooth" });
       }
-    },
+    };
 
-    methods: {
-      openHireFormModal() {
-        this.openModal({ component: 'HireFormModal', props: {} });
-      },
-    },
-  });
+    const onModalOpen = async () => {
+      await openModal(ModalKey.HireForm);
+    };
+
+    return {
+      onModalOpen,
+      smoothScroll,
+    };
+  },
+});
 </script>
 
 <template>
@@ -45,7 +42,7 @@
       </div>
 
       <div class="flex items-center justify-end w-full">
-        <HireMeButton @click="openHireFormModal" />
+        <HireMeButton @click="onModalOpen" />
       </div>
     </div>
   </nav>
@@ -70,7 +67,7 @@ nav {
     height: 100%;
     width: 100%;
     position: relative;
-    
+
     transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
     background: rgba(255, 255, 255, 0.05);
     backdrop-filter: blur(10px);
@@ -88,7 +85,7 @@ nav {
     cursor: pointer;
     color: var(--text);
     transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
-    
+
     &:hover {
       color: var(--cyan);
     }
@@ -105,7 +102,7 @@ nav {
       font-weight: 500;
       transition: color 0.3s ease;
       min-width: max-content;
-      
+
       &:hover {
         color: var(--cyan);
       }
@@ -115,7 +112,6 @@ nav {
       }
     }
   }
-
 
   &.collapsed {
     .nav-content {
@@ -147,7 +143,7 @@ nav {
         display: none;
         transform: translateX(-100%);
       }
-      
+
       .nav-links {
         display: flex;
         transform: translateX(0);
@@ -163,4 +159,4 @@ nav {
     }
   }
 }
-</style> 
+</style>

@@ -1,25 +1,31 @@
 <script lang="ts" setup>
-import { Avatar } from '../'
-import { defineProps } from 'vue'
+import { Avatar } from "@/components";
+import { defineProps } from "vue";
 
 const props = defineProps({
   name: {
     type: String,
-    default: 'Daniel Kazansky'
+    default: "Daniel Kazansky",
   },
   position: {
     type: String,
-    default: 'Full-stack Developer & Business Automation'
-  }
-})
+    default: "Full-stack Developer & Business Automation",
+  },
+});
 </script>
 
 <template>
-  <div class="face-screen flex items-center gap-6 sm:gap-18 p-4 pt-10 sm:pt-auto">
+  <div
+    class="face-screen flex items-center gap-6 sm:gap-18 p-4 pt-10 sm:pt-auto mt-25"
+  >
     <Avatar class="max-w-[500px] max-h-[500px]" />
     <div class="flex flex-col gap-4 text-left">
-      <h1 class="text-center sm:text-left text-4xl sm:text-7xl font-bold">{{ props.name }}</h1>
-      <p class="face-screen__position text-3xl font-semibold">{{ props.position }}</p>
+      <h1 class="text-center sm:text-left text-4xl sm:text-7xl font-bold">
+        {{ props.name }}
+      </h1>
+      <p class="face-screen__position text-3xl font-semibold">
+        {{ props.position }}
+      </p>
     </div>
   </div>
 </template>

@@ -1,31 +1,34 @@
-<script lang="ts" setup>
-  import { Button } from '@/components/ui';
+<script lang="ts">
+import SButton from "@/components/ui/buttons/SButton.vue";
+import { defineComponent } from "vue";
+export default defineComponent({
+  name: "HireMeButton",
+  components: {
+    SButton,
+  },
+});
 </script>
 
 <template>
-  <Button
-    class="hire-me-button rounded-3xl"
-    size="medium"
-    type="primary"
-  >
+  <SButton class="hire-me-button rounded-3xl" size="medium" type="primary">
     Hire me
-  </Button>
+  </SButton>
 </template>
 
 <style lang="scss" scoped>
-  .hire-me-button {
-    animation: bubble 2s ease-in-out infinite;
+.hire-me-button {
+  animation: bubble 2s ease-in-out infinite;
 
-    @keyframes bubble {
-      0% {
-        transform: scale(1);
-      }
-      50% {
-        transform: scale(1.2);
-      }
-      100% {
-        transform: scale(1);
-      }
+  @keyframes bubble {
+    0% {
+      transform: scale(1);
+    }
+    50% {
+      transform: scale(1.2);
+    }
+    100% {
+      transform: scale(1);
     }
   }
+}
 </style>
