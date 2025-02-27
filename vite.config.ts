@@ -8,17 +8,19 @@ export default defineConfig({
   resolve: {
     alias: {
       "@/*": fileURLToPath(new URL("./src/*", import.meta.url)),
-      "@components": fileURLToPath(
+      "@/components": fileURLToPath(
         new URL("./src/components", import.meta.url),
       ),
-      "@composables": fileURLToPath(
+      "@/composables": fileURLToPath(
         new URL("./src/composables", import.meta.url),
       ),
-      "@fontsource": fileURLToPath(
+      "@/fontsource": fileURLToPath(
         new URL("./node_modules/@fontsource", import.meta.url),
       ),
-      "@styles": fileURLToPath(new URL("./src/styles", import.meta.url)),
-      "@stores": fileURLToPath(new URL("./src/stores", import.meta.url)),
+      "@/styles": fileURLToPath(new URL("./src/styles", import.meta.url)),
+      "@/stores": fileURLToPath(new URL("./src/stores", import.meta.url)),
+      "@/modals": fileURLToPath(new URL("./src/modals", import.meta.url)),
+      "@/assets": fileURLToPath(new URL("./src/assets", import.meta.url)),
     },
   },
 });
