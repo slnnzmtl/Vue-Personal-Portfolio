@@ -1,30 +1,39 @@
-<script lang="ts" setup>
-import { Avatar } from "@/components";
-import { defineProps } from "vue";
+<script lang="ts">
+import AuthorAvatar from "@/components/AuthorAvatar.vue";
+import { defineComponent } from "vue";
 
-const props = defineProps({
-  name: {
-    type: String,
-    default: "Daniel Kazansky",
+export default defineComponent({
+  name: "FaceScreen",
+  components: {
+    AuthorAvatar,
   },
-  position: {
-    type: String,
-    default: "Full-stack Developer & Business Automation",
+  props: {
+    name: {
+      type: String,
+      default: "Daniel Kazansky",
+    },
+    position: {
+      type: String,
+      default: "Full-stack Developer & Business Automation",
+    },
   },
 });
 </script>
 
 <template>
   <div
-    class="face-screen flex items-center gap-6 sm:gap-18 p-4 pt-10 sm:pt-auto mt-25"
+    class="face-screen flex items-center flex-col lg:flex-row gap-6 sm:gap-18 p-4 pt-10 sm:pt-auto mt-25"
   >
-    <Avatar class="max-w-[500px] max-h-[500px]" />
+    <AuthorAvatar class="max-w-[300px] lg:max-w-[500px] lg:max-h-[500px]" />
     <div class="flex flex-col gap-4 text-left">
-      <h1 class="text-center sm:text-left text-4xl sm:text-7xl font-bold">
-        {{ props.name }}
+      <h1 class="text-center lg:text-left text-4xl sm:text-7xl font-bold">
+        {{ name }}
       </h1>
-      <p class="face-screen__position text-3xl font-semibold">
-        {{ props.position }}
+
+      <p
+        class="face-screen__position text-xl lg:text-3xl font-semibold text-center lg:text-left"
+      >
+        {{ position }}
       </p>
     </div>
   </div>
@@ -47,7 +56,6 @@ const props = defineProps({
 
     &__position {
       max-width: 100%;
-      text-align: center;
     }
   }
 

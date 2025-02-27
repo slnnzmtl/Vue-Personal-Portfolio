@@ -1,9 +1,11 @@
 <template>
   <section class="skills-screen">
-    <p class="text-2xl sm:text-4xl font-bold mb-8">Technology stack</p>
-    <p class="text-lg sm:text-xl mb-8">I work with many technologies, covering every detail of web development.</p>
+    <h2 class="mb-8">Technology stack</h2>
+    <p class="text-lg sm:text-xl mb-8">
+      I work with many technologies, covering every detail of web development.
+    </p>
 
-    <div class="flex flex-wrap  gap-4 sm:max-h-[600px] justify-between w-full">
+    <div class="flex flex-wrap gap-4 sm:max-h-[600px] justify-between w-full">
       <SkillCard title="Core">
         <ul>
           <li>JavaScript</li>
@@ -19,7 +21,7 @@
         <ul>
           <li>React / Vue</li>
           <li>React Native</li>
-          <li>Redux / Vuex / </li>
+          <li>Redux / Vuex /</li>
           <li>MobX / Pinia</li>
           <li>Next.js / Nuxt.js</li>
           <li>MaterialUI</li>
@@ -61,8 +63,15 @@
   </section>
 </template>
 
-<script setup lang="ts">
-import { SkillCard } from '@/components';
+<script lang="ts">
+import { SkillCard } from "@/components/SkillCard";
+
+export default {
+  name: "SkillsScreen",
+  components: {
+    SkillCard,
+  },
+};
 </script>
 
 <style scoped lang="scss">
@@ -75,4 +84,4 @@ import { SkillCard } from '@/components';
   flex: 1;
   min-width: 250px;
 }
-</style> 
+</style>

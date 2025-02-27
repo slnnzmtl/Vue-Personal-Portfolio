@@ -6,6 +6,15 @@
   </div>
 </template>
 
-<script setup lang="ts">
-import { FaceScreen, SkillsScreen, ProjectsScreen } from '@/components';
-</script> 
+<script lang="ts">
+import { FaceScreen, SkillsScreen, ProjectsScreen } from "@/components";
+
+export default {
+  name: "MainView",
+  components: {
+    FaceScreen,
+    SkillsScreen,
+    ProjectsScreen,
+  },
+};
+</script>
