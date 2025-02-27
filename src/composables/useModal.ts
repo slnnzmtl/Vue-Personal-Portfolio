@@ -1,18 +1,13 @@
-import { ref } from "vue";
+import { inject } from "vue";
+import { ModalComponent, ModalProps } from "@/modals/types";
+import { HireFormModal } from "@/modals";
 
 export default function useModal() {
-  const isVisible = ref(false);
+  const openModal = inject("openModal");
 
-  const openModal = () => {
-    isVisible.value = true;
-  };
-
-  const closeModal = () => {
-    isVisible.value = false;
-  };
+  const closeModal = (key: string) => {};
 
   return {
-    isVisible,
     openModal,
     closeModal,
   };
