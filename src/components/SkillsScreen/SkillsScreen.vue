@@ -62,7 +62,7 @@
 </template>
 
 <script setup lang="ts">
-import { SkillCard } from '@components';
+import { SkillCard } from '@/components';
 </script>
 
 <style scoped lang="scss">

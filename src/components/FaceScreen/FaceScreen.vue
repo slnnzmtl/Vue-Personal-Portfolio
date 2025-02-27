@@ -18,7 +18,7 @@ const props = defineProps({
   <div class="face-screen flex items-center gap-6 sm:gap-18 p-4 pt-10 sm:pt-auto">
     <Avatar class="max-w-[500px] max-h-[500px]" />
     <div class="flex flex-col gap-4 text-left">
-      <h2 class="text-center sm:text-left text-4xl sm:text-7xl font-bold">{{ props.name }}</h2>
+      <h1 class="text-center sm:text-left text-4xl sm:text-7xl font-bold">{{ props.name }}</h1>
       <p class="face-screen__position text-3xl font-semibold">{{ props.position }}</p>
     </div>
   </div>
@@ -50,7 +50,7 @@ const props = defineProps({
       font-size: 2.5rem;
     }
 
-    h2 {
+    h1 {
       font-size: 6rem;
     }
 
