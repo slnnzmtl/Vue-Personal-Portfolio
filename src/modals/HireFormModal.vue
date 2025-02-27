@@ -1,69 +1,90 @@
-<script lang="ts" setup>
-import { Button, InputField, TextareaField, ContactsBar } from '@/components/ui';
-import { ref } from 'vue';
+<script lang="ts">
+import {
+  SButton,
+  InputField,
+  TextareaField,
+  ContactsBar,
+  ModalWindow,
+} from "@/components/ui";
+import { defineComponent, ref } from "vue";
 
-const emit = defineEmits(['closeModal']);
+export default defineComponent({
+  name: "HireFormModal",
+  components: {
+    SButton,
+    InputField,
+    TextareaField,
+    ContactsBar,
+    ModalWindow,
+  },
+  emits: ["close"],
+  setup(props, { emit }) {
+    const budget = ref("");
+    const projectDescription = ref("");
+    const contactName = ref("");
+    const contactEmail = ref("");
+    const contactPhone = ref("");
 
-const budget = ref('');
-const projectDescription = ref('');
-const contactName = ref('');
-const contactEmail = ref('');
-const contactPhone = ref('');
+    const submitForm = () => {
+      console.log({
+        budget: budget.value,
+        projectDescription: projectDescription.value,
+        contactName: contactName.value,
+        contactEmail: contactEmail.value,
+        contactPhone: contactPhone.value,
+      });
 
-const submitForm = () => {
-  console.log({
-    budget: budget.value,
-    projectDescription: projectDescription.value,
-    contactName: contactName.value,
-    contactEmail: contactEmail.value,
-    contactPhone: contactPhone.value,
-  });
+      emit("close", true);
+    };
 
-  emit('closeModal');
-};
+    const closeModal = (result: boolean | null) => {
+      emit("close", result);
+    };
 
-const closeModal = () => {
-  emit('closeModal');
-};
+    return {
+      budget,
+      projectDescription,
+      contactName,
+      contactEmail,
+      contactPhone,
+      submitForm,
+      closeModal,
+    };
+  },
+});
 </script>
 
 <template>
-  <div class="hire-form-modal flex flex-col gap-4 items-center">
-    <h2 class="form-title">Hire Me</h2>
-    <p class="">
-      Please fill a form or contact me directly at
-    </p>
-    <ContactsBar class="mb-4" />
+  <ModalWindow name="ModalKey.HireForm" @close="closeModal">
+    <div class="hire-form-modal flex flex-col gap-4 items-center">
+      <h2 class="form-title">Hire Me</h2>
+      <p class="">Please fill a form or contact me directly at</p>
+      <ContactsBar class="mb-4" />
 
-    <form class="form-container w-full" @submit.prevent="submitForm">
-      <InputField
-        label="Name"
-        v-model="contactName"
-        required
-      />
-      <InputField
-        label="Email"
-        v-model="contactEmail"
-        type="email"
-        required
-      />
-      <InputField
-        label="Phone"
-        v-model="contactPhone"
-        type="tel"
-      />
-      <TextareaField
-        label="Project Description"
-        v-model="projectDescription"
-        required
-      />
+      <form class="form-container w-full" @submit.prevent="submitForm">
+        <InputField v-model="contactName" label="Name" required />
+        <InputField
+          v-model="contactEmail"
+          label="Email"
+          type="email"
+          required
+        />
+        <InputField v-model="contactPhone" label="Phone" type="tel" />
+        <TextareaField
+          v-model="projectDescription"
+          label="Project Description"
+          required
+        />
 
-      <div class="form-actions">
-        <Button type="button" @click="closeModal" class="cancel-button">Cancel</Button>
-        <Button type="submit" class="submit-button">Submit</Button>
-      </div>
-    </form>
-  </div>
+        <div class="form-actions">
+          <SButton type="button" class="cancel-button" @click="closeModal">
+            Cancel
+          </SButton>
+          <SButton type="submit" class="submit-button">Submit</SButton>
+        </div>
+      </form>
+    </div>
+  </ModalWindow>
 </template>
 
 <style lang="scss" scoped>

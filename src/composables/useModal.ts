@@ -1,14 +1,52 @@
-import { inject } from "vue";
-import { ModalComponent, ModalProps } from "@/modals/types";
-import { HireFormModal } from "@/modals";
+/* eslint-disable @typescript-eslint/no-explicit-any */
+import { ModalKey } from "@/modals/types";
+import { reactive, provide, inject } from "vue";
 
-export default function useModal() {
-  const openModal = inject("openModal");
+interface ModalInstance<T = any> {
+  name: ModalKey;
+  props?: Record<string, any>;
+  resolve: (value: T | null) => void;
+}
 
-  const closeModal = (key: string) => {};
+interface ModalService {
+  openModal: <T>(
+    name: ModalKey,
+    props?: Record<string, any>,
+  ) => Promise<T | null>;
+  closeModal: (key: string, result: any) => void;
+  activeModals: ModalInstance[];
+}
 
-  return {
-    openModal,
-    closeModal,
-  };
+const MODAL_SERVICE_KEY = Symbol("ModalService");
+
+export function provideModalService() {
+  const modals = reactive<ModalInstance[]>([]);
+
+  function openModal<T>(
+    name: ModalKey,
+    props: Record<string, any> = {},
+  ): Promise<T | null> {
+    console.log(props);
+    return new Promise<T | null>((resolve) => {
+      modals.push({ name, props, resolve });
+    });
+  }
+
+  function closeModal(name: string, result: any) {
+    const index = modals.findIndex((modal) => modal.name === name);
+    if (index !== -1) {
+      modals[index].resolve(result);
+      modals.splice(index, 1);
+    }
+  }
+
+  provide(MODAL_SERVICE_KEY, { openModal, closeModal, activeModals: modals });
+}
+
+export function useModalService(): ModalService {
+  const service = inject<ModalService>(MODAL_SERVICE_KEY);
+  if (!service) {
+    throw new Error("useModalService must be used within a ModalProvider.");
+  }
+  return service;
 }
