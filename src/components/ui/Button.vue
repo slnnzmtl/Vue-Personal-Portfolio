@@ -42,12 +42,23 @@ const isLarge = computed(() => props.size === 'large');
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  padding: 0.5rem 1rem;
   font-size: 1rem;
   font-weight: 500;
   line-height: 1.5;
-  border-radius: 0.25rem;
-  transition: background-color 0.3s, color 0.3s;
+  cursor: pointer;
+
+  &:hover {
+    animation: scale .3s ease-in-out forwards;
+  }
+
+  @keyframes scale {
+    0% {
+      transform: scale(1);
+    }
+    100% {
+      transform: scale(1.2);
+    }
+  }
 
   &--primary {
     background-color: var(--cyan);
@@ -70,7 +81,7 @@ const isLarge = computed(() => props.size === 'large');
   }
 
   &--medium {
-    padding: 0.5rem 1rem;
+    padding: 0.5rem 1.5rem;
     font-size: 1rem;
   }
 
