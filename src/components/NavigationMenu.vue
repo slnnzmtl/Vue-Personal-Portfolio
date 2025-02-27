@@ -1,11 +1,38 @@
-<script setup lang="ts">
-const smoothScroll = (event: MouseEvent, targetId: string) => {
-  event.preventDefault();
-  const targetElement = document.getElementById(targetId);
-  if (targetElement) {
-    targetElement.scrollIntoView({ behavior: 'smooth' });
-  }
-};
+<script lang="ts">
+  import { useModal } from '@/composables';
+  import { HireFormModal } from '@/modals';
+  import { Button, HireMeButton } from '@/components/ui';
+  import { defineComponent, inject } from 'vue';
+
+  export default defineComponent({
+    components: {
+      Button,
+      HireMeButton
+    },
+    setup() {
+      const { openModal, closeModal } = useModal()
+
+      const smoothScroll = (event: MouseEvent, targetId: string) => {
+        event.preventDefault();
+        const targetElement = document.getElementById(targetId);
+        if (targetElement) {
+          targetElement.scrollIntoView({ behavior: 'smooth' });
+        }
+      };
+
+      return {
+        openModal,
+        closeModal,
+        smoothScroll,
+      }
+    },
+
+    methods: {
+      openHireFormModal() {
+        this.openModal({ component: 'HireFormModal', props: {} });
+      },
+    },
+  });
 </script>
 
 <template>
@@ -14,11 +41,12 @@ const smoothScroll = (event: MouseEvent, targetId: string) => {
       <div class="nav-links">
         <router-link to="/">About Me</router-link>
         <router-link to="/projects">Projects</router-link>
-        <!-- <a href="#projects-screen" @click="smoothScroll($event, 'projects-screen')">#projects</a> -->
-        <a href="#skills-screen" @click="smoothScroll($event, 'skills-screen')">#technologies</a>
+        <router-link to="/blog">Blog</router-link>
       </div>
 
-      
+      <div class="flex items-center justify-end w-full">
+        <HireMeButton @click="openHireFormModal" />
+      </div>
     </div>
   </nav>
 </template>
@@ -28,7 +56,7 @@ nav {
   padding: 0 1rem;
   position: fixed;
   top: 10px;
-  right: 10px;
+  right: 0;
   height: 60px;
   z-index: 100;
   width: 100%;
@@ -48,7 +76,7 @@ nav {
     backdrop-filter: blur(10px);
     border-radius: 30px;
     border: 1px solid rgba(255, 255, 255, 0.1);
-    padding: 0 2rem;
+    padding: 0 1rem;
   }
 
   .nav-icon {

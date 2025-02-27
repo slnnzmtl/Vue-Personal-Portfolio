@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { Glass } from '@components/ui'; // Correct usage
+import { Glass } from '@/components/ui'; // Correct usage
 defineProps<{
   title: string;
 }>();

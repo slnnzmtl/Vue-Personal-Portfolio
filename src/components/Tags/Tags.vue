@@ -1,11 +1,11 @@
 <template>
   <div class="tags">
     <span 
-      v-for="tech in technologies" 
-      :key="tech" 
-      :class="['tag', { 'highlighted': selectedFilters.includes(tech) }]"
+      v-for="tag in tags" 
+      :key="tag" 
+      :class="['tag', { 'highlighted': selectedFilters?.includes(tag) }]"
     >
-      {{ tech }}
+      {{ tag }}
     </span>
   </div>
 </template>
@@ -16,7 +16,7 @@ import { defineComponent, PropType } from 'vue';
 export default defineComponent({
   name: 'Tags',
   props: {
-    technologies: {
+    tags: {
       type: Array as PropType<string[]>,
       required: true,
     },
