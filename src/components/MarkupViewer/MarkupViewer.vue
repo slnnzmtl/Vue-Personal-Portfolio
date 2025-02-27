@@ -1,59 +1,57 @@
 <template>
-  <Glass class="markup-content p-4">
+  <div class="markup-content">
     <div
       v-if="activeProject"
+      class="markup-content__render rounded-lg"
       v-html="renderedContent"
-      class="markup-content__render rounded-lg p-4"
     />
-    <div v-else
-      class="placeholder flex items-center justify-center h-full"
-    >
+
+    <div v-else class="placeholder flex items-center justify-center h-full">
       <p>Please select an element to view its details.</p>
     </div>
-  </Glass>
+  </div>
 </template>
 
-<script lang="ts" setup>
-import { ref, onMounted, defineProps, onBeforeUnmount, computed } from 'vue';
-import { marked } from 'marked';
-import { Glass } from '@/components/ui';
+<script lang="ts">
+import { defineComponent, computed } from "vue";
 
-const props = defineProps<{
-  activeProject: any; 
-  viewerHeight: number; 
-}>()
+import { marked } from "marked";
 
-const renderedContent = computed(() => {
-  if (props.activeProject) {
-    return marked(props.activeProject.html);
-  }
-  return '';
-})
+export default defineComponent({
+  name: "MarkupViewer",
+  props: {
+    activeProject: {
+      type: Object,
+      required: true,
+    },
+  },
+  setup(props) {
+    const renderedContent = computed(() => {
+      if (props.activeProject) {
+        console.log(props.activeProject);
+        return marked(props.activeProject.html);
+      }
+      return "";
+    });
+
+    return {
+      renderedContent,
+    };
+  },
+});
 </script>
 
 <style lang="scss">
-@use "@/styles/mixins/_scrollbar.scss";
 .markup-content {
-  overflow-y: auto;
   text-align: left;
-  
-  @extend %scrollbar-tidy; 
 
   &__render {
-    h1, h2, p, ul {
+    h1,
+    h2,
+    h3,
+    p,
+    ul {
       margin-bottom: 1rem;
-    }
-
-    h1 {
-      font-size: 3rem;
-    }
-
-    h2 {
-      font-size: 2rem;
-    }
-
-    h3 {
-      font-size: 1.5rem;
     }
 
     ul {
@@ -73,4 +71,4 @@ const renderedContent = computed(() => {
     font-size: 1.2rem;
   }
 }
-</style> 
+</style>

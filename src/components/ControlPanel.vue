@@ -2,38 +2,30 @@
   <div>
     <FilterPanel
       :tags="tags"
-      :selectedFilters="selectedFilters"
-      @onFilterChange="onFilterChange"
+      :selected-filters="selectedFilters"
+      @on-filter-change="onFilterChange"
     />
 
     <ProjectList
       :projects="projects"
-      :activeProject="activeProject"
-      :selectedFilters="selectedFilters"
-      @project-clicked="onProjectClicked"
-      type="list"
+      :active-project="activeProject"
+      :selected-filters="selectedFilters"
+      :type="projectListType"
+      return-value="id"
+      @selected="onProjectChange"
     />
   </div>
 </template>
 
 <script lang="ts">
-import { defineComponent, onMounted } from 'vue';
-import { FilterPanel, ProjectList } from '@/components';
+import { computed, defineComponent, ref } from "vue";
+import { FilterPanel, ProjectList } from "@/components";
 
 export default defineComponent({
-  setup (props) {
-    onMounted(() => {
-      console.log(props)
-    });
-
-    return {
-      props
-    }
-  },
-  name: 'ControlPanel',
+  name: "ControlPanel",
   components: {
     FilterPanel,
-    ProjectList
+    ProjectList,
   },
   props: {
     tags: {
@@ -53,18 +45,34 @@ export default defineComponent({
       required: true,
     },
   },
-  emits: ['onFilterChange', 'project-clicked'],
-  methods: {
-    onFilterChange(filters) {
-      this.$emit('onFilterChange', filters);
-    },
-    onProjectClicked(project) {
-      this.$emit('project-clicked', project);
-    },
-  }
+  emits: ["onFilterChange", "onProjectChange"],
+  setup(props, { emit }) {
+    const windowWidth = ref(window.innerWidth);
+    const updateWindowWidth = () => {
+      windowWidth.value = window.innerWidth;
+    };
+
+    window.addEventListener("resize", updateWindowWidth);
+
+    const projectListType = computed(() => {
+      return windowWidth.value < 1024 ? "grid" : "list";
+    });
+
+    const onFilterChange = (filters: string[]) => {
+      emit("onFilterChange", filters);
+    };
+
+    const onProjectChange = (id: number) => {
+      console.log(id);
+      emit("onProjectChange", id);
+    };
+
+    return {
+      projectListType,
+      props,
+      onFilterChange,
+      onProjectChange,
+    };
+  },
 });
 </script>
-
-<style scoped>
-/* Add any specific styles for ControlPanel here */
-</style> 
