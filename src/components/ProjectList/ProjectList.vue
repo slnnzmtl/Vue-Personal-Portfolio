@@ -2,89 +2,172 @@
   <div class="project-viewer">
     <transition-group :name="transitionName" tag="div" :class="layoutClass">
       <template v-if="!isLoading">
-        <ProjectCard 
-          v-for="project in displayedProjects" 
+        <ProjectCard
+          v-for="project in displayedProjects"
+          :id="`project-${project.id}`"
           :key="project.id"
           :project="project"
           :selected-filters="selectedFilters"
           :type="type"
-          :active="activeProject?.id === project.id"
-          class="h-full"
-          @click="onProjectClick(project)"
-        />
+          :active="isCardActive(project.id)"
+          class="project"
+          @click="(event) => onCardClicked(project, event)"
+          @close="onClose"
+        >
+          <template #default="{ active }">
+            <MarkupViewer v-if="active" :active-project="project" />
+          </template>
+        </ProjectCard>
       </template>
-      
+
       <template v-else>
         <CardPlaceholder v-for="n in itemsPerPage" :key="n" />
       </template>
     </transition-group>
 
-    <Button v-if="hasMoreProjects" @click="loadMore" class="load-more-button">
+    <SButton v-if="hasMoreProjects" class="load-more-button" @click="loadMore">
       Load More
-    </Button>
+    </SButton>
   </div>
 </template>
 
-<script lang="ts" setup>
-import { ref, computed, defineProps, defineEmits } from 'vue';
-import { ProjectCard, CardPlaceholder } from '@/components/ProjectCard'; // Adjust the import path as necessary
-import { Button } from '@/components/ui';
-import { Project } from '@/stores/projectTypes';
+<script lang="ts">
+import { ref, computed, defineComponent, watch } from "vue";
+import { ProjectCard, CardPlaceholder } from "@/components/ProjectCard";
+import { SButton } from "@/components/ui";
+import { Project } from "@/stores/projectTypes";
+import { MarkupViewer } from "@/components/MarkupViewer";
 
-const props = defineProps<{
-  projects: Project[];
-  selectedFilters: string[];
-  type: 'list' | 'grid';
-  activeProject: Project | null;
-  returnValue?: string;
-}>();
+export default defineComponent({
+  name: "ProjectList",
+  components: {
+    ProjectCard,
+    CardPlaceholder,
+    SButton,
+    MarkupViewer,
+  },
+  props: {
+    projects: {
+      type: Array,
+      required: true,
+    },
+    selectedFilters: {
+      type: Array,
+      required: true,
+    },
+    type: {
+      type: String,
+      required: true,
+    },
+    activeProject: {
+      type: Object,
+      required: true,
+    },
+    returnValue: {
+      type: String,
+      required: false,
+      default: null,
+    },
+  },
+  emits: ["selected"],
+  setup(props, { emit }) {
+    const isLoading = ref(false);
+    const itemsPerPage = ref(6);
+    const currentPage = ref(1);
+    const displayedProjects = computed(() => {
+      const start = 0;
+      return props.projects.slice(
+        start,
+        currentPage.value * itemsPerPage.value,
+      );
+    });
 
-const emit = defineEmits<{
-  (e: 'projectClicked', project: Project): void;
-}>();
+    const hasMoreProjects = computed(() => {
+      return currentPage.value * itemsPerPage.value < props.projects.length;
+    });
 
-const onProjectClick = (project: Project) => {
-  if (props.returnValue) {
-    emit('projectClicked', project[props.returnValue]);
-  } else {
-    emit('projectClicked', project);
-  }
-};
+    const loadMore = () => {
+      if (hasMoreProjects.value) {
+        currentPage.value++;
+      }
+    };
 
-const filteredProjects = computed(() => {
-  if (props.selectedFilters.length === 0) {
-    return props.projects;
-  }
-  return props.projects.filter(project =>
-    project.tags.some(tech => props.selectedFilters.includes(tech))
-  );
-});
+    const layoutClass = computed(() => {
+      return props.type === "grid"
+        ? "layout flex flex-wrap gap-4 justify-start w-full"
+        : "flex flex-col gap-4";
+    });
 
-const isLoading = ref(false);
-const itemsPerPage = ref(6); // Default items to load
-const currentPage = ref(1);
+    const transitionName = computed(() => {
+      return props.type === "grid" ? "fade" : "fade";
+    });
 
-const displayedProjects = computed(() => {
-  const start = 0; // Always start from the beginning
-  return filteredProjects.value.slice(start, currentPage.value * itemsPerPage.value);
-});
+    const onClose = () => {
+      emit("selected", {
+        id: -1,
+      });
+    };
 
-const hasMoreProjects = computed(() => {
-  return currentPage.value * itemsPerPage.value < filteredProjects.value.length;
-});
+    const scrollToProject = (id: number) => {
+      const container = document.querySelector(`#project-${id}`);
 
-const loadMore = () => {
-  if (hasMoreProjects.value) {
-    currentPage.value++;
-  }
-};
+      if (container) {
+        container.scrollIntoView({
+          behavior: "smooth",
+          block: "start",
+        });
+      }
+    };
 
-const layoutClass = computed(() => {
-  return props.type === 'grid' ? 'grid md:grid-cols-2 lg:grid-cols-3 items-start gap-4' : 'flex flex-col gap-4';
-});
+    const onCardClicked = (project: Project) => {
+      console.log(project);
+      if (props.activeProject?.id === project?.id) {
+        onClose();
+        return;
+      }
 
-const transitionName = computed(() => {
-  return props.type === 'grid' ? 'fade' : 'fade';
+      if (props.returnValue) {
+        emit("selected", project[props.returnValue]);
+      } else {
+        emit("selected", project);
+      }
+    };
+
+    watch(
+      () => props.activeProject,
+      (current, prev) => {
+        if (!current) {
+          setTimeout(() => {
+            scrollToProject(prev?.id);
+          }, 500);
+          return;
+        }
+
+        setTimeout(() => {
+          scrollToProject(current?.id);
+        }, 500);
+      },
+      { immediate: true },
+    );
+
+    const isCardActive = (id: number) => {
+      return props.activeProject?.id === id;
+    };
+
+    return {
+      isLoading,
+      itemsPerPage,
+      currentPage,
+      displayedProjects,
+      hasMoreProjects,
+      loadMore,
+      layoutClass,
+      transitionName,
+      onCardClicked,
+      isCardActive,
+      onClose,
+    };
+  },
 });
 </script>
 
@@ -97,26 +180,35 @@ const transitionName = computed(() => {
   margin-top: 1rem;
   padding: 0.5rem 1rem;
   cursor: pointer;
-  background: rgba(255, 255, 255, 0.1); /* Semi-transparent background */
-  border: 1px solid rgba(255, 255, 255, 0.2); /* Light border */
+  background: rgba(255, 255, 255, 0.1);
+  border: 1px solid rgba(255, 255, 255, 0.2);
   border-radius: 8px;
-  backdrop-filter: blur(10px); /* Frosted glass effect */
-  color: var(--text); /* Use theme variable for text color */
-  transition: background-color 0.3s, border-color 0.3s;
+  backdrop-filter: blur(10px);
+  color: var(--text);
+  transition:
+    background-color 0.3s,
+    border-color 0.3s;
 
   &:hover {
-    background: rgba(255, 255, 255, 0.2); /* Darker on hover */
-    border-color: rgba(255, 255, 255, 0.4); /* Darker border on hover */
+    background: rgba(255, 255, 255, 0.2);
+    border-color: rgba(255, 255, 255, 0.4);
   }
 }
 
-/* Transition styles */
-.fade-enter-active, .fade-leave-active {
-  transition: opacity 0.5s, transform 0.5s;
+.fade-enter-active,
+.fade-leave-active {
+  transition:
+    opacity 0.5s,
+    transform 0.5s;
 }
 
-.fade-enter, .fade-leave-to /* .fade-leave-active in <2.1.8 */ {
+.fade-enter,
+.fade-leave-to {
   opacity: 0;
   transform: translateY(10px);
+}
+
+.layout {
+  transition: all 1s ease;
 }
 </style>

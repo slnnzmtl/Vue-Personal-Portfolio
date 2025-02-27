@@ -1,73 +1,135 @@
 <template>
-  <transition name="fade" mode="out-in">
-    <div class="grid grid-cols-1 lg:grid-cols-3 gap-16 ml-6 mr-6">
-      <div class="text-left">
+  <div class="projects-view flex justify-center mx-6">
+    <div
+      class="max-w-[95%] lg:max-w-[90%] flex flex-wrap lg:flex-nowrap gap-12"
+    >
+      <div class="text-left scrollable-container w-full lg:max-w-[30%]">
         <p class="text-2xl sm:text-4xl font-bold mb-8">Projects</p>
-        <p class="text-lg sm:text-xl mb-8">
-          Here, you'll find projects I've built or contributed to. Use the filters below to
-          explore projects based on the tech stack you're interested in.
+        <p class="text-lg xl:text-xl mb-8">
+          Here, you'll find projects I've built or contributed to. Use the
+          filters below to explore projects based on the tech stack you're
+          interested in.
         </p>
 
         <ControlPanel
-          :tags="projectsStore.tags"
-          :selectedFilters="selectedFilters"
+          :tags="tags"
+          :selected-filters="selectedFilters"
           :projects="filteredProjects"
-          :activeProject="activeProject"
-          @onFilterChange="projectFilterChange"
-          @project-clicked="onActiveProjectChange"
+          :active-project="activeProject"
+          @on-filter-change="projectFilterChange"
+          @on-project-change="onActiveProjectChange"
         />
       </div>
 
-      <MarkupViewer class="col-span-2 hidden lg:block" :active-project="activeProject" />
+      <div class="scrollable-container col-span-2 lg:max-w-[68%]">
+        <MarkupViewer
+          class="col-span-2 hidden lg:block"
+          :active-project="activeProject"
+        />
+      </div>
     </div>
-  </transition>
+  </div>
 </template>
 
-<script lang="ts" setup>
+<script lang="ts">
 import { computed, defineComponent, ref, watch } from "vue";
 import { useProjectsStore } from "@/stores/projectsStore";
-import { MarkupViewer, FilterPanel, ProjectList, ControlPanel } from "@/components";
+import { MarkupViewer, ControlPanel } from "@/components";
 import { Project } from "@/stores/projectTypes";
-import { useRoute } from 'vue-router';
+import { useRoute } from "vue-router";
+import router from "@/router";
 
-const projectsStore = useProjectsStore();
+export default defineComponent({
+  name: "ProjectsView",
+  components: {
+    MarkupViewer,
+    ControlPanel,
+  },
+  setup() {
+    const projectsStore = useProjectsStore();
+    const route = useRoute();
 
-const selectedFilters = ref<string[]>([]);
-const activeProject = ref<Project | null>(null);
-const route = useRoute();
+    const selectedFilters = ref<string[]>([]);
+    const activeProject = ref<Project | null>(null);
 
-const filteredProjects = computed(() => {
-  if (selectedFilters.value.length === 0) {
-    return projectsStore.projects;
-  }
-  return projectsStore.projects.filter((project) =>
-    project.tags.some((tech) => selectedFilters.value.includes(tech))
-  );
+    const filteredProjects = computed(() => {
+      const selectedFiltersSet = new Set(selectedFilters.value);
+      if (selectedFiltersSet.size === 0) {
+        return projectsStore.projects;
+      }
+
+      return projectsStore.projects.filter((project) =>
+        project.tags.some((tech) => selectedFiltersSet.has(tech)),
+      );
+    });
+
+    watch(
+      () => route.params.projectId,
+      (newProjectId) => {
+        if (newProjectId) {
+          const project = projectsStore.projects.find(
+            (p) => p.id === Number(newProjectId),
+          );
+          activeProject.value = project || null;
+        }
+      },
+      { immediate: true },
+    );
+
+    const projectFilterChange = (filters: string[]) => {
+      selectedFilters.value = filters;
+    };
+
+    const onActiveProjectChange = (projectId: Project["id"]) => {
+      if (projectId === -1) {
+        router.push("/projects");
+      } else {
+        router.push(`/projects/${projectId}`);
+      }
+    };
+
+    return {
+      filteredProjects,
+      selectedFilters,
+      activeProject,
+      projectFilterChange,
+      onActiveProjectChange,
+      tags: projectsStore.tags,
+    };
+  },
 });
-
-watch(() => route.params.projectId, (newProjectId) => {
-  console.log(newProjectId);
-  if (newProjectId) {
-    const project = projectsStore.projects.find(p => p.id === Number(newProjectId));
-    activeProject.value = project || null;
-  }
-}, { immediate: true });
-
-const projectFilterChange = (filters: string[]) => {
-  selectedFilters.value = filters;
-};
-
-const onActiveProjectChange = (project: Project) => {
-  console.log(project);
-  activeProject.value = project;
-};
 </script>
 
-<style scoped>
-.fade-enter-active, .fade-leave-active {
+<style lang="scss" scoped>
+.fade-enter-active,
+.fade-leave-active {
   transition: opacity 0.5s;
 }
-.fade-enter, .fade-leave-to /* .fade-leave-active in <2.1.8 */ {
+.fade-enter,
+.fade-leave-to {
   opacity: 0;
+}
+
+.projects-view {
+  position: fixed;
+  inset: 0;
+}
+
+.scrollable-container {
+  overflow-y: auto;
+  overflow-x: visible;
+  height: 100%;
+  width: 100%;
+  padding-right: 25px;
+  padding-top: 6rem;
+  padding-bottom: 3rem;
+
+  @media (max-width: 1024px) {
+    padding-right: 0;
+    padding-top: 6rem;
+    padding-bottom: 0;
+  }
+
+  @extend %scrollbar-hidden;
 }
 </style>

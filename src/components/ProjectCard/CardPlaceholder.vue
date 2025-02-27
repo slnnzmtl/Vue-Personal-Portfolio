@@ -57,8 +57,12 @@
     div {
       height: 1rem;
       margin-bottom: 0.5rem;
-      &:first-child { width: 100%; }
-      &:last-child { width: 70%; }
+      &:first-child {
+        width: 100%;
+      }
+      &:last-child {
+        width: 70%;
+      }
     }
   }
 
@@ -82,7 +86,11 @@
 }
 
 @keyframes shimmer {
-  0% { background-position: 200% 0; }
-  100% { background-position: -200% 0; }
+  0% {
+    background-position: 200% 0;
+  }
+  100% {
+    background-position: -200% 0;
+  }
 }
 </style>

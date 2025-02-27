@@ -1,103 +1,139 @@
-<script setup lang="ts">
-import { computed, ref } from 'vue';
-import { Tags, Glass } from '@/components';
-import type { Project } from '@/stores/projectTypes';
-
-interface Props {
-  project: Project;
-  selectedFilters: string[];
-  type: 'list' | 'grid';
-  active: boolean;
-}
-
-const props = defineProps<Props>();
-const isImageLoading = ref(true);
-const isExpanded = ref(false);
-
-const isGridLayout = computed(() => props.type === 'grid');
-const activeClass = computed(() => {
-  return props.active ? 'active' : '' 
-});
-
-
-const expandedClass = computed(() => {
-  return isExpanded || props.active  ? 'expanded' : ''
-});
-
-const handleImageLoad = () => {
-  isImageLoading.value = false;
-};
-
-const expand = () => {
-  isExpanded.value = true;
-};
-
-const collapse = () => {
-  isExpanded.value = false;
-};
-</script>
-
 <template>
-  <Glass 
-    v-if="isGridLayout" 
+  <GlassMaterial
+    v-if="isGridLayout"
     :class="`project-card flex flex-col relative radius-md overflow-hidden ${activeClass}`"
+    @click="onCardClick"
   >
     <div class="project-card__image">
       <div v-if="isImageLoading" class="image-loader shimmer"></div>
-      <img 
-        :src="project?.image" 
+      <img
+        :src="project?.image"
         :alt="project?.title"
-        @load="handleImageLoad"
         :class="{ 'image-loaded': !isImageLoading }"
+        @load="handleImageLoad"
       />
     </div>
-    
-    <div class="project-card__content flex flex-col gap-4 p-4 text-left">
-      <h2 class="project-card__title text-lg sm:text-xl">{{ project?.title }}</h2>
-      <p class="project-card__description text-sm sm:text-base">{{ project?.description }}</p>
-      
-      <Tags 
-        :tags="project?.tags" 
-        :selectedFilters="selectedFilters" 
-      />
 
-      <a :href="project?.url" target="_blank" class="project-card__link">
+    <div class="project-card__content flex flex-col gap-4 p-4 text-left">
+      <h2 class="project-card__title text-lg sm:text-xl">
+        {{ project?.title }}
+      </h2>
+      <p class="project-card__description text-sm sm:text-base">
+        {{ project?.description }}
+      </p>
+
+      <TagsBar :tags="project?.tags" :selected-filters="selectedFilters" />
+
+      <div v-if="active" class="mt-6">
+        <slot :active="active" />
+      </div>
+
+      <a v-if="!active" class="project-card__link" @click="onCardClick">
         Read more
         <span class="project-card__link-arrow">→</span>
       </a>
     </div>
-  </Glass>
+  </GlassMaterial>
 
-  <Glass 
-    v-else 
-    :class="`project-card project-card--list relative radius-md overflow-hidden p-4 ${activeClass} ${expandedClass}`"
+  <GlassMaterial
+    v-else
+    :class="`project-card project-card--list relative radius-md overflow-hidden p-4 ${activeClass}`"
+    @click="onCardClick"
   >
     <div class="flex gap-4">
       <div class="project-card__image">
         <div v-if="isImageLoading" class="image-loader shimmer"></div>
-        <img 
-          :src="project?.image" 
+        <img
+          :src="project?.image"
           :alt="project?.title"
-          @load="handleImageLoad"
           :class="{ 'image-loaded': !isImageLoading }"
+          @load="handleImageLoad"
         />
       </div>
 
       <div class="flex flex-col gap-2 justify-around flex-grow">
-        <h2 class="project-card__title text-lg sm:text-xl">{{ project?.title }}</h2>
+        <h2 class="project-card__title text-lg sm:text-xl">
+          {{ project?.title }}
+        </h2>
 
-        <Tags 
-          :tags="project?.tags" 
-          :selectedFilters="selectedFilters" 
-        />
+        <TagsBar :tags="project?.tags" :selected-filters="selectedFilters" />
       </div>
     </div>
-    
+
     <div class="project-card__content">
-      <p class="project-card__description text-sm sm:text-base py-4">{{ project?.description }}</p>
+      <p class="project-card__description text-sm sm:text-base py-4">
+        {{ project?.description }}
+      </p>
     </div>
-  </Glass>
+  </GlassMaterial>
 </template>
+
+<script lang="ts">
+import { defineComponent, computed, ref } from "vue";
+import type { Project } from "@/stores/projectTypes";
+import { GlassMaterial } from "@/components/ui";
+import { TagsBar } from "@/components/Tags";
+
+export default defineComponent({
+  name: "ProjectCard",
+  components: {
+    GlassMaterial,
+    TagsBar,
+  },
+  props: {
+    project: {
+      type: Object as () => Project,
+      required: true,
+    },
+    selectedFilters: {
+      type: Array,
+      required: true,
+    },
+    type: {
+      type: String,
+      required: true,
+    },
+    active: {
+      type: Boolean,
+      required: true,
+    },
+  },
+  emits: ["click", "close"],
+  setup(props, { emit }) {
+    const isImageLoading = ref(true);
+
+    const isGridLayout = computed(() => props.type === "grid");
+    const activeClass = computed(() => {
+      return props.active ? "active" : "";
+    });
+
+    const handleImageLoad = () => {
+      isImageLoading.value = false;
+    };
+
+    const onCardClick = () => {
+      if (props.active) {
+        onClose();
+      } else {
+        emit("click");
+      }
+    };
+
+    const onClose = () => {
+      emit("close");
+    };
+
+    return {
+      isImageLoading,
+      isGridLayout,
+      activeClass,
+      handleImageLoad,
+      onClose,
+      onCardClick,
+    };
+  },
+});
+</script>
 
 <style scoped lang="scss">
 :root {
@@ -107,65 +143,53 @@ const collapse = () => {
 }
 
 .project-card {
-  transition: all .3s ease;
+  transition: width 0.5s height 0s ease;
   cursor: pointer;
+  flex: 0 1 calc(33.33% - 20px);
 
-  &.active {
-    background: var(--cyan-alpha-10);
+  @media (max-width: 900px) {
+    flex: 0 1 calc(50% - 20px);
+  }
+
+  @media (max-width: 600px) {
+    flex: 1 1 100%;
   }
 
   &:hover {
     transform: translateY(-5px);
-    
+
     .project-card__link-arrow {
       transform: translateX(5px);
     }
   }
 
-  &--list {
-    &.active {
-      background: var(--cyan-alpha-10);
-      transform: translateX(20px);
-    }
+  &.active {
+    background: var(--cyan-alpha-10);
 
-    &:hover:not(.active) {
-      transform: translateX(5px);
-    }
+    @media (max-width: 1024px) {
+      flex: 1 1 100%;
 
-    .project-card__image {
-      height: auto;
-      width: 20%;
-      max-width: 120px;
-      min-width: 80px;
-      object-fit: cover;
-      overflow: hidden;
-      border-radius: var(--radius-lg);
-    }
+      order: -1;
 
-    .project-card__content {
-      max-height: 0;
-      overflow: hidden;
-      opacity: 0;
-      transition: max-height 0.3s ease, opacity 0.3s ease, padding 0.3s ease;
-    }
-
-    &.expanded {
-      .project-card__content {
-        max-height: 200px;
-        opacity: 1;
+      .project-card__image {
+        height: 400px;
       }
     }
   }
 
   &__image {
     position: relative;
-    height: 300px; 
+    height: 300px;
+    width: auto;
     overflow: hidden;
     z-index: 1;
+    transition:
+      height 0.5s ease,
+      width 1s ease;
 
     img {
-      width: 100%;
       height: 100%;
+      width: 100%;
       object-fit: cover;
       transition: opacity var(--card-transition);
       opacity: 0;
@@ -211,8 +235,44 @@ const collapse = () => {
     }
 
     &-arrow {
-      margin-left: .5rem;
+      margin-left: 0.5rem;
       transition: transform 0.3s;
+    }
+  }
+
+  &--list {
+    &.active {
+      background: var(--cyan-alpha-10);
+
+      @media (min-width: 1024px) {
+        transform: translateX(20px);
+      }
+    }
+
+    &:hover:not(.active) {
+      @media (min-width: 1024px) {
+        transform: translateX(5px);
+      }
+    }
+
+    .project-card__image {
+      height: auto;
+      width: 20%;
+      max-width: 120px;
+      min-width: 80px;
+      object-fit: cover;
+      overflow: hidden;
+      border-radius: var(--radius-lg);
+    }
+
+    .project-card__content {
+      max-height: 200px;
+      overflow: visible;
+      opacity: 1;
+      transition:
+        max-height 0.3s ease,
+        opacity 0.3s ease,
+        padding 0.3s ease;
     }
   }
 }
@@ -235,7 +295,11 @@ const collapse = () => {
 }
 
 @keyframes shimmer {
-  0% { background-position: 200% 0; }
-  100% { background-position: -200% 0; }
+  0% {
+    background-position: 200% 0;
+  }
+  100% {
+    background-position: -200% 0;
+  }
 }
 </style>

@@ -5,8 +5,8 @@
         v-for="tech in tags"
         :key="tech"
         class="filter-panel__tag"
+        :class="{ active: isActive(tech) }"
         @click="toggleFilter(tech)"
-        :class="{ 'active': isActive(tech) }"
       >
         {{ tech }}
       </span>
@@ -15,7 +15,7 @@
 </template>
 
 <script lang="ts">
-import { defineComponent, defineEmits } from 'vue';
+import { defineComponent } from "vue";
 
 export default defineComponent({
   props: {
@@ -28,33 +28,32 @@ export default defineComponent({
       required: true,
     },
   },
-  setup (props) {
-    const emit = defineEmits<{
-      (e: 'onFilterChange', filters: string[]): void;
-    }>();
-    
-
+  emits: ["onFilterChange"],
+  setup(props, { emit }) {
     const toggleFilter = (tech: string) => {
       const index = props.selectedFilters.indexOf(tech);
       if (index === -1) {
-        emit('onFilterChange', [...props.selectedFilters, tech]);
+        emit("onFilterChange", [...props.selectedFilters, tech]);
       } else {
-        emit('onFilterChange', props.selectedFilters.filter(t => t !== tech));
+        emit(
+          "onFilterChange",
+          props.selectedFilters.filter((t) => t !== tech),
+        );
       }
-    };
-
-    const isActive = (tech: string) => {
-      return props.selectedFilters.includes(tech);
     };
 
     return {
       props,
       emit,
       toggleFilter,
-      isActive
-    }
-  }
-})
+    };
+  },
+  methods: {
+    isActive(tech: string) {
+      return this.props.selectedFilters.includes(tech);
+    },
+  },
+});
 </script>
 
 <style scoped lang="scss">
@@ -87,4 +86,4 @@ export default defineComponent({
     }
   }
 }
-</style> 
+</style>
