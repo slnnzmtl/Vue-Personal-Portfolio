@@ -11,9 +11,9 @@ export const useProjectsStore = defineStore("projects", {
     },
   },
   getters: {
-    technologies(state) {
+    tags(state) {
       return state.projects.reduce((acc, project) => {
-        project.technologies.forEach((tech) => {
+        project.tags.forEach((tech) => {
           if (!acc.includes(tech)) {
             acc.push(tech);
           }
