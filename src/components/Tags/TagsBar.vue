@@ -1,9 +1,9 @@
 <template>
   <div class="tags">
-    <span 
-      v-for="tag in tags" 
-      :key="tag" 
-      :class="['tag', { 'highlighted': selectedFilters?.includes(tag) }]"
+    <span
+      v-for="tag in tags"
+      :key="tag"
+      :class="['tag', { highlighted: selectedFilters?.includes(tag) }]"
     >
       {{ tag }}
     </span>
@@ -11,10 +11,10 @@
 </template>
 
 <script lang="ts">
-import { defineComponent, PropType } from 'vue';
+import { defineComponent, PropType } from "vue";
 
 export default defineComponent({
-  name: 'Tags',
+  name: "TagsBar",
   props: {
     tags: {
       type: Array as PropType<string[]>,
@@ -29,7 +29,6 @@ export default defineComponent({
 </script>
 
 <style scoped lang="scss">
-
 .tags {
   display: flex;
   flex-wrap: wrap;
@@ -49,4 +48,4 @@ export default defineComponent({
     color: var(--background);
   }
 }
-</style> 
+</style>

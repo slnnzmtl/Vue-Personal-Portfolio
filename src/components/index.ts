@@ -8,9 +8,9 @@ export { default as NavigationMenu } from "./NavigationMenu.vue";
 export { default as FilterPanel } from "./FilterPanel/FilterPanel.vue";
 export { SkillsScreen } from "./SkillsScreen";
 export { SkillCard } from "./SkillCard";
-export { Tags } from "./Tags";
+export { TagsBar } from "./Tags";
 export { MarkupViewer } from "./MarkupViewer";
 export { ModalProvider } from "./ModalProvider";
 export { BlogList } from "./BlogList";
-export { default as ControlPanel } from './ControlPanel.vue'
+export { default as ControlPanel } from "./ControlPanel.vue";
 export * from "./ui/";

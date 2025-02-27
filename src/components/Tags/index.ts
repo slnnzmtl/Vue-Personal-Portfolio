@@ -1,1 +1,1 @@
-export { default as Tags } from "./Tags.vue";
+export { default as TagsBar } from "./TagsBar.vue";
