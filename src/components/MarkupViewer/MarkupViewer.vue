@@ -1,8 +1,14 @@
 <template>
   <Glass class="markup-content p-4">
-    <div v-if="activeProject" v-html="renderedContent" class="markup-content__render rounded-lg"></div>
-    <div v-else class="placeholder flex items-center justify-center h-full">
-      <p>Please select a project to view its details.</p>
+    <div
+      v-if="activeProject"
+      v-html="renderedContent"
+      class="markup-content__render rounded-lg p-4"
+    />
+    <div v-else
+      class="placeholder flex items-center justify-center h-full"
+    >
+      <p>Please select an element to view its details.</p>
     </div>
   </Glass>
 </template>
@@ -10,7 +16,7 @@
 <script lang="ts" setup>
 import { ref, onMounted, defineProps, onBeforeUnmount, computed } from 'vue';
 import { marked } from 'marked';
-import { Glass } from '@components/ui';
+import { Glass } from '@/components/ui';
 
 const props = defineProps<{
   activeProject: any; 
@@ -26,7 +32,7 @@ const renderedContent = computed(() => {
 </script>
 
 <style lang="scss">
-@use "@styles/mixins/_scrollbar.scss";
+@use "@/styles/mixins/_scrollbar.scss";
 .markup-content {
   overflow-y: auto;
   text-align: left;
