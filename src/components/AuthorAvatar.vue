@@ -1,0 +1,59 @@
+<script lang="ts">
+import MaleAvatar from "@/assets/male-avatar.svg";
+import { defineComponent } from "vue";
+import { GlassMaterial } from "@/components/ui";
+
+export default defineComponent({
+  name: "AuthorAvatar",
+  components: {
+    GlassMaterial,
+  },
+  setup() {
+    return {
+      MaleAvatar,
+    };
+  },
+});
+</script>
+
+<template>
+  <GlassMaterial class="avatar-background">
+    <div class="male-avatar">
+      <img :src="MaleAvatar" />
+    </div>
+  </GlassMaterial>
+</template>
+
+<style lang="scss">
+.avatar-background {
+  position: relative;
+  background: rgba(255, 255, 255, 0);
+  background-size: 200% 200%;
+  animation: gradient-rotate 6s ease-in-out infinite;
+  border-radius: 50% !important;
+  overflow: hidden;
+  display: flex;
+  flex-shrink: 0;
+}
+
+.male-avatar {
+  min-width: 100%;
+  border-radius: 50%;
+  box-sizing: border-box;
+  overflow: hidden;
+  opacity: 0.9;
+  z-index: 1;
+}
+
+@keyframes gradient-rotate {
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
+}
+</style>
