@@ -2,60 +2,91 @@
   <div class="article-viewer">
     <transition-group :name="transitionName" tag="div" :class="layoutClass">
       <template v-if="!isLoading">
-        <ProjectCard 
-          v-for="article in articles" 
+        <ProjectCard
+          v-for="article in articles"
           :key="article.id"
           :project="article"
           :selected-filters="selectedFilters"
-          :type="type"
-          selected="test"
-          class="h-full"
+          :active="isCardActive(article.id)"
+          type="grid"
+          return-value="id"
           @click="onArticleClick(article)"
         />
       </template>
-      
+
       <template v-else>
         <CardPlaceholder v-for="n in itemsPerPage" :key="n" />
       </template>
     </transition-group>
 
-    <Button v-if="hasMoreArticles" @click="loadMore" class="load-more-button">
+    <SButton v-if="hasMoreArticles" class="load-more-button" @click="loadMore">
       Load More
-    </Button>
+    </SButton>
   </div>
 </template>
 
-<script lang="ts" setup>
-import { ref, computed, defineProps } from 'vue';
-import { ProjectCard, CardPlaceholder } from '@/components/ProjectCard';
-import { Button } from '@/components/ui';
-import { Article } from '@/stores/blogTypes';
-import { useBlogStore } from '@/stores';
+<script lang="ts">
+import { computed, defineComponent } from "vue";
+import { ProjectCard, CardPlaceholder } from "@/components/ProjectCard";
+import { SButton } from "@/components/ui";
+import { Article } from "@/stores/blogTypes";
+import { useBlogStore } from "@/stores";
 
-const { articles } = useBlogStore();
+export default defineComponent({
+  name: "BlogList",
+  components: {
+    ProjectCard,
+    CardPlaceholder,
+    SButton,
+  },
+  props: {
+    selectedFilters: {
+      type: Array<string>,
+      required: true,
+    },
+    type: {
+      type: String,
+      required: true,
+      default: "list",
+      validator: (value: string) => {
+        return ["list", "grid"].includes(value);
+      },
+    },
+    activeArticle: {
+      type: Object,
+      required: true,
+    },
+  },
+  emits: ["click"],
+  setup(props, { emit }) {
+    const { articles } = useBlogStore();
 
-const layoutClass = computed(() => {
-  return props.type === 'grid' ? 'grid grid-cols-1 lg:grid-cols-3 gap-8 ml-6 mr-6' : 'flex flex-col gap-4'; 
+    const layoutClass = computed(() => {
+      return props.type === "grid"
+        ? "layout flex flex-wrap gap-4 justify-start w-full"
+        : "flex flex-col gap-4";
+    });
+
+    const onArticleClick = (article: Article) => {
+      console.log(article);
+      emit("click", article);
+    };
+
+    const isCardActive = (id: number) => {
+      return props.activeArticle?.id === id;
+    };
+    return {
+      articles,
+      layoutClass,
+      onArticleClick,
+      isCardActive,
+    };
+  },
 });
-
-const props = defineProps<{
-  articles: Article[];
-  selectedFilters?: string[];
-  type: 'list' | 'grid';
-}>();
-
-const emit = defineEmits<{
-  (e: 'click', article: Article): void;
-}>();
-
-const onArticleClick = (article: Article) => {
-  emit('click', article);
-};
-
 </script>
 
 <style scoped lang="scss">
 .article-viewer {
   position: relative;
 }
-</style> 
+</style>

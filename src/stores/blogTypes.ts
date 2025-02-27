@@ -1,4 +1,5 @@
 export interface Article {
+  id: number;
   title: string;
   description: string;
   slug: string;
@@ -10,6 +11,7 @@ export interface Article {
 
 export const articles: Array<Article> = [
   {
+    id: 1,
     title: "Hello World",
     description: "This is a test",
     slug: "hello-world",
@@ -19,6 +21,7 @@ export const articles: Array<Article> = [
     html: `This is a test`,
   },
   {
+    id: 2,
     title: "Hello World",
     description: "This is a test",
     slug: "hello-world",
@@ -27,4 +30,4 @@ export const articles: Array<Article> = [
     tags: ["test", "hello"],
     html: `This is a test`,
   },
-]
+];

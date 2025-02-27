@@ -1,5 +1,5 @@
-import { ref } from 'vue';
-import { Article } from './blogTypes'; // Define your Article type
+import { ref } from "vue";
+import { Article } from "./blogTypes"; // Define your Article type
 
 const articles = ref<Article[]>([]);
 
@@ -10,4 +10,4 @@ const loadArticles = async () => {
 export const articleStore = {
   articles,
   loadArticles,
-}; 
+};
