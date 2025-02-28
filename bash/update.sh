@@ -6,14 +6,11 @@ set -e
 echo "🚀 Starting application update process..."
 
 # Source SSH credentials
-source ~/bash/slnnzmtl-ssh.sh
-if [ $? -ne 0 ]; then
-    echo "❌ Failed to load SSH credentials"
-    exit 1
-fi
+eval "$(ssh-agent -s)"
+ssh-add ~/.ssh/slnnzmtl-git
 
 # Navigate to project directory (adjust if needed)
-cd ~/slnnzmtl-xyz
+cd ~/slnnzmtl.xyz
 
 # Check if --rebuild flag is provided
 if [ "$1" != "--rebuild" ]; then
