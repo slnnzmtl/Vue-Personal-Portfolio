@@ -4,8 +4,8 @@
       <template v-if="!isLoading">
         <ProjectCard
           v-for="project in displayedProjects"
-          :key="project.id"
           :id="`project-${project.id}`"
+          :key="project.id"
           :project="project"
           :selected-filters="selectedFilters"
           :type="type"
@@ -75,7 +75,7 @@ export default defineComponent({
     const isLoading = ref(false);
     const itemsPerPage = ref(6);
     const currentPage = ref(1);
-    
+
     const displayedProjects = computed(() => {
       const start = 0;
       return props.projects.slice(
@@ -105,9 +105,7 @@ export default defineComponent({
     });
 
     const onClose = () => {
-      emit("selected", {
-        id: -1,
-      });
+      emit("selected", null);
     };
 
     const scrollToProject = (id: number) => {
@@ -137,6 +135,10 @@ export default defineComponent({
     watch(
       () => props.activeProject,
       (current, prev) => {
+        console.log({
+          current: current,
+          prev: prev,
+        });
         if (!current) {
           setTimeout(() => {
             scrollToProject(prev?.id);

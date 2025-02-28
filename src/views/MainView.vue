@@ -41,19 +41,10 @@
   </div>
 </template>
 
-<script setup lang="ts">
-import { ref, onMounted } from "vue";
-import { defineAsyncComponent } from "vue";
+<script lang="ts">
+import { defineComponent, ref, onMounted, defineAsyncComponent } from "vue";
 
-const faceRef = ref<HTMLElement | null>(null);
-const skillsRef = ref<HTMLElement | null>(null);
-const projectsRef = ref<HTMLElement | null>(null);
-
-const shouldLoadFace = ref(true); // Load immediately since it's above the fold
-const shouldLoadSkills = ref(false);
-const shouldLoadProjects = ref(false);
-
-// Consistent naming and loading strategy for all components
+// Define async components outside of component definition for better reusability
 const AsyncFaceScreen = defineAsyncComponent({
   loader: () => import("@/components/FaceScreen/FaceScreen.vue"),
   delay: 200,
@@ -75,29 +66,58 @@ const AsyncProjectsScreen = defineAsyncComponent({
   suspensible: true,
 });
 
-onMounted(() => {
-  const observerOptions = {
-    root: null,
-    rootMargin: "50px",
-    threshold: 0,
-  };
+export default defineComponent({
+  name: "MainView",
 
-  const skillsObserver = new IntersectionObserver((entries) => {
-    if (entries[0].isIntersecting) {
-      shouldLoadSkills.value = true;
-      skillsObserver.disconnect();
-    }
-  }, observerOptions);
+  components: {
+    AsyncFaceScreen,
+    AsyncSkillsScreen,
+    AsyncProjectsScreen,
+  },
 
-  const projectsObserver = new IntersectionObserver((entries) => {
-    if (entries[0].isIntersecting) {
-      shouldLoadProjects.value = true;
-      projectsObserver.disconnect();
-    }
-  }, observerOptions);
+  setup() {
+    const faceRef = ref<HTMLElement | null>(null);
+    const skillsRef = ref<HTMLElement | null>(null);
+    const projectsRef = ref<HTMLElement | null>(null);
 
-  if (skillsRef.value) skillsObserver.observe(skillsRef.value);
-  if (projectsRef.value) projectsObserver.observe(projectsRef.value);
+    const shouldLoadFace = ref(true); // Load immediately since it's above the fold
+    const shouldLoadSkills = ref(false);
+    const shouldLoadProjects = ref(false);
+
+    onMounted(() => {
+      const observerOptions = {
+        root: null,
+        rootMargin: "50px",
+        threshold: 0,
+      };
+
+      const skillsObserver = new IntersectionObserver((entries) => {
+        if (entries[0].isIntersecting) {
+          shouldLoadSkills.value = true;
+          skillsObserver.disconnect();
+        }
+      }, observerOptions);
+
+      const projectsObserver = new IntersectionObserver((entries) => {
+        if (entries[0].isIntersecting) {
+          shouldLoadProjects.value = true;
+          projectsObserver.disconnect();
+        }
+      }, observerOptions);
+
+      if (skillsRef.value) skillsObserver.observe(skillsRef.value);
+      if (projectsRef.value) projectsObserver.observe(projectsRef.value);
+    });
+
+    return {
+      faceRef,
+      skillsRef,
+      projectsRef,
+      shouldLoadFace,
+      shouldLoadSkills,
+      shouldLoadProjects,
+    };
+  },
 });
 </script>
 

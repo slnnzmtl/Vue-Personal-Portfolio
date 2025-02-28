@@ -1,5 +1,7 @@
 <template>
-  <div class="projects-view flex justify-center mx-6">
+  <div
+    class="projects-view max-w-screen-xl lg:max-w-screen-2xl w-full mx-auto flex justify-center mx-6"
+  >
     <div
       class="max-w-[95%] lg:max-w-[90%] flex flex-wrap lg:flex-nowrap gap-12"
     >
@@ -32,7 +34,7 @@
 </template>
 
 <script lang="ts">
-import { computed, defineComponent, ref, watch, onMounted } from "vue";
+import { computed, defineComponent, ref, watch } from "vue";
 import { useProjectsStore } from "@/stores/projectsStore";
 import { MarkupViewer, ControlPanel } from "@/components";
 import { Project } from "@/stores/projectTypes";
@@ -74,25 +76,21 @@ export default defineComponent({
       () => route.params.projectId,
       (newProjectId: string) => {
         if (newProjectId) {
-          console.log("newProjectId", newProjectId);
           setActiveProject(newProjectId);
         }
       },
+      { immediate: true },
     );
 
-    onMounted(() => {
-      if (route.params.projectId) {
-        setActiveProject(route.params.projectId as string);
-      }
-    });
-
     const projectFilterChange = (filters: string[]) => {
+      onActiveProjectChange(null);
       selectedFilters.value = filters;
     };
 
-    const onActiveProjectChange = (projectId: Project["id"]) => {
-      if (projectId === -1) {
-        router.push("/projects");
+    const onActiveProjectChange = (projectId: Project["id"] | null) => {
+      if (!projectId) {
+        router.replace("/projects");
+        setActiveProject(null);
       } else {
         router.push(`/projects/${projectId}`);
       }
@@ -104,6 +102,7 @@ export default defineComponent({
       activeProject,
       projectFilterChange,
       onActiveProjectChange,
+      setActiveProject,
       tags: projectsStore.tags,
     };
   },
@@ -131,7 +130,7 @@ export default defineComponent({
   height: 100%;
   width: 100%;
   padding-right: 25px;
-  padding-top: 6rem;
+  padding-top: 8rem;
   padding-bottom: 3rem;
 
   @media (max-width: 1024px) {

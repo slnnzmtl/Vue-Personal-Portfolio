@@ -6,7 +6,7 @@
       v-html="renderedContent"
     />
 
-    <div v-else class="placeholder flex items-center justify-center h-full">
+    <div v-else class="placeholder flex items-center justify-center h-[70vh]">
       <p>Please select an element to view its details.</p>
     </div>
   </div>
@@ -28,7 +28,6 @@ export default defineComponent({
   setup(props) {
     const renderedContent = computed(() => {
       if (props.activeProject) {
-        console.log(props.activeProject);
         return marked(props.activeProject.html);
       }
       return "";

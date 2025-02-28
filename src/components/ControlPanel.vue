@@ -64,8 +64,7 @@ export default defineComponent({
       emit("onFilterChange", filters);
     };
 
-    const onProjectChange = (id: number) => {
-      console.log(id);
+    const onProjectChange = (id: number | null) => {
       emit("onProjectChange", id);
     };
 

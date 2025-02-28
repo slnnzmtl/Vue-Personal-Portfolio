@@ -22,10 +22,10 @@ export default defineComponent({
 
 <template>
   <div
-    class="face-screen flex items-center flex-col lg:flex-row gap-6 sm:gap-18 p-4 pt-10 sm:pt-auto mt-25"
+    class="face-screen grid grid-cols-1 lg:grid-cols-3 gap-6 sm:gap-18 p-4 pt-10 sm:pt-auto items-center"
   >
     <AuthorAvatar class="max-w-[300px] md:max-w-[400px]" />
-    <div class="flex flex-col gap-4 text-left">
+    <div class="flex flex-col col-span-2 gap-4 text-left">
       <h1 class="text-center lg:text-left text-4xl sm:text-7xl font-bold">
         {{ name }}
       </h1>
@@ -41,7 +41,10 @@ export default defineComponent({
 
 <style lang="scss" scoped>
 .face-screen {
-  height: 800px;
+  height: 600px;
+  margin-top: 150px;
+  margin-bottom: 50px;
+  width: 100%;
 
   &__position {
     color: var(--text-secondary);
