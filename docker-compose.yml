@@ -1,0 +1,44 @@
+version: '3.8'
+
+services:
+  dev:
+    container_name: slnnzmtl-xyz-dev
+    build:
+      context: .
+      dockerfile: Dockerfile
+      target: build-stage
+    ports:
+      - "5173:5173"
+    volumes:
+      - ./:/app
+      - /app/node_modules
+    command: npm run dev
+    environment:
+      - NODE_ENV=development
+      - VITE_HOST=0.0.0.0
+    networks:
+      - dev_network
+
+  prod:
+    container_name: slnnzmtl-xyz-prod
+    build:
+      context: .
+      dockerfile: Dockerfile
+      target: production-stage
+    ports:
+      - "443:80"
+    restart: unless-stopped
+    environment:
+      - VIRTUAL_HOST=slnnzmtl.xyz
+      - LETSENCRYPT_HOST=slnnzmtl.xyz
+    networks:
+      - nginx-proxy
+      - prod_network
+
+networks:
+  dev_network:
+    name: dev_network
+  nginx-proxy:
+    external: true
+  prod_network:
+    name: prod_network 

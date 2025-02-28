@@ -1,0 +1,3 @@
+aws ec2 modify-instance-attribute \
+    --instance-id i-1234567890abcdef0 \
+    --private-dns-name slnnzmtl.xyz
