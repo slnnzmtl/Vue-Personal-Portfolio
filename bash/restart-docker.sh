@@ -24,7 +24,7 @@ start_containers() {
     fi
     
     echo -e "${GREEN}Starting containers${NC} ${YELLOW}${profile:+"($profile)"}${NC}..."
-    $command up
+    $command up -d
 
     # Check if containers are running
     if $command ps | grep -q "Up"; then
