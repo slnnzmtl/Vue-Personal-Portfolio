@@ -6,7 +6,7 @@ set -e
 echo "🚀 Starting application update process..."
 
 # Source SSH credentials
-source ~/bash/use-slnnzmtl.sh
+source ~/bash/slnnzmtl-ssh.sh
 if [ $? -ne 0 ]; then
     echo "❌ Failed to load SSH credentials"
     exit 1
