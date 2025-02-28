@@ -5,10 +5,9 @@
   "type": "module",
   "scripts": {
     "dev": "vite",
-    "build": "vue-tsc -b && vite build",
-    "preview": "vite preview",
+    "build": "vue-tsc && vite build --emptyOutDir",
     "lint": "eslint ./src --fix",
-    "docker:dev": "docker-compose up app",
+    "docker:dev": "docker-compose up dev",
     "docker:build": "docker-compose build prod",
     "docker:prod": "docker-compose up prod"
   },

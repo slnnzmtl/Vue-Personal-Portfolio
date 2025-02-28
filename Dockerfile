@@ -21,20 +21,20 @@ ENV VITE_HOST=0.0.0.0
 ENV NODE_ENV=production
 
 # Build the app with adjusted memory allocation
-ENV NODE_OPTIONS="--max-old-space-size=1024"
+ENV NODE_OPTIONS="--max-old-space-size=512"
 
 # Build the app
-RUN npm run build --verbose
-
-# Development stage
-FROM nginx:stable-alpine as development-stage
-COPY nginx.dev.conf /etc/nginx/conf.d/default.conf
-EXPOSE 5173
+RUN npm run build --verbose --no-cache
 
 # Production stage
 FROM nginx:stable-alpine as production-stage
+
+# Copy the built files
 COPY --from=build-stage /app/dist /usr/share/nginx/html
+
+# Copy our nginx configuration
 COPY nginx.prod.conf /etc/nginx/conf.d/default.conf
+
 EXPOSE 80
 
 CMD ["nginx", "-g", "daemon off;"] 

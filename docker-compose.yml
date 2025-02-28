@@ -2,6 +2,7 @@ version: '3.8'
 
 services:
   dev:
+    profiles: ["dev"]
     container_name: slnnzmtl-xyz-dev
     build:
       context: .
@@ -32,11 +33,10 @@ services:
       dockerfile: Dockerfile
       target: production-stage
     ports:
-      - "443:80"
+      - "80:80"
     restart: unless-stopped
     environment:
       - VIRTUAL_HOST=slnnzmtl.xyz
-      - LETSENCRYPT_HOST=slnnzmtl.xyz
     networks:
       - nginx-proxy
       - prod_network
@@ -46,6 +46,8 @@ services:
           memory: 128M
         reservations:
           memory: 64M
+    volumes:
+      - ./certbot/www:/var/www/certbot
 
 networks:
   dev_network:
