@@ -18,6 +18,13 @@ services:
       - VITE_HOST=0.0.0.0
     networks:
       - dev_network
+    deploy:
+      resources:
+        limits:
+          memory: 384M
+          memory-swap: 512M
+        reservations:
+          memory: 128M
 
   prod:
     container_name: slnnzmtl-xyz-prod
@@ -34,6 +41,12 @@ services:
     networks:
       - nginx-proxy
       - prod_network
+    deploy:
+      resources:
+        limits:
+          memory: 128M
+        reservations:
+          memory: 64M
 
 networks:
   dev_network:

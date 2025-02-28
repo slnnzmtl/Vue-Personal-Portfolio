@@ -20,8 +20,8 @@ COPY . .
 ENV VITE_HOST=0.0.0.0
 ENV NODE_ENV=production
 
-# Build the app with additional memory allocation
-ENV NODE_OPTIONS="--max-old-space-size=4096"
+# Build the app with adjusted memory allocation
+ENV NODE_OPTIONS="--max-old-space-size=1024"
 
 # Build the app
 RUN npm run build --verbose
