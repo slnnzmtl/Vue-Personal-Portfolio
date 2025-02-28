@@ -30,13 +30,14 @@ export default defineComponent({
 
     const filteredProjects = computed(() => {
       const selectedFiltersSet = new Set(selectedFilters.value);
-      if (selectedFiltersSet.size === 0) {
-        return projects;
-      }
+      const filtered =
+        selectedFiltersSet.size === 0
+          ? projects
+          : projects.filter((project) =>
+              project.tags.some((tech) => selectedFiltersSet.has(tech)),
+            );
 
-      return projects.filter((project) =>
-        project.tags.some((tech) => selectedFiltersSet.has(tech)),
-      );
+      return filtered.slice(0, 3);
     });
 
     const projectFilterChange = (filters: string[]) => {

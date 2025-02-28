@@ -1,36 +1,32 @@
 <template>
-  <div 
-    class="background-wrapper"
-    @mousemove="handleMouseMove"
-    ref="wrapper"
-  >
+  <div ref="wrapper" class="background-wrapper" @mousemove="handleMouseMove">
     <div class="light-effects">
-      <div class="light-group" v-for="i in 2" :key="i">
-        <div 
-          class="light light-2" 
-          :style="{ 
+      <div v-for="i in 2" :key="i" class="light-group">
+        <div
+          class="light light-2"
+          :style="{
             transform: `translate(
               ${mousePos.x * -0.03}px,
               ${mousePos.y * -0.03}px
-            )`
+            )`,
           }"
         ></div>
-        <div 
-          class="light light-3" 
-          :style="{ 
+        <div
+          class="light light-3"
+          :style="{
             transform: `translate(
               ${mousePos.x * 0.015}px,
               ${mousePos.y * 0.015}px
-            )`
+            )`,
           }"
         ></div>
-        <div 
-          class="light light-4" 
-          :style="{ 
+        <div
+          class="light light-4"
+          :style="{
             transform: `translate(
               ${mousePos.x * -0.025}px,
               ${mousePos.y * -0.025}px
-            )`
+            )`,
           }"
         ></div>
       </div>
@@ -42,7 +38,7 @@
 </template>
 
 <script setup lang="ts">
-import { ref, onMounted, onUnmounted } from 'vue';
+import { ref, onMounted, onUnmounted } from "vue";
 
 const wrapper = ref<HTMLElement | null>(null);
 const mousePos = ref({ x: 0, y: 0 });
@@ -51,11 +47,11 @@ let animationFrame: number | null = null;
 
 const handleMouseMove = (e: MouseEvent) => {
   if (!wrapper.value) return;
-  
+
   const rect = wrapper.value.getBoundingClientRect();
   targetPos.value = {
     x: e.clientX - (rect.left + rect.width / 2),
-    y: e.clientY - (rect.top + rect.height / 2)
+    y: e.clientY - (rect.top + rect.height / 2),
   };
 };
 
@@ -63,9 +59,9 @@ const updatePosition = () => {
   // Smooth lerp animation
   mousePos.value = {
     x: mousePos.value.x + (targetPos.value.x - mousePos.value.x) * 0.1,
-    y: mousePos.value.y + (targetPos.value.y - mousePos.value.y) * 0.1
+    y: mousePos.value.y + (targetPos.value.y - mousePos.value.y) * 0.1,
   };
-  
+
   animationFrame = requestAnimationFrame(updatePosition);
 };
 
@@ -114,47 +110,53 @@ onUnmounted(() => {
   position: absolute;
   border-radius: 50%;
   filter: blur(10vh);
-  contain: layout paint;
+  contain: layout paint style;
   opacity: 0.3;
   mix-blend-mode: screen;
-  will-change: transform;
-  
+  will-change: transform, opacity;
+  transform: translateZ(0);
+  backface-visibility: hidden;
+
   /* Use responsive sizes */
-  width: 10vw; /* Base size for mobile */
-  height: 10vw; /* Base size for mobile */
+  width: 10vw;
+  height: 10vw;
 }
 
 .light-2 {
-  background: #0800FF;
-  width: 60vh; /* Adjusted for larger screens */
-  height: 60vh; /* Adjusted for larger screens */
+  background: #0800ff;
+  width: 60vh;
+  height: 60vh;
   top: 50%;
-  right: -20vw; /* Adjusted for proportional positioning */
-  animation: float2 25s ease-in-out infinite,
-             pulse 9s ease-in-out infinite,
-             scale 12s ease-in-out infinite;
+  right: -20vw;
+  animation:
+    float2 25s ease-in-out infinite,
+    pulse 9s ease-in-out infinite,
+    scale 12s ease-in-out infinite;
+  transform-origin: center;
 }
 
 .light-3 {
-  background: #00EEFF;
-  width: 40vh; /* Adjusted for larger screens */
-  height: 40vh; /* Adjusted for larger screens */
-  bottom: -10vw; /* Adjusted for proportional positioning */
+  background: #00eeff;
+  width: 40vh;
+  height: 40vh;
+  bottom: -10vw;
   left: 30%;
-  animation: float3 22s ease-in-out infinite,
-             pulse 8s ease-in-out infinite,
-             scale 18s ease-in-out infinite;
+  animation:
+    float3 22s ease-in-out infinite,
+    pulse 8s ease-in-out infinite,
+    scale 18s ease-in-out infinite;
 }
 
 .light-4 {
-  background: #FF00EA;
-  width: 45vh; /* Adjusted for larger screens */
-  height: 45vh; /* Adjusted for larger screens */
+  background: #ff00ea;
+  width: 45vh;
+  height: 45vh;
   top: 30%;
   left: 20%;
-  animation: float4 23s ease-in-out infinite,
-             pulse 10s ease-in-out infinite,
-             scale 20s ease-in-out infinite;
+  animation:
+    float4 23s ease-in-out infinite,
+    pulse 10s ease-in-out infinite,
+    scale 20s ease-in-out infinite;
 }
 
 .content {
@@ -163,60 +165,96 @@ onUnmounted(() => {
 }
 
 @keyframes pulse {
-  0%, 100% { opacity: 0.3; }
-  50% { opacity: 0.1; }
+  0%,
+  100% {
+    opacity: 0.3;
+    transform: translateZ(0);
+  }
+  50% {
+    opacity: 0.1;
+    transform: translateZ(0);
+  }
 }
 
 @keyframes scale {
-  0%, 100% { transform: scale(1); }
-  50% { transform: scale(1.2); }
+  0%,
+  100% {
+    transform: scale(1) translateZ(0);
+  }
+  50% {
+    transform: scale(1.2) translateZ(0);
+  }
 }
 
 @keyframes rotate {
-  from { transform: rotate(0deg); }
-  to { transform: rotate(360deg); }
+  from {
+    transform: rotate(0deg) translateZ(0);
+  }
+  to {
+    transform: rotate(360deg) translateZ(0);
+  }
 }
 
 @keyframes float1 {
-  0%, 100% { transform: translate(0, 0); }
-  50% { transform: translate(100px, 100px); }
+  0%,
+  100% {
+    transform: translate3d(0, 0, 0);
+  }
+  50% {
+    transform: translate3d(100px, 100px, 0);
+  }
 }
 
 @keyframes float2 {
-  0%, 100% { transform: translate(0, 0); }
-  50% { transform: translate(-100px, -50px); }
+  0%,
+  100% {
+    transform: translate3d(0, 0, 0);
+  }
+  50% {
+    transform: translate3d(-100px, -50px, 0);
+  }
 }
 
 @keyframes float3 {
-  0%, 100% { transform: translate(0, 0); }
-  50% { transform: translate(50px, -100px); }
+  0%,
+  100% {
+    transform: translate3d(0, 0, 0);
+  }
+  50% {
+    transform: translate3d(50px, -100px, 0);
+  }
 }
 
 @keyframes float4 {
-  0%, 100% { transform: translate(0, 0); }
-  50% { transform: translate(-75px, 75px); }
+  0%,
+  100% {
+    transform: translate3d(0, 0, 0);
+  }
+  50% {
+    transform: translate3d(-75px, 75px, 0);
+  }
 }
 
 /* Media Queries for Mobile Adjustments */
 @media (max-width: 640px) {
   .light {
-    width: 15vw; /* Increase size for mobile */
-    height: 15vw; /* Increase size for mobile */
+    width: 15vw;
+    height: 15vw;
   }
 
   .light-2 {
-    width: 50vh; /* Adjust size for mobile */
-    height: 50vh; /* Adjust size for mobile */
+    width: 50vh;
+    height: 50vh;
   }
 
   .light-3 {
-    width: 30vh; /* Adjust size for mobile */
-    height: 30vh; /* Adjust size for mobile */
+    width: 30vh;
+    height: 30vh;
   }
 
   .light-4 {
-    width: 35vh; /* Adjust size for mobile */
-    height: 35vh; /* Adjust size for mobile */
+    width: 35vh;
+    height: 35vh;
   }
 }
-</style> 
+</style>
