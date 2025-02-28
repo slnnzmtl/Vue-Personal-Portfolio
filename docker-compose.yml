@@ -22,7 +22,6 @@ services:
       resources:
         limits:
           memory: 384M
-          memory-swap: 512M
         reservations:
           memory: 128M
 
