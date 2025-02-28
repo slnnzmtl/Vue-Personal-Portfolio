@@ -15,11 +15,16 @@ fi
 # Navigate to project directory (adjust if needed)
 cd ~/slnnzmtl-xyz
 
-echo "📥 Pulling latest changes from master branch..."
-git pull origin master
-if [ $? -ne 0 ]; then
-    echo "❌ Git pull failed"
-    exit 1
+# Check if --rebuild flag is provided
+if [ "$1" != "--rebuild" ]; then
+    echo "📥 Pulling latest changes from master branch..."
+    git pull origin master
+    if [ $? -ne 0 ]; then
+        echo "❌ Git pull failed"
+        exit 1
+    fi
+else
+    echo "🔄 Skipping git pull, rebuilding only..."
 fi
 
 echo "🧹 Cleaning up Docker resources..."
