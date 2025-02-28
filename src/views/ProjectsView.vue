@@ -74,10 +74,17 @@ export default defineComponent({
       () => route.params.projectId,
       (newProjectId: string) => {
         if (newProjectId) {
+          console.log("newProjectId", newProjectId);
           setActiveProject(newProjectId);
         }
       },
     );
+
+    onMounted(() => {
+      if (route.params.projectId) {
+        setActiveProject(route.params.projectId as string);
+      }
+    });
 
     const projectFilterChange = (filters: string[]) => {
       selectedFilters.value = filters;
@@ -90,13 +97,6 @@ export default defineComponent({
         router.push(`/projects/${projectId}`);
       }
     };
-
-    onMounted(async () => {
-      await projectsStore.fetchProjects();
-      if (route.params.projectId) {
-        setActiveProject(route.params.projectId as string);
-      }
-    });
 
     return {
       filteredProjects,

@@ -1,34 +1,10 @@
 <template>
-  <div ref="wrapper" class="background-wrapper" @mousemove="handleMouseMove">
+  <div class="background-wrapper">
     <div class="light-effects">
       <div v-for="i in 2" :key="i" class="light-group">
-        <div
-          class="light light-2"
-          :style="{
-            transform: `translate(
-              ${mousePos.x * -0.03}px,
-              ${mousePos.y * -0.03}px
-            )`,
-          }"
-        ></div>
-        <div
-          class="light light-3"
-          :style="{
-            transform: `translate(
-              ${mousePos.x * 0.015}px,
-              ${mousePos.y * 0.015}px
-            )`,
-          }"
-        ></div>
-        <div
-          class="light light-4"
-          :style="{
-            transform: `translate(
-              ${mousePos.x * -0.025}px,
-              ${mousePos.y * -0.025}px
-            )`,
-          }"
-        ></div>
+        <div class="light light-2"></div>
+        <div class="light light-3"></div>
+        <div class="light light-4"></div>
       </div>
     </div>
     <div class="content">
@@ -37,40 +13,11 @@
   </div>
 </template>
 
-<script setup lang="ts">
-import { ref, onMounted, onUnmounted } from "vue";
+<script lang="ts">
+import { defineComponent } from "vue";
 
-const wrapper = ref<HTMLElement | null>(null);
-const mousePos = ref({ x: 0, y: 0 });
-const targetPos = ref({ x: 0, y: 0 });
-let animationFrame: number | null = null;
-
-const handleMouseMove = (e: MouseEvent) => {
-  if (!wrapper.value) return;
-
-  const rect = wrapper.value.getBoundingClientRect();
-  targetPos.value = {
-    x: e.clientX - (rect.left + rect.width / 2),
-    y: e.clientY - (rect.top + rect.height / 2),
-  };
-};
-
-const updatePosition = () => {
-  // Smooth lerp animation
-  mousePos.value = {
-    x: mousePos.value.x + (targetPos.value.x - mousePos.value.x) * 0.1,
-    y: mousePos.value.y + (targetPos.value.y - mousePos.value.y) * 0.1,
-  };
-
-  animationFrame = requestAnimationFrame(updatePosition);
-};
-
-onMounted(() => {
-  animationFrame = requestAnimationFrame(updatePosition);
-});
-
-onUnmounted(() => {
-  if (animationFrame) cancelAnimationFrame(animationFrame);
+export default defineComponent({
+  name: "BackgroundWrapper",
 });
 </script>
 
@@ -86,7 +33,7 @@ onUnmounted(() => {
   left: 0;
   right: 0;
   bottom: 0;
-  z-index: -1;
+  z-index: 0;
   background: #0a0a0a;
 }
 

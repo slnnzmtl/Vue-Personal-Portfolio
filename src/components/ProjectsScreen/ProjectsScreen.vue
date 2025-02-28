@@ -1,5 +1,5 @@
 <script lang="ts">
-import { computed, defineComponent, ref, onMounted } from "vue";
+import { computed, defineComponent, ref } from "vue";
 import { useRouter } from "vue-router";
 import { FilterPanel } from "@/components/FilterPanel";
 import { ProjectList } from "@/components/ProjectList";
@@ -53,10 +53,6 @@ export default defineComponent({
 
       router.push(`/projects/${projectId}`);
     };
-
-    onMounted(async () => {
-      await store.fetchProjects();
-    });
 
     return {
       tags,

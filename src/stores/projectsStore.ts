@@ -6,11 +6,20 @@ export const useProjectsStore = defineStore("projects", {
     projects: [] as Array<Project>,
     isLoading: false,
     error: null as string | null,
+    lastFetched: null as number | null,
   }),
 
   actions: {
     async fetchProjects() {
-      if (this.projects.length) return;
+      const CACHE_DURATION = 5 * 60 * 1000;
+
+      if (
+        this.projects.length &&
+        this.lastFetched &&
+        Date.now() - this.lastFetched < CACHE_DURATION
+      ) {
+        return;
+      }
 
       this.isLoading = true;
       this.error = null;
@@ -22,6 +31,7 @@ export const useProjectsStore = defineStore("projects", {
         }
         const data = await response.json();
         this.projects = data.projects;
+        this.lastFetched = Date.now();
       } catch (err) {
         this.error = (err as Error).message;
         console.error("Error fetching projects:", err);
