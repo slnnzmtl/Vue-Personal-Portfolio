@@ -14,6 +14,12 @@ services:
       - html:/usr/share/nginx/html
     networks:
       - nginx-proxy
+    deploy:
+      resources:
+        limits:
+          memory: 256M
+        reservations:
+          memory: 128M
 
   acme-companion:
     image: nginxproxy/acme-companion
@@ -27,6 +33,12 @@ services:
       - DEFAULT_EMAIL=your-email@example.com
     networks:
       - nginx-proxy
+    deploy:
+      resources:
+        limits:
+          memory: 128M
+        reservations:
+          memory: 64M
 
 volumes:
   certs:
