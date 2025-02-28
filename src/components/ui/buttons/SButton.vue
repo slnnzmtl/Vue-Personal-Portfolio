@@ -1,11 +1,11 @@
 <script lang="ts">
-import { computed, defineComponent } from "vue";
+import { computed, defineComponent, PropType } from "vue";
 
 export default defineComponent({
   name: "SButton",
   props: {
     type: {
-      type: String,
+      type: String as PropType<"primary" | "secondary" | "tertiary">,
       default: "button",
     },
     size: {
@@ -56,7 +56,6 @@ export default defineComponent({
       loading && 'button--loading',
     ]"
     :disabled="disabled"
-    :type="type"
   >
     <slot />
   </button>

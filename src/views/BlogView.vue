@@ -1,6 +1,6 @@
 <template>
   <div class="blog-view flex justify-center mx-6">
-    <div
+    <!-- <div
       class="pt-25 max-w-[95%] lg:max-w-[90%] flex flex-wrap lg:flex-nowrap gap-12"
     >
       <div class="text-left w-full">
@@ -17,13 +17,13 @@
         />
       </div>
 
-      <!-- <div class="scrollable-container col-span-2 lg:max-w-[68%]">
+      <div class="scrollable-container col-span-2 lg:max-w-[68%]">
         <MarkupViewer
           class="col-span-2 hidden lg:block"
           :active-project="activeArticle"
         />
-      </div> -->
-    </div>
+      </div>
+    </div> -->
   </div>
 </template>
 

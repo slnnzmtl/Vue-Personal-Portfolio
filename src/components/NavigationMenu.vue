@@ -50,7 +50,9 @@ export default defineComponent({
 
       <div class="nav-links">
         <router-link to="/" @click="isMenuOpen = false">About Me</router-link>
-        <router-link to="/projects" @click="isMenuOpen = false">Projects</router-link>
+        <router-link to="/projects" @click="isMenuOpen = false">
+          Projects
+        </router-link>
         <router-link to="/blog" @click="isMenuOpen = false">Blog</router-link>
       </div>
 
@@ -142,6 +144,8 @@ nav {
       padding: 1rem 1rem;
       height: 100%;
       max-height: 60px;
+      overflow: hidden;
+      transition: max-height 0.3s ease;
     }
 
     .nav-links {
@@ -150,6 +154,7 @@ nav {
       flex-direction: column;
       gap: 1.5rem;
       margin-top: 1rem;
+      margin-bottom: 1rem;
       align-items: center;
     }
 

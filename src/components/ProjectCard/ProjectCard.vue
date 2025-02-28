@@ -86,7 +86,7 @@ export default defineComponent({
       required: true,
     },
     selectedFilters: {
-      type: Array,
+      type: Array<string>,
       required: true,
     },
     type: {

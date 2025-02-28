@@ -1,13 +1,6 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import { ModalKey } from "@/modals/types";
+import { ModalKey, ModalInstance } from "@/modals/types";
 import { reactive, provide, inject } from "vue";
-
-interface ModalInstance<T = any> {
-  name: ModalKey;
-  props?: Record<string, any>;
-  resolve: (value: T | null) => void;
-}
-
 interface ModalService {
   openModal: <T>(
     name: ModalKey,

@@ -4,14 +4,14 @@
       <template v-if="!isLoading">
         <ProjectCard
           v-for="project in displayedProjects"
-          :id="`project-${project.id}`"
           :key="project.id"
+          :id="`project-${project.id}`"
           :project="project"
           :selected-filters="selectedFilters"
           :type="type"
           :active="isCardActive(project.id)"
           class="project"
-          @click="(event) => onCardClicked(project, event)"
+          @click="onCardClicked(project)"
           @close="onClose"
         >
           <template #default="{ active }">
@@ -48,11 +48,11 @@ export default defineComponent({
   },
   props: {
     projects: {
-      type: Array,
+      type: Array as () => Project[],
       required: true,
     },
     selectedFilters: {
-      type: Array,
+      type: Array as () => string[],
       required: true,
     },
     type: {
@@ -60,8 +60,9 @@ export default defineComponent({
       required: true,
     },
     activeProject: {
-      type: Object,
-      required: true,
+      type: Object as () => Project | null,
+      required: false,
+      default: null,
     },
     returnValue: {
       type: String,
@@ -74,6 +75,7 @@ export default defineComponent({
     const isLoading = ref(false);
     const itemsPerPage = ref(6);
     const currentPage = ref(1);
+    
     const displayedProjects = computed(() => {
       const start = 0;
       return props.projects.slice(
@@ -120,7 +122,6 @@ export default defineComponent({
     };
 
     const onCardClicked = (project: Project) => {
-      console.log(project);
       if (props.activeProject?.id === project?.id) {
         onClose();
         return;

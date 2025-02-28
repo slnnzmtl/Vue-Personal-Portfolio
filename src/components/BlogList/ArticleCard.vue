@@ -6,17 +6,22 @@
   </div>
 </template>
 
-<script lang="ts" setup>
-import { defineProps } from 'vue';
-import { Article } from '@/stores/blogTypes'; // Update import to Article
+<script lang="ts">
+import { defineComponent } from "vue";
 
-const props = defineProps<{
-  article: Article; // Update to use Article type
-}>();
+export default defineComponent({
+  name: "ArticleCard",
+  props: {
+    article: {
+      type: Object,
+      required: true,
+    },
+  },
+});
 </script>
 
 <style scoped lang="scss">
 .article-card {
   // Add your styles here
 }
-</style> 
+</style>

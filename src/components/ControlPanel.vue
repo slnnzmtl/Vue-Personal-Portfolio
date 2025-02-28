@@ -18,8 +18,9 @@
 </template>
 
 <script lang="ts">
-import { computed, defineComponent, ref } from "vue";
+import { computed, defineComponent, PropType, ref } from "vue";
 import { FilterPanel, ProjectList } from "@/components";
+import { Project } from "@/stores/projectTypes";
 
 export default defineComponent({
   name: "ControlPanel",
@@ -29,20 +30,21 @@ export default defineComponent({
   },
   props: {
     tags: {
-      type: Array,
+      type: Array as PropType<string[]>,
       required: true,
     },
     selectedFilters: {
-      type: Array,
+      type: Array as PropType<string[]>,
       required: true,
     },
     projects: {
-      type: Array,
+      type: Array as PropType<Project[]>,
       required: true,
     },
     activeProject: {
-      type: Object,
-      required: true,
+      type: Object as PropType<Project | null>,
+      required: false,
+      default: null,
     },
   },
   emits: ["onFilterChange", "onProjectChange"],

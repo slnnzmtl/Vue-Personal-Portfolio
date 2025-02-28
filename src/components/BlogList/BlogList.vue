@@ -1,6 +1,6 @@
 <template>
   <div class="article-viewer">
-    <transition-group :name="transitionName" tag="div" :class="layoutClass">
+    <!-- <transition-group :name="transitionName" tag="div" :class="layoutClass">
       <template v-if="!isLoading">
         <ProjectCard
           v-for="article in articles"
@@ -21,7 +21,7 @@
 
     <SButton v-if="hasMoreArticles" class="load-more-button" @click="loadMore">
       Load More
-    </SButton>
+    </SButton> -->
   </div>
 </template>
 
@@ -44,6 +44,10 @@ export default defineComponent({
       type: Array<string>,
       required: true,
     },
+    transitionName: {
+      type: String,
+      required: true,
+    },
     type: {
       type: String,
       required: true,
@@ -54,6 +58,10 @@ export default defineComponent({
     },
     activeArticle: {
       type: Object,
+      required: true,
+    },
+    isLoading: {
+      type: Boolean,
       required: true,
     },
   },

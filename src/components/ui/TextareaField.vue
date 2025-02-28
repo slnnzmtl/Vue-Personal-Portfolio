@@ -1,17 +1,46 @@
-<script lang="ts" setup>
-import { computed, defineProps } from 'vue';
+<script lang="ts">
+import { defineComponent, computed } from "vue";
 
-const props = defineProps<{
-  label: string;
-  modelValue: string;
-  placeholder?: string;
-  required?: boolean;
-}>();
+export default defineComponent({
+  name: "TextareaField",
+  props: {
+    modelValue: {
+      type: String,
+      required: true,
+    },
+    label: {
+      type: String,
+      required: true,
+    },
+    placeholder: {
+      type: String,
+      default: "",
+    },
+    required: {
+      type: Boolean,
+      default: false,
+    },
+  },
+  emits: ["update:modelValue"],
+  setup(props, { emit }) {
+    const isInputFilled = computed(() => {
+      return !!props.modelValue;
+    });
 
-const emit = defineEmits(['update:modelValue']);
+    const value = computed({
+      get() {
+        return props.modelValue;
+      },
+      set(value) {
+        emit("update:modelValue", value);
+      },
+    });
 
-const isInputFilled = computed(() => {
-  return !!props.modelValue;
+    return {
+      isInputFilled,
+      value,
+    };
+  },
 });
 </script>
 
@@ -20,15 +49,14 @@ const isInputFilled = computed(() => {
     <div class="input-container">
       <textarea
         :id="label"
-        v-model="props.modelValue"
+        v-model="value"
         class="form-input"
         :placeholder="placeholder"
         :required="required"
-        @input="$emit('update:modelValue', $event.target.value)"
       />
       <label
         :for="label"
-        :class="{ 'floating': isInputFilled || !!props.placeholder }"
+        :class="{ floating: isInputFilled || !!placeholder }"
         class="form-label"
       >
         {{ label }}
@@ -85,9 +113,9 @@ const isInputFilled = computed(() => {
   }
 }
 
-  .floating {
-    top: 1rem;
-    font-size: 0.8rem;
-    color: var(--cyan);
-  }
-</style> 
+.floating {
+  top: 1rem;
+  font-size: 0.8rem;
+  color: var(--cyan);
+}
+</style>

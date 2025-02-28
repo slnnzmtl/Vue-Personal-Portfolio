@@ -1,22 +1,55 @@
-<script lang="ts" setup>
-import { defineProps, computed } from 'vue';
+<script lang="ts">
+import { defineComponent, computed } from "vue";
 
-const props = defineProps<{
-  label: string;
-  modelValue: string;
-  type?: string;
-  placeholder?: string;
-  required?: boolean;
-}>();
+export default defineComponent({
+  name: "InputField",
+  props: {
+    label: {
+      type: String,
+      required: true,
+    },
+    modelValue: {
+      type: String,
+      required: true,
+    },
+    type: {
+      type: String,
+      default: "text",
+    },
+    placeholder: {
+      type: String,
+      default: "",
+    },
+    required: {
+      type: Boolean,
+      default: false,
+    },
+  },
+  emits: ["update:modelValue"],
+  setup(props, { emit }) {
+    const isInputFilled = computed(() => {
+      return !!props.modelValue;
+    });
 
-const emit = defineEmits(['update:modelValue']);
+    const displayLabel = computed(() => {
+      return props.required ? `${props.label} *` : props.label;
+    });
 
-const isInputFilled = computed(() => {
-  return !!props.modelValue;
-});
+    const value = computed({
+      get() {
+        return props.modelValue;
+      },
+      set(value) {
+        emit("update:modelValue", value);
+      },
+    });
 
-const displayLabel = computed(() => {
-  return props.required ? `${props.label} *` : props.label;
+    return {
+      isInputFilled,
+      displayLabel,
+      value,
+    };
+  },
 });
 </script>
 
@@ -25,14 +58,17 @@ const displayLabel = computed(() => {
     <div class="input-container">
       <input
         :id="label"
+        v-model="value"
         :type="type || 'text'"
-        v-model="props.modelValue"
         class="form-input"
         :required="required"
         :placeholder="placeholder"
-        @input="$emit('update:modelValue', $event.target.value)"
       />
-      <label :for="label" :class="{ 'floating': isInputFilled || props.placeholder }" class="form-label">
+      <label
+        :for="label"
+        :class="{ floating: isInputFilled || placeholder }"
+        class="form-label"
+      >
         {{ displayLabel }}
       </label>
     </div>
@@ -70,8 +106,8 @@ const displayLabel = computed(() => {
   line-height: 1.5;
   width: 100%;
   box-sizing: border-box;
-  background-color: rgba(255, 255, 255, 0.1); 
-  backdrop-filter: blur(10px); 
+  background-color: rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(10px);
 
   &:focus {
     outline: none;

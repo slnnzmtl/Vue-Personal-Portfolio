@@ -77,10 +77,10 @@ export default defineComponent({
         />
 
         <div class="form-actions">
-          <SButton type="button" class="cancel-button" @click="closeModal">
+          <SButton type="secondary" class="cancel-button" @click="closeModal">
             Cancel
           </SButton>
-          <SButton type="submit" class="submit-button">Submit</SButton>
+          <SButton type="primary" class="submit-button">Submit</SButton>
         </div>
       </form>
     </div>

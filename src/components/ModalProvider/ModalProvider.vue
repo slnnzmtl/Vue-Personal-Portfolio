@@ -1,6 +1,6 @@
 <template>
   <Teleport to="body">
-    <div v-for="modal in activeModals" :key="modal.id" class="modal-overlay">
+    <div v-for="modal in activeModals" :key="modal.name" class="modal-overlay">
       <component
         :is="modal.name"
         v-bind="modal.props"
