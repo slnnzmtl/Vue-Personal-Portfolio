@@ -1,15 +1,29 @@
-<script lang="ts" setup>
-</script>
+<script lang="ts" setup></script>
 
 <template>
   <div class="contacts-bar">
-    <a href="https://www.linkedin.com/in/daniel-kazanskiy" target="_blank" rel="noopener noreferrer" class="contact-link">
+    <a
+      href="https://www.linkedin.com/in/daniel-kazanskiy"
+      target="_blank"
+      rel="noopener noreferrer"
+      class="contact-link"
+    >
       <img src="@/assets/icons/linkedin.svg" alt="LinkedIn" />
     </a>
-    <a href="https://t.me/slnnzmtl" target="_blank" rel="noopener noreferrer" class="contact-link">
+    <a
+      href="https://t.me/slnnzmtl"
+      target="_blank"
+      rel="noopener noreferrer"
+      class="contact-link"
+    >
       <img src="@/assets/icons/telegram.svg" alt="Telegram" />
     </a>
-    <a href="https://wa.me/your-whatsapp-number" target="_blank" rel="noopener noreferrer" class="contact-link">
+    <a
+      href="https://wa.me/your-whatsapp-number"
+      target="_blank"
+      rel="noopener noreferrer"
+      class="contact-link"
+    >
       <img src="@/assets/icons/whatsapp.svg" alt="WhatsApp" />
     </a>
   </div>
@@ -38,4 +52,4 @@
     }
   }
 }
-</style> 
+</style>

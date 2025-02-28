@@ -2,9 +2,9 @@
 import { defineComponent } from "vue";
 import { BackgroundWrapper, NavigationMenu, ModalProvider } from "@/components";
 import { provideModalService } from "@/composables/useModal";
-import { ref, onMounted } from 'vue';
-import { useRouter } from 'vue-router';
-import LoadingIndicator from '@/components/ui/LoadingIndicator.vue';
+import { ref, onMounted } from "vue";
+import { useRouter } from "vue-router";
+import { LoadingIndicator } from "@/components/ui";
 
 export default defineComponent({
   name: "App",

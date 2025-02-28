@@ -19,7 +19,7 @@ export default defineComponent({
 <template>
   <GlassMaterial class="avatar-background">
     <div class="male-avatar">
-      <img :src="MaleAvatar" />
+      <img :src="MaleAvatar" alt="Male Avatar" />
     </div>
   </GlassMaterial>
 </template>
