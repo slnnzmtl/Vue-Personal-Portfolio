@@ -67,7 +67,7 @@ export default defineComponent({
 nav {
   padding: 0 1rem;
   position: fixed;
-  top: 10px;
+  top: 0;
   right: 0;
   height: 100%;
   max-height: 60px;
@@ -89,6 +89,7 @@ nav {
     border-radius: 30px;
     border: 1px solid rgba(255, 255, 255, 0.1);
     padding: 0 1rem;
+    margin-top: 15px;
   }
 
   .burger-button {

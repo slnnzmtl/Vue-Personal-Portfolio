@@ -1,11 +1,18 @@
 <template>
-  <section class="skills-screen">
-    <h2 class="mb-8">Technology stack</h2>
-    <p class="text-lg sm:text-xl mb-8">
-      I work with many technologies, covering every detail of web development.
-    </p>
+  <div class="skills-container">
+    <div class="px-8">
+      <h2 class="mb-8">Technology stack</h2>
 
-    <div class="flex flex-wrap gap-4 sm:max-h-[600px] justify-between w-full">
+      <p class="text-lg sm:text-xl mb-8">
+        I work with many technologies, covering every detail of web development.
+      </p>
+    </div>
+
+    <div
+      ref="scrollContainer"
+      class="flex flex-row flex-nowrap gap-4 overflow-x-auto overflow-y-hidden p-4 scroll-smooth"
+    >
+      <div class="scroll-indicator"></div>
       <SkillCard title="Core">
         <ul>
           <li>JavaScript</li>
@@ -60,7 +67,7 @@
         </ul>
       </SkillCard>
     </div>
-  </section>
+  </div>
 </template>
 
 <script lang="ts">
@@ -74,14 +81,57 @@ export default {
 };
 </script>
 
-<style scoped lang="scss">
-.skills-screen {
-  padding: 4rem 2rem;
+<style lang="scss" scoped>
+.skills-container {
+  width: 100%;
+  max-width: 100vw;
+  overflow-x: hidden;
+  position: relative;
   text-align: left;
-}
 
-.skill-item {
-  flex: 1;
-  min-width: 250px;
+  & > div {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+    scroll-behavior: smooth;
+    &::-webkit-scrollbar {
+      display: none;
+    }
+  }
+
+  .scroll-indicator {
+    position: absolute;
+    right: 1rem;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 2rem;
+    height: 2rem;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.1);
+    pointer-events: none;
+    animation: pulse 2s infinite;
+    opacity: 0.8;
+    z-index: 100;
+
+    @media (min-width: 1080px) {
+      display: none;
+    }
+  }
+
+  @keyframes pulse {
+    0% {
+      transform: translateY(-50%) scale(0.95);
+      box-shadow: 0 0 0 0 rgba(255, 255, 255, 0.1);
+    }
+
+    70% {
+      transform: translateY(-50%) scale(1);
+      box-shadow: 0 0 0 10px rgba(255, 255, 255, 0);
+    }
+
+    100% {
+      transform: translateY(-50%) scale(0.95);
+      box-shadow: 0 0 0 0 rgba(255, 255, 255, 0);
+    }
+  }
 }
 </style>

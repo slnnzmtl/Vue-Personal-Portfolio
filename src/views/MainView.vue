@@ -1,29 +1,7 @@
 <template>
-  <div class="main-view">
-    <div ref="faceRef">
-      <Suspense v-if="shouldLoadFace">
-        <template #default>
-          <AsyncFaceScreen class="max-w-screen-2xl mx-auto" />
-        </template>
-        <template #fallback>
-          <div class="loading-placeholder"></div>
-        </template>
-      </Suspense>
-    </div>
-
-    <div ref="skillsRef">
-      <Suspense v-if="shouldLoadSkills">
-        <template #default>
-          <AsyncSkillsScreen
-            id="skills-screen"
-            class="max-w-screen-2xl mx-auto"
-          />
-        </template>
-        <template #fallback>
-          <div class="loading-placeholder"></div>
-        </template>
-      </Suspense>
-    </div>
+  <div class="main-view flex flex-col gap-8">
+    <FaceScreen class="max-w-screen-2xl mx-auto" />
+    <SkillsScreen class="max-w-screen-2xl mx-auto" />
 
     <div ref="projectsRef">
       <Suspense v-if="shouldLoadProjects">
@@ -43,25 +21,10 @@
 
 <script lang="ts">
 import { defineComponent, ref, onMounted, defineAsyncComponent } from "vue";
-
-// Define async components outside of component definition for better reusability
-const AsyncFaceScreen = defineAsyncComponent({
-  loader: () => import("@/components/FaceScreen/FaceScreen.vue"),
-  delay: 200,
-  timeout: 3000,
-  suspensible: true,
-});
-
-const AsyncSkillsScreen = defineAsyncComponent({
-  loader: () => import("@/components/SkillsScreen/SkillsScreen.vue"),
-  delay: 200,
-  timeout: 3000,
-  suspensible: true,
-});
+import { SkillsScreen, FaceScreen } from "@/components";
 
 const AsyncProjectsScreen = defineAsyncComponent({
   loader: () => import("@/components/ProjectsScreen/ProjectsScreen.vue"),
-  delay: 200,
   timeout: 3000,
   suspensible: true,
 });
@@ -70,8 +33,8 @@ export default defineComponent({
   name: "MainView",
 
   components: {
-    AsyncFaceScreen,
-    AsyncSkillsScreen,
+    FaceScreen,
+    SkillsScreen,
     AsyncProjectsScreen,
   },
 
@@ -91,13 +54,6 @@ export default defineComponent({
         threshold: 0,
       };
 
-      const skillsObserver = new IntersectionObserver((entries) => {
-        if (entries[0].isIntersecting) {
-          shouldLoadSkills.value = true;
-          skillsObserver.disconnect();
-        }
-      }, observerOptions);
-
       const projectsObserver = new IntersectionObserver((entries) => {
         if (entries[0].isIntersecting) {
           shouldLoadProjects.value = true;
@@ -105,7 +61,6 @@ export default defineComponent({
         }
       }, observerOptions);
 
-      if (skillsRef.value) skillsObserver.observe(skillsRef.value);
       if (projectsRef.value) projectsObserver.observe(projectsRef.value);
     });
 

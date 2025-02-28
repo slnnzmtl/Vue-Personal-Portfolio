@@ -1,8 +1,18 @@
-<script setup lang="ts">
+<script lang="ts">
 import { GlassMaterial } from "@/components/ui";
-defineProps<{
-  title: string;
-}>();
+
+export default {
+  name: "SkillCard",
+  components: {
+    GlassMaterial,
+  },
+  props: {
+    title: {
+      type: String,
+      required: true,
+    },
+  },
+};
 </script>
 
 <template>
@@ -24,9 +34,14 @@ defineProps<{
   &__title {
     color: var(--cyan);
     margin-bottom: 1rem;
+
+    text-align: left;
   }
 
   &__content {
+    min-width: 170px;
+    text-align: left;
+
     ul {
       list-style: none;
       padding: 0;

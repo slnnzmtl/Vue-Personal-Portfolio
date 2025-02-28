@@ -24,14 +24,18 @@ export default defineComponent({
   <div
     class="face-screen grid grid-cols-1 lg:grid-cols-3 gap-6 sm:gap-18 p-4 pt-10 sm:pt-auto items-center"
   >
-    <AuthorAvatar class="max-w-[300px] md:max-w-[400px]" />
-    <div class="flex flex-col col-span-2 gap-4 text-left">
-      <h1 class="text-center lg:text-left text-4xl sm:text-7xl font-bold">
+    <div class="w-full flex justify-center">
+      <AuthorAvatar class="max-w-[300px] md:max-w-[400px]" />
+    </div>
+    <div
+      class="flex flex-col items-center lg:items-start lg:col-span-2 gap-4 text-left"
+    >
+      <h1 class="text-center text-6xl lg:text-6xl font-bold">
         {{ name }}
       </h1>
 
       <p
-        class="face-screen__position text-xl lg:text-3xl font-semibold text-center lg:text-left"
+        class="face-screen__position text-2xl lg:text-3xl font-semibold text-center lg:text-left"
       >
         {{ position }}
       </p>

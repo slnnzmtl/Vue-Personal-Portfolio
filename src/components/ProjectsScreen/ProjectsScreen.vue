@@ -1,8 +1,7 @@
 <script lang="ts">
 import { computed, defineComponent, ref } from "vue";
 import { useRouter } from "vue-router";
-import { FilterPanel } from "@/components/FilterPanel";
-import { ProjectList } from "@/components/ProjectList";
+import { FilterPanel, ProjectList } from "@/components";
 import { useProjectsStore } from "@/stores/projectsStore";
 import { storeToRefs } from "pinia";
 
