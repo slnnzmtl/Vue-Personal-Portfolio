@@ -32,7 +32,7 @@
 </template>
 
 <script lang="ts">
-import { computed, defineComponent, ref, watch } from "vue";
+import { computed, defineComponent, ref, watch, onMounted } from "vue";
 import { useProjectsStore } from "@/stores/projectsStore";
 import { MarkupViewer, ControlPanel } from "@/components";
 import { Project } from "@/stores/projectTypes";
@@ -63,17 +63,20 @@ export default defineComponent({
       );
     });
 
+    const setActiveProject = (projectId: string) => {
+      const project = projectsStore.projects.find(
+        (p) => p.id === Number(projectId),
+      );
+      activeProject.value = project || null;
+    };
+
     watch(
       () => route.params.projectId,
-      (newProjectId) => {
+      (newProjectId: string) => {
         if (newProjectId) {
-          const project = projectsStore.projects.find(
-            (p) => p.id === Number(newProjectId),
-          );
-          activeProject.value = project || null;
+          setActiveProject(newProjectId);
         }
       },
-      { immediate: true },
     );
 
     const projectFilterChange = (filters: string[]) => {
@@ -87,6 +90,13 @@ export default defineComponent({
         router.push(`/projects/${projectId}`);
       }
     };
+
+    onMounted(async () => {
+      await projectsStore.fetchProjects();
+      if (route.params.projectId) {
+        setActiveProject(route.params.projectId as string);
+      }
+    });
 
     return {
       filteredProjects,

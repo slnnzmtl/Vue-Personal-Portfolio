@@ -24,7 +24,7 @@ export default defineComponent({
   <div
     class="face-screen flex items-center flex-col lg:flex-row gap-6 sm:gap-18 p-4 pt-10 sm:pt-auto mt-25"
   >
-    <AuthorAvatar class="max-w-[300px] lg:max-w-[500px] lg:max-h-[500px]" />
+    <AuthorAvatar class="max-w-[300px] md:max-w-[400px]" />
     <div class="flex flex-col gap-4 text-left">
       <h1 class="text-center lg:text-left text-4xl sm:text-7xl font-bold">
         {{ name }}

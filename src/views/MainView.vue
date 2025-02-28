@@ -3,7 +3,7 @@
     <div ref="faceRef">
       <Suspense v-if="shouldLoadFace">
         <template #default>
-          <AsyncFaceScreen />
+          <AsyncFaceScreen class="max-w-screen-2xl mx-auto" />
         </template>
         <template #fallback>
           <div class="loading-placeholder"></div>
@@ -14,7 +14,10 @@
     <div ref="skillsRef">
       <Suspense v-if="shouldLoadSkills">
         <template #default>
-          <AsyncSkillsScreen id="skills-screen" />
+          <AsyncSkillsScreen
+            id="skills-screen"
+            class="max-w-screen-2xl mx-auto"
+          />
         </template>
         <template #fallback>
           <div class="loading-placeholder"></div>
@@ -25,7 +28,10 @@
     <div ref="projectsRef">
       <Suspense v-if="shouldLoadProjects">
         <template #default>
-          <AsyncProjectsScreen id="projects-screen" />
+          <AsyncProjectsScreen
+            id="projects-screen"
+            class="max-w-screen-2xl mx-auto"
+          />
         </template>
         <template #fallback>
           <div class="loading-placeholder"></div>
