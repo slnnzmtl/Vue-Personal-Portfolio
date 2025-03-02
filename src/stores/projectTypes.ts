@@ -6,7 +6,8 @@ export interface Project {
   position: string;
   description: string;
   url: string;
-  image: string;
+  cover: string;
+  images: string[];
   html: HtmlHTMLAttributes["innerHTML"];
   tags: string[];
 }
