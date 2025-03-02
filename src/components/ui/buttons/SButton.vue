@@ -20,6 +20,14 @@ export default defineComponent({
       type: Boolean,
       default: false,
     },
+    href: {
+      type: String,
+      default: "",
+    },
+    target: {
+      type: String,
+      default: "_self",
+    },
   },
   setup(props) {
     const isPrimary = computed(() => props.type === "primary");
@@ -30,6 +38,7 @@ export default defineComponent({
     const isMedium = computed(() => props.size === "medium");
     const isLarge = computed(() => props.size === "large");
 
+    const isHref = computed(() => !!props.href);
     return {
       isPrimary,
       isSecondary,
@@ -37,13 +46,18 @@ export default defineComponent({
       isSmall,
       isMedium,
       isLarge,
+      isHref,
     };
   },
 });
 </script>
 
 <template>
+  <a v-if="isHref" :href="href" target="_blank" rel="noopener noreferrer">
+    <slot />
+  </a>
   <button
+    v-else
     :class="[
       'button',
       isPrimary && 'button--primary',
@@ -56,6 +70,7 @@ export default defineComponent({
       loading && 'button--loading',
     ]"
     :disabled="disabled"
+    v-bind="$attrs"
   >
     <slot />
   </button>
