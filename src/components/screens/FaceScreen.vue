@@ -1,21 +1,13 @@
 <script lang="ts">
 import AuthorAvatar from "@/components/AuthorAvatar.vue";
 import { defineComponent } from "vue";
+import SocialLinks from "../SocialLinks/SocialLinks.vue";
 
 export default defineComponent({
   name: "FaceScreen",
   components: {
     AuthorAvatar,
-  },
-  props: {
-    name: {
-      type: String,
-      default: "Daniel Kazansky",
-    },
-    position: {
-      type: String,
-      default: "Full-stack Developer & Business Automation",
-    },
+    SocialLinks,
   },
 });
 </script>
@@ -31,14 +23,21 @@ export default defineComponent({
       class="flex flex-col items-center lg:items-start lg:col-span-2 gap-4 text-left"
     >
       <h1 class="text-center text-6xl lg:text-6xl font-bold">
-        {{ name }}
+        Daniel Kazansky
       </h1>
 
       <p
         class="face-screen__position text-2xl lg:text-3xl font-semibold text-center lg:text-left"
       >
-        {{ position }}
+        Web development with focus on user experience
       </p>
+
+      <!-- <p class="text-lg sm:text-xl my-8">
+        Passionate about creating seamless web experiences with modern
+        technologies.
+      </p> -->
+
+      <SocialLinks />
     </div>
   </div>
 </template>
@@ -52,7 +51,7 @@ export default defineComponent({
 
   &__position {
     color: var(--text-secondary);
-    max-width: 700px;
+    // max-width: 700px;
 
     text-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
   }

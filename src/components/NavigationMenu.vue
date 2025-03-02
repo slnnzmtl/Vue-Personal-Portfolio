@@ -48,12 +48,12 @@ export default defineComponent({
         <span></span>
       </button>
 
-      <div class="nav-links">
-        <router-link to="/" @click="isMenuOpen = false">About Me</router-link>
+      <div class="nav-links pl-4">
+        <router-link to="/" @click="isMenuOpen = false"> Main </router-link>
         <router-link to="/projects" @click="isMenuOpen = false">
           Projects
         </router-link>
-        <router-link to="/blog" @click="isMenuOpen = false">Blog</router-link>
+        <!-- <router-link to="/blog" @click="isMenuOpen = false">Blog</router-link> -->
       </div>
 
       <div class="hire-button">

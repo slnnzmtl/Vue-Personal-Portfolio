@@ -1,6 +1,7 @@
 <template>
   <div class="main-view flex flex-col w-full">
     <FaceScreen class="max-w-screen-2xl w-full mx-auto" />
+    <InfoScreen class="max-w-screen-2xl w-full mx-auto" />
     <SkillsScreen class="max-w-screen-2xl w-full mx-auto" />
 
     <div ref="projectsRef" class="max-w-screen-2xl mx-auto">
@@ -18,10 +19,10 @@
 
 <script lang="ts">
 import { defineComponent, ref, onMounted, defineAsyncComponent } from "vue";
-import { SkillsScreen, FaceScreen } from "@/components";
+import { SkillsScreen, FaceScreen, InfoScreen } from "@/components/screens";
 
 const AsyncProjectsScreen = defineAsyncComponent({
-  loader: () => import("@/components/ProjectsScreen/ProjectsScreen.vue"),
+  loader: () => import("@/components/screens/ProjectsScreen.vue"),
   timeout: 3000,
   suspensible: true,
 });
@@ -31,6 +32,7 @@ export default defineComponent({
 
   components: {
     FaceScreen,
+    InfoScreen,
     SkillsScreen,
     AsyncProjectsScreen,
   },
