@@ -1,10 +1,13 @@
 <template>
   <div class="markup-content">
-    <div
-      v-if="activeProject"
-      class="markup-content__render rounded-lg"
-      v-html="renderedContent"
-    />
+    <div v-if="activeProject">
+      <div class="markup-content__render rounded-lg" v-html="renderedContent" />
+
+      <div v-if="activeProject.images">
+        <h2 class="text-lg sm:text-xl mb-4">Images</h2>
+        <ImageViewer :images="activeProject.images" />
+      </div>
+    </div>
 
     <div v-else class="placeholder flex items-center justify-center h-[70vh]">
       <p>Please select an element to view its details.</p>
@@ -14,11 +17,15 @@
 
 <script lang="ts">
 import { defineComponent, computed } from "vue";
+import ImageViewer from "./ImageViewer.vue";
 
 import { marked } from "marked";
 
 export default defineComponent({
   name: "MarkupViewer",
+  components: {
+    ImageViewer,
+  },
   props: {
     activeProject: {
       type: Object,
