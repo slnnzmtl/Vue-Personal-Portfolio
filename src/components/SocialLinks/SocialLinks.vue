@@ -1,5 +1,5 @@
 <template>
-  <div class="social-links flex gap-8">
+  <div class="social-links flex flex-wrap justify-around gap-4 md:gap-8">
     <SButton
       v-for="link in socialLinks"
       :key="link.name"
@@ -45,11 +45,11 @@ export default defineComponent({
 
   setup() {
     const socialLinks: SocialLink[] = [
-      {
-        name: "GitHub",
-        url: "https://github.com/slnnzmtl",
-        icon: GithubIcon,
-      },
+      // {
+      //   name: "GitHub",
+      //   url: "https://github.com/slnnzmtl",
+      //   icon: GithubIcon,
+      // },
       {
         name: "LinkedIn",
         url: "https://linkedin.com/in/daniel-kazanskiy",
@@ -78,7 +78,6 @@ export default defineComponent({
 .social-button {
   display: inline-flex;
   align-items: center;
-  padding: 0.5rem 0;
   transition: transform 0.2s ease;
 
   &:hover {
