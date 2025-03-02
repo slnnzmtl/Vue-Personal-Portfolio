@@ -3,7 +3,7 @@
     <div class="px-8">
       <h2 class="mb-8">Technology stack</h2>
 
-      <p class="text-lg sm:text-xl mb-8">
+      <p class="text-lg sm:text-xl mb-8 text-justify">
         I work with many technologies, covering every detail of web development.
       </p>
     </div>

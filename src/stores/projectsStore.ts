@@ -7,6 +7,7 @@ export const useProjectsStore = defineStore("projects", {
     isLoading: false,
     error: null as string | null,
     lastFetched: null as number | null,
+    selectedFilters: [] as string[],
   }),
 
   actions: {
@@ -43,18 +44,34 @@ export const useProjectsStore = defineStore("projects", {
     addProject(project: Project) {
       this.projects.push(project);
     },
-  },
 
+    setFilters(filters: string[]) {
+      this.selectedFilters = filters;
+    },
+
+    clearFilters() {
+      this.selectedFilters = [];
+    },
+  },
   getters: {
-    tags(state) {
-      return state.projects.reduce((acc, project) => {
-        project.tags.forEach((tech) => {
-          if (!acc.includes(tech)) {
-            acc.push(tech);
-          }
-        });
-        return acc;
-      }, [] as string[]);
+    tags(): string[] {
+      const tagsSet = new Set<string>();
+      this.projects.forEach((project) => {
+        project.tags.forEach((tag) => tagsSet.add(tag));
+      });
+      return Array.from(tagsSet);
+    },
+    sortedProjects(): Project[] {
+      return this.projects.slice().sort((a, b) => b.id - a.id);
+    },
+    filteredProjects(): Project[] {
+      const selectedFiltersSet = new Set(this.selectedFilters);
+      const sorted = this.sortedProjects;
+      return selectedFiltersSet.size === 0
+        ? sorted
+        : sorted.filter((project) =>
+            project.tags.some((tech) => selectedFiltersSet.has(tech))
+          );
     },
   },
 });

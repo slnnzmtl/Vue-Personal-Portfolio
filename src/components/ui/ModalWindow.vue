@@ -62,6 +62,6 @@ export default defineComponent({
 }
 
 .modal {
-  padding: 2rem;
+  /* padding: 2rem; */
 }
 </style>

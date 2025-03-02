@@ -1,5 +1,5 @@
 <script lang="ts">
-import { computed, defineComponent, ref } from "vue";
+import { computed, defineComponent } from "vue";
 import { useRouter } from "vue-router";
 import { FilterPanel, ProjectList, ScrollableContainer } from "@/components";
 import { useProjectsStore } from "@/stores/projectsStore";
@@ -15,40 +15,17 @@ export default defineComponent({
   },
   setup() {
     const router = useRouter();
-    const selectedFilters = ref<string[]>([]);
     const store = useProjectsStore();
-    const { projects, isLoading, error } = storeToRefs(store);
+    const { filteredProjects, selectedFilters, isLoading, error, tags } =
+      storeToRefs(store);
     const { width } = useWindowSize();
-
-    const tags = computed(() => {
-      return projects.value.reduce((acc, project) => {
-        project.tags.forEach((tech) => {
-          if (!acc.includes(tech)) {
-            acc.push(tech);
-          }
-        });
-        return acc;
-      }, [] as string[]);
-    });
-
-    const filteredProjects = computed(() => {
-      const selectedFiltersSet = new Set(selectedFilters.value);
-      const filtered =
-        selectedFiltersSet.size === 0
-          ? projects.value
-          : projects.value.filter((project) =>
-              project.tags.some((tech) => selectedFiltersSet.has(tech)),
-            );
-
-      return filtered.slice(0, 3);
-    });
 
     const projectListLayout = computed(() => {
       return width.value < 1024 ? "scroll" : "grid";
     });
 
     const projectFilterChange = (filters: string[]) => {
-      selectedFilters.value = filters;
+      store.setFilters(filters);
     };
 
     const onProjectClick = (projectId: number) => {
@@ -82,10 +59,11 @@ export default defineComponent({
       <div class="px-8">
         <h2 class="mb-8">Projects</h2>
 
-        <p class="text-lg sm:text-xl mb-8">
-          Here, you'll find projects I've built or contributed to. Use the
-          filters below to explore projects based on the tech stack you're
-          interested in.
+        <p class="text-lg sm:text-xl mb-8 text-justify">
+          Here, you'll find projects I've built or contributed to.
+          <br />
+          Use the filters below to explore projects based on the tech stack
+          you're interested in.
         </p>
 
         <FilterPanel

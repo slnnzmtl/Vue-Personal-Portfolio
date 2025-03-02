@@ -97,7 +97,7 @@ export default defineComponent({
     const layoutClass = computed(() => {
       switch (props.layout) {
         case "grid":
-          return "layout grid gap-4 grid-cols-1 md:grid-cols-2 lg:grid-cols-3 justify-start w-full max-w-screen-2xl sm:mx-8";
+          return "layout grid gap-4 grid-cols-1 md:grid-cols-2 lg:grid-cols-3 justify-start w-full max-w-screen-2xl lg:mx-8";
         case "scroll":
           return "flex gap-4 flex-nowrap mx-8";
         default:

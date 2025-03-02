@@ -19,12 +19,13 @@ export function provideModalService() {
     name: ModalKey,
     props: Record<string, any> = {},
   ): Promise<T | null> {
+    console.log(name)
     return new Promise<T | null>((resolve) => {
       modals.push({ name, props, resolve });
     });
   }
 
-  function closeModal(name: string, result: any) {
+  function closeModal(name: ModalKey, result: any) {
     const index = modals.findIndex((modal) => modal.name === name);
     if (index !== -1) {
       modals[index].resolve(result);

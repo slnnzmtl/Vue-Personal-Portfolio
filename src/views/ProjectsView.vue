@@ -34,12 +34,13 @@
 </template>
 
 <script lang="ts">
-import { computed, defineComponent, ref, watch } from "vue";
+import { defineComponent, ref, watch } from "vue";
 import { useProjectsStore } from "@/stores/projectsStore";
 import { MarkupViewer, ControlPanel } from "@/components";
 import { Project } from "@/stores/projectTypes";
 import { useRoute } from "vue-router";
 import router from "@/router";
+import { storeToRefs } from "pinia";
 
 export default defineComponent({
   name: "ProjectsView",
@@ -49,24 +50,13 @@ export default defineComponent({
   },
   setup() {
     const projectsStore = useProjectsStore();
+    const { filteredProjects, selectedFilters } = storeToRefs(projectsStore);
     const route = useRoute();
 
-    const selectedFilters = ref<string[]>([]);
     const activeProject = ref<Project | null>(null);
 
-    const filteredProjects = computed(() => {
-      const selectedFiltersSet = new Set(selectedFilters.value);
-      if (selectedFiltersSet.size === 0) {
-        return projectsStore.projects;
-      }
-
-      return projectsStore.projects.filter((project) =>
-        project.tags.some((tech) => selectedFiltersSet.has(tech)),
-      );
-    });
-
     const setActiveProject = (projectId: string) => {
-      const project = projectsStore.projects.find(
+      const project = projectsStore.sortedProjects.find(
         (p) => p.id === Number(projectId),
       );
       activeProject.value = project || null;
@@ -84,7 +74,7 @@ export default defineComponent({
 
     const projectFilterChange = (filters: string[]) => {
       onActiveProjectChange(null);
-      selectedFilters.value = filters;
+      projectsStore.setFilters(filters);
     };
 
     const onActiveProjectChange = (projectId: Project["id"] | null) => {

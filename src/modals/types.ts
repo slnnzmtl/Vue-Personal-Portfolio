@@ -11,6 +11,7 @@ export type { ModalComponent, ModalProps };
 
 export enum ModalKey {
   HireForm = "HireFormModal",
+  ImageViewer = "ImageViewerModal",
 }
 
 export interface ModalInstance<T = any> {

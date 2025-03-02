@@ -2,12 +2,14 @@
 import AuthorAvatar from "@/components/AuthorAvatar.vue";
 import { defineComponent } from "vue";
 import SocialLinks from "../SocialLinks/SocialLinks.vue";
+import GlassMaterial from "../ui/GlassMaterial.vue";
 
 export default defineComponent({
   name: "FaceScreen",
   components: {
     AuthorAvatar,
     SocialLinks,
+    GlassMaterial,
   },
 });
 </script>
@@ -31,20 +33,15 @@ export default defineComponent({
       >
         Web development with focus on user experience
       </p>
-
-      <!-- <p class="text-lg sm:text-xl my-8">
-        Passionate about creating seamless web experiences with modern
-        technologies.
-      </p> -->
-
-      <SocialLinks />
+      <GlassMaterial class="mt-2 p-4 mx-4 md:mx-0">
+        <SocialLinks />
+      </GlassMaterial>
     </div>
   </div>
 </template>
 
 <style lang="scss" scoped>
 .face-screen {
-  height: 600px;
   margin-top: 150px;
   margin-bottom: 50px;
   width: 100%;
