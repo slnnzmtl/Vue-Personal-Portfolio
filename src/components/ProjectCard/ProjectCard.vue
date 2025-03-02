@@ -8,7 +8,7 @@
     <div class="project-card__image">
       <div v-if="isImageLoading" class="image-loader shimmer"></div>
       <img
-        :src="project?.image"
+        :src="project?.cover"
         :alt="project?.title"
         :class="{ 'image-loaded': !isImageLoading }"
         @load="handleImageLoad"
@@ -45,7 +45,7 @@
       <div class="project-card__image">
         <div v-if="isImageLoading" class="image-loader shimmer"></div>
         <img
-          :src="project?.image"
+          :src="project?.cover"
           :alt="project?.title"
           :class="{ 'image-loaded': !isImageLoading }"
           @load="handleImageLoad"
