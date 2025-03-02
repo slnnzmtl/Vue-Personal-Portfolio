@@ -5,7 +5,7 @@
     <div
       class="max-w-[95%] lg:max-w-[90%] flex flex-wrap lg:flex-nowrap gap-12"
     >
-      <div class="text-left scrollable-container w-full lg:max-w-[30%]">
+      <div class="text-left scrollable-container w-full lg:max-w-[40%]">
         <p class="text-2xl sm:text-4xl font-bold mb-8">Projects</p>
         <p class="text-lg xl:text-xl mb-8">
           Here, you'll find projects I've built or contributed to. Use the
@@ -23,7 +23,7 @@
         />
       </div>
 
-      <div class="scrollable-container col-span-2 lg:max-w-[68%]">
+      <div class="scrollable-container col-span-2 lg:max-w-[58%]">
         <MarkupViewer
           class="col-span-2 hidden lg:block"
           :active-project="activeProject"
@@ -129,7 +129,6 @@ export default defineComponent({
   overflow-x: visible;
   height: 100%;
   width: 100%;
-  padding-right: 25px;
   padding-top: 8rem;
   padding-bottom: 3rem;
 

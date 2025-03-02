@@ -1,7 +1,8 @@
 <template>
   <GlassMaterial
     v-if="isGridLayout"
-    :class="`project-card flex flex-col relative radius-md overflow-hidden ${activeClass}`"
+    class="project-card flex flex-col relative radius-md overflow-hidden"
+    :class="[activeClass, scrollableClass]"
     @click="onCardClick"
   >
     <div class="project-card__image">
@@ -89,7 +90,7 @@ export default defineComponent({
       type: Array<string>,
       required: true,
     },
-    type: {
+    layout: {
       type: String,
       required: true,
     },
@@ -102,7 +103,14 @@ export default defineComponent({
   setup(props, { emit }) {
     const isImageLoading = ref(true);
 
-    const isGridLayout = computed(() => props.type === "grid");
+    const isGridLayout = computed(
+      () => props.layout === "grid" || props.layout === "scroll",
+    );
+
+    const scrollableClass = computed(() => {
+      return props.layout === "scroll" ? "scrollable" : "";
+    });
+
     const activeClass = computed(() => {
       return props.active ? "active" : "";
     });
@@ -130,6 +138,7 @@ export default defineComponent({
       handleImageLoad,
       onClose,
       onCardClick,
+      scrollableClass,
     };
   },
 });
@@ -143,16 +152,12 @@ export default defineComponent({
 }
 
 .project-card {
-  transition: width 0.5s height 0s ease;
   cursor: pointer;
-  flex: 0 1 calc(33.33% - 20px);
+  height: 100%;
 
-  @media (max-width: 900px) {
-    flex: 0 1 calc(50% - 20px);
-  }
-
-  @media (max-width: 600px) {
-    flex: 1 1 100%;
+  &.scrollable {
+    width: 300px;
+    height: 100%;
   }
 
   &:hover {
@@ -165,12 +170,13 @@ export default defineComponent({
 
   &.active {
     background: var(--cyan-alpha-10);
+    grid-column: span 2;
+
+    @media (max-width: 768px) {
+      grid-column: span 1;
+    }
 
     @media (max-width: 1024px) {
-      flex: 1 1 100%;
-
-      order: -1;
-
       .project-card__image {
         height: 400px;
       }

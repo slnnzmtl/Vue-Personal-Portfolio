@@ -1,5 +1,5 @@
 <template>
-  <div class="project-viewer">
+  <ScrollableContainer class="project-viewer">
     <transition-group :name="transitionName" tag="div" :class="layoutClass">
       <template v-if="!isLoading">
         <ProjectCard
@@ -8,7 +8,7 @@
           :key="project.id"
           :project="project"
           :selected-filters="selectedFilters"
-          :type="type"
+          :layout="layout"
           :active="isCardActive(project.id)"
           class="project"
           @click="onCardClicked(project)"
@@ -28,13 +28,13 @@
     <SButton v-if="hasMoreProjects" class="load-more-button" @click="loadMore">
       Load More
     </SButton>
-  </div>
+  </ScrollableContainer>
 </template>
 
 <script lang="ts">
 import { ref, computed, defineComponent, watch } from "vue";
 import { ProjectCard, CardPlaceholder } from "@/components/ProjectCard";
-import { SButton } from "@/components/ui";
+import { SButton, ScrollableContainer } from "@/components/ui";
 import { Project } from "@/stores/projectTypes";
 import { MarkupViewer } from "@/components/MarkupViewer";
 
@@ -45,6 +45,7 @@ export default defineComponent({
     CardPlaceholder,
     SButton,
     MarkupViewer,
+    ScrollableContainer,
   },
   props: {
     projects: {
@@ -53,10 +54,6 @@ export default defineComponent({
     },
     selectedFilters: {
       type: Array as () => string[],
-      required: true,
-    },
-    type: {
-      type: String,
       required: true,
     },
     activeProject: {
@@ -68,6 +65,12 @@ export default defineComponent({
       type: String,
       required: false,
       default: null,
+    },
+    layout: {
+      type: String,
+      required: false,
+      default: "grid",
+      validator: (value: string) => ["grid", "list", "scroll"].includes(value),
     },
   },
   emits: ["selected"],
@@ -95,13 +98,18 @@ export default defineComponent({
     };
 
     const layoutClass = computed(() => {
-      return props.type === "grid"
-        ? "layout flex flex-wrap gap-4 justify-start w-full"
-        : "flex flex-col gap-4";
+      switch (props.layout) {
+        case "grid":
+          return "layout grid gap-4 grid-cols-1 md:grid-cols-2 lg:grid-cols-3 justify-start w-full max-w-screen-2xl sm:mx-8";
+        case "scroll":
+          return "flex gap-4 flex-nowrap mb-4 mx-8";
+        default:
+          return "flex flex-col gap-4 lg:pr-8";
+      }
     });
 
     const transitionName = computed(() => {
-      return props.type === "grid" ? "fade" : "fade";
+      return props.layout === "grid" ? "fade" : "fade";
     });
 
     const onClose = () => {
@@ -177,6 +185,8 @@ export default defineComponent({
 <style scoped lang="scss">
 .project-viewer {
   position: relative;
+  width: 100%;
+  overflow-x: visible !important;
 }
 
 .load-more-button {
