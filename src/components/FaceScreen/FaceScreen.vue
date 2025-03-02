@@ -22,7 +22,7 @@ export default defineComponent({
 
 <template>
   <div
-    class="face-screen grid grid-cols-1 lg:grid-cols-3 gap-6 sm:gap-18 p-4 pt-10 sm:pt-auto items-center"
+    class="face-screen grid grid-cols-1 lg:grid-cols-3 gap-6 sm:gap-18 pt-10 sm:pt-auto items-center"
   >
     <div class="w-full flex justify-center">
       <AuthorAvatar class="max-w-[300px] md:max-w-[400px]" />

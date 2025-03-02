@@ -10,8 +10,9 @@
       :projects="projects"
       :active-project="activeProject"
       :selected-filters="selectedFilters"
-      :type="projectListType"
+      :layout="projectListLayout"
       return-value="id"
+      flex-wrap
       @selected="onProjectChange"
     />
   </div>
@@ -56,7 +57,7 @@ export default defineComponent({
 
     window.addEventListener("resize", updateWindowWidth);
 
-    const projectListType = computed(() => {
+    const projectListLayout = computed(() => {
       return windowWidth.value < 1024 ? "grid" : "list";
     });
 
@@ -69,7 +70,7 @@ export default defineComponent({
     };
 
     return {
-      projectListType,
+      projectListLayout,
       props,
       onFilterChange,
       onProjectChange,

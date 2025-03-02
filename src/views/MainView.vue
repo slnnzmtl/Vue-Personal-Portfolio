@@ -1,15 +1,12 @@
 <template>
-  <div class="main-view flex flex-col gap-8">
-    <FaceScreen class="max-w-screen-2xl mx-auto" />
-    <SkillsScreen class="max-w-screen-2xl mx-auto" />
+  <div class="main-view flex flex-col w-full">
+    <FaceScreen class="max-w-screen-2xl w-full mx-auto" />
+    <SkillsScreen class="max-w-screen-2xl w-full mx-auto" />
 
-    <div ref="projectsRef">
+    <div ref="projectsRef" class="max-w-screen-2xl mx-auto">
       <Suspense v-if="shouldLoadProjects">
         <template #default>
-          <AsyncProjectsScreen
-            id="projects-screen"
-            class="max-w-screen-2xl mx-auto"
-          />
+          <AsyncProjectsScreen id="projects-screen" />
         </template>
         <template #fallback>
           <div class="loading-placeholder"></div>
