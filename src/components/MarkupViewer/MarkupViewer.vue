@@ -49,8 +49,9 @@ export default defineComponent({
     h2,
     h3,
     p,
-    ul {
-      margin-bottom: 1rem;
+    ul,
+    img {
+      margin-bottom: 2rem;
     }
 
     ul {
