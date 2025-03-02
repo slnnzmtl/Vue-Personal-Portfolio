@@ -2,12 +2,11 @@
   "projects": [
     {
       "id": 1,
-      "title": "Woki.one",
-      "position": "Lead Frontend Developer",
-      "description": "Contributed to a universal CRM system, specializing in frontend development and team leadership.",
-      "url": "https://woki.one",
-      "image": "https://picsum.photos/id/2/400/300",
-      "html": "<h1>Lead Frontend Developer</h1><p>Woki.one</p><p>2023-06 - 2023-12</p><h2>Key Responsibilities:</h2><h3>Engineering:</h3><ul><li>Developed user-friendly frontend components.</li><li>Addressed architectural tasks for system optimization.</li></ul><h3>Team Management:</h3><ul><li>Led frontend team for timely code delivery.</li><li>Conducted code reviews and provided mentorship.</li></ul><h3>Features:</h3><ul><li>Implemented user-focused features.</li><li>Translated requirements into valuable system enhancements.</li></ul><h3>Refactoring:</h3><ul><li>Conducted codebase refactoring for maintainability.</li><li>Ensured adherence to industry standards.</li></ul><h3>Configurability:</h3><ul><li>Engineered a highly configurable CRM system.</li><li>Implemented customization features for user adaptability.</li></ul>",
+      "title": "Smoke alert bot",
+      "position": "BOT developer",
+      "description": "AI powered smoke alert bot for forest fires monitoring",
+      "image": "http://slnnzmtl.xyz/projects/smoke-alert-bot/cover.jpg",
+      "html": "<h1>Telegram BOT development</h1><br/><p>I have been part of the development of an innovative project that aims to use AI and video cameras to monitor forests for the early detection of wildfires.</p><p>By placing cameras strategically, the system records live videos and uses AI algorithms to analyze them in real time. This helps to quickly spot potential fires by identifying changes in temperature and the environment, and it sends immediate alerts to forest authorities for quick action.</p><img src=\"http://slnnzmtl.xyz/projects/smoke-alert-bot/image-2.jpg\" alt=\"image\"><p>The project is flexible and can be expanded, and ongoing improvements to the AI model make it more accurate.</p><img src=\"http://slnnzmtl.xyz/projects/smoke-alert-bot/image-1.jpg\" alt=\"image\"><p>This project highlights how technology can help protect the environment and prevent the damaging effects of forest fires on ecosystems and communities.</p><h2>Tech stack</h2><ul><li>Python</li><li>Telegram.ext</li></ul>",
       "tags": ["Vue", "JavaScript", "TypeScript"]
     },
     {
