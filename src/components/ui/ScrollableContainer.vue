@@ -35,6 +35,7 @@ export default defineComponent({
 }
 
 .scrollable-container {
-@extend %scrollbar-tidy;
+  @extend %scrollbar-tidy;
+  padding-bottom: 1rem;
 }
 </style>

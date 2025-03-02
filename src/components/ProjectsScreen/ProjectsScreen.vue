@@ -1,16 +1,17 @@
 <script lang="ts">
 import { computed, defineComponent, ref } from "vue";
 import { useRouter } from "vue-router";
-import { FilterPanel, ProjectList } from "@/components";
+import { FilterPanel, ProjectList, ScrollableContainer } from "@/components";
 import { useProjectsStore } from "@/stores/projectsStore";
 import { storeToRefs } from "pinia";
-import { useWindowSize } from '@/composables/useWindowSize';
+import { useWindowSize } from "@/composables/useWindowSize";
 
 export default defineComponent({
   name: "ProjectsScreen",
   components: {
     FilterPanel,
     ProjectList,
+    ScrollableContainer,
   },
   setup() {
     const router = useRouter();
@@ -74,11 +75,11 @@ export default defineComponent({
 </script>
 
 <template>
-  <div class="projects-screen">
+  <div class="projects-screen max-w-screen-2xl">
     <div v-if="isLoading" class="loading">Loading projects...</div>
     <div v-else-if="error" class="error">{{ error }}</div>
     <template v-else>
-      <div class="px-8 max-w-screen-2xl">
+      <div class="px-8">
         <h2 class="mb-8">Projects</h2>
 
         <p class="text-lg sm:text-xl mb-8">
@@ -94,13 +95,15 @@ export default defineComponent({
         />
       </div>
 
-      <ProjectList
-        :layout="projectListLayout"
-        :projects="filteredProjects"
-        :selected-filters="selectedFilters"
-        return-value="id"
-        @selected="onProjectClick"
-      />
+      <ScrollableContainer>
+        <ProjectList
+          :layout="projectListLayout"
+          :projects="filteredProjects"
+          :selected-filters="selectedFilters"
+          return-value="id"
+          @selected="onProjectClick"
+        />
+      </ScrollableContainer>
     </template>
   </div>
 </template>

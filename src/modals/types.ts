@@ -11,7 +11,6 @@ export type { ModalComponent, ModalProps };
 
 export enum ModalKey {
   HireForm = "HireFormModal",
-  ProjectDetails = "ProjectDetailsModal",
 }
 
 export interface ModalInstance<T = any> {

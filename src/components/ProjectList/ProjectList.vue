@@ -1,42 +1,40 @@
 <template>
-  <ScrollableContainer class="project-viewer">
-    <transition-group :name="transitionName" tag="div" :class="layoutClass">
-      <template v-if="!isLoading">
-        <ProjectCard
-          v-for="project in displayedProjects"
-          :id="`project-${project.id}`"
-          :key="project.id"
-          :project="project"
-          :selected-filters="selectedFilters"
-          :layout="layout"
-          :active="isCardActive(project.id)"
-          class="project"
-          @click="onCardClicked(project)"
-          @close="onClose"
-        >
-          <template #default="{ active }">
-            <MarkupViewer v-if="active" :active-project="project" />
-          </template>
-        </ProjectCard>
-      </template>
+  <transition-group :name="transitionName" tag="div" :class="layoutClass">
+    <template v-if="!isLoading">
+      <ProjectCard
+        v-for="project in displayedProjects"
+        :id="`project-${project.id}`"
+        :key="project.id"
+        :project="project"
+        :selected-filters="selectedFilters"
+        :layout="layout"
+        :active="isCardActive(project.id)"
+        class="project"
+        @click="onCardClicked(project)"
+        @close="onClose"
+      >
+        <template #default="{ active }">
+          <MarkupViewer v-if="active" :active-project="project" />
+        </template>
+      </ProjectCard>
+    </template>
 
-      <template v-else>
-        <CardPlaceholder v-for="n in itemsPerPage" :key="n" />
-      </template>
-    </transition-group>
+    <template v-else>
+      <CardPlaceholder v-for="n in itemsPerPage" :key="n" />
+    </template>
+  </transition-group>
 
-    <SButton v-if="hasMoreProjects" class="load-more-button" @click="loadMore">
-      Load More
-    </SButton>
-  </ScrollableContainer>
+  <SButton v-if="hasMoreProjects" class="load-more-button" @click="loadMore">
+    Load More
+  </SButton>
 </template>
 
 <script lang="ts">
 import { ref, computed, defineComponent, watch } from "vue";
 import { ProjectCard, CardPlaceholder } from "@/components/ProjectCard";
-import { SButton, ScrollableContainer } from "@/components/ui";
-import { Project } from "@/stores/projectTypes";
+import { SButton } from "@/components/ui";
 import { MarkupViewer } from "@/components/MarkupViewer";
+import { Project } from "@/stores/projectTypes";
 
 export default defineComponent({
   name: "ProjectList",
@@ -45,7 +43,6 @@ export default defineComponent({
     CardPlaceholder,
     SButton,
     MarkupViewer,
-    ScrollableContainer,
   },
   props: {
     projects: {
@@ -102,7 +99,7 @@ export default defineComponent({
         case "grid":
           return "layout grid gap-4 grid-cols-1 md:grid-cols-2 lg:grid-cols-3 justify-start w-full max-w-screen-2xl sm:mx-8";
         case "scroll":
-          return "flex gap-4 flex-nowrap mb-4 mx-8";
+          return "flex gap-4 flex-nowrap mx-8";
         default:
           return "flex flex-col gap-4 lg:pr-8";
       }
@@ -143,10 +140,6 @@ export default defineComponent({
     watch(
       () => props.activeProject,
       (current, prev) => {
-        console.log({
-          current: current,
-          prev: prev,
-        });
         if (!current) {
           setTimeout(() => {
             scrollToProject(prev?.id);
@@ -183,12 +176,6 @@ export default defineComponent({
 </script>
 
 <style scoped lang="scss">
-.project-viewer {
-  position: relative;
-  width: 100%;
-  overflow-x: visible !important;
-}
-
 .load-more-button {
   margin-top: 1rem;
   padding: 0.5rem 1rem;
