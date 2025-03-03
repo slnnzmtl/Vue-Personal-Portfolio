@@ -6,7 +6,7 @@
     <div ref="projectsRef" class="max-w-screen-2xl mx-auto">
       <Suspense v-if="shouldLoadProjects">
         <template #default>
-          <AsyncProjectsScreen id="projects-screen" />
+          <ProjectsScreen id="projects-screen" />
         </template>
         <template #fallback>
           <div class="loading-placeholder"></div>
@@ -18,13 +18,18 @@
 
 <script lang="ts">
 import { defineComponent, ref, onMounted, defineAsyncComponent } from "vue";
-import { SkillsScreen, FaceScreen } from "@/components/screens";
 
-const AsyncProjectsScreen = defineAsyncComponent({
-  loader: () => import("@/components/screens/ProjectsScreen.vue"),
-  timeout: 3000,
-  suspensible: true,
-});
+const ProjectsScreen = defineAsyncComponent(
+  () => import("@/components/screens/ProjectsScreen.vue"),
+);
+
+const FaceScreen = defineAsyncComponent(
+  () => import("@/components/screens/FaceScreen.vue"),
+);
+
+const SkillsScreen = defineAsyncComponent(
+  () => import("@/components/screens/SkillsScreen.vue"),
+);
 
 export default defineComponent({
   name: "MainView",
@@ -32,7 +37,7 @@ export default defineComponent({
   components: {
     FaceScreen,
     SkillsScreen,
-    AsyncProjectsScreen,
+    ProjectsScreen,
   },
 
   setup() {
