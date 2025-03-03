@@ -2,10 +2,9 @@
   <div class="markup-content">
     <transition name="fade" mode="out-in">
       <div v-if="project">
-        <div
-          class="markup-content__render rounded-lg"
-          v-html="renderedContent"
-        />
+        <div class="markup-content__render rounded-lg">
+          <div v-html="renderedContent" />
+        </div>
 
         <div v-if="activeProject.images">
           <h2 class="text-lg sm:text-xl mb-4">Images</h2>

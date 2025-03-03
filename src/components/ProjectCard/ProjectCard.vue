@@ -16,9 +16,9 @@
     </div>
 
     <div class="project-card__content flex flex-col gap-4 p-4 text-left">
-      <h2 class="project-card__title text-lg sm:text-xl">
+      <h1 class="project-card__title">
         {{ project?.title }}
-      </h2>
+      </h1>
       <p class="project-card__description text-sm sm:text-base">
         {{ project?.description }}
       </p>
@@ -53,7 +53,7 @@
       </div>
 
       <div class="flex flex-col gap-2 justify-around flex-grow">
-        <h2 class="project-card__title text-lg sm:text-xl">
+        <h2 class="project-card__title">
           {{ project?.title }}
         </h2>
 
@@ -220,9 +220,22 @@ export default defineComponent({
   }
 
   &__title {
+    transition: font-size 0.3s ease;
+
     font-weight: 600;
     color: var(--text);
-    margin-bottom: var(--spacing-sm);
+  }
+
+  @media (min-width: 768px) {
+    .project-card__title {
+      font-size: 1.5rem !important;
+    }
+
+    &.active {
+      .project-card__title {
+        font-size: 2.4rem !important;
+      }
+    }
   }
 
   &__description {
@@ -232,7 +245,6 @@ export default defineComponent({
   }
 
   &__link {
-    margin-top: var(--spacing-md);
     display: inline-flex;
     align-items: center;
     color: var(--cyan);
@@ -241,7 +253,7 @@ export default defineComponent({
     transition: color var(--card-transition);
 
     &:hover {
-      color: var(--cyan-light);
+      color: var(--cyan-dark);
     }
 
     &-arrow {
