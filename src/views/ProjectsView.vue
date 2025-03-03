@@ -5,7 +5,7 @@
     <div class="flex flex-wrap lg:flex-nowrap gap-4">
       <ScrollableContainer
         direction="flex-col"
-        wrap="nowrap"
+        :wrap="false"
         class="text-left w-full lg:max-w-[40%] pt-36"
         hide-scrollbar
       >
