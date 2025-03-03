@@ -31,9 +31,7 @@ export default defineComponent({
       <LoadingIndicator ref="loadingIndicator" />
       <NavigationMenu />
       <router-view v-slot="{ Component }">
-        <keep-alive :include="['MainView', 'ProjectsView', 'BlogView']">
-          <component :is="Component" />
-        </keep-alive>
+        <component :is="Component" />
       </router-view>
     </BackgroundWrapper>
   </div>

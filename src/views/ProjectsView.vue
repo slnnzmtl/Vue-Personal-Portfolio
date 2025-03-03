@@ -47,7 +47,14 @@
 </template>
 
 <script lang="ts">
-import { defineComponent, computed, watch, ref, onMounted } from "vue";
+import {
+  defineComponent,
+  computed,
+  watch,
+  ref,
+  onMounted,
+  onBeforeUnmount,
+} from "vue";
 import { useProjectsStore } from "@/stores/projectsStore";
 import { MarkupViewer, ControlPanel, ScrollableContainer } from "@/components";
 import { Project } from "@/stores/projectTypes";
@@ -145,6 +152,10 @@ export default defineComponent({
         router.push(`/projects/${projectId}`);
       }
     };
+
+    onBeforeUnmount(() => {
+      projectsStore.clearFilters();
+    });
 
     return {
       isLgLayout,

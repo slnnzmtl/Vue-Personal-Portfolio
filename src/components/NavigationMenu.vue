@@ -122,6 +122,7 @@ nav {
       text-decoration: none;
       font-weight: 500;
       transition: color 0.3s ease;
+      font-size: 1.5rem;
 
       &:hover {
         color: var(--cyan);
