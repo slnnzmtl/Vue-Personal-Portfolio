@@ -70,24 +70,24 @@ nav {
   position: fixed;
   top: 0;
   right: 0;
-  height: 100%;
-  max-height: 60px;
   z-index: 100;
   width: 100%;
-  display: flex;
-  justify-content: flex-end;
+  transition: height 0.3s ease;
+  height: 60px;
+  overflow: hidden;
+  margin-top: 1rem;
 
   .nav-content {
     display: flex;
     align-items: center;
     justify-content: space-between;
-    height: 100%;
     width: 100%;
+    height: auto;
+    min-height: 60px;
     position: relative;
     transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
     border-radius: 30px;
     padding: 0 1rem;
-    margin-top: 15px;
   }
 
   .burger-button {
@@ -141,10 +141,6 @@ nav {
     .nav-content {
       align-items: flex-start;
       padding: 1rem 1rem;
-      height: 100%;
-      max-height: 60px;
-      overflow: hidden;
-      transition: max-height 0.3s ease;
     }
 
     .nav-links {
@@ -164,12 +160,7 @@ nav {
     }
 
     &.menu-open {
-      height: max-content;
-
-      .nav-content {
-        height: 100%;
-        max-height: 1000px;
-      }
+      height: 100vh;
 
       .nav-links {
         display: flex;
