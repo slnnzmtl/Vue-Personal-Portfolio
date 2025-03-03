@@ -139,21 +139,21 @@ export default defineComponent({
       return props.activeProject?.id === id;
     };
 
-    onMounted(() => {
-      scrollToProject(props.activeProject?.id);
-    });
+    // onMounted(() => {
+    //   scrollToProject(props.activeProject?.id);
+    // });
 
-    watch(
-      () => props.activeProject,
-      (current, prev) => {
-        if (!current) {
-          scrollToProject(prev?.id);
-          return;
-        }
+    // watch(
+    //   () => props.activeProject,
+    //   (current, prev) => {
+    //     if (!current) {
+    //       scrollToProject(prev?.id);
+    //       return;
+    //     }
 
-        scrollToProject(current?.id);
-      },
-    );
+    //     scrollToProject(current?.id);
+    //   },
+    // );
 
     const onCardClicked = (project: Project) => {
       if (props.activeProject?.id === project?.id) {

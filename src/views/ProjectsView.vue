@@ -28,7 +28,7 @@
 
       <ScrollableContainer
         v-if="isLgLayout"
-        ref="markupViewerContainer"
+        id="markup-viewer-container"
         hide-scrollbar
         class="pt-36"
       >
@@ -47,7 +47,7 @@
 </template>
 
 <script lang="ts">
-import { defineComponent, computed, watch, ref } from "vue";
+import { defineComponent, computed, watch, ref, onMounted } from "vue";
 import { useProjectsStore } from "@/stores/projectsStore";
 import { MarkupViewer, ControlPanel, ScrollableContainer } from "@/components";
 import { Project } from "@/stores/projectTypes";
@@ -70,6 +70,8 @@ export default defineComponent({
     const route = useRoute();
     const { width } = useWindowSize();
 
+    const isLgLayout = computed(() => width.value > 1024);
+
     const activeProjectId = computed(
       () => route.params.projectId as string | undefined,
     );
@@ -85,30 +87,49 @@ export default defineComponent({
       );
     });
 
-    const markupViewerContainer = ref<HTMLElement | null>(null);
-
     const scrollToTop = () => {
-      if (markupViewerContainer.value) {
-        markupViewerContainer.value.scrollTo({
-          top: 0,
-          behavior: "smooth",
-        });
+      const markupViewerContainer = document.getElementById(
+        "markup-viewer-container",
+      );
+
+      if (markupViewerContainer) {
+        setTimeout(() => {
+          markupViewerContainer.scrollTo({
+            top: 0,
+          });
+        }, 100);
       }
     };
 
-    watch(activeProject, (current) => {
-      if (!isLgLayout.value) {
-        return;
-      }
+    const scrollToProject = (id: number) => {
+      if (!id) return;
 
-      if (current) {
-        console.log({ current });
-        setTimeout(() => {
+      setTimeout(() => {
+        const project = document.getElementById(`project-${id}`);
+        if (!project) return;
+
+        project.scrollIntoView({
+          behavior: "smooth",
+          block: "start",
+        });
+      }, 100);
+    };
+
+    watch(
+      activeProject,
+      (current) => {
+        if (!current) {
+          return;
+        }
+
+        scrollToProject(current?.id);
+
+        if (isLgLayout.value) {
           scrollToTop();
-        }, 500);
-        return;
-      }
-    });
+        }
+      },
+      { immediate: true },
+    );
 
     const filteredProjects = computed(() => projectsStore.filteredProjects);
 
@@ -125,8 +146,6 @@ export default defineComponent({
       }
     };
 
-    const isLgLayout = computed(() => width.value > 1024);
-
     return {
       isLgLayout,
       filteredProjects,
@@ -135,7 +154,6 @@ export default defineComponent({
       projectFilterChange,
       onActiveProjectChange,
       tags,
-      markupViewerContainer,
     };
   },
 });
