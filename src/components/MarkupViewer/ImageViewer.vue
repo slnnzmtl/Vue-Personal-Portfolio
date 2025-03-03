@@ -14,9 +14,8 @@
 </template>
 
 <script lang="ts">
-import { defineComponent, PropType } from "vue";
+import { defineComponent } from "vue";
 import { ScrollableContainer } from "@/components";
-import { Project } from "@/stores/projectTypes";
 import { useModalService } from "@/composables";
 import { ModalKey } from "@/modals/types";
 
@@ -27,7 +26,7 @@ export default defineComponent({
   },
   props: {
     images: {
-      type: Object as PropType<Project>,
+      type: Array<string>,
       required: true,
     },
   },
@@ -35,6 +34,7 @@ export default defineComponent({
     const { openModal } = useModalService();
 
     const onImageClick = (imageUrl: string) => {
+      console.log({ imageUrl });
       openModal(ModalKey.ImageViewer, { imageUrl });
     };
 

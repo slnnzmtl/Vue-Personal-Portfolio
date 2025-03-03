@@ -19,7 +19,7 @@ export function provideModalService() {
     name: ModalKey,
     props: Record<string, any> = {},
   ): Promise<T | null> {
-    console.log(name)
+    console.log(name);
     return new Promise<T | null>((resolve) => {
       modals.push({ name, props, resolve });
     });

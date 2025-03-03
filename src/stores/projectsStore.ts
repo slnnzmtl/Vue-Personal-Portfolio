@@ -70,7 +70,7 @@ export const useProjectsStore = defineStore("projects", {
       return selectedFiltersSet.size === 0
         ? sorted
         : sorted.filter((project) =>
-            project.tags.some((tech) => selectedFiltersSet.has(tech))
+            project.tags.some((tech) => selectedFiltersSet.has(tech)),
           );
     },
   },

@@ -1,5 +1,5 @@
 <template>
-  <ModalWindow class="image-viewer-modal" @close="closeModal">
+  <ModalWindow :name="modalName" class="image-viewer-modal" @close="closeModal">
     <GlassMaterial
       class="image-viewer"
       @wheel="handleZoom"
@@ -39,6 +39,7 @@
 import { defineComponent, ref } from "vue";
 import { ModalWindow, SButton, GlassMaterial } from "@/components/ui";
 import { PlusIcon, MinusIcon, ResetIcon } from "@/components/icons";
+import { ModalKey } from "@/modals/types";
 
 interface Position {
   x: number;
@@ -168,6 +169,7 @@ export default defineComponent({
       zoomOut,
       resetView,
       handleBackgroundClick,
+      modalName: ModalKey.ImageViewer,
     };
   },
 });
