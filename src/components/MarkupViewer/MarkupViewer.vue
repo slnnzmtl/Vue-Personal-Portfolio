@@ -1,24 +1,32 @@
 <template>
   <div class="markup-content">
-    <div v-if="activeProject">
-      <div class="markup-content__render rounded-lg" v-html="renderedContent" />
+    <transition name="fade" mode="out-in">
+      <div v-if="project">
+        <div
+          class="markup-content__render rounded-lg"
+          v-html="renderedContent"
+        />
 
-      <div v-if="activeProject.images">
-        <h2 class="text-lg sm:text-xl mb-4">Images</h2>
-        <ImageViewer :images="activeProject.images" />
+        <div v-if="activeProject.images">
+          <h2 class="text-lg sm:text-xl mb-4">Images</h2>
+          <ImageViewer :images="activeProject.images" />
+        </div>
       </div>
-    </div>
 
-    <div v-else class="placeholder flex items-center justify-center h-[70vh]">
-      <p>Please select an element to view its details.</p>
-    </div>
+      <div
+        v-else
+        key="placeholder"
+        class="placeholder flex items-center justify-center h-[70vh]"
+      >
+        <p>Please select an element to view its details.</p>
+      </div>
+    </transition>
   </div>
 </template>
 
 <script lang="ts">
-import { defineComponent, computed } from "vue";
+import { defineComponent, computed, ref, watch } from "vue";
 import ImageViewer from "./ImageViewer.vue";
-
 import { marked } from "marked";
 
 export default defineComponent({
@@ -33,6 +41,8 @@ export default defineComponent({
     },
   },
   setup(props) {
+    const project = ref(null);
+
     const renderedContent = computed(() => {
       if (props.activeProject) {
         return marked(props.activeProject.html);
@@ -40,8 +50,20 @@ export default defineComponent({
       return "";
     });
 
+    watch(
+      () => props.activeProject,
+      (current) => {
+        project.value = null;
+        setTimeout(() => {
+          project.value = current;
+        }, 100);
+      },
+      { immediate: true },
+    );
+
     return {
       renderedContent,
+      project,
     };
   },
 });
@@ -77,5 +99,15 @@ export default defineComponent({
     padding: 20px;
     font-size: 1.2rem;
   }
+}
+
+.fade-enter-active,
+.fade-leave-active {
+  transition: opacity 0.3s ease;
+}
+
+.fade-enter-from,
+.fade-leave-to {
+  opacity: 0;
 }
 </style>

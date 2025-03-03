@@ -25,9 +25,11 @@
 
       <div
         v-if="isLgLayout"
+        ref="markupViewerContainer"
         class="scrollable-container markup-viewer col-span-2 lg:max-w-[58%]"
       >
         <MarkupViewer
+          id="markup-viewer"
           class="col-span-2 hidden lg:block"
           :active-project="activeProject"
         />
@@ -37,7 +39,7 @@
 </template>
 
 <script lang="ts">
-import { defineComponent, computed } from "vue";
+import { defineComponent, computed, watch, ref } from "vue";
 import { useProjectsStore } from "@/stores/projectsStore";
 import { MarkupViewer, ControlPanel } from "@/components";
 import { Project } from "@/stores/projectTypes";
@@ -74,6 +76,30 @@ export default defineComponent({
       );
     });
 
+    const markupViewerContainer = ref<HTMLElement | null>(null);
+
+    const scrollToTop = () => {
+      if (markupViewerContainer.value) {
+        markupViewerContainer.value.scrollTo({
+          top: 0,
+          behavior: "smooth",
+        });
+      }
+    };
+
+    watch(activeProject, (current) => {
+      if (!isLgLayout.value) {
+        return;
+      }
+
+      if (current) {
+        setTimeout(() => {
+          scrollToTop();
+        }, 500);
+        return;
+      }
+    });
+
     const filteredProjects = computed(() => projectsStore.filteredProjects);
 
     const projectFilterChange = (filters: string[]) => {
@@ -99,6 +125,7 @@ export default defineComponent({
       projectFilterChange,
       onActiveProjectChange,
       tags,
+      markupViewerContainer,
     };
   },
 });

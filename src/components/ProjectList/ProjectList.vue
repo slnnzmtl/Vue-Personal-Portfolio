@@ -109,12 +109,12 @@ export default defineComponent({
       return props.layout === "grid" ? "fade" : "fade";
     });
 
-    const onClose = () => {
-      emit("selected", null);
-    };
+    const shouldScroll = computed(() => props.layout === "list");
 
     const scrollToProject = (id: number) => {
       const container = document.querySelector(`#project-${id}`);
+
+      console.log({ container });
 
       if (container) {
         container.scrollIntoView({
@@ -124,22 +124,17 @@ export default defineComponent({
       }
     };
 
-    const onCardClicked = (project: Project) => {
-      if (props.activeProject?.id === project?.id) {
-        onClose();
-        return;
-      }
-
-      if (props.returnValue) {
-        emit("selected", project[props.returnValue]);
-      } else {
-        emit("selected", project);
-      }
+    const isCardActive = (id: number) => {
+      return props.activeProject?.id === id;
     };
 
     watch(
       () => props.activeProject,
       (current, prev) => {
+        if (!shouldScroll.value) {
+          return;
+        }
+
         if (!current) {
           setTimeout(() => {
             scrollToProject(prev?.id);
@@ -154,8 +149,21 @@ export default defineComponent({
       { immediate: true },
     );
 
-    const isCardActive = (id: number) => {
-      return props.activeProject?.id === id;
+    const onCardClicked = (project: Project) => {
+      if (props.activeProject?.id === project?.id) {
+        onClose();
+        return;
+      }
+
+      if (props.returnValue) {
+        emit("selected", project[props.returnValue]);
+      } else {
+        emit("selected", project);
+      }
+    };
+
+    const onClose = () => {
+      emit("selected", null);
     };
 
     return {
