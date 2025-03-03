@@ -16,29 +16,17 @@ const routes: RouteRecordRaw[] = [
     path: "/projects",
     name: "projects",
 
-    component: () =>
-      import(/* webpackChunkName: "projects" */ "../views/ProjectsView.vue"),
+    component: () => import("@/views/ProjectsView.vue"),
     meta: {
       title: "Projects",
-      keepAlive: true,
-    },
-
-    beforeEnter: (to, from, next) => {
-      import("@/components/ProjectCard/ProjectCard.vue");
-      import("@/components/FilterPanel/FilterPanel.vue");
-      next();
     },
   },
   {
     path: "/projects/:projectId",
     name: "projects-id",
-    component: () =>
-      import(
-        /* webpackChunkName: "project-details" */ "../views/ProjectsView.vue"
-      ),
+    component: () => import("@/views/ProjectsView.vue"),
     meta: {
       title: "Project Details",
-      keepAlive: false,
     },
   },
   {
@@ -48,7 +36,6 @@ const routes: RouteRecordRaw[] = [
       import(/* webpackChunkName: "blog" */ "../views/BlogView.vue"),
     meta: {
       title: "Blog",
-      keepAlive: true,
     },
   },
 ];
