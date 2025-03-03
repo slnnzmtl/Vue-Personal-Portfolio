@@ -1,10 +1,16 @@
-import { HireFormModal, ImageViewerModal } from "@/modals";
+import { App, defineAsyncComponent } from "vue";
 import { ModalKey } from "@/modals/types";
-import { App } from "vue";
 
 export default {
   install: (app: App) => {
-    app.component(ModalKey.HireForm, HireFormModal);
-    app.component(ModalKey.ImageViewer, ImageViewerModal);
+    app.component(
+      ModalKey.HireForm,
+      defineAsyncComponent(() => import("@/modals/HireFormModal.vue")),
+    );
+
+    app.component(
+      ModalKey.ImageViewer,
+      defineAsyncComponent(() => import("@/modals/ImageViewerModal.vue")),
+    );
   },
 };
