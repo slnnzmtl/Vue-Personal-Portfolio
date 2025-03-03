@@ -9,8 +9,8 @@
     </div>
 
     <ScrollableContainer>
-      <div class="flex gap-4 w-full justify-between flex-nowrap mx-6">
-        <SkillCard title="Core" class="basis-xs">
+      <div class="flex gap-4 w-full justify-between flex-nowrap px-6">
+        <SkillCard title="Core">
           <ul>
             <li>JavaScript</li>
             <li>TypeScript</li>
@@ -21,7 +21,7 @@
           </ul>
         </SkillCard>
 
-        <SkillCard title="Front-end" class="basis-xs">
+        <SkillCard title="Front-end">
           <ul>
             <li>React / Vue</li>
             <li>React Native</li>
@@ -35,7 +35,7 @@
           </ul>
         </SkillCard>
 
-        <SkillCard title="Back-end" class="basis-xs">
+        <SkillCard title="Back-end">
           <ul>
             <li>Node.js</li>
             <li>Express.js</li>
