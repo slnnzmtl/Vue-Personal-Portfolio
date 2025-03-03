@@ -83,5 +83,7 @@ export default defineComponent({
   &:hover {
     transform: translateY(-2px);
   }
+
+  color: var(--text);
 }
 </style>

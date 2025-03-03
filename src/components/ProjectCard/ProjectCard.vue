@@ -160,6 +160,7 @@ export default defineComponent({
   &.scrollable {
     width: 300px;
     height: max-content;
+    flex-shrink: 0;
   }
 
   &:hover {

@@ -2,8 +2,13 @@
   <div
     class="projects-view max-w-[2000px] w-full mx-auto flex justify-center px-3"
   >
-    <div class="flex flex-wrap lg:flex-nowrap gap-12">
-      <div class="text-left scrollable-container w-full lg:max-w-[40%]">
+    <div class="flex flex-wrap lg:flex-nowrap gap-4">
+      <ScrollableContainer
+        direction="flex-col"
+        wrap="nowrap"
+        class="text-left w-full lg:max-w-[40%] pt-36"
+        hide-scrollbar
+      >
         <p class="text-2xl sm:text-4xl font-bold mb-8">Projects</p>
         <p class="text-lg xl:text-xl mb-8">
           Here, you'll find projects I've built or contributed to. Use the
@@ -19,12 +24,13 @@
           @on-filter-change="projectFilterChange"
           @on-project-change="onActiveProjectChange"
         />
-      </div>
+      </ScrollableContainer>
 
-      <div
+      <ScrollableContainer
         v-if="isLgLayout"
         ref="markupViewerContainer"
-        class="scrollable-container markup-viewer col-span-2 lg:max-w-[58%]"
+        hide-scrollbar
+        class="pt-36"
       >
         <MarkupViewer
           id="markup-viewer"
@@ -35,7 +41,7 @@
             <h1>{{ activeProject?.title }}</h1>
           </template>
         </MarkupViewer>
-      </div>
+      </ScrollableContainer>
     </div>
   </div>
 </template>
@@ -43,7 +49,7 @@
 <script lang="ts">
 import { defineComponent, computed, watch, ref } from "vue";
 import { useProjectsStore } from "@/stores/projectsStore";
-import { MarkupViewer, ControlPanel } from "@/components";
+import { MarkupViewer, ControlPanel, ScrollableContainer } from "@/components";
 import { Project } from "@/stores/projectTypes";
 import { useRoute } from "vue-router";
 import router from "@/router";
@@ -55,6 +61,7 @@ export default defineComponent({
   components: {
     MarkupViewer,
     ControlPanel,
+    ScrollableContainer,
   },
   setup() {
     const projectsStore = useProjectsStore();
@@ -137,24 +144,5 @@ export default defineComponent({
 .projects-view {
   position: fixed;
   inset: 0;
-}
-
-.scrollable-container {
-  overflow-y: auto;
-  overflow-x: visible;
-  height: 100%;
-  width: 100%;
-  padding-top: 8rem;
-  padding-bottom: 3rem;
-
-  @media (max-width: 1024px) {
-    padding-right: 0;
-    padding-top: 8rem;
-    padding-bottom: 0;
-  }
-
-  padding-right: 1rem;
-
-  @extend %scrollbar-hidden;
 }
 </style>

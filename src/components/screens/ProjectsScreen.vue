@@ -73,7 +73,7 @@ export default defineComponent({
         />
       </div>
 
-      <ScrollableContainer>
+      <ScrollableContainer :wrap="false">
         <ProjectList
           :layout="projectListLayout"
           :projects="filteredProjects"

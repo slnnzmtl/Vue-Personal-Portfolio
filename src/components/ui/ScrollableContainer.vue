@@ -1,11 +1,6 @@
 <template>
-  <div class="scrollable-wrapper">
-    <div
-      class="flex gap-4 overflow-x-auto scroll-smooth"
-      :class="containerClass"
-    >
-      <slot />
-    </div>
+  <div :class="containerClass">
+    <slot />
   </div>
 </template>
 
@@ -32,7 +27,7 @@ export default defineComponent({
   setup(props) {
     const containerClass = computed(() => {
       return [
-        "scrollable-container",
+        "scrollable-wrapper scroll-smooth",
         props.hideScrollbar ? "hide-scrollbar" : "",
         props.direction,
         props.wrap ? "flex-wrap" : "flex-nowrap",
@@ -49,15 +44,17 @@ export default defineComponent({
 <style lang="scss" scoped>
 .scrollable-wrapper {
   width: 100%;
+  height: 100%;
   position: relative;
-}
+  overflow-x: auto;
+  overflow-y: auto;
 
-.scrollable-container {
   @extend %scrollbar-tidy;
   padding-bottom: 1rem;
 
   &.hide-scrollbar {
     @extend %scrollbar-hidden;
+    padding-right: 0;
   }
 }
 </style>
