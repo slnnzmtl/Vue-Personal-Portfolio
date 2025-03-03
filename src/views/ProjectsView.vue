@@ -23,7 +23,10 @@
         />
       </div>
 
-      <div class="scrollable-container col-span-2 lg:max-w-[58%]">
+      <div
+        v-if="isLgLayout"
+        class="scrollable-container markup-viewer col-span-2 lg:max-w-[58%]"
+      >
         <MarkupViewer
           class="col-span-2 hidden lg:block"
           :active-project="activeProject"
@@ -34,13 +37,14 @@
 </template>
 
 <script lang="ts">
-import { defineComponent, ref, watch } from "vue";
+import { defineComponent, computed } from "vue";
 import { useProjectsStore } from "@/stores/projectsStore";
 import { MarkupViewer, ControlPanel } from "@/components";
 import { Project } from "@/stores/projectTypes";
 import { useRoute } from "vue-router";
 import router from "@/router";
 import { storeToRefs } from "pinia";
+import { useWindowSize } from "@/composables/useWindowSize";
 
 export default defineComponent({
   name: "ProjectsView",
@@ -50,27 +54,27 @@ export default defineComponent({
   },
   setup() {
     const projectsStore = useProjectsStore();
-    const { filteredProjects, selectedFilters } = storeToRefs(projectsStore);
+    const { selectedFilters, sortedProjects, tags } =
+      storeToRefs(projectsStore);
     const route = useRoute();
+    const { width } = useWindowSize();
 
-    const activeProject = ref<Project | null>(null);
-
-    const setActiveProject = (projectId: string) => {
-      const project = projectsStore.sortedProjects.find(
-        (p) => p.id === Number(projectId),
-      );
-      activeProject.value = project || null;
-    };
-
-    watch(
-      () => route.params.projectId,
-      (newProjectId: string) => {
-        if (newProjectId) {
-          setActiveProject(newProjectId);
-        }
-      },
-      { immediate: true },
+    const activeProjectId = computed(
+      () => route.params.projectId as string | undefined,
     );
+
+    const activeProject = computed<Project | null>(() => {
+      if (!activeProjectId.value) {
+        return null;
+      }
+      return (
+        sortedProjects.value.find(
+          (p) => p.id === Number(activeProjectId.value),
+        ) || null
+      );
+    });
+
+    const filteredProjects = computed(() => projectsStore.filteredProjects);
 
     const projectFilterChange = (filters: string[]) => {
       onActiveProjectChange(null);
@@ -80,35 +84,27 @@ export default defineComponent({
     const onActiveProjectChange = (projectId: Project["id"] | null) => {
       if (!projectId) {
         router.replace("/projects");
-        setActiveProject(null);
       } else {
         router.push(`/projects/${projectId}`);
       }
     };
 
+    const isLgLayout = computed(() => width.value > 1024);
+
     return {
+      isLgLayout,
       filteredProjects,
       selectedFilters,
       activeProject,
       projectFilterChange,
       onActiveProjectChange,
-      setActiveProject,
-      tags: projectsStore.tags,
+      tags,
     };
   },
 });
 </script>
 
 <style lang="scss" scoped>
-.fade-enter-active,
-.fade-leave-active {
-  transition: opacity 0.5s;
-}
-.fade-enter,
-.fade-leave-to {
-  opacity: 0;
-}
-
 .projects-view {
   position: fixed;
   inset: 0;
@@ -127,6 +123,8 @@ export default defineComponent({
     padding-top: 6rem;
     padding-bottom: 0;
   }
+
+  padding-right: 1rem;
 
   @extend %scrollbar-hidden;
 }

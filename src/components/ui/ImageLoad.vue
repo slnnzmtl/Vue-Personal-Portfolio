@@ -77,6 +77,7 @@ export default defineComponent({
   left: 0;
   width: 100%;
   height: 100%;
+  min-height: 150px;
   background: rgba(255, 255, 255, 0.05);
   border-radius: 8px;
   overflow: hidden;
