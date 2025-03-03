@@ -34,6 +34,8 @@ export default defineComponent({
   overflow: hidden;
   display: flex;
   flex-shrink: 0;
+  height: 100%;
+  width: 100%;
   max-width: 400px; /* Adjust as needed */
   max-height: 400px; /* Adjust as needed */
 }
