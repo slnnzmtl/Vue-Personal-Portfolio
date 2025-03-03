@@ -9,11 +9,21 @@ services:
       - "443:443"
     volumes:
       - /var/run/docker.sock:/tmp/docker.sock:ro
-      - ./certs:/etc/nginx/certs
+      - ./certs:/etc/nginx/certs # Ensure this path is correct
+      - ./vhost.d:/etc/nginx/vhost.d # Added vhost.d mapping
     networks:
       - nginx-proxy
     restart: always
 
+  your-app:
+    build:
+      context: .
+      dockerfile: DockerFile
+    environment:
+      - VIRTUAL_HOST=slnnzmtl.xyz
+    networks:
+      - nginx-proxy
+
 networks:
   nginx-proxy:
-    external: true 
+    external: true
