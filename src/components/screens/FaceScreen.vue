@@ -1,7 +1,20 @@
-<script setup lang="ts">
-import AuthorAvatar from "@/components/AuthorAvatar.vue";
+<script lang="ts">
+import { defineAsyncComponent, defineComponent } from "vue";
 import SocialLinks from "../SocialLinks/SocialLinks.vue";
 import GlassMaterial from "../ui/GlassMaterial.vue";
+
+const AuthorAvatar = defineAsyncComponent(
+  () => import("@/components/AuthorAvatar.vue"),
+);
+
+export default defineComponent({
+  name: "AuthorFace",
+  components: {
+    AuthorAvatar,
+    SocialLinks,
+    GlassMaterial,
+  },
+});
 </script>
 
 <template>
