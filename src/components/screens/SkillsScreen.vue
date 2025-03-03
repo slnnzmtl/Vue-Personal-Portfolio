@@ -9,7 +9,7 @@
     </div>
 
     <ScrollableContainer>
-      <div class="flex gap-4 w-full justify-between flex-nowrap">
+      <div class="flex gap-4 w-full justify-between flex-nowrap mx-6">
         <SkillCard title="Core" class="basis-xs">
           <ul>
             <li>JavaScript</li>
