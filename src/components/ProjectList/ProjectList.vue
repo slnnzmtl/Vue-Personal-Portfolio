@@ -33,14 +33,7 @@
 </template>
 
 <script lang="ts">
-import {
-  ref,
-  computed,
-  defineComponent,
-  watch,
-  onMounted,
-  nextTick,
-} from "vue";
+import { ref, computed, defineComponent } from "vue";
 import { ProjectCard, CardPlaceholder } from "@/components/ProjectCard";
 import { SButton } from "@/components/ui";
 import { MarkupViewer } from "@/components/MarkupViewer";
@@ -121,39 +114,9 @@ export default defineComponent({
       return props.layout === "grid" ? "fade" : "fade";
     });
 
-    const scrollToProject = (id: number) => {
-      if (!id) return;
-
-      setTimeout(() => {
-        const project = document.getElementById(`project-${id}`);
-        if (!project) return;
-
-        project.scrollIntoView({
-          behavior: "smooth",
-          block: "start",
-        });
-      }, 500);
-    };
-
     const isCardActive = (id: number) => {
       return props.activeProject?.id === id;
     };
-
-    // onMounted(() => {
-    //   scrollToProject(props.activeProject?.id);
-    // });
-
-    // watch(
-    //   () => props.activeProject,
-    //   (current, prev) => {
-    //     if (!current) {
-    //       scrollToProject(prev?.id);
-    //       return;
-    //     }
-
-    //     scrollToProject(current?.id);
-    //   },
-    // );
 
     const onCardClicked = (project: Project) => {
       if (props.activeProject?.id === project?.id) {
