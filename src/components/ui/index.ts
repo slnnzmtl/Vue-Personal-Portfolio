@@ -7,3 +7,4 @@ export * from "./buttons";
 export { default as Preloader } from "./Preloader.vue";
 export { default as LoadingIndicator } from "./LoadingIndicator.vue";
 export { default as ScrollableContainer } from "./ScrollableContainer.vue";
+export { default as ImageLoad } from "./ImageLoad.vue";

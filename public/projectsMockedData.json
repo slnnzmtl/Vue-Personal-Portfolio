@@ -34,13 +34,13 @@
       "position": "Senior Frontend Developer",
       "description": "Contributed to the frontend development of Subbly.co, an e-commerce platform for subscription businesses, focusing on user experience, performance, and collaboration.",
       "url": "https://subbly.co",
-      "cover": "http://slnnzmtl.xyz/projects/subbly/image-1.jpg",
+      "cover": "http://slnnzmtl.xyz/projects/subbly/image-4.jpg",
       "html": "<h1>Building a Better Subscription Experience: Subbly.co</h1><p>I contributed to the frontend development of Subbly.co, an e-commerce platform for subscription-based marketplaces. My focus was creating user-friendly experiences for merchants and customers.</p><img src=http://slnnzmtl.xyz/projects/subbly/image-1.jpg alt=Subbly><h2>My Contributions</h2><ul><li><b>Interface Development:</b> Developed and maintained responsive UIs with modern JavaScript frameworks.</li><li><b>Collaboration:</b> Worked with designers and backend developers to implement features and designs.</li><li><b>Subscription Features:</b> Contributed to subscription management, payment processing, and dynamic content loading.</li><li><b>Performance:</b> Optimized for speed and scalability to improve load times.</li><li><b>Code Quality:</b> Participated in code reviews to maintain code quality.</li></ul><p>This project helped me develop my skills in building user-centric e-commerce solutions. I'm grateful for the opportunity to contribute to a platform that helps businesses succeed with subscriptions.</p>",
       "tags": ["Vue 2", "Vue 3", "TypeScript"],
       "images": [
         "http://slnnzmtl.xyz/projects/subbly/image-2.jpg",
         "http://slnnzmtl.xyz/projects/subbly/image-3.jpg",
-        "http://slnnzmtl.xyz/projects/subbly/image-4.jpg"
+        "http://slnnzmtl.xyz/projects/subbly/image-1.jpg"
       ]
     }
   ]

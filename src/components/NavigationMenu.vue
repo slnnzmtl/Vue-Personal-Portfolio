@@ -1,5 +1,5 @@
 <script lang="ts">
-import { HireMeButton } from "@/components/ui";
+import { HireMeButton, GlassMaterial } from "@/components/ui";
 import { useModalService } from "@/composables";
 import { ModalKey } from "@/modals/types";
 import { defineComponent, ref } from "vue";
@@ -8,6 +8,7 @@ export default defineComponent({
   name: "NavigationMenu",
   components: {
     HireMeButton,
+    GlassMaterial,
   },
   setup() {
     const { openModal } = useModalService();
@@ -41,7 +42,9 @@ export default defineComponent({
 
 <template>
   <nav :class="{ 'menu-open': isMenuOpen }">
-    <div class="nav-content max-w-screen-xl 2xl:max-w-screen-2xl mx-auto">
+    <GlassMaterial
+      class="nav-content max-w-screen-xl 2xl:max-w-screen-2xl mx-auto"
+    >
       <button class="burger-button" @click="toggleMenu">
         <span></span>
         <span></span>
@@ -59,7 +62,7 @@ export default defineComponent({
       <div class="hire-button">
         <HireMeButton @click="onModalOpen" />
       </div>
-    </div>
+    </GlassMaterial>
   </nav>
 </template>
 
@@ -84,10 +87,7 @@ nav {
     width: 100%;
     position: relative;
     transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-    background: rgba(255, 255, 255, 0.05);
-    backdrop-filter: blur(10px);
     border-radius: 30px;
-    border: 1px solid rgba(255, 255, 255, 0.1);
     padding: 0 1rem;
     margin-top: 15px;
   }
