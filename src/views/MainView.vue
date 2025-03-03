@@ -18,18 +18,12 @@
 
 <script lang="ts">
 import { defineComponent, ref, onMounted, defineAsyncComponent } from "vue";
+import { SkillsScreen, FaceScreen } from "@/components/screens";
 
-const ProjectsScreen = defineAsyncComponent(
-  () => import("@/components/screens/ProjectsScreen.vue"),
-);
-
-const FaceScreen = defineAsyncComponent(
-  () => import("@/components/screens/FaceScreen.vue"),
-);
-
-const SkillsScreen = defineAsyncComponent(
-  () => import("@/components/screens/SkillsScreen.vue"),
-);
+const ProjectsScreen = defineAsyncComponent({
+  loader: () => import("@/components/screens/ProjectsScreen.vue"),
+  suspensible: true,
+});
 
 export default defineComponent({
   name: "MainView",
