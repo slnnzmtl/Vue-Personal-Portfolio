@@ -1,6 +1,6 @@
 <template>
   <div
-    class="projects-view max-w-[2000px] w-full mx-auto flex justify-center px-3"
+    class="projects-view max-w-[2000px] w-full mx-auto flex justify-center px-6"
   >
     <div class="flex flex-wrap lg:flex-nowrap gap-4">
       <ScrollableContainer
@@ -102,6 +102,7 @@ export default defineComponent({
       }
 
       if (current) {
+        console.log({ current });
         setTimeout(() => {
           scrollToTop();
         }, 500);

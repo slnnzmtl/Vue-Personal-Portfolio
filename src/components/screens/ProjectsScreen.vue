@@ -56,7 +56,7 @@ export default defineComponent({
     <div v-if="isLoading" class="loading">Loading projects...</div>
     <div v-else-if="error" class="error">{{ error }}</div>
     <template v-else>
-      <div class="px-8">
+      <div class="px-6">
         <h2 class="mb-8">Projects</h2>
 
         <p class="text-lg sm:text-xl mb-8 text-justify">

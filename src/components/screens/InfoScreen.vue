@@ -1,5 +1,5 @@
 <template>
-  <div class="info-screen flex flex-col items-start gap-8 px-8 py-16 ">
+  <div class="info-screen flex flex-col items-start gap-8 px-6 py-16">
     <div class="text-left">
       <!-- <p class="text-lg sm:text-xl mb-4 text-justify">
           Full-Stack Developer with over 5 years of experience specializing in

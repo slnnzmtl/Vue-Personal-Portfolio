@@ -1,5 +1,10 @@
 <template>
-  <transition-group :name="transitionName" tag="div" :class="layoutClass">
+  <transition-group
+    ref="listRef"
+    :name="transitionName"
+    tag="div"
+    :class="layoutClass"
+  >
     <template v-if="!isLoading">
       <ProjectCard
         v-for="project in displayedProjects"
@@ -28,7 +33,14 @@
 </template>
 
 <script lang="ts">
-import { ref, computed, defineComponent, watch } from "vue";
+import {
+  ref,
+  computed,
+  defineComponent,
+  watch,
+  onMounted,
+  nextTick,
+} from "vue";
 import { ProjectCard, CardPlaceholder } from "@/components/ProjectCard";
 import { SButton } from "@/components/ui";
 import { MarkupViewer } from "@/components/MarkupViewer";
@@ -74,6 +86,8 @@ export default defineComponent({
     const itemsPerPage = ref(6);
     const currentPage = ref(1);
 
+    const listRef = ref<HTMLElement | null>(null);
+
     const displayedProjects = computed(() => {
       const start = 0;
       return props.projects.slice(
@@ -97,7 +111,7 @@ export default defineComponent({
         case "grid":
           return "layout grid gap-4 grid-cols-1 md:grid-cols-2 lg:grid-cols-3 justify-start w-full max-w-screen-2xl lg:px-8 py-4";
         case "scroll":
-          return "flex gap-4 flex-nowrap mx-8 pt-4";
+          return "flex gap-4 flex-nowrap mx-6 pt-4";
         default:
           return "flex flex-col gap-4 lg:pr-8";
       }
@@ -108,35 +122,37 @@ export default defineComponent({
     });
 
     const scrollToProject = (id: number) => {
-      const container = document.querySelector(`#project-${id}`);
+      if (!id) return;
 
-      if (container) {
-        container.scrollIntoView({
+      setTimeout(() => {
+        const project = document.getElementById(`project-${id}`);
+        if (!project) return;
+
+        project.scrollIntoView({
           behavior: "smooth",
           block: "start",
         });
-      }
+      }, 500);
     };
 
     const isCardActive = (id: number) => {
       return props.activeProject?.id === id;
     };
 
+    onMounted(() => {
+      scrollToProject(props.activeProject?.id);
+    });
+
     watch(
       () => props.activeProject,
       (current, prev) => {
         if (!current) {
-          setTimeout(() => {
-            scrollToProject(prev?.id);
-          }, 500);
+          scrollToProject(prev?.id);
           return;
         }
 
-        setTimeout(() => {
-          scrollToProject(current?.id);
-        }, 500);
+        scrollToProject(current?.id);
       },
-      { immediate: true },
     );
 
     const onCardClicked = (project: Project) => {
@@ -168,6 +184,7 @@ export default defineComponent({
       onCardClicked,
       isCardActive,
       onClose,
+      listRef,
     };
   },
 });

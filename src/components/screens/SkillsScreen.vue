@@ -1,6 +1,6 @@
 <template>
   <div class="skills-container">
-    <div class="px-8">
+    <div class="px-6">
       <h2 class="mb-8">Technology stack</h2>
 
       <p class="text-lg sm:text-xl mb-8 text-justify">
@@ -9,7 +9,7 @@
     </div>
 
     <ScrollableContainer>
-      <div class="flex gap-4 w-full justify-between mx-8 lg:flex-wrap">
+      <div class="flex gap-4 w-full justify-between mx-6 lg:flex-wrap">
         <SkillCard title="Core" class="basis-xs">
           <ul>
             <li>JavaScript</li>
