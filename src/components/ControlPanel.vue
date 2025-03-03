@@ -6,15 +6,17 @@
       @on-filter-change="onFilterChange"
     />
 
-    <ProjectList
-      :projects="projects"
-      :active-project="activeProject"
-      :selected-filters="selectedFilters"
-      :layout="projectListLayout"
-      return-value="id"
-      flex-wrap
-      @selected="onProjectChange"
-    />
+    <div class="pb-6">
+      <ProjectList
+        :projects="projects"
+        :active-project="activeProject"
+        :selected-filters="selectedFilters"
+        :layout="projectListLayout"
+        return-value="id"
+        flex-wrap
+        @selected="onProjectChange"
+      />
+    </div>
   </div>
 </template>
 

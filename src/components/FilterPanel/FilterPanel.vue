@@ -1,5 +1,9 @@
 <template>
-  <div class="filter-panel">
+  <ScrollableContainer
+    hide-scrollbar
+    direction="flex-row"
+    :class="filterPanelClass"
+  >
     <div class="filter-panel__tags">
       <span
         v-for="tech in tags"
@@ -11,13 +15,18 @@
         {{ tech }}
       </span>
     </div>
-  </div>
+  </ScrollableContainer>
 </template>
 
 <script lang="ts">
-import { defineComponent } from "vue";
+import { computed, defineComponent } from "vue";
+import { ScrollableContainer } from "@/components";
 
 export default defineComponent({
+  name: "FilterPanel",
+  components: {
+    ScrollableContainer,
+  },
   props: {
     tags: {
       type: Array<string>,
@@ -26,6 +35,10 @@ export default defineComponent({
     selectedFilters: {
       type: Array<string>,
       required: true,
+    },
+    wrap: {
+      type: Boolean,
+      default: true,
     },
   },
   emits: ["onFilterChange"],
@@ -42,10 +55,15 @@ export default defineComponent({
       }
     };
 
+    const filterPanelClass = computed(() => {
+      return ["filter-panel", props.wrap ? "wrap" : "nowrap"];
+    });
+
     return {
       props,
       emit,
       toggleFilter,
+      filterPanelClass,
     };
   },
   methods: {
@@ -58,11 +76,22 @@ export default defineComponent({
 
 <style scoped lang="scss">
 .filter-panel {
-  margin-bottom: 2rem;
+  max-width: 100vw;
 
   &__title {
     font-size: 1.5rem;
     margin-bottom: 1rem;
+  }
+
+  &.nowrap {
+    .filter-panel__tags {
+      flex-wrap: nowrap;
+      margin: 0 1.5rem;
+    }
+
+    .filter-panel__tag {
+      flex: 1 0 auto;
+    }
   }
 
   &__tags {
@@ -81,6 +110,10 @@ export default defineComponent({
     transition:
       background-color 0.3s,
       transform 0.3s;
+
+    @media (max-width: 768px) {
+      font-size: 0.875rem;
+    }
 
     &:hover {
       transform: translateY(-2px);

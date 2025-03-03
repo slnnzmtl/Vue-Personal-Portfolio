@@ -1,10 +1,8 @@
 <template>
   <div
-    class="projects-view max-w-screen-xl lg:max-w-screen-2xl w-full mx-auto flex justify-center mx-6"
+    class="projects-view max-w-[2000px] w-full mx-auto flex justify-center px-3"
   >
-    <div
-      class="max-w-[95%] lg:max-w-[90%] flex flex-wrap lg:flex-nowrap gap-12"
-    >
+    <div class="flex flex-wrap lg:flex-nowrap gap-12">
       <div class="text-left scrollable-container w-full lg:max-w-[40%]">
         <p class="text-2xl sm:text-4xl font-bold mb-8">Projects</p>
         <p class="text-lg xl:text-xl mb-8">
@@ -32,7 +30,11 @@
           id="markup-viewer"
           class="col-span-2 hidden lg:block"
           :active-project="activeProject"
-        />
+        >
+          <template #prepend>
+            <h1>{{ activeProject?.title }}</h1>
+          </template>
+        </MarkupViewer>
       </div>
     </div>
   </div>
@@ -147,7 +149,7 @@ export default defineComponent({
 
   @media (max-width: 1024px) {
     padding-right: 0;
-    padding-top: 6rem;
+    padding-top: 8rem;
     padding-bottom: 0;
   }
 

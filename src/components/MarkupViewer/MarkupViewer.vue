@@ -3,6 +3,7 @@
     <transition name="fade" mode="out-in">
       <div v-if="project">
         <div class="markup-content__render rounded-lg">
+          <slot name="prepend" />
           <div v-html="renderedContent" />
         </div>
 

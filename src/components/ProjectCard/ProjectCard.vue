@@ -29,10 +29,12 @@
         <slot :active="active" />
       </div>
 
-      <a v-if="!active" class="project-card__link" @click="onCardClick">
-        Read more
-        <span class="project-card__link-arrow">→</span>
-      </a>
+      <div class="flex h-full items-end">
+        <a v-if="!active" class="project-card__link" @click="onCardClick">
+          Read more
+          <span class="project-card__link-arrow">→</span>
+        </a>
+      </div>
     </div>
   </GlassMaterial>
 
@@ -157,7 +159,7 @@ export default defineComponent({
 
   &.scrollable {
     width: 300px;
-    height: 100%;
+    height: max-content;
   }
 
   &:hover {
@@ -189,7 +191,7 @@ export default defineComponent({
 
   &__image {
     position: relative;
-    height: 300px;
+    height: 250px;
     width: auto;
     overflow: hidden;
     z-index: 1;
@@ -213,7 +215,6 @@ export default defineComponent({
   &__content {
     display: flex;
     flex-direction: column;
-    justify-content: space-between;
     position: relative;
     z-index: 1;
     flex-grow: 1;
@@ -229,12 +230,6 @@ export default defineComponent({
   @media (min-width: 768px) {
     .project-card__title {
       font-size: 1.5rem !important;
-    }
-
-    &.active {
-      .project-card__title {
-        font-size: 2.4rem !important;
-      }
     }
   }
 

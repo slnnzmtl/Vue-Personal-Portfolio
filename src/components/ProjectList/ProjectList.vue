@@ -13,9 +13,7 @@
         @click="onCardClicked(project)"
         @close="onClose"
       >
-        <template #default="{ active }">
-          <MarkupViewer v-if="active" :active-project="project" />
-        </template>
+        <MarkupViewer :active-project="project" />
       </ProjectCard>
     </template>
 
@@ -109,12 +107,8 @@ export default defineComponent({
       return props.layout === "grid" ? "fade" : "fade";
     });
 
-    const shouldScroll = computed(() => props.layout === "list");
-
     const scrollToProject = (id: number) => {
       const container = document.querySelector(`#project-${id}`);
-
-      console.log({ container });
 
       if (container) {
         container.scrollIntoView({
@@ -131,10 +125,6 @@ export default defineComponent({
     watch(
       () => props.activeProject,
       (current, prev) => {
-        if (!shouldScroll.value) {
-          return;
-        }
-
         if (!current) {
           setTimeout(() => {
             scrollToProject(prev?.id);

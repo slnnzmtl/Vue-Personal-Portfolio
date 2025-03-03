@@ -1,8 +1,8 @@
 <template>
   <div class="scrollable-wrapper">
     <div
-      class="scrollable-container flex gap-4 overflow-x-auto scroll-smooth"
-      :class="[direction, wrap ? 'flex-wrap' : 'flex-nowrap']"
+      class="flex gap-4 overflow-x-auto scroll-smooth"
+      :class="containerClass"
     >
       <slot />
     </div>
@@ -10,7 +10,7 @@
 </template>
 
 <script lang="ts">
-import { defineComponent } from "vue";
+import { computed, defineComponent } from "vue";
 
 export default defineComponent({
   name: "ScrollableContainer",
@@ -24,6 +24,24 @@ export default defineComponent({
       type: Boolean,
       default: true,
     },
+    hideScrollbar: {
+      type: Boolean,
+      default: false,
+    },
+  },
+  setup(props) {
+    const containerClass = computed(() => {
+      return [
+        "scrollable-container",
+        props.hideScrollbar ? "hide-scrollbar" : "",
+        props.direction,
+        props.wrap ? "flex-wrap" : "flex-nowrap",
+      ];
+    });
+
+    return {
+      containerClass,
+    };
   },
 });
 </script>
@@ -37,5 +55,9 @@ export default defineComponent({
 .scrollable-container {
   @extend %scrollbar-tidy;
   padding-bottom: 1rem;
+
+  &.hide-scrollbar {
+    @extend %scrollbar-hidden;
+  }
 }
 </style>

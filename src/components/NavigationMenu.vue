@@ -42,9 +42,7 @@ export default defineComponent({
 
 <template>
   <nav :class="{ 'menu-open': isMenuOpen }">
-    <GlassMaterial
-      class="nav-content max-w-screen-xl 2xl:max-w-screen-2xl mx-auto"
-    >
+    <GlassMaterial class="nav-content max-w-[2000px] mx-auto">
       <button class="burger-button" @click="toggleMenu">
         <span></span>
         <span></span>
@@ -68,7 +66,7 @@ export default defineComponent({
 
 <style scoped lang="scss">
 nav {
-  padding: 0 1rem;
+  padding: 0 0.5rem;
   position: fixed;
   top: 0;
   right: 0;
