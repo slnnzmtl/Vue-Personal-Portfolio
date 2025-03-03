@@ -1,35 +1,21 @@
-<script lang="ts">
+<script setup lang="ts">
 import AuthorAvatar from "@/components/AuthorAvatar.vue";
-import { defineComponent } from "vue";
 import SocialLinks from "../SocialLinks/SocialLinks.vue";
 import GlassMaterial from "../ui/GlassMaterial.vue";
-
-export default defineComponent({
-  name: "FaceScreen",
-  components: {
-    AuthorAvatar,
-    SocialLinks,
-    GlassMaterial,
-  },
-});
 </script>
 
 <template>
   <div
-    class="face-screen grid grid-cols-1 lg:grid-cols-3 gap-6 sm:gap-18 pt-10 sm:pt-auto items-center xl:min-h-[600px]"
+    class="face-screen items-center p-10 xl:min-h-[600px] mt-[150px] mb-[50px]"
   >
-    <div class="w-full flex justify-center">
-      <AuthorAvatar class="max-w-[300px] md:max-w-[400px]" />
+    <div class="relative w-full flex justify-center">
+      <AuthorAvatar />
     </div>
-    <div
-      class="flex flex-col items-center lg:items-start lg:col-span-2 gap-4 text-left"
-    >
-      <h1 class="text-center text-6xl lg:text-6xl font-bold">
-        Daniel Kazansky
-      </h1>
 
+    <div class="flex flex-col items-center xl:items-start gap-4 text-left">
+      <h1 class="text-center text-6xl font-bold">Daniel Kazansky</h1>
       <p
-        class="face-screen__position text-2xl lg:text-3xl font-semibold text-center lg:text-left"
+        class="text-2xl lg:text-3xl font-semibold text-center lg:text-left text-secondary text-shadow-[0_4px_4px_rgba(0,0,0,0.25)]"
       >
         Web development with focus on user experience
       </p>
@@ -42,28 +28,26 @@ export default defineComponent({
 
 <style lang="scss" scoped>
 .face-screen {
-  margin-top: 150px;
-  margin-bottom: 50px;
-  width: 100%;
+  //  grid grid-cols-1 lg:grid-cols-3 gap-6 sm:gap-18
 
-  &__position {
-    color: var(--text-secondary);
-    // max-width: 700px;
+  display: grid;
+  grid-template-columns: 1fr;
+  grid-template-rows: 1fr;
+  gap: 3rem;
 
-    text-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+  @media (min-width: 1280px) {
+    grid-template-columns: 30% 1fr;
+    grid-template-rows: 1fr;
   }
 
-  @media (max-width: 768px) {
-    flex-direction: column;
-    height: auto;
-
-    &__position {
+  &__position {
+    @media (max-width: 768px) {
       max-width: 100%;
     }
   }
 
   @media (min-width: 2048px) {
-    .face-screen__position {
+    &__position {
       font-size: 2.5rem;
     }
 
@@ -71,10 +55,13 @@ export default defineComponent({
       font-size: 6rem;
     }
 
-    Avatar {
-      max-width: 600px;
-      max-height: 600px;
+    .author-avatar {
+      @apply max-w-[600px] max-h-[600px];
     }
   }
+}
+
+.text-secondary {
+  color: var(--text-secondary);
 }
 </style>

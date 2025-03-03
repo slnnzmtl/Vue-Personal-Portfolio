@@ -34,15 +34,24 @@ export default defineComponent({
   overflow: hidden;
   display: flex;
   flex-shrink: 0;
+  max-width: 400px; /* Adjust as needed */
+  max-height: 400px; /* Adjust as needed */
 }
 
 .male-avatar {
-  min-width: 100%;
+  width: 100%;
+  height: 100%;
   border-radius: 50%;
   box-sizing: border-box;
   overflow: hidden;
   opacity: 0.9;
   z-index: 1;
+
+  img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
 }
 
 @keyframes gradient-rotate {
