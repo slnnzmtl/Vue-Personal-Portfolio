@@ -168,6 +168,10 @@ export default defineComponent({
     }
   }
 
+  &:active {
+    transform: translateY(-10px);
+  }
+
   &.active {
     background: var(--cyan-alpha-10);
     grid-column: span 2;

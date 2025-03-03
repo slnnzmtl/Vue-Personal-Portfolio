@@ -1,7 +1,7 @@
 <template>
   <div class="scrollable-wrapper">
     <div
-      class="scrollable-container flex gap-4 overflow-x-auto overflow-y-hidden scroll-smooth"
+      class="scrollable-container flex gap-4 overflow-x-auto scroll-smooth"
       :class="[direction, wrap ? 'flex-wrap' : 'flex-nowrap']"
     >
       <slot />
