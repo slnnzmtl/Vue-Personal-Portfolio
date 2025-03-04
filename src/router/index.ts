@@ -32,8 +32,7 @@ const routes: RouteRecordRaw[] = [
   {
     path: "/blog",
     name: "blog",
-    component: () =>
-      import(/* webpackChunkName: "blog" */ "../views/BlogView.vue"),
+    component: () => import("../views/BlogView.vue"),
     meta: {
       title: "Blog",
     },

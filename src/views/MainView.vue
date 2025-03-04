@@ -1,19 +1,26 @@
 <template>
-  <div class="main-view flex flex-col w-full">
-    <FaceScreen class="max-w-screen-2xl w-full mx-auto" />
-    <SkillsScreen class="max-w-screen-2xl w-full mx-auto" />
+  <Suspense>
+    <template #default>
+      <div class="main-view flex flex-col w-full">
+        <FaceScreen class="max-w-screen-2xl w-full mx-auto" />
+        <SkillsScreen class="max-w-screen-2xl w-full mx-auto" />
 
-    <div ref="projectsRef" class="max-w-screen-2xl mx-auto">
-      <Suspense v-if="shouldLoadProjects">
-        <template #default>
-          <ProjectsScreen id="projects-screen" />
-        </template>
-        <template #fallback>
-          <div class="loading-placeholder"></div>
-        </template>
-      </Suspense>
-    </div>
-  </div>
+        <div ref="projectsRef" class="max-w-screen-2xl mx-auto">
+          <Suspense v-if="shouldLoadProjects">
+            <template #default>
+              <ProjectsScreen id="projects-screen" />
+            </template>
+            <template #fallback>
+              <div class="loading-placeholder"></div>
+            </template>
+          </Suspense>
+        </div>
+      </div>
+    </template>
+    <template #fallback>
+      <div class="loading">Loading...</div>
+    </template>
+  </Suspense>
 </template>
 
 <script lang="ts">
