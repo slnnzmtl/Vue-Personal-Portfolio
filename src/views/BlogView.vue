@@ -29,14 +29,14 @@
 
 <script lang="ts">
 import { defineComponent, ref } from "vue";
-import { BlogList } from "@/components";
+// import { BlogList } from "@/components";
 import { Project } from "@/stores/projectTypes";
 import { useBlogStore } from "@/stores";
 
 export default defineComponent({
   name: "BlogView",
   components: {
-    BlogList,
+    // BlogList,
   },
   setup() {
     const { articles } = useBlogStore();
