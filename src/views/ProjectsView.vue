@@ -1,55 +1,46 @@
 <template>
-  <Suspense>
-    <template #default>
-      <div class="projects-view max-w-[2000px] w-full mx-auto flex justify-center px-6">
-        <div class="flex flex-wrap lg:flex-nowrap gap-4">
-          <ScrollableContainer
-            direction="flex-col"
-            :wrap="false"
-            class="text-left w-full lg:max-w-[40%] pt-36"
-            hide-scrollbar
-          >
-            <p class="text-2xl sm:text-4xl font-bold mb-8">Projects</p>
-            <p class="text-lg xl:text-xl mb-8">
-              Here, you'll find projects I've built or contributed to. Use the filters
-              below to explore projects based on the tech stack you're interested in.
-            </p>
+  <div class="projects-view max-w-[2000px] w-full mx-auto flex justify-center px-6">
+    <div class="flex flex-wrap lg:flex-nowrap gap-4">
+      <ScrollableContainer
+        direction="flex-col"
+        :wrap="false"
+        class="text-left w-full lg:max-w-[40%] pt-36"
+        hide-scrollbar
+      >
+        <p class="text-2xl sm:text-4xl font-bold mb-8">Projects</p>
+        <p class="text-lg xl:text-xl mb-8">
+          Here, you'll find projects I've built or contributed to. Use the filters below
+          to explore projects based on the tech stack you're interested in.
+        </p>
 
-            <ControlPanel
-              :tags="tags"
-              :selected-filters="selectedFilters"
-              :projects="filteredProjects"
-              :active-project="activeProject"
-              @on-filter-change="projectFilterChange"
-              @on-project-change="onActiveProjectChange"
-            />
-          </ScrollableContainer>
+        <ControlPanel
+          :tags="tags"
+          :selected-filters="selectedFilters"
+          :projects="filteredProjects"
+          :active-project="activeProject"
+          @on-filter-change="projectFilterChange"
+          @on-project-change="onActiveProjectChange"
+        />
+      </ScrollableContainer>
 
-          <ScrollableContainer
-            v-if="isLgLayout"
-            id="markup-viewer-container"
-            hide-scrollbar
-            class="pt-36"
-          >
-            <MarkupViewer
-              id="markup-viewer"
-              class="col-span-2 hidden lg:block"
-              :active-project="activeProject"
-            >
-              <template #prepend>
-                <h1>{{ activeProject?.title }}</h1>
-              </template>
-            </MarkupViewer>
-          </ScrollableContainer>
-        </div>
-      </div>
-    </template>
-    <template #fallback>
-      <div class="loading-state">
-        <div class="loading-placeholder"></div>
-      </div>
-    </template>
-  </Suspense>
+      <ScrollableContainer
+        v-if="isLgLayout"
+        id="markup-viewer-container"
+        hide-scrollbar
+        class="pt-36"
+      >
+        <MarkupViewer
+          id="markup-viewer"
+          class="col-span-2 hidden lg:block"
+          :active-project="activeProject"
+        >
+          <template #prepend>
+            <h1>{{ activeProject?.title }}</h1>
+          </template>
+        </MarkupViewer>
+      </ScrollableContainer>
+    </div>
+  </div>
 </template>
 
 <script lang="ts">
@@ -171,7 +162,15 @@ export default defineComponent({
 
 <style lang="scss" scoped>
 .projects-view {
-  position: fixed;
-  inset: 0;
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  width: 100%;
+  height: 100vh;
+  overflow-y: auto;
+  z-index: 0;
+  -webkit-overflow-scrolling: touch; /* For better scrolling on iOS */
 }
 </style>

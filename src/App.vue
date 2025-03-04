@@ -31,14 +31,13 @@ export default defineComponent({
   <div>
     <BackgroundWrapper />
     <ModalProvider />
-    <div class="content">
-      <NavigationMenu />
-      <router-view v-slot="{ Component }">
-        <keep-alive>
-          <component :is="Component" />
-        </keep-alive>
-      </router-view>
-    </div>
+    <NavigationMenu />
+
+    <router-view v-slot="{ Component }">
+      <keep-alive>
+        <component :is="Component" />
+      </keep-alive>
+    </router-view>
   </div>
 </template>
 
@@ -46,10 +45,5 @@ export default defineComponent({
 :root {
   color: #fff;
   @extend %scrollbar-tidy;
-}
-
-.content {
-  position: relative;
-  z-index: 1;
 }
 </style>
