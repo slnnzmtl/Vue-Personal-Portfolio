@@ -21,7 +21,7 @@
 </template>
 
 <script lang="ts">
-import { computed, defineComponent, PropType, ref } from "vue";
+import { computed, defineComponent, PropType, ref, watch } from "vue";
 import FilterPanel from "@/components/FilterPanel/FilterPanel.vue";
 import ProjectList from "@/components/ProjectList/ProjectList.vue";
 import { Project } from "@/stores/projectTypes";
@@ -59,6 +59,31 @@ export default defineComponent({
     };
 
     window.addEventListener("resize", updateWindowWidth);
+
+    const scrollToProject = (id: number) => {
+      if (!id) return;
+
+      setTimeout(() => {
+        const project = document.getElementById(`project-${id}`);
+        console.log(project);
+        if (!project) return;
+
+        project.scrollIntoView({
+          behavior: "smooth",
+          block: "start",
+        });
+      }, 100);
+    };
+
+    watch(
+      () => props.activeProject,
+      (current) => {
+        if (!current) return;
+
+        scrollToProject(current?.id);
+      },
+      { immediate: true }
+    );
 
     const projectListLayout = computed(() => {
       return windowWidth.value < 1024 ? "grid" : "list";

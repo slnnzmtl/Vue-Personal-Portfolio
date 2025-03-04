@@ -123,28 +123,12 @@ export default defineComponent({
       }
     };
 
-    const scrollToProject = (id: number) => {
-      if (!id) return;
-
-      setTimeout(() => {
-        const project = document.getElementById(`project-${id}`);
-        if (!project) return;
-
-        project.scrollIntoView({
-          behavior: "smooth",
-          block: "start",
-        });
-      }, 100);
-    };
-
     watch(
       activeProject,
       (current) => {
         if (!current) {
           return;
         }
-
-        scrollToProject(current?.id);
 
         if (isLgLayout.value) {
           scrollToTop();
