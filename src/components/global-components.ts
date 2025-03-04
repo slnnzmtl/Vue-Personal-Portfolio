@@ -18,7 +18,6 @@ export default {
         loadingComponent,
         errorComponent,
         delay: 200,
-        timeout: 10000,
       }),
     );
 
@@ -29,7 +28,6 @@ export default {
         loadingComponent,
         errorComponent,
         delay: 200,
-        timeout: 10000,
       }),
     );
   },

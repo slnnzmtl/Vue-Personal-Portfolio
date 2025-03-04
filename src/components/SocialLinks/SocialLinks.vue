@@ -17,14 +17,12 @@
 
 <script lang="ts">
 import { defineComponent } from "vue";
-import { SButton } from "@/components/ui";
-import {
-  GithubIcon,
-  LinkedinIcon,
-  TelegramIcon,
-  MailIcon,
-} from "@/components/icons";
+import SButton from "@/components/ui/buttons/SButton.vue";
 import type { Component } from "vue";
+import GithubIcon from "@/components/icons/GithubIcon.vue";
+import LinkedinIcon from "@/components/icons/LinkedinIcon.vue";
+import TelegramIcon from "@/components/icons/TelegramIcon.vue";
+import MailIcon from "@/components/icons/MailIcon.vue";
 
 interface SocialLink {
   name: string;

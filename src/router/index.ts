@@ -15,19 +15,20 @@ const routes: RouteRecordRaw[] = [
   {
     path: "/projects",
     name: "projects",
-
-    component: () => import("@/views/ProjectsView.vue"),
+    component: () => import(/* webpackChunkName: "projects" */ "@/views/ProjectsView.vue"),
     meta: {
       title: "Projects",
     },
+    props: true,
   },
   {
     path: "/projects/:projectId",
     name: "projects-id",
-    component: () => import("@/views/ProjectsView.vue"),
+    component: () => import(/* webpackChunkName: "projects" */ "@/views/ProjectsView.vue"),
     meta: {
       title: "Project Details",
     },
+    props: true,
   },
   {
     path: "/blog",

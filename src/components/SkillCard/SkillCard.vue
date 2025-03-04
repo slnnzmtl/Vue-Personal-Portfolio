@@ -1,5 +1,5 @@
 <script lang="ts">
-import { GlassMaterial } from "@/components/ui";
+import GlassMaterial from "@/components/ui/GlassMaterial.vue";
 
 export default {
   name: "SkillCard",

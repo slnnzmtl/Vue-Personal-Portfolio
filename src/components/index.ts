@@ -8,7 +8,6 @@ export { SkillCard } from "./SkillCard";
 export { TagsBar } from "./Tags";
 export { MarkupViewer } from "./MarkupViewer";
 export { ModalProvider } from "./ModalProvider";
-export { BlogList } from "./BlogList";
 export { default as ControlPanel } from "./ControlPanel.vue";
 export { default as SocialLinks } from "./SocialLinks/SocialLinks.vue";
 export * from "./ui/";

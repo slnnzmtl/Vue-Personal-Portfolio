@@ -15,8 +15,8 @@
 
 <script lang="ts">
 import { defineComponent } from "vue";
-import { ImageLoad } from "@/components/ui";
-import { useModalService } from "@/composables";
+import ImageLoad from "@/components/ui/ImageLoad.vue";
+import { useModalService } from "@/composables/useModal";
 import { ModalKey } from "@/modals/types";
 
 export default defineComponent({

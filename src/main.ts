@@ -12,4 +12,6 @@ app.use(globalComponents);
 
 app.use(router);
 app.use(pinia);
+
 app.mount("#app");
+

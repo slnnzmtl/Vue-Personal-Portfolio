@@ -1,7 +1,9 @@
 <script lang="ts">
 import { computed, defineComponent } from "vue";
 import { useRouter } from "vue-router";
-import { FilterPanel, ProjectList, ScrollableContainer } from "@/components";
+import FilterPanel from "@/components/FilterPanel/FilterPanel.vue";
+import ProjectList from "@/components/ProjectList/ProjectList.vue";
+import ScrollableContainer from "@/components/ui/ScrollableContainer.vue";
 import { useProjectsStore } from "@/stores/projectsStore";
 import { storeToRefs } from "pinia";
 import { useWindowSize } from "@/composables/useWindowSize";
@@ -16,8 +18,9 @@ export default defineComponent({
   setup() {
     const router = useRouter();
     const store = useProjectsStore();
-    const { filteredProjects, selectedFilters, isLoading, error, tags } =
-      storeToRefs(store);
+    const { filteredProjects, selectedFilters, isLoading, error, tags } = storeToRefs(
+      store
+    );
     const { width } = useWindowSize();
 
     const projectListLayout = computed(() => {
@@ -62,8 +65,8 @@ export default defineComponent({
         <p class="text-lg sm:text-xl mb-8 text-justify">
           Here, you'll find projects I've built or contributed to.
           <br />
-          Use the filters below to explore projects based on the tech stack
-          you're interested in.
+          Use the filters below to explore projects based on the tech stack you're
+          interested in.
         </p>
 
         <FilterPanel

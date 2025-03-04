@@ -3,9 +3,7 @@ import { defineAsyncComponent, defineComponent } from "vue";
 import SocialLinks from "../SocialLinks/SocialLinks.vue";
 import GlassMaterial from "../ui/GlassMaterial.vue";
 
-const AuthorAvatar = defineAsyncComponent(
-  () => import("@/components/AuthorAvatar.vue"),
-);
+const AuthorAvatar = defineAsyncComponent(() => import("@/components/AuthorAvatar.vue"));
 
 export default defineComponent({
   name: "AuthorFace",
@@ -35,9 +33,8 @@ export default defineComponent({
       </GlassMaterial>
 
       <p class="sm:text-base text-center mt-12 xl:mt-6 xl:text-left">
-        I bring a strong background in building complex, high-performance
-        solutions across e-commerce, online learning, marketing, and sales
-        domains.
+        I bring a strong background in building complex, high-performance solutions across
+        e-commerce, online learning, marketing, and sales domains.
       </p>
     </div>
   </div>

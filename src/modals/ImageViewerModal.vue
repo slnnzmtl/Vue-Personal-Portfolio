@@ -37,8 +37,14 @@
 
 <script lang="ts">
 import { defineComponent, ref } from "vue";
-import { ModalWindow, SButton, GlassMaterial } from "@/components/ui";
-import { PlusIcon, MinusIcon, ResetIcon } from "@/components/icons";
+import SButton from "@/components/ui/buttons/SButton.vue";
+import GlassMaterial from "@/components/ui/GlassMaterial.vue";
+import ModalWindow from "@/components/ui/ModalWindow.vue";
+
+import PlusIcon from "@/components/icons/PlusIcon.vue";
+import MinusIcon from "@/components/icons/MinusIcon.vue";
+import ResetIcon from "@/components/icons/ResetIcon.vue";
+
 import { ModalKey } from "@/modals/types";
 
 interface Position {
@@ -85,10 +91,7 @@ export default defineComponent({
     const handleZoom = (e: WheelEvent) => {
       e.preventDefault();
       const delta = e.deltaY > 0 ? -ZOOM_SPEED : ZOOM_SPEED;
-      const newScale = Math.max(
-        MIN_SCALE,
-        Math.min(MAX_SCALE, scale.value + delta),
-      );
+      const newScale = Math.max(MIN_SCALE, Math.min(MAX_SCALE, scale.value + delta));
 
       if (newScale !== scale.value) {
         const rect = imageRef.value?.getBoundingClientRect();
@@ -97,10 +100,8 @@ export default defineComponent({
           const mouseY = e.clientY - rect.top;
 
           const scaleChange = newScale - scale.value;
-          position.value.x -=
-            (mouseX - position.value.x) * (scaleChange / scale.value);
-          position.value.y -=
-            (mouseY - position.value.y) * (scaleChange / scale.value);
+          position.value.x -= (mouseX - position.value.x) * (scaleChange / scale.value);
+          position.value.y -= (mouseY - position.value.y) * (scaleChange / scale.value);
 
           scale.value = newScale;
         }

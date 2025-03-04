@@ -1,34 +1,29 @@
 <template>
-  <Suspense>
-    <template #default>
-      <div class="main-view flex flex-col w-full">
-        <FaceScreen class="max-w-screen-2xl w-full mx-auto" />
-        <SkillsScreen class="max-w-screen-2xl w-full mx-auto" />
+  <div class="main-view flex flex-col w-full">
+    <FaceScreen class="max-w-screen-2xl w-full mx-auto" />
+    <SkillsScreen class="max-w-screen-2xl w-full mx-auto" />
 
-        <div ref="projectsRef" class="max-w-screen-2xl mx-auto">
-          <Suspense v-if="shouldLoadProjects">
-            <template #default>
-              <ProjectsScreen id="projects-screen" />
-            </template>
-            <template #fallback>
-              <div class="loading-placeholder"></div>
-            </template>
-          </Suspense>
-        </div>
-      </div>
-    </template>
-    <template #fallback>
-      <div class="loading">Loading...</div>
-    </template>
-  </Suspense>
+    <div class="max-w-screen-2xl mx-auto">
+      <ProjectsScreen id="projects-screen" />
+    </div>
+  </div>
 </template>
 
 <script lang="ts">
 import { defineComponent, ref, onMounted, defineAsyncComponent } from "vue";
-import { SkillsScreen, FaceScreen } from "@/components/screens";
+import FaceScreen from "@/components/screens/FaceScreen.vue";
+import { useProjectsStore } from "@/stores/projectsStore";
+import LoadingIndicator from "@/components/ui/LoadingIndicator.vue";
+
+const SkillsScreen = defineAsyncComponent({
+  loader: () => import("@/components/screens/SkillsScreen.vue"),
+  suspensible: true,
+});
 
 const ProjectsScreen = defineAsyncComponent({
   loader: () => import("@/components/screens/ProjectsScreen.vue"),
+  timeout: 3000,
+  delay: 1000,
   suspensible: true,
 });
 
@@ -42,38 +37,25 @@ export default defineComponent({
   },
 
   setup() {
-    const faceRef = ref<HTMLElement | null>(null);
-    const skillsRef = ref<HTMLElement | null>(null);
-    const projectsRef = ref<HTMLElement | null>(null);
+    const loadingIndicator = ref<InstanceType<typeof LoadingIndicator> | null>(null);
 
-    const shouldLoadFace = ref(true); // Load immediately since it's above the fold
-    const shouldLoadSkills = ref(false);
-    const shouldLoadProjects = ref(false);
+    const projectsStore = useProjectsStore();
+
+    const loadProjects = async () => {
+      await projectsStore.fetchProjects();
+      loadingIndicator.value?.stop();
+    };
 
     onMounted(() => {
-      const observerOptions = {
-        root: null,
-        rootMargin: "50px",
-        threshold: 0,
-      };
+      setTimeout(() => {
+        loadProjects();
+      }, 1000);
 
-      const projectsObserver = new IntersectionObserver((entries) => {
-        if (entries[0].isIntersecting) {
-          shouldLoadProjects.value = true;
-          projectsObserver.disconnect();
-        }
-      }, observerOptions);
-
-      if (projectsRef.value) projectsObserver.observe(projectsRef.value);
+      loadingIndicator.value?.start();
     });
 
     return {
-      faceRef,
-      skillsRef,
-      projectsRef,
-      shouldLoadFace,
-      shouldLoadSkills,
-      shouldLoadProjects,
+      loadingIndicator,
     };
   },
 });

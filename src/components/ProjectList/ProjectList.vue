@@ -1,10 +1,5 @@
 <template>
-  <transition-group
-    ref="listRef"
-    :name="transitionName"
-    tag="div"
-    :class="layoutClass"
-  >
+  <transition-group ref="listRef" :name="transitionName" tag="div" :class="layoutClass">
     <template v-if="!isLoading">
       <ProjectCard
         v-for="project in displayedProjects"
@@ -33,11 +28,17 @@
 </template>
 
 <script lang="ts">
-import { ref, computed, defineComponent } from "vue";
+import { ref, computed, defineComponent, defineAsyncComponent } from "vue";
 import { ProjectCard, CardPlaceholder } from "@/components/ProjectCard";
-import { SButton } from "@/components/ui";
-import { MarkupViewer } from "@/components/MarkupViewer";
+import SButton from "@/components/ui/buttons/SButton.vue";
 import { Project } from "@/stores/projectTypes";
+
+const MarkupViewer = defineAsyncComponent({
+  loader: () => import("@/components/MarkupViewer/MarkupViewer.vue"),
+  delay: 1000,
+  timeout: 3000,
+  suspensible: true,
+});
 
 export default defineComponent({
   name: "ProjectList",
@@ -83,10 +84,7 @@ export default defineComponent({
 
     const displayedProjects = computed(() => {
       const start = 0;
-      return props.projects.slice(
-        start,
-        currentPage.value * itemsPerPage.value,
-      );
+      return props.projects.slice(start, currentPage.value * itemsPerPage.value);
     });
 
     const hasMoreProjects = computed(() => {
@@ -163,9 +161,7 @@ export default defineComponent({
   border-radius: 8px;
   backdrop-filter: blur(10px);
   color: var(--text);
-  transition:
-    background-color 0.3s,
-    border-color 0.3s;
+  transition: background-color 0.3s, border-color 0.3s;
 
   &:hover {
     background: rgba(255, 255, 255, 0.2);
@@ -175,9 +171,7 @@ export default defineComponent({
 
 .fade-enter-active,
 .fade-leave-active {
-  transition:
-    opacity 0.5s,
-    transform 0.5s;
+  transition: opacity 0.5s, transform 0.5s;
 }
 
 .fade-enter,

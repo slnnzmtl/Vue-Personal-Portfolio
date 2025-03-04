@@ -25,9 +25,15 @@
 </template>
 
 <script lang="ts">
-import { defineComponent, computed, ref, watch } from "vue";
-import ImageViewer from "./ImageViewer.vue";
+import { defineComponent, computed, ref, watch, defineAsyncComponent } from "vue";
 import { marked } from "marked";
+
+const ImageViewer = defineAsyncComponent({
+  loader: () => import("@/components/MarkupViewer/ImageViewer.vue"),
+  delay: 1000,
+  timeout: 3000,
+  suspensible: true,
+});
 
 export default defineComponent({
   name: "MarkupViewer",
@@ -58,7 +64,7 @@ export default defineComponent({
           project.value = current;
         }, 100);
       },
-      { immediate: true },
+      { immediate: true }
     );
 
     return {

@@ -24,7 +24,7 @@
       rel="noopener noreferrer"
       class="contact-link"
     >
-      <img src="@/assets/icons/whatsapp.svg" alt="WhatsApp" />
+      <!-- <img src="@/assets/icons/whatsapp.svg" alt="WhatsApp" /> -->
     </a>
   </div>
 </template>

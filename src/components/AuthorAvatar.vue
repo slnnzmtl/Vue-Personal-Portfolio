@@ -1,7 +1,7 @@
 <script lang="ts">
 import MaleAvatar from "@/assets/male-avatar.svg";
 import { defineComponent } from "vue";
-import { GlassMaterial } from "@/components/ui";
+import GlassMaterial from "@/components/ui/GlassMaterial.vue";
 
 export default defineComponent({
   name: "AuthorAvatar",
@@ -19,7 +19,7 @@ export default defineComponent({
 <template>
   <GlassMaterial class="avatar-background">
     <div class="male-avatar">
-      <img fetchpriority="high" :src="MaleAvatar" alt="Male Avatar" />
+      <img :src="MaleAvatar" alt="Male Avatar" />
     </div>
   </GlassMaterial>
 </template>

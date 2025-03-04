@@ -1,9 +1,5 @@
 <template>
-  <ScrollableContainer
-    hide-scrollbar
-    direction="flex-row"
-    :class="filterPanelClass"
-  >
+  <ScrollableContainer hide-scrollbar direction="flex-row" :class="filterPanelClass">
     <div class="filter-panel__tags">
       <span
         v-for="tech in tags"
@@ -20,7 +16,7 @@
 
 <script lang="ts">
 import { computed, defineComponent } from "vue";
-import { ScrollableContainer } from "@/components";
+import ScrollableContainer from "@/components/ui/ScrollableContainer.vue";
 
 export default defineComponent({
   name: "FilterPanel",
@@ -107,9 +103,7 @@ export default defineComponent({
     margin-right: 0.5rem;
     margin-bottom: 0.5rem;
     cursor: pointer;
-    transition:
-      background-color 0.3s,
-      transform 0.3s;
+    transition: background-color 0.3s, transform 0.3s;
 
     @media (max-width: 768px) {
       font-size: 0.875rem;

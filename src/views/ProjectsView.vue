@@ -1,60 +1,85 @@
 <template>
-  <div
-    class="projects-view max-w-[2000px] w-full mx-auto flex justify-center px-6"
-  >
-    <div class="flex flex-wrap lg:flex-nowrap gap-4">
-      <ScrollableContainer
-        direction="flex-col"
-        :wrap="false"
-        class="text-left w-full lg:max-w-[40%] pt-36"
-        hide-scrollbar
-      >
-        <p class="text-2xl sm:text-4xl font-bold mb-8">Projects</p>
-        <p class="text-lg xl:text-xl mb-8">
-          Here, you'll find projects I've built or contributed to. Use the
-          filters below to explore projects based on the tech stack you're
-          interested in.
-        </p>
+  <Suspense>
+    <template #default>
+      <div class="projects-view max-w-[2000px] w-full mx-auto flex justify-center px-6">
+        <div class="flex flex-wrap lg:flex-nowrap gap-4">
+          <ScrollableContainer
+            direction="flex-col"
+            :wrap="false"
+            class="text-left w-full lg:max-w-[40%] pt-36"
+            hide-scrollbar
+          >
+            <p class="text-2xl sm:text-4xl font-bold mb-8">Projects</p>
+            <p class="text-lg xl:text-xl mb-8">
+              Here, you'll find projects I've built or contributed to. Use the filters
+              below to explore projects based on the tech stack you're interested in.
+            </p>
 
-        <ControlPanel
-          :tags="tags"
-          :selected-filters="selectedFilters"
-          :projects="filteredProjects"
-          :active-project="activeProject"
-          @on-filter-change="projectFilterChange"
-          @on-project-change="onActiveProjectChange"
-        />
-      </ScrollableContainer>
+            <ControlPanel
+              :tags="tags"
+              :selected-filters="selectedFilters"
+              :projects="filteredProjects"
+              :active-project="activeProject"
+              @on-filter-change="projectFilterChange"
+              @on-project-change="onActiveProjectChange"
+            />
+          </ScrollableContainer>
 
-      <ScrollableContainer
-        v-if="isLgLayout"
-        id="markup-viewer-container"
-        hide-scrollbar
-        class="pt-36"
-      >
-        <MarkupViewer
-          id="markup-viewer"
-          class="col-span-2 hidden lg:block"
-          :active-project="activeProject"
-        >
-          <template #prepend>
-            <h1>{{ activeProject?.title }}</h1>
-          </template>
-        </MarkupViewer>
-      </ScrollableContainer>
-    </div>
-  </div>
+          <ScrollableContainer
+            v-if="isLgLayout"
+            id="markup-viewer-container"
+            hide-scrollbar
+            class="pt-36"
+          >
+            <MarkupViewer
+              id="markup-viewer"
+              class="col-span-2 hidden lg:block"
+              :active-project="activeProject"
+            >
+              <template #prepend>
+                <h1>{{ activeProject?.title }}</h1>
+              </template>
+            </MarkupViewer>
+          </ScrollableContainer>
+        </div>
+      </div>
+    </template>
+    <template #fallback>
+      <div class="loading-state">
+        <div class="loading-placeholder"></div>
+      </div>
+    </template>
+  </Suspense>
 </template>
 
 <script lang="ts">
-import { defineComponent, computed, watch, onBeforeUnmount } from "vue";
+import {
+  defineComponent,
+  computed,
+  watch,
+  onBeforeUnmount,
+  defineAsyncComponent,
+  onMounted,
+} from "vue";
 import { useProjectsStore } from "@/stores/projectsStore";
-import { MarkupViewer, ControlPanel, ScrollableContainer } from "@/components";
+import ScrollableContainer from "@/components/ui/ScrollableContainer.vue";
 import { Project } from "@/stores/projectTypes";
 import { useRoute } from "vue-router";
 import router from "@/router";
 import { storeToRefs } from "pinia";
 import { useWindowSize } from "@/composables/useWindowSize";
+
+const MarkupViewer = defineAsyncComponent({
+  loader: () => import("@/components/MarkupViewer/MarkupViewer.vue"),
+  delay: 1000,
+  timeout: 3000,
+  suspensible: true,
+});
+
+const ControlPanel = defineAsyncComponent({
+  loader: () => import("@/components/ControlPanel.vue"),
+  suspensible: true,
+});
 
 export default defineComponent({
   name: "ProjectsView",
@@ -65,32 +90,29 @@ export default defineComponent({
   },
   setup() {
     const projectsStore = useProjectsStore();
-    const { selectedFilters, sortedProjects, tags } =
-      storeToRefs(projectsStore);
+    const { selectedFilters, sortedProjects, tags } = storeToRefs(projectsStore);
     const route = useRoute();
     const { width } = useWindowSize();
 
     const isLgLayout = computed(() => width.value > 1024);
 
-    const activeProjectId = computed(
-      () => route.params.projectId as string | undefined,
-    );
+    const activeProjectId = computed(() => route.params.projectId as string | undefined);
 
     const activeProject = computed<Project | null>(() => {
       if (!activeProjectId.value) {
         return null;
       }
       return (
-        sortedProjects.value.find(
-          (p) => p.id === Number(activeProjectId.value),
-        ) || null
+        sortedProjects.value.find((p) => p.id === Number(activeProjectId.value)) || null
       );
     });
 
+    onMounted(() => {
+      projectsStore.fetchProjects();
+    });
+
     const scrollToTop = () => {
-      const markupViewerContainer = document.getElementById(
-        "markup-viewer-container",
-      );
+      const markupViewerContainer = document.getElementById("markup-viewer-container");
 
       if (markupViewerContainer) {
         setTimeout(() => {
@@ -128,7 +150,7 @@ export default defineComponent({
           scrollToTop();
         }
       },
-      { immediate: true },
+      { immediate: true }
     );
 
     const filteredProjects = computed(() => projectsStore.filteredProjects);

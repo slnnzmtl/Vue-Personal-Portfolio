@@ -74,8 +74,8 @@
 <script lang="ts">
 import { defineComponent, computed, ref } from "vue";
 import type { Project } from "@/stores/projectTypes";
-import { GlassMaterial } from "@/components/ui";
-import { TagsBar } from "@/components/Tags";
+import GlassMaterial from "@/components/ui/GlassMaterial.vue";
+import TagsBar from "@/components/Tags/TagsBar.vue";
 
 export default defineComponent({
   name: "ProjectCard",
@@ -196,9 +196,7 @@ export default defineComponent({
     width: auto;
     overflow: hidden;
     z-index: 1;
-    transition:
-      height 0.5s ease,
-      width 1s ease;
+    transition: height 0.5s ease, width 1s ease;
 
     img {
       height: 100%;
@@ -287,10 +285,7 @@ export default defineComponent({
       max-height: 200px;
       overflow: visible;
       opacity: 1;
-      transition:
-        max-height 0.3s ease,
-        opacity 0.3s ease,
-        padding 0.3s ease;
+      transition: max-height 0.3s ease, opacity 0.3s ease, padding 0.3s ease;
     }
   }
 }

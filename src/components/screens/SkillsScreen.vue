@@ -69,8 +69,8 @@
 </template>
 
 <script lang="ts">
-import { SkillCard, ScrollableContainer } from "@/components";
-
+import SkillCard from "@/components/SkillCard/SkillCard.vue";
+import ScrollableContainer from "@/components/ui/ScrollableContainer.vue";
 export default {
   name: "SkillsScreen",
   components: {

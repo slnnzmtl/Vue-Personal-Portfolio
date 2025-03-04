@@ -1,9 +1,18 @@
 <script lang="ts">
-import { defineComponent, onMounted } from "vue";
-import { BackgroundWrapper, NavigationMenu, ModalProvider } from "@/components";
+import { defineAsyncComponent, defineComponent } from "vue";
 import { provideModalService } from "@/composables/useModal";
-import { LoadingIndicator } from "@/components/ui";
-import { useProjectsStore } from "@/stores/projectsStore";
+
+const BackgroundWrapper = defineAsyncComponent({
+  loader: () => import("@/components/BackgroundWrapper.vue"),
+});
+
+const ModalProvider = defineAsyncComponent({
+  loader: () => import("@/components/ModalProvider/ModalProvider.vue"),
+});
+
+const NavigationMenu = defineAsyncComponent({
+  loader: () => import("@/components/NavigationMenu.vue"),
+});
 
 export default defineComponent({
   name: "App",
@@ -11,29 +20,25 @@ export default defineComponent({
     BackgroundWrapper,
     NavigationMenu,
     ModalProvider,
-    LoadingIndicator,
   },
   setup() {
     provideModalService();
-    const projectsStore = useProjectsStore();
-
-    onMounted(() => {
-      projectsStore.fetchProjects();
-    });
   },
 });
 </script>
 
 <template>
   <div>
+    <BackgroundWrapper />
     <ModalProvider />
-    <BackgroundWrapper>
-      <LoadingIndicator ref="loadingIndicator" />
+    <div class="content">
       <NavigationMenu />
       <router-view v-slot="{ Component }">
-        <component :is="Component" />
+        <keep-alive>
+          <component :is="Component" />
+        </keep-alive>
       </router-view>
-    </BackgroundWrapper>
+    </div>
   </div>
 </template>
 
@@ -41,5 +46,10 @@ export default defineComponent({
 :root {
   color: #fff;
   @extend %scrollbar-tidy;
+}
+
+.content {
+  position: relative;
+  z-index: 1;
 }
 </style>

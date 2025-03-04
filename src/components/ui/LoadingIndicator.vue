@@ -1,52 +1,56 @@
 <template>
   <Transition name="fade">
     <div v-if="isLoading" class="loading-indicator">
-      <div class="loading-bar"></div>
+      <div class="loading-circle"></div>
     </div>
   </Transition>
 </template>
 
-<script setup lang="ts">
-import { ref } from "vue";
+<script lang="ts">
+import { defineComponent } from "vue";
 
-const isLoading = ref(false);
-
-defineExpose({
-  start: () => (isLoading.value = true),
-  stop: () => (isLoading.value = false),
-  isLoading: isLoading,
+export default defineComponent({
+  name: "LoadingIndicator",
+  data() {
+    return {
+      isLoading: false,
+    };
+  },
+  methods: {
+    start() {
+      this.isLoading = true;
+    },
+    stop() {
+      this.isLoading = false;
+    },
+  },
 });
 </script>
 
 <style scoped>
 .loading-indicator {
   position: fixed;
-  top: 0;
-  left: 0;
-  right: 0;
-  height: 3px;
-  overflow: hidden;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
   z-index: 9999;
 }
 
-.loading-bar {
-  width: 100%;
-  height: 100%;
-  background: linear-gradient(to right, #0800ff, #00eeff);
-  animation: loading 1.5s infinite ease-in-out;
-  transform-origin: 0% 50%;
+.loading-circle {
+  width: 50px;
+  height: 50px;
+  border: 5px solid #00eeff;
+  border-top: 5px solid #0800ff;
+  border-radius: 50%;
+  animation: spin 1s linear infinite;
 }
 
-@keyframes loading {
+@keyframes spin {
   0% {
-    transform: scaleX(0);
-  }
-  50% {
-    transform: scaleX(1);
+    transform: rotate(0deg);
   }
   100% {
-    transform: scaleX(0);
-    transform-origin: 100% 50%;
+    transform: rotate(360deg);
   }
 }
 

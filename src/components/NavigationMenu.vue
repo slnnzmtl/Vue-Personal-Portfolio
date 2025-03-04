@@ -1,8 +1,15 @@
 <script lang="ts">
-import { HireMeButton, GlassMaterial } from "@/components/ui";
-import { useModalService } from "@/composables";
+import GlassMaterial from "@/components/ui/GlassMaterial.vue";
+import { useModalService } from "@/composables/useModal";
 import { ModalKey } from "@/modals/types";
-import { defineComponent, ref } from "vue";
+import { defineComponent, ref, defineAsyncComponent } from "vue";
+
+const HireMeButton = defineAsyncComponent({
+  loader: () => import("@/components/ui/buttons/HireMeButton.vue"),
+  delay: 1000,
+  timeout: 3000,
+  suspensible: true,
+});
 
 export default defineComponent({
   name: "NavigationMenu",
@@ -51,9 +58,7 @@ export default defineComponent({
 
       <div class="nav-links pl-4">
         <router-link to="/" @click="isMenuOpen = false"> Main </router-link>
-        <router-link to="/projects" @click="isMenuOpen = false">
-          Projects
-        </router-link>
+        <router-link to="/projects" @click="isMenuOpen = false"> Projects </router-link>
         <!-- <router-link to="/blog" @click="isMenuOpen = false">Blog</router-link> -->
       </div>
 

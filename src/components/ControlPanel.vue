@@ -22,7 +22,8 @@
 
 <script lang="ts">
 import { computed, defineComponent, PropType, ref } from "vue";
-import { FilterPanel, ProjectList } from "@/components";
+import FilterPanel from "@/components/FilterPanel/FilterPanel.vue";
+import ProjectList from "@/components/ProjectList/ProjectList.vue";
 import { Project } from "@/stores/projectTypes";
 
 export default defineComponent({
