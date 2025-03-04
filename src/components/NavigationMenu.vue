@@ -49,16 +49,18 @@ export default defineComponent({
 
 <template>
   <nav :class="{ 'menu-open': isMenuOpen }">
-    <GlassMaterial class="nav-content max-w-[2000px] mx-auto">
-      <button class="burger-button" @click="toggleMenu">
+    <GlassMaterial class="nav-content max-w-[2000px] mx-auto" @click="toggleMenu">
+      <button class="burger-button" @click.stop="toggleMenu">
         <span></span>
         <span></span>
         <span></span>
       </button>
 
       <div class="nav-links pl-4">
-        <router-link to="/" @click="isMenuOpen = false"> Main </router-link>
-        <router-link to="/projects" @click="isMenuOpen = false"> Projects </router-link>
+        <router-link to="/" @click.stop="isMenuOpen = false"> Main </router-link>
+        <router-link to="/projects" @click.stop="isMenuOpen = false">
+          Projects
+        </router-link>
         <!-- <router-link to="/blog" @click="isMenuOpen = false">Blog</router-link> -->
       </div>
 
@@ -87,7 +89,7 @@ nav {
     align-items: center;
     justify-content: space-between;
     width: 100%;
-    height: auto;
+    height: 60px;
     min-height: 60px;
     position: relative;
     transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
@@ -167,6 +169,28 @@ nav {
 
     &.menu-open {
       height: 100vh;
+      padding-bottom: 2rem;
+
+      .nav-content {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        height: 100%;
+      }
+
+      .nav-links {
+        padding: 0;
+      }
+
+      .hire-button {
+        position: relative;
+        display: flex;
+        justify-content: center;
+        width: 100%;
+        margin: 0;
+        inset: 0;
+        margin-top: 1rem;
+      }
 
       .nav-links {
         display: flex;
