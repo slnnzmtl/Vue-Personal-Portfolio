@@ -1,9 +1,8 @@
 <script lang="ts">
-import { defineAsyncComponent, defineComponent } from "vue";
+import { defineComponent } from "vue";
 import SocialLinks from "../SocialLinks/SocialLinks.vue";
 import GlassMaterial from "../ui/GlassMaterial.vue";
-
-const AuthorAvatar = defineAsyncComponent(() => import("@/components/AuthorAvatar.vue"));
+import AuthorAvatar from "../AuthorAvatar.vue";
 
 export default defineComponent({
   name: "AuthorFace",
