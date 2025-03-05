@@ -1,5 +1,5 @@
 <template>
-  <div class="main-view flex flex-col w-full">
+  <div class="main-view flex flex-col w-full z-1">
     <FaceScreen class="max-w-screen-2xl w-full mx-auto" />
     <WorkflowScreen class="max-w-screen-2xl w-full mx-auto" />
     <SkillsScreen class="max-w-screen-2xl w-full mx-auto" />

@@ -1,8 +1,9 @@
 <script lang="ts">
 import GlassMaterial from "@/components/ui/GlassMaterial.vue";
 import { useModalService } from "@/composables/useModal";
+import { useNavigation } from "@/composables/useNavigation";
 import { ModalKey } from "@/modals/types";
-import { defineComponent, ref, defineAsyncComponent } from "vue";
+import { defineComponent, defineAsyncComponent, computed } from "vue";
 
 const HireMeButton = defineAsyncComponent({
   loader: () => import("@/components/ui/buttons/HireMeButton.vue"),
@@ -19,27 +20,40 @@ export default defineComponent({
   },
   setup() {
     const { openModal } = useModalService();
-    const isMenuOpen = ref(false);
+    const {
+      isMenuOpen,
+      isNavVisible,
+      isMobileView,
+      toggleMenu,
+      closeMenu,
+      showMenu,
+    } = useNavigation();
 
-    const toggleMenu = () => {
-      isMenuOpen.value = !isMenuOpen.value;
-    };
+    const menuClasses = computed(() => ({
+      "menu-open": isMenuOpen.value,
+      "nav-hidden": !isNavVisible.value,
+      "mobile-view": isMobileView.value,
+    }));
 
     const smoothScroll = (event: MouseEvent, targetId: string) => {
       event.preventDefault();
       const targetElement = document.getElementById(targetId);
       if (targetElement) {
         targetElement.scrollIntoView({ behavior: "smooth" });
+        closeMenu();
       }
     };
 
     const onModalOpen = async () => {
       await openModal(ModalKey.HireForm);
+      showMenu(true);
     };
 
     return {
-      isMenuOpen,
+      menuClasses,
+      isMobileView,
       toggleMenu,
+      closeMenu,
       onModalOpen,
       smoothScroll,
     };
@@ -48,8 +62,9 @@ export default defineComponent({
 </script>
 
 <template>
-  <nav :class="{ 'menu-open': isMenuOpen }">
-    <GlassMaterial class="nav-content max-w-[2000px] mx-auto" @click="toggleMenu">
+  <nav :class="menuClasses">
+    <GlassMaterial class="nav-content max-w-[2000px] mx-auto">
+      <!-- Burger button only for mobile -->
       <button class="burger-button" @click.stop="toggleMenu">
         <span></span>
         <span></span>
@@ -57,11 +72,9 @@ export default defineComponent({
       </button>
 
       <div class="nav-links pl-4">
-        <router-link to="/" @click.stop="isMenuOpen = false"> Main </router-link>
-        <router-link to="/projects" @click.stop="isMenuOpen = false">
-          Projects
-        </router-link>
-        <!-- <router-link to="/blog" @click="isMenuOpen = false">Blog</router-link> -->
+        <router-link to="/" @click.stop="closeMenu"> Main </router-link>
+        <router-link to="/projects" @click.stop="closeMenu"> Projects </router-link>
+        <!-- <router-link to="/blog" @click="closeMenu">Blog</router-link> -->
       </div>
 
       <div class="hire-button">
@@ -79,10 +92,89 @@ nav {
   right: 0;
   z-index: 100;
   width: 100%;
-  transition: height 0.3s ease;
+  transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1), height 0.3s ease;
   height: 60px;
   overflow: hidden;
   margin-top: 1rem;
+
+  &.nav-hidden {
+    transform: translateY(-100%);
+  }
+
+  // Mobile-specific styles
+  &.mobile-view {
+    .burger-button {
+      display: flex;
+    }
+
+    .nav-content {
+      align-items: flex-start;
+      padding: 1rem 1rem;
+    }
+
+    .nav-links {
+      display: none;
+      width: 100%;
+      flex-direction: column;
+      gap: 1.5rem;
+      margin-top: 1rem;
+      margin-bottom: 1rem;
+      align-items: center;
+    }
+
+    .hire-button {
+      position: absolute;
+      top: 10px;
+      right: 18px;
+    }
+
+    // Mobile menu open state
+    &.menu-open {
+      height: 100vh;
+      padding-bottom: 2rem;
+
+      .nav-content {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        height: 90%;
+      }
+
+      .nav-links {
+        padding: 0;
+        display: flex;
+      }
+
+      .hire-button {
+        position: relative;
+        display: flex;
+        justify-content: center;
+        width: 100%;
+        margin: 0;
+        inset: 0;
+        margin-top: 1rem;
+      }
+    }
+  }
+
+  // Desktop and mobile common styles for menu open
+  &.menu-open {
+    transform: translateY(0); // Ensure menu is visible when open
+
+    .burger-button {
+      span {
+        &:first-child {
+          transform: translateY(9px) rotate(45deg);
+        }
+        &:nth-child(2) {
+          opacity: 0;
+        }
+        &:last-child {
+          transform: translateY(-9px) rotate(-45deg);
+        }
+      }
+    }
+  }
 
   .nav-content {
     display: flex;
@@ -102,7 +194,7 @@ nav {
     top: 20px;
     left: 20px;
 
-    display: none;
+    display: none; // Hidden by default (desktop)
     flex-direction: column;
     justify-content: space-between;
     width: 24px;
@@ -137,77 +229,6 @@ nav {
 
       &.router-link-active {
         color: var(--cyan);
-      }
-    }
-  }
-
-  @media (max-width: 768px) {
-    .burger-button {
-      display: flex;
-    }
-
-    .nav-content {
-      align-items: flex-start;
-      padding: 1rem 1rem;
-    }
-
-    .nav-links {
-      display: none;
-      width: 100%;
-      flex-direction: column;
-      gap: 1.5rem;
-      margin-top: 1rem;
-      margin-bottom: 1rem;
-      align-items: center;
-    }
-
-    .hire-button {
-      position: absolute;
-      top: 10px;
-      right: 18px;
-    }
-
-    &.menu-open {
-      height: 100vh;
-      padding-bottom: 2rem;
-
-      .nav-content {
-        display: flex;
-        flex-direction: column;
-        justify-content: center;
-        height: 100%;
-      }
-
-      .nav-links {
-        padding: 0;
-      }
-
-      .hire-button {
-        position: relative;
-        display: flex;
-        justify-content: center;
-        width: 100%;
-        margin: 0;
-        inset: 0;
-        margin-top: 1rem;
-      }
-
-      .nav-links {
-        display: flex;
-      }
-
-      .burger-button {
-        span {
-          &:first-child {
-            transform: translateY(9px) rotate(45deg);
-          }
-          &:nth-child(2) {
-            opacity: 0;
-          }
-          &:last-child {
-            transform: translateY(-9px) rotate(-45deg);
-          }
-        }
       }
     }
   }

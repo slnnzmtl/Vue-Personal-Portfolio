@@ -62,7 +62,7 @@ export default defineComponent({
       <div class="px-6">
         <h2 class="mb-8">Projects</h2>
 
-        <p class="text-lg sm:text-xl mb-8 text-justify">
+        <p class="text-lg sm:text-xl mb-8 text-justify text-gray-500">
           Here, you'll find projects I've built or contributed to.
           <br />
           Use the filters below to explore projects based on the tech stack you're

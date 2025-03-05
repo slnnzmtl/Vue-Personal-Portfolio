@@ -1,6 +1,7 @@
 <script lang="ts">
-import { defineAsyncComponent, defineComponent } from "vue";
+import { defineAsyncComponent, defineComponent, onMounted } from "vue";
 import { provideModalService } from "@/composables/useModal";
+import { provideNavigationService } from "@/composables/useNavigation";
 
 const BackgroundWrapper = defineAsyncComponent({
   loader: () => import("@/components/BackgroundWrapper.vue"),
@@ -23,6 +24,15 @@ export default defineComponent({
   },
   setup() {
     provideModalService();
+    const navService = provideNavigationService();
+
+    onMounted(() => {
+      window.dispatchEvent(new Event("scroll"));
+    });
+
+    return {
+      navService,
+    };
   },
 });
 </script>

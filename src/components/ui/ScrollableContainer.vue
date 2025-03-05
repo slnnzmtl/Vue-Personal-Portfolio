@@ -1,11 +1,11 @@
 <template>
-  <div :class="containerClass">
+  <div ref="scrollableContainer" :class="containerClass">
     <slot />
   </div>
 </template>
 
 <script lang="ts">
-import { computed, defineComponent } from "vue";
+import { computed, defineComponent, onMounted, ref, watch, onUnmounted } from "vue";
 
 export default defineComponent({
   name: "ScrollableContainer",
@@ -24,7 +24,10 @@ export default defineComponent({
       default: false,
     },
   },
-  setup(props) {
+  emits: ["scroll"],
+  setup(props, { emit }) {
+    const scrollableContainer = ref<HTMLElement | null>(null);
+
     const containerClass = computed(() => {
       return [
         "scrollable-wrapper scroll-smooth",
@@ -34,8 +37,25 @@ export default defineComponent({
       ];
     });
 
+    const handleScroll = (e: Event) => {
+      emit("scroll", e);
+    };
+
+    onMounted(() => {
+      if (scrollableContainer.value) {
+        scrollableContainer.value.addEventListener("scroll", handleScroll);
+      }
+    });
+
+    onUnmounted(() => {
+      if (scrollableContainer.value) {
+        scrollableContainer.value.removeEventListener("scroll", handleScroll);
+      }
+    });
+
     return {
       containerClass,
+      scrollableContainer, // Return the ref so template can bind to it
     };
   },
 });

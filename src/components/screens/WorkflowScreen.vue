@@ -1,14 +1,14 @@
 <template>
-  <div class="workflow-screen py-16">
+  <div class="workflow-screen pt-12 pb-24">
     <h2 class="text-left font-bold mb-10 px-6">My Workflow</h2>
-    <p class="text-lg sm:text-xl mb-8 text-justify px-6">
+    <p class="text-lg sm:text-xl mb-8 text-justify px-6 text-gray-500">
       My structured approach drives project success through deep understanding of business
       needs, precise estimation, exceptional UI design, and delivery that exceeds
       expectations.
     </p>
 
     <ScrollableContainer>
-      <div class="workflow-items flex flex-nowrap gap-4 py-4 px-6">
+      <div class="workflow-items flex flex-nowrap gap-4 pt-4 px-6">
         <GlassMaterial
           v-for="(point, index) in workflowPoints"
           :key="index"
@@ -26,7 +26,7 @@
 </template>
 
 <script lang="ts">
-import { defineComponent, ref, computed } from "vue";
+import { defineComponent, computed } from "vue";
 import UnderstandBusinessIcon from "@/assets/icons/UnderstandBusinessIcon.vue";
 import EstimateProjectIcon from "@/assets/icons/EstimateProjectIcon.vue";
 import ImplementUiIcon from "@/assets/icons/ImplementUiIcon.vue";
@@ -91,14 +91,11 @@ export default defineComponent({
   display: none; /* Chrome, Safari and Opera */
 }
 
-.workflow-items {
-  padding-bottom: 20px;
-}
-
 .workflow-item {
   max-width: 25%;
   width: 100%;
   transition: transform 0.3s ease;
+  background: rgba(0, 247, 255, 0.1);
 }
 
 .workflow-item:hover {

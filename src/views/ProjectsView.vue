@@ -6,6 +6,7 @@
         :wrap="false"
         class="text-left w-full lg:max-w-[40%] pt-36"
         hide-scrollbar
+        @scroll="onScroll"
       >
         <p class="text-2xl sm:text-4xl font-bold mb-8">Projects</p>
         <p class="text-lg xl:text-xl mb-8">
@@ -28,6 +29,7 @@
         id="markup-viewer-container"
         hide-scrollbar
         class="pt-36"
+        @scroll="onScroll"
       >
         <MarkupViewer
           id="markup-viewer"
@@ -59,6 +61,7 @@ import { useRoute } from "vue-router";
 import router from "@/router";
 import { storeToRefs } from "pinia";
 import { useWindowSize } from "@/composables/useWindowSize";
+import { useNavigation } from "@/composables/useNavigation";
 
 const MarkupViewer = defineAsyncComponent({
   loader: () => import("@/components/MarkupViewer/MarkupViewer.vue"),
@@ -84,6 +87,7 @@ export default defineComponent({
     const { selectedFilters, sortedProjects, tags } = storeToRefs(projectsStore);
     const route = useRoute();
     const { width } = useWindowSize();
+    const { handleScroll } = useNavigation();
 
     const isLgLayout = computed(() => width.value > 1024);
 
@@ -112,6 +116,10 @@ export default defineComponent({
           });
         }, 100);
       }
+    };
+
+    const onScroll = (e: Event) => {
+      handleScroll(e);
     };
 
     watch(
@@ -155,6 +163,7 @@ export default defineComponent({
       projectFilterChange,
       onActiveProjectChange,
       tags,
+      onScroll,
     };
   },
 });
