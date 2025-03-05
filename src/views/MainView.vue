@@ -1,6 +1,7 @@
 <template>
   <div class="main-view flex flex-col w-full">
     <FaceScreen class="max-w-screen-2xl w-full mx-auto" />
+    <WorkflowScreen class="max-w-screen-2xl w-full mx-auto" />
     <SkillsScreen class="max-w-screen-2xl w-full mx-auto" />
 
     <div class="max-w-screen-2xl mx-auto">
@@ -12,6 +13,7 @@
 <script lang="ts">
 import { defineComponent, ref, onMounted, defineAsyncComponent } from "vue";
 import FaceScreen from "@/components/screens/FaceScreen.vue";
+import WorkflowScreen from "@/components/screens/WorkflowScreen.vue";
 import { useProjectsStore } from "@/stores/projectsStore";
 import LoadingIndicator from "@/components/ui/LoadingIndicator.vue";
 
@@ -32,6 +34,7 @@ export default defineComponent({
 
   components: {
     FaceScreen,
+    WorkflowScreen,
     SkillsScreen,
     ProjectsScreen,
   },
