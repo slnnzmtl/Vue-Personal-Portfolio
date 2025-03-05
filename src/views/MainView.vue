@@ -1,5 +1,5 @@
 <template>
-  <div class="main-view flex flex-col w-full z-1">
+  <div class="main-view flex flex-col w-full">
     <FaceScreen class="max-w-screen-2xl w-full mx-auto" />
     <WorkflowScreen class="max-w-screen-2xl w-full mx-auto" />
     <SkillsScreen class="max-w-screen-2xl w-full mx-auto" />
@@ -70,6 +70,11 @@ export default defineComponent({
   background: linear-gradient(90deg, #1a1a1a 0%, #2a2a2a 50%, #1a1a1a 100%);
   background-size: 200% 100%;
   animation: loading 1.5s infinite;
+}
+
+.main-view {
+  position: relative;
+  z-index: 1;
 }
 
 @keyframes loading {
