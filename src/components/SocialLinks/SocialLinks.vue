@@ -1,5 +1,6 @@
 <template>
   <div class="social-links flex flex-wrap justify-around gap-4 md:gap-8">
+    <p class="text-md hidden sm:block">Contact me:</p>
     <SButton
       v-for="link in socialLinks"
       :key="link.name"

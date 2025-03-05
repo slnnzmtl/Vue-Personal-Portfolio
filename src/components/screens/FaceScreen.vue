@@ -27,14 +27,15 @@ export default defineComponent({
       >
         Web development with focus on user experience
       </p>
-      <GlassMaterial class="p-4 mx-4 md:mx-0 w-full lg:w-auto">
-        <SocialLinks />
-      </GlassMaterial>
 
-      <p class="sm:text-base text-center text-gray-500 mt-12 xl:mt-6 xl:text-left">
+      <p class="sm:text-base text-center text-gray-500 my-2 xl:text-left">
         I bring a strong background in building complex, high-performance solutions across
         e-commerce, online learning, marketing, and sales domains.
       </p>
+
+      <GlassMaterial class="p-4 mx-4 md:mx-0 mt-2 w-full lg:w-auto">
+        <SocialLinks />
+      </GlassMaterial>
     </div>
   </div>
 </template>

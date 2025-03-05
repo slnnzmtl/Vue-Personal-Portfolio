@@ -11,13 +11,23 @@
 </template>
 
 <script lang="ts">
-import { defineComponent } from "vue";
+import { defineComponent, watch } from "vue";
 import { useModalService } from "@/composables";
 
 export default defineComponent({
   name: "ModalProvider",
   setup() {
     const { activeModals, closeModal } = useModalService();
+
+    const toggleBodyScroll = (hasActiveModals: boolean) => {
+      if (hasActiveModals) {
+        document.body.style.overflow = "hidden";
+      } else {
+        document.body.style.overflow = "";
+      }
+    };
+
+    watch(() => activeModals.length > 0, toggleBodyScroll, { immediate: true });
 
     return {
       activeModals,

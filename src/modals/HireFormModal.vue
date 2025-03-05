@@ -1,53 +1,25 @@
 <script lang="ts">
-import {
-  SButton,
-  InputField,
-  TextareaField,
-  ContactsBar,
-  ModalWindow,
-} from "@/components/ui";
+import SocialLinks from "@/components/SocialLinks/SocialLinks.vue";
+import GlassMaterial from "@/components/ui/GlassMaterial.vue";
+import ModalWindow from "@/components/ui/ModalWindow.vue";
+
 import { defineComponent, ref } from "vue";
 
 export default defineComponent({
   name: "HireFormModal",
   components: {
-    SButton,
-    InputField,
-    TextareaField,
-    ContactsBar,
+    SocialLinks,
+    GlassMaterial,
     ModalWindow,
   },
   emits: ["close"],
   setup(props, { emit }) {
-    const budget = ref("");
-    const projectDescription = ref("");
-    const contactName = ref("");
-    const contactEmail = ref("");
-    const contactPhone = ref("");
-
-    const submitForm = () => {
-      console.log({
-        budget: budget.value,
-        projectDescription: projectDescription.value,
-        contactName: contactName.value,
-        contactEmail: contactEmail.value,
-        contactPhone: contactPhone.value,
-      });
-
-      emit("close", true);
-    };
-
     const closeModal = (result: boolean | null) => {
+      console.log("closeModal", result);
       emit("close", result);
     };
 
     return {
-      budget,
-      projectDescription,
-      contactName,
-      contactEmail,
-      contactPhone,
-      submitForm,
       closeModal,
     };
   },
@@ -56,33 +28,10 @@ export default defineComponent({
 
 <template>
   <ModalWindow name="ModalKey.HireForm" @close="closeModal">
-    <div class="hire-form-modal flex flex-col gap-4 items-center">
-      <h2 class="form-title">Hire Me</h2>
-      <p class="">Please fill a form or contact me directly at</p>
-      <ContactsBar class="mb-4" />
-
-      <form class="form-container w-full" @submit.prevent="submitForm">
-        <InputField v-model="contactName" label="Name" required />
-        <InputField
-          v-model="contactEmail"
-          label="Email"
-          type="email"
-          required
-        />
-        <InputField v-model="contactPhone" label="Phone" type="tel" />
-        <TextareaField
-          v-model="projectDescription"
-          label="Project Description"
-          required
-        />
-
-        <div class="form-actions">
-          <SButton type="secondary" class="cancel-button" @click="closeModal">
-            Cancel
-          </SButton>
-          <SButton type="primary" class="submit-button">Submit</SButton>
-        </div>
-      </form>
+    <div class="hire-form-modal flex flex-col gap-4 items-center justify-center">
+      <GlassMaterial class="p-6">
+        <SocialLinks class="flex-col sm:flex-row gap-6" />
+      </GlassMaterial>
     </div>
   </ModalWindow>
 </template>
@@ -91,6 +40,11 @@ export default defineComponent({
 .hire-form-modal {
   padding: 2rem;
   width: 600px;
+
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
 }
 
 .form-title {

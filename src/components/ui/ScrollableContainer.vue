@@ -5,7 +5,7 @@
 </template>
 
 <script lang="ts">
-import { computed, defineComponent, onMounted, ref, watch, onUnmounted } from "vue";
+import { computed, defineComponent, onMounted, ref, watch } from "vue";
 
 export default defineComponent({
   name: "ScrollableContainer",
@@ -38,24 +38,23 @@ export default defineComponent({
     });
 
     const handleScroll = (e: Event) => {
+      console.log("Scroll event detected", e);
       emit("scroll", e);
     };
 
-    onMounted(() => {
-      if (scrollableContainer.value) {
-        scrollableContainer.value.addEventListener("scroll", handleScroll);
-      }
-    });
-
-    onUnmounted(() => {
-      if (scrollableContainer.value) {
-        scrollableContainer.value.removeEventListener("scroll", handleScroll);
-      }
-    });
+    watch(
+      () => scrollableContainer.value,
+      (container) => {
+        if (container) {
+          console.log("Container", container);
+          container.addEventListener("scroll", handleScroll);
+        }
+      },
+      { immediate: true }
+    );
 
     return {
       containerClass,
-      scrollableContainer, // Return the ref so template can bind to it
     };
   },
 });
