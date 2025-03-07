@@ -1,6 +1,6 @@
 # SSL Certificate Setup for slnnzmtl.xyz
 
-This document outlines how to set up and renew SSL certificates for the slnnzmtl.xyz website using Let's Encrypt and Certbot.
+This document outlines how to set up and renew SSL certificates for the slnnzmtl.xyz website using Let's Encrypt and Certbot in standalone mode.
 
 ## Initial Setup
 
@@ -17,19 +17,18 @@ This document outlines how to set up and renew SSL certificates for the slnnzmtl
 
    This script will:
    - Create necessary directories
-   - Test if the ACME challenge path is accessible
-   - Stop the production container temporarily
+   - Stop any running containers to free up port 80
    - Generate certificates using Certbot in standalone mode
    - Restart the production container
    - Reload Nginx to apply the certificates
 
 3. Alternatively, you can manually generate certificates:
    ```bash
-   # Stop the production container
-   docker compose down prod
+   # Stop any running containers
+   docker compose down
    
    # Generate certificates using standalone mode
-   docker run --rm -p 80:80 -v ./certbot/conf:/etc/letsencrypt -v ./certbot/www:/var/www/certbot certbot/certbot certonly --standalone --email slonanezametil@example.com --agree-tos --no-eff-email --force-renewal -d slnnzmtl.xyz
+   docker run --rm -p 80:80 -v $(pwd)/certbot/conf:/etc/letsencrypt -v $(pwd)/certbot/www:/var/www/certbot certbot/certbot certonly --standalone --email slonanezametil@example.com --agree-tos --no-eff-email --force-renewal -d slnnzmtl.xyz
    
    # Restart the production container
    docker compose up -d prod
@@ -53,7 +52,7 @@ The easiest way to manage certificates is through the `update.sh` script, which 
 This script will:
 - Pull the latest code changes
 - Ensure SSL certificate directories exist
-- Check if certificates need to be generated or renewed
+- Check if certificates need to be generated or renewed using standalone mode
 - Reload Nginx to apply any certificate changes
 
 ### Manual Renewal
@@ -61,11 +60,11 @@ This script will:
 You can manually renew the certificates using the standalone method:
 
 ```bash
-# Stop the production container
-docker compose down prod
+# Stop all containers to free up port 80
+docker compose down
 
 # Renew certificates
-docker run --rm -p 80:80 -v ./certbot/conf:/etc/letsencrypt -v ./certbot/www:/var/www/certbot certbot/certbot renew
+docker run --rm -p 80:80 -v $(pwd)/certbot/conf:/etc/letsencrypt -v $(pwd)/certbot/www:/var/www/certbot certbot/certbot renew --standalone
 
 # Restart the production container
 docker compose up -d prod
@@ -85,7 +84,7 @@ To set up automatic renewal, add a cron job:
 
 2. Add the following line to run the renewal script twice a month:
    ```
-   0 0 1,15 * * /path/to/your/project/bash/update.sh >> /path/to/your/project/update.log 2>&1
+   0 0 1,15 * * cd /path/to/your/project && ./bash/update.sh >> /path/to/your/project/update.log 2>&1
    ```
 
 ## Troubleshooting
@@ -99,24 +98,24 @@ If you encounter issues with certificate generation:
    ./troubleshoot-ssl.sh
    ```
 
-2. Verify that the ACME challenge path is accessible:
-   ```bash
-   curl http://slnnzmtl.xyz/.well-known/acme-challenge/test-file
-   ```
-
-3. Check if your domain resolves to the correct IP:
+2. Check if your domain resolves to the correct IP:
    ```bash
    dig +short slnnzmtl.xyz
    ```
 
-4. Ensure port 80 is open and accessible from the internet for the ACME challenge:
+3. Ensure port 80 is open and accessible from the internet for the Let's Encrypt verification:
    ```bash
    nc -zv slnnzmtl.xyz 80
    ```
 
-5. Check the Certbot logs:
+4. Check if port 443 is open for HTTPS:
    ```bash
-   docker compose logs certbot
+   nc -zv slnnzmtl.xyz 443
+   ```
+
+5. Verify that no other services are using port 80:
+   ```bash
+   sudo lsof -i :80
    ```
 
 ### SSL Configuration Issues
@@ -136,6 +135,11 @@ If the site loads but SSL is not working correctly:
 3. Test the Nginx configuration:
    ```bash
    docker compose exec prod nginx -t
+   ```
+
+4. Check certificate expiration:
+   ```bash
+   openssl x509 -enddate -noout -in ./certbot/conf/live/slnnzmtl.xyz/cert.pem
    ```
 
 ## SSL Configuration Details

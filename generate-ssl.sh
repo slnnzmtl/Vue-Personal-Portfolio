@@ -9,54 +9,39 @@ echo "🔒 Starting SSL certificate generation..."
 mkdir -p ./certbot/www/.well-known/acme-challenge
 mkdir -p ./certbot/conf
 
-# Create a test file in the ACME challenge directory
-echo "Creating test file in ACME challenge directory..."
-echo "test-content" > ./certbot/www/.well-known/acme-challenge/test-file
+# Stop any running containers to free up port 80
+echo "🛑 Stopping any running containers to free up port 80..."
+docker compose down
 
-# Check if the container is running
-if ! docker ps | grep -q "slnnzmtl-xyz-prod"; then
-    echo "❌ Production container is not running. Starting it..."
-    docker compose up -d prod
-    echo "⏳ Waiting for container to start..."
-    sleep 15
-fi
+# Get the current directory
+CURRENT_DIR=$(pwd)
 
-# Test if the ACME challenge path is accessible
-echo "🔍 Testing ACME challenge path accessibility..."
-echo "Attempting to access: http://slnnzmtl.xyz/.well-known/acme-challenge/test-file"
-curl -v http://slnnzmtl.xyz/.well-known/acme-challenge/test-file
+echo "📁 Using directory: $CURRENT_DIR"
 
-# Check if the test was successful
-if [ $? -ne 0 ]; then
-    echo "❌ ACME challenge path is not accessible. Please check your network configuration."
-    echo "Possible issues:"
-    echo "1. DNS not pointing to your server"
-    echo "2. Port 80 is blocked"
-    echo "3. Nginx configuration issue"
-    exit 1
-fi
-
-echo "✅ ACME challenge path is accessible. Proceeding with certificate generation..."
-
-# Run certbot with standalone mode first to avoid webroot issues
+# Run certbot with standalone mode
 echo "🔑 Running certbot in standalone mode..."
-docker compose down prod
-sleep 5
-docker run --rm -p 80:80 -v ./certbot/conf:/etc/letsencrypt -v ./certbot/www:/var/www/certbot certbot/certbot certonly --standalone --email slonanezametil@example.com --agree-tos --no-eff-email --force-renewal -d slnnzmtl.xyz
-
-# Restart the production container
-echo "🔄 Restarting production container..."
-docker compose up -d prod
-sleep 10
+docker run --rm -p 80:80 -v $CURRENT_DIR/certbot/conf:/etc/letsencrypt -v $CURRENT_DIR/certbot/www:/var/www/certbot certbot/certbot certonly --standalone --email slonanezametil@example.com --agree-tos --no-eff-email --force-renewal -d slnnzmtl.xyz
 
 # Check if certificate generation was successful
 if [ -d "./certbot/conf/live/slnnzmtl.xyz" ]; then
     echo "✅ Certificate generation successful!"
+    
+    # Restart the production container
+    echo "🔄 Restarting production container..."
+    docker compose up -d prod
+    sleep 10
+    
+    # Reload Nginx configuration
     echo "🔄 Reloading Nginx configuration..."
     docker compose exec prod nginx -s reload
 else
     echo "❌ Certificate generation failed."
     echo "Please check the logs above for details."
+    
+    # Restart the production container anyway
+    echo "🔄 Restarting production container..."
+    docker compose up -d prod
+    
     exit 1
 fi
 
