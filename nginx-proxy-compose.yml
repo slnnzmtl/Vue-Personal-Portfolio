@@ -12,6 +12,7 @@ services:
       - certs:/etc/nginx/certs
       - vhost:/etc/nginx/vhost.d
       - html:/usr/share/nginx/html
+      - ./certbot/www:/var/www/certbot
     networks:
       - nginx-proxy
     deploy:
@@ -29,6 +30,7 @@ services:
     volumes:
       - /var/run/docker.sock:/var/run/docker.sock:ro
       - acme:/etc/acme.sh
+      - ./certbot/conf:/etc/letsencrypt
     environment:
       - DEFAULT_EMAIL=your-email@example.com
     networks:

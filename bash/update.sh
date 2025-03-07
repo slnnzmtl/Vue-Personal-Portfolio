@@ -37,9 +37,30 @@ if ! docker network ls | grep -q "nginx-proxy"; then
     docker network create nginx-proxy
 fi
 
+# Create required directories for SSL certificates if they don't exist
+echo "📁 Ensuring SSL certificate directories exist..."
+mkdir -p ./certbot/www
+mkdir -p ./certbot/conf
+mkdir -p ./nginx/conf
+
 echo "🏗️ Building and starting production container..."
 # Build and start the production container
 docker compose up -d prod --build
+
+# Check if SSL certificates exist
+if [ ! -d "./certbot/conf/live/slnnzmtl.xyz" ]; then
+    echo "🔒 SSL certificates not found. Generating new certificates..."
+    # Generate new certificates
+    docker compose run --rm certbot certonly --webroot --webroot-path=/var/www/certbot --email slonanezametil@example.com --agree-tos --no-eff-email --force-renewal -d slnnzmtl.xyz
+else
+    echo "🔄 Checking if SSL certificates need renewal..."
+    # Attempt to renew certificates
+    docker compose run --rm certbot renew
+fi
+
+# Reload nginx to apply any certificate changes
+echo "🔄 Reloading Nginx configuration..."
+docker compose exec prod nginx -s reload
 
 echo "✅ Update completed successfully!"
 
