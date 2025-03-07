@@ -6,23 +6,36 @@ This document outlines how to set up and renew SSL certificates for the slnnzmtl
 
 1. Make sure the required directories exist:
    ```bash
-   mkdir -p ./certbot/www ./certbot/conf ./nginx/conf
+   mkdir -p ./certbot/www/.well-known/acme-challenge
+   mkdir -p ./certbot/conf
    ```
 
-2. Start the services:
+2. Use the dedicated script to generate SSL certificates:
    ```bash
-   docker-compose down
-   docker-compose up -d
+   ./generate-ssl.sh
    ```
 
-3. Initial certificate generation:
-   ```bash
-   docker-compose run --rm certbot certonly --webroot --webroot-path=/var/www/certbot --email slonanezametil@example.com --agree-tos --no-eff-email --force-renewal -d slnnzmtl.xyz
-   ```
+   This script will:
+   - Create necessary directories
+   - Test if the ACME challenge path is accessible
+   - Stop the production container temporarily
+   - Generate certificates using Certbot in standalone mode
+   - Restart the production container
+   - Reload Nginx to apply the certificates
 
-4. Reload Nginx to apply the certificates:
+3. Alternatively, you can manually generate certificates:
    ```bash
-   docker-compose exec prod nginx -s reload
+   # Stop the production container
+   docker compose down prod
+   
+   # Generate certificates using standalone mode
+   docker run --rm -p 80:80 -v ./certbot/conf:/etc/letsencrypt -v ./certbot/www:/var/www/certbot certbot/certbot certonly --standalone --email slonanezametil@example.com --agree-tos --no-eff-email --force-renewal -d slnnzmtl.xyz
+   
+   # Restart the production container
+   docker compose up -d prod
+   
+   # Reload Nginx
+   docker compose exec prod nginx -s reload
    ```
 
 ## Certificate Renewal
@@ -45,10 +58,20 @@ This script will:
 
 ### Manual Renewal
 
-You can manually renew the certificates using the provided script:
+You can manually renew the certificates using the standalone method:
 
 ```bash
-./renew-cert.sh
+# Stop the production container
+docker compose down prod
+
+# Renew certificates
+docker run --rm -p 80:80 -v ./certbot/conf:/etc/letsencrypt -v ./certbot/www:/var/www/certbot certbot/certbot renew
+
+# Restart the production container
+docker compose up -d prod
+
+# Reload Nginx
+docker compose exec prod nginx -s reload
 ```
 
 ### Automatic Renewal
@@ -62,11 +85,6 @@ To set up automatic renewal, add a cron job:
 
 2. Add the following line to run the renewal script twice a month:
    ```
-   0 0 1,15 * * /path/to/your/project/renew-cert.sh >> /path/to/your/project/renewal.log 2>&1
-   ```
-
-   Alternatively, you can use the update script for a complete update including certificate renewal:
-   ```
    0 0 1,15 * * /path/to/your/project/bash/update.sh >> /path/to/your/project/update.log 2>&1
    ```
 
@@ -76,17 +94,30 @@ To set up automatic renewal, add a cron job:
 
 If you encounter issues with certificate generation:
 
-1. Check the Certbot logs:
+1. Run the troubleshooting script:
    ```bash
-   docker-compose logs certbot
+   ./troubleshoot-ssl.sh
    ```
 
 2. Verify that the ACME challenge path is accessible:
    ```bash
-   curl http://slnnzmtl.xyz/.well-known/acme-challenge/
+   curl http://slnnzmtl.xyz/.well-known/acme-challenge/test-file
    ```
 
-3. Ensure port 80 is open and accessible from the internet for the ACME challenge.
+3. Check if your domain resolves to the correct IP:
+   ```bash
+   dig +short slnnzmtl.xyz
+   ```
+
+4. Ensure port 80 is open and accessible from the internet for the ACME challenge:
+   ```bash
+   nc -zv slnnzmtl.xyz 80
+   ```
+
+5. Check the Certbot logs:
+   ```bash
+   docker compose logs certbot
+   ```
 
 ### SSL Configuration Issues
 
@@ -94,7 +125,7 @@ If the site loads but SSL is not working correctly:
 
 1. Check Nginx logs:
    ```bash
-   docker-compose logs prod
+   docker compose logs prod
    ```
 
 2. Verify the certificate files exist:
@@ -104,7 +135,7 @@ If the site loads but SSL is not working correctly:
 
 3. Test the Nginx configuration:
    ```bash
-   docker-compose exec prod nginx -t
+   docker compose exec prod nginx -t
    ```
 
 ## SSL Configuration Details
