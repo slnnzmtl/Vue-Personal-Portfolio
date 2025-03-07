@@ -12,7 +12,7 @@
 
 <script lang="ts">
 import { defineComponent, watch } from "vue";
-import { useModalService } from "@/composables";
+import { useModalService } from "@/composables/useModal";
 
 export default defineComponent({
   name: "ModalProvider",

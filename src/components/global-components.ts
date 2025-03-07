@@ -1,5 +1,6 @@
 import { App, defineAsyncComponent } from "vue";
 import { ModalKey } from "@/modals/types";
+import HireFormModal from "@/modals/HireFormModal.vue";
 
 const loadingComponent = {
   template: '<div class="async-loading">Loading...</div>',
@@ -11,23 +12,13 @@ const errorComponent = {
 
 export default {
   install: (app: App) => {
-    app.component(
-      ModalKey.HireForm,
-      defineAsyncComponent({
-        loader: () => import("@/modals/HireFormModal.vue"),
-        loadingComponent,
-        errorComponent,
-        delay: 200,
-      }),
-    );
-
+    app.component(ModalKey.HireForm, HireFormModal);
     app.component(
       ModalKey.ImageViewer,
       defineAsyncComponent({
         loader: () => import("@/modals/ImageViewerModal.vue"),
         loadingComponent,
         errorComponent,
-        delay: 200,
       }),
     );
   },

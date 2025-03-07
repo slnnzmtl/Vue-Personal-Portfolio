@@ -65,7 +65,6 @@ export default defineComponent({
 
       setTimeout(() => {
         const project = document.getElementById(`project-${id}`);
-        console.log(project);
         if (!project) return;
 
         project.scrollIntoView({

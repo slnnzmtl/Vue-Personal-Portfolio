@@ -64,7 +64,6 @@ export default defineComponent({
 <template>
   <nav :class="menuClasses">
     <GlassMaterial class="nav-content max-w-[2000px] mx-auto">
-      <!-- Burger button only for mobile -->
       <button class="burger-button" @click.stop="toggleMenu">
         <span></span>
         <span></span>
@@ -74,7 +73,6 @@ export default defineComponent({
       <div class="nav-links pl-4">
         <router-link to="/" @click.stop="closeMenu"> Main </router-link>
         <router-link to="/projects" @click.stop="closeMenu"> Projects </router-link>
-        <!-- <router-link to="/blog" @click="closeMenu">Blog</router-link> -->
       </div>
 
       <div class="hire-button">
