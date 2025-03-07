@@ -98,11 +98,11 @@ export default defineComponent({
   background: rgba(0, 247, 255, 0.1);
 }
 
-.workflow-item:hover {
-  transform: translateY(-10px);
-}
-
 @media (min-width: 1024px) {
+  .workflow-item:hover {
+    transform: translateY(-10px);
+  }
+
   .workflow-items {
     justify-content: center;
   }

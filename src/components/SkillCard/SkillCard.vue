@@ -31,8 +31,10 @@ export default {
   flex-grow: 1;
   padding: 1.5rem;
 
-  &:hover {
-    transform: translateY(-10px);
+  @media (min-width: 1024px) {
+    &:hover {
+      transform: translateY(-10px);
+    }
   }
 
   &__title {
