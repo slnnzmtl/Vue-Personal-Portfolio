@@ -63,7 +63,7 @@ export default defineComponent({
 
 <template>
   <nav :class="menuClasses">
-    <GlassMaterial class="nav-content max-w-[2000px] mx-auto">
+    <GlassMaterial class="nav-content max-w-[2000px] mx-auto" @click.stop="closeMenu">
       <button class="burger-button" @click.stop="toggleMenu">
         <span></span>
         <span></span>

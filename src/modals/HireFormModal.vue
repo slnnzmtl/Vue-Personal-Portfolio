@@ -17,7 +17,6 @@ export default defineComponent({
   emits: ["close"],
   setup(props, { emit }) {
     const closeModal = (result: boolean | null) => {
-      console.log("closeModal", result);
       emit("close", result);
     };
 

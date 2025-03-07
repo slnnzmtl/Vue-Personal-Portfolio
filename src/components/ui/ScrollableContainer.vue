@@ -5,7 +5,7 @@
 </template>
 
 <script lang="ts">
-import { computed, defineComponent, onMounted, ref, watch } from "vue";
+import { computed, defineComponent, ref, watch } from "vue";
 
 export default defineComponent({
   name: "ScrollableContainer",
@@ -38,7 +38,6 @@ export default defineComponent({
     });
 
     const handleScroll = (e: Event) => {
-      console.log("Scroll event detected", e);
       emit("scroll", e);
     };
 
@@ -46,7 +45,6 @@ export default defineComponent({
       () => scrollableContainer.value,
       (container) => {
         if (container) {
-          console.log("Container", container);
           container.addEventListener("scroll", handleScroll);
         }
       },
@@ -55,6 +53,7 @@ export default defineComponent({
 
     return {
       containerClass,
+      scrollableContainer,
     };
   },
 });

@@ -36,7 +36,6 @@ export default defineComponent({
     const { openModal } = useModalService();
 
     const onImageClick = (imageUrl: string) => {
-      console.log({ imageUrl });
       openModal(ModalKey.ImageViewer, { imageUrl });
     };
 
