@@ -1,9 +1,10 @@
 <script lang="ts">
 import SocialLinks from "@/components/SocialLinks/SocialLinks.vue";
+import DownloadResume from "@/components/ui/buttons/DownloadResume.vue";
 import GlassMaterial from "@/components/ui/GlassMaterial.vue";
 import ModalWindow from "@/components/ui/ModalWindow.vue";
 
-import { defineComponent, ref } from "vue";
+import { defineComponent } from "vue";
 
 export default defineComponent({
   name: "HireFormModal",
@@ -11,6 +12,7 @@ export default defineComponent({
     SocialLinks,
     GlassMaterial,
     ModalWindow,
+    DownloadResume,
   },
   emits: ["close"],
   setup(props, { emit }) {
@@ -28,10 +30,18 @@ export default defineComponent({
 
 <template>
   <ModalWindow name="ModalKey.HireForm" @close="closeModal">
-    <div class="hire-form-modal flex flex-col gap-4 items-center justify-center">
+    <div
+      class="hire-form-modal flex flex-col gap-4 items-left justify-center max-w-[100vw]"
+    >
       <GlassMaterial class="p-6">
-        <SocialLinks class="flex-col sm:flex-row gap-6" />
+        <SocialLinks class="gap-6" />
       </GlassMaterial>
+
+      <p class="mt-6">
+        If you are recruiter and want to hire me, you can download my resume below.
+      </p>
+
+      <DownloadResume class="" />
     </div>
   </ModalWindow>
 </template>

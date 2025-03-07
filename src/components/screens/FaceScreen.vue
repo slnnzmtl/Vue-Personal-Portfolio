@@ -15,15 +15,15 @@ export default defineComponent({
 </script>
 
 <template>
-  <div class="face-screen items-center py-10 px-3 mb-[50px]">
+  <div class="face-screen items-center py-10 px-3">
     <div class="author-avatar relative w-full flex justify-center">
       <AuthorAvatar />
     </div>
 
-    <div class="flex flex-col items-center xl:items-start gap-4 text-left">
+    <div class="flex flex-col items-center xl:items-start gap-6 md:gap-3 text-left">
       <h1 class="text-center text-6xl font-bold">Daniel Kazansky</h1>
       <p
-        class="text-xl lg:text-3xl font-semibold text-center lg:text-left text-secondary text-shadow-[0_4px_4px_rgba(0,0,0,0.25)]"
+        class="text-xl lg:text-3xl font-semibold text-center lg:text-left text-secondary text-shadow"
       >
         Web development with focus on user experience
       </p>
@@ -46,21 +46,24 @@ export default defineComponent({
   grid-template-columns: 1fr;
   justify-content: center;
   margin-top: 12rem;
-  gap: 6rem;
+  gap: 3rem;
   min-height: 600px;
 
   @media (max-width: 768px) {
-    height: 100vh;
+    height: max-content;
     max-height: 1000px;
     margin-top: 0;
     padding-top: 100px;
-    gap: 3rem;
   }
 
   .author-avatar {
     align-items: center;
     max-width: 300px;
     margin: 0 auto;
+
+    @media (max-width: 1280px) {
+      max-width: 250px;
+    }
   }
 
   @media (min-width: 1280px) {
@@ -81,10 +84,6 @@ export default defineComponent({
 
     h1 {
       font-size: 6rem;
-    }
-
-    .author-avatar {
-      @apply max-w-[600px] max-h-[600px];
     }
   }
 }

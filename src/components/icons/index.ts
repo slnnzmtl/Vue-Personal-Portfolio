@@ -5,3 +5,4 @@ export { default as MailIcon } from "./MailIcon.vue";
 export { default as PlusIcon } from "./PlusIcon.vue";
 export { default as MinusIcon } from "./MinusIcon.vue";
 export { default as ResetIcon } from "./ResetIcon.vue";
+export { default as DownloadIcon } from "./DownloadIcon.vue";
