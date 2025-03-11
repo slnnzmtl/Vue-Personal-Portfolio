@@ -9,9 +9,16 @@ export default defineComponent({
     SButton,
     DownloadIcon,
   },
+  props: {
+    title: {
+      type: String,
+      default:
+        "If you are recruiter and want to hire me, you can download my resume below.",
+    },
+  },
   setup() {
     const handleDownload = () => {
-      const cvUrl = "/daniel-kazansky.pdf";
+      const cvUrl = "/files/daniel-kazansky.pdf";
       window.open(cvUrl, "_blank");
     };
 
@@ -23,6 +30,10 @@ export default defineComponent({
 </script>
 
 <template>
+  <p v-if="title" class="text-sm text-gray-500 mb-4">
+    {{ title }}
+  </p>
+
   <SButton
     class="download-resume-button"
     size="large"
