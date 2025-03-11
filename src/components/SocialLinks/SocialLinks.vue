@@ -2,7 +2,7 @@
   <div
     class="social-links flex flex-wrap flex-col sm:flex-row justify-around gap-4 md:gap-8"
   >
-    <p class="text-md">Contact me:</p>
+    <p class="text-md flex items-center">Contact me:</p>
     <SButton
       v-for="link in displayLinks"
       :key="link.name"
@@ -132,6 +132,13 @@ export default defineComponent({
 
 .email-button {
   cursor: pointer;
+  justify-content: flex-start;
+  padding: 0;
+  transition: transform 0.2s ease;
+
+  &:hover {
+    transform: translateY(-2px) !important;
+  }
 }
 
 .toast {
