@@ -4,7 +4,7 @@
   >
     <p class="text-md">Contact me:</p>
     <SButton
-      v-for="link in socialLinks"
+      v-for="link in displayLinks"
       :key="link.name"
       :href="link.url"
       target="_blank"
@@ -15,17 +15,29 @@
       <component :is="link.icon" class="w-5 h-5" />
       <span class="ml-2">{{ link.name }}</span>
     </SButton>
+
+    <SButton
+      variant="glass"
+      class="social-button email-button"
+      @click="copyEmailToClipboard"
+    >
+      <MailIcon class="w-5 h-5" />
+      <span class="ml-2">Email</span>
+    </SButton>
+
+    <div v-if="showToast" class="toast">Email copied to clipboard!</div>
   </div>
 </template>
 
 <script lang="ts">
-import { defineComponent } from "vue";
+import { defineComponent, ref, computed } from "vue";
 import SButton from "@/components/ui/buttons/SButton.vue";
 import type { Component } from "vue";
 import GithubIcon from "@/components/icons/GithubIcon.vue";
 import LinkedinIcon from "@/components/icons/LinkedinIcon.vue";
 import TelegramIcon from "@/components/icons/TelegramIcon.vue";
 import MailIcon from "@/components/icons/MailIcon.vue";
+import { copyToClipboard } from "@/utils/clipboard";
 
 interface SocialLink {
   name: string;
@@ -45,6 +57,10 @@ export default defineComponent({
   },
 
   setup() {
+    const emailCopied = ref(false);
+    const showToast = ref(false);
+    const EMAIL = "kazanskydaniel@gmail.com";
+
     const socialLinks: SocialLink[] = [
       // {
       //   name: "GitHub",
@@ -61,21 +77,47 @@ export default defineComponent({
         url: "https://t.me/slnnzmtl",
         icon: TelegramIcon,
       },
-      {
-        name: "Email",
-        url: "mailto:kazanskydaniel@gmail.com",
-        icon: MailIcon,
-      },
     ];
 
+    // Filter out the email link for separate handling
+    const displayLinks = computed(() => {
+      return socialLinks.filter((link) => link.name !== "Email");
+    });
+
+    const copyEmailToClipboard = async () => {
+      const success = await copyToClipboard(EMAIL);
+
+      if (success) {
+        emailCopied.value = true;
+        showToast.value = true;
+
+        // Reset the button text after 2 seconds
+        setTimeout(() => {
+          emailCopied.value = false;
+        }, 2000);
+
+        // Hide the toast after 3 seconds
+        setTimeout(() => {
+          showToast.value = false;
+        }, 3000);
+      }
+    };
+
     return {
-      socialLinks,
+      displayLinks,
+      emailCopied,
+      showToast,
+      copyEmailToClipboard,
     };
   },
 });
 </script>
 
 <style lang="scss" scoped>
+.social-links {
+  position: relative;
+}
+
 .social-button {
   display: inline-flex;
   align-items: center;
@@ -86,5 +128,38 @@ export default defineComponent({
   }
 
   color: var(--text);
+}
+
+.email-button {
+  cursor: pointer;
+}
+
+.toast {
+  position: absolute;
+  bottom: -40px;
+  left: 50%;
+  transform: translateX(-50%);
+  background-color: rgba(0, 0, 0, 0.8);
+  color: white;
+  padding: 8px 16px;
+  border-radius: 4px;
+  font-size: 0.875rem;
+  animation: fadeInOut 3s ease;
+  z-index: 10;
+}
+
+@keyframes fadeInOut {
+  0% {
+    opacity: 0;
+  }
+  10% {
+    opacity: 1;
+  }
+  90% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0;
+  }
 }
 </style>
