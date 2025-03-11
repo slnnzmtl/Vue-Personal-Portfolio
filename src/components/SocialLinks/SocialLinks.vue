@@ -81,7 +81,7 @@ export default defineComponent({
 
     const handleLinkClick = (name: string) => {
       window.gtag("event", "contact_link_clicked", {
-        link: "name",
+        link: name,
       });
     };
 
@@ -91,6 +91,10 @@ export default defineComponent({
       if (success) {
         emailCopied.value = true;
         showToast.value = true;
+
+        window.gtag("event", "contact_link_clicked", {
+          link: "email",
+        });
 
         setTimeout(() => {
           emailCopied.value = false;

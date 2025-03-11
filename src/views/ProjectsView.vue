@@ -62,6 +62,7 @@ import router from "@/router";
 import { storeToRefs } from "pinia";
 import { useWindowSize } from "@/composables/useWindowSize";
 import { useNavigation } from "@/composables/useNavigation";
+import { debounce } from "@/utils/debounce";
 
 const MarkupViewer = defineAsyncComponent({
   loader: () => import("@/components/MarkupViewer/MarkupViewer.vue"),
@@ -122,6 +123,12 @@ export default defineComponent({
       handleScroll(e);
     };
 
+    const debouncedGtag = debounce((title: string) => {
+      window.gtag("event", "project_case_seen", {
+        project: title,
+      });
+    }, 1000);
+
     watch(
       activeProject,
       (current) => {
@@ -129,9 +136,7 @@ export default defineComponent({
           return;
         }
 
-        window.gtag("event", "project_case_seen", {
-          project: current.title,
-        });
+        debouncedGtag(current.title);
 
         if (isLgLayout.value) {
           scrollToTop();
