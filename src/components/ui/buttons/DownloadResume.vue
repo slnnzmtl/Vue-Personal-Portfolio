@@ -20,6 +20,8 @@ export default defineComponent({
     const handleDownload = () => {
       const cvUrl = "/files/daniel-kazansky.pdf";
       window.open(cvUrl, "_blank");
+
+      window.gtag("event", "cv_downloaded");
     };
 
     return {

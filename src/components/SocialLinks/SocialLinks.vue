@@ -11,6 +11,7 @@
       rel="noopener noreferrer"
       variant="glass"
       class="social-button"
+      @click="handleLinkClick(link.name)"
     >
       <component :is="link.icon" class="w-5 h-5" />
       <span class="ml-2">{{ link.name }}</span>
@@ -62,11 +63,6 @@ export default defineComponent({
     const EMAIL = "kazanskydaniel@gmail.com";
 
     const socialLinks: SocialLink[] = [
-      // {
-      //   name: "GitHub",
-      //   url: "https://github.com/slnnzmtl",
-      //   icon: GithubIcon,
-      // },
       {
         name: "LinkedIn",
         url: "https://linkedin.com/in/daniel-kazanskiy",
@@ -79,10 +75,15 @@ export default defineComponent({
       },
     ];
 
-    // Filter out the email link for separate handling
     const displayLinks = computed(() => {
       return socialLinks.filter((link) => link.name !== "Email");
     });
+
+    const handleLinkClick = (name: string) => {
+      window.gtag("event", "contact_link_clicked", {
+        link: "name",
+      });
+    };
 
     const copyEmailToClipboard = async () => {
       const success = await copyToClipboard(EMAIL);
@@ -91,12 +92,10 @@ export default defineComponent({
         emailCopied.value = true;
         showToast.value = true;
 
-        // Reset the button text after 2 seconds
         setTimeout(() => {
           emailCopied.value = false;
         }, 2000);
 
-        // Hide the toast after 3 seconds
         setTimeout(() => {
           showToast.value = false;
         }, 3000);
@@ -108,6 +107,7 @@ export default defineComponent({
       emailCopied,
       showToast,
       copyEmailToClipboard,
+      handleLinkClick,
     };
   },
 });

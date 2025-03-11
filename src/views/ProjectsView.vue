@@ -129,6 +129,10 @@ export default defineComponent({
           return;
         }
 
+        window.gtag("event", "project_case_seen", {
+          project: current.title,
+        });
+
         if (isLgLayout.value) {
           scrollToTop();
         }
