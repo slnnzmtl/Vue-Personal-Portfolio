@@ -66,7 +66,7 @@ export default defineComponent({
 
 <style lang="scss">
 :root {
-  color: #fff;
+  background-color: black;
   @extend %scrollbar-tidy;
 }
 </style>

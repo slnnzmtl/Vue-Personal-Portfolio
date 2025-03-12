@@ -7,7 +7,7 @@ import ScrollableContainer from "@/components/ui/ScrollableContainer.vue";
 import { useProjectsStore } from "@/stores/projectsStore";
 import { storeToRefs } from "pinia";
 import { useWindowSize } from "@/composables/useWindowSize";
-import SButton from "../ui/buttons/SButton.vue";
+import SButton from "@/components/ui/buttons/SButton.vue";
 
 export default defineComponent({
   name: "ProjectsScreen",
@@ -87,7 +87,7 @@ export default defineComponent({
         />
       </div>
 
-      <ScrollableContainer :wrap="false">
+      <ScrollableContainer :wrap="false" class="min-h-[600px]">
         <ProjectList
           :layout="projectListLayout"
           :projects="projects"

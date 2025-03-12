@@ -6,7 +6,7 @@
     <SkillsScreen class="max-w-screen-2xl w-full mx-auto" />
 
     <div class="max-w-screen-2xl mx-auto">
-      <ProjectsScreen id="projects-screen" />
+      <ProjectsScreen />
     </div>
 
     <HireScreen class="max-w-screen-2xl w-full mx-auto" id="hire-screen" />
@@ -33,8 +33,6 @@ const SkillsScreen = defineAsyncComponent({
 
 const ProjectsScreen = defineAsyncComponent({
   loader: () => import("@/components/screens/ProjectsScreen.vue"),
-  timeout: 3000,
-  delay: 1000,
   suspensible: true,
 });
 
@@ -73,9 +71,8 @@ export default defineComponent({
     };
 
     onMounted(() => {
-      setTimeout(() => {
-        loadProjects();
-      }, 1000);
+      loadProjects();
+      setTimeout(() => {}, 100);
 
       loadingIndicator.value?.start();
     });

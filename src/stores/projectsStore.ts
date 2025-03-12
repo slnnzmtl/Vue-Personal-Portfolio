@@ -22,6 +22,8 @@ export const useProjectsStore = defineStore("projects", {
         return;
       }
 
+      console.log("fetching projects");
+
       this.isLoading = true;
       this.error = null;
 
