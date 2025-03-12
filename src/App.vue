@@ -5,20 +5,18 @@ import { provideNavigationService } from "@/composables/useNavigation";
 
 const BackgroundWrapper = defineAsyncComponent({
   loader: () => import("@/components/BackgroundWrapper.vue"),
-  delay: 10000,
-  timeout: 10000,
 });
 
-const ModalProvider = defineAsyncComponent({
-  loader: () => import("@/components/ModalProvider/ModalProvider.vue"),
-  delay: 10000,
-  timeout: 10000,
+const ModalProvider = defineAsyncComponent(() => {
+  return new Promise((resolve) => {
+    setTimeout(() => {
+      resolve(import("@/components/ModalProvider/ModalProvider.vue"));
+    }, 500);
+  });
 });
 
 const NavigationMenu = defineAsyncComponent({
   loader: () => import("@/components/NavigationMenu.vue"),
-  delay: 10000,
-  timeout: 10000,
 });
 
 export default defineComponent({
@@ -32,19 +30,12 @@ export default defineComponent({
     provideModalService();
     const navService = provideNavigationService();
 
-    const readyToRender = ref(false);
-
     onMounted(() => {
       window.dispatchEvent(new Event("scroll"));
-
-      setTimeout(() => {
-        readyToRender.value = true;
-      }, 1000);
     });
 
     return {
       navService,
-      readyToRender,
     };
   },
 });
@@ -53,7 +44,7 @@ export default defineComponent({
 <template>
   <div>
     <BackgroundWrapper />
-    <ModalProvider v-if="readyToRender" />
+    <ModalProvider />
     <NavigationMenu />
 
     <router-view v-slot="{ Component }">

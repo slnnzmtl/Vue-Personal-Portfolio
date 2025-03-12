@@ -1,4 +1,3 @@
-export { default as BackgroundWrapper } from "./BackgroundWrapper.vue";
 export { ProjectCard } from "./ProjectCard";
 export { default as ProjectList } from "./ProjectList/ProjectList.vue";
 export { default as AuthorAvatar } from "./AuthorAvatar.vue";
