@@ -157,10 +157,17 @@ export default defineComponent({
   cursor: pointer;
   height: 100%;
 
+  width: 100%;
+
+  @media (min-width: 768px) {
+    width: calc(100% / 2 - 1rem);
+  }
+
   &.scrollable {
-    width: 300px;
+    min-width: calc(100% / 3 - 1rem);
     height: max-content;
     flex-shrink: 0;
+    max-width: 300px;
   }
 
   &:hover {
@@ -177,11 +184,7 @@ export default defineComponent({
 
   &.active {
     background: var(--cyan-alpha-10);
-    grid-column: span 2;
-
-    @media (max-width: 768px) {
-      grid-column: span 1;
-    }
+    width: 100%;
 
     @media (max-width: 1024px) {
       .project-card__image {
@@ -192,11 +195,11 @@ export default defineComponent({
 
   &__image {
     position: relative;
-    height: 250px;
     width: auto;
     overflow: hidden;
     z-index: 1;
     transition: height 0.5s ease, width 1s ease;
+    height: 200px;
 
     img {
       height: 100%;
@@ -221,15 +224,9 @@ export default defineComponent({
 
   &__title {
     transition: font-size 0.3s ease;
-
+    font-size: 1.5rem !important;
     font-weight: 600;
     color: var(--text);
-  }
-
-  @media (min-width: 768px) {
-    .project-card__title {
-      font-size: 1.5rem !important;
-    }
   }
 
   &__description {
@@ -257,6 +254,8 @@ export default defineComponent({
   }
 
   &--list {
+    width: 100%;
+
     &.active {
       background: var(--cyan-alpha-10);
 

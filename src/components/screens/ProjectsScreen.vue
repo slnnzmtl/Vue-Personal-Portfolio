@@ -6,7 +6,6 @@ import ProjectList from "@/components/ProjectList/ProjectList.vue";
 import ScrollableContainer from "@/components/ui/ScrollableContainer.vue";
 import { useProjectsStore } from "@/stores/projectsStore";
 import { storeToRefs } from "pinia";
-import { useWindowSize } from "@/composables/useWindowSize";
 import SButton from "@/components/ui/buttons/SButton.vue";
 
 export default defineComponent({
@@ -23,12 +22,6 @@ export default defineComponent({
     const { filteredProjects, selectedFilters, isLoading, error, tags } = storeToRefs(
       store
     );
-    const { width } = useWindowSize();
-
-    const projectListLayout = computed(() => {
-      return width.value < 1024 ? "scroll" : "grid";
-    });
-
     const projectFilterChange = (filters: string[]) => {
       store.setFilters(filters);
     };
@@ -58,7 +51,6 @@ export default defineComponent({
       projects,
       isLoading,
       error,
-      projectListLayout,
       showAllProjects,
     };
   },
@@ -89,7 +81,7 @@ export default defineComponent({
 
       <ScrollableContainer :wrap="false" class="min-h-[600px]">
         <ProjectList
-          :layout="projectListLayout"
+          layout="scroll"
           :projects="projects"
           :selected-filters="selectedFilters"
           return-value="id"
