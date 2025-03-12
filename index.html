@@ -1,16 +1,6 @@
 <!doctype html>
 <html lang="en">
   <head>
-    <!-- Google tag (gtag.js) -->
-    <script async src="https://www.googletagmanager.com/gtag/js?id=G-FV340HLHT4"></script>
-    <script>
-      window.dataLayer = window.dataLayer || [];
-      function gtag(){dataLayer.push(arguments);}
-      gtag('js', new Date());
-
-      gtag('config', 'G-FV340HLHT4');
-    </script>
-    
     <meta charset="UTF-8" />
     <link rel="icon" type="image/svg+xml" href="/vite.svg" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -62,8 +52,21 @@
 
     <!-- Preload critical assets -->
     <link rel="preload" href="/fonts/FiraCode-Regular.ttf" as="font" type="font/ttf" crossorigin>
-    <link rel="preload" href="/fonts/FiraCode-Medium.ttf" as="font" type="font/ttf" crossorigin>
-    <link rel="preload" href="/fonts/FiraCode-SemiBold.ttf" as="font" type="font/ttf" crossorigin>
+    <!-- <link rel="preload" href="/fonts/FiraCode-Medium.ttf" as="font" type="font/ttf" crossorigin> -->
+    <!-- <link rel="preload" href="/fonts/FiraCode-SemiBold.ttf" as="font" type="font/ttf" crossorigin> -->
+
+    <link rel="preload" href="src/assets/male-avatar.svg" as="image" crossorigin>
+
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-FV340HLHT4"></script>
+    <script async>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+
+      gtag('config', 'G-FV340HLHT4');
+    </script>
+    
   </head>
 
   <body>
@@ -71,7 +74,7 @@
       <div class="global-loading-circle"></div>
     </div>
     <div id="app"></div>
-    <script type="module" src="/src/main.ts"></script>
+    <script type="module" src="/src/main.ts" async></script>
     <script>
       window.addEventListener('load', () => {
         const loader = document.getElementById('main-loader');
@@ -83,6 +86,10 @@
   </body>
 
   <style>
+    body {
+      background-color: #000;
+    }
+
     #main-loader {
       position: fixed;
       top: 50%;

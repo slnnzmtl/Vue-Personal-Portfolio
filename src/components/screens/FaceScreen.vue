@@ -1,8 +1,8 @@
 <script lang="ts">
 import { defineComponent } from "vue";
-import SocialLinks from "../SocialLinks/SocialLinks.vue";
-import GlassMaterial from "../ui/GlassMaterial.vue";
-import AuthorAvatar from "../AuthorAvatar.vue";
+import SocialLinks from "@/components/SocialLinks/SocialLinks.vue";
+import GlassMaterial from "@/components/ui/GlassMaterial.vue";
+import AuthorAvatar from "@/components/AuthorAvatar.vue";
 
 export default defineComponent({
   name: "AuthorFace",

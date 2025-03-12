@@ -36,24 +36,6 @@ export default defineComponent({
   z-index: 9999;
 }
 
-.loading-circle {
-  width: 50px;
-  height: 50px;
-  border: 5px solid #00eeff;
-  border-top: 5px solid #0800ff;
-  border-radius: 50%;
-  animation: spin 1s linear infinite;
-}
-
-@keyframes spin {
-  0% {
-    transform: rotate(0deg);
-  }
-  100% {
-    transform: rotate(360deg);
-  }
-}
-
 .fade-enter-active,
 .fade-leave-active {
   transition: opacity 0.3s;

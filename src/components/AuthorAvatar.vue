@@ -34,10 +34,13 @@ export default defineComponent({
   overflow: hidden;
   display: flex;
   flex-shrink: 0;
-  height: 100%;
-  width: 100%;
-  max-width: 400px; /* Adjust as needed */
-  max-height: 400px; /* Adjust as needed */
+  height: 400px;
+  width: 400px;
+
+  @media (max-width: 768px) {
+    height: 300px;
+    width: 300px;
+  }
 }
 
 .male-avatar {

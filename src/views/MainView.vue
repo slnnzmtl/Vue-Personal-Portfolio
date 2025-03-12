@@ -16,9 +16,13 @@
 <script lang="ts">
 import { defineComponent, ref, onMounted, defineAsyncComponent } from "vue";
 import FaceScreen from "@/components/screens/FaceScreen.vue";
-import WorkflowScreen from "@/components/screens/WorkflowScreen.vue";
 import { useProjectsStore } from "@/stores/projectsStore";
 import LoadingIndicator from "@/components/ui/LoadingIndicator.vue";
+
+const WorkflowScreen = defineAsyncComponent({
+  loader: () => import("@/components/screens/WorkflowScreen.vue"),
+  suspensible: true,
+});
 
 const SkillsScreen = defineAsyncComponent({
   loader: () => import("@/components/screens/SkillsScreen.vue"),
