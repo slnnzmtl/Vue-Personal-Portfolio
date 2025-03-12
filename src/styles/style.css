@@ -146,13 +146,3 @@ a {
   overflow-x: hidden;
   text-align: center;
 }
-
-@media (prefers-color-scheme: light) {
-  :root {
-    color: var(--blue-dark);
-    background-color: #ffffff;
-  }
-  a:hover {
-    color: var(--blue-light);
-  }
-}
