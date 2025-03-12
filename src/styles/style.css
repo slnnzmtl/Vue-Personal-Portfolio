@@ -74,6 +74,7 @@ body {
   place-items: center;
   min-width: 320px;
   background-color: black;
+  color: var(--text);
 }
 
 h1 {
