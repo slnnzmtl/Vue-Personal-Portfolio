@@ -2,7 +2,12 @@
 import { defineAsyncComponent, defineComponent, onMounted, ref } from "vue";
 import { provideModalService } from "@/composables/useModal";
 import { provideNavigationService } from "@/composables/useNavigation";
-import BackgroundWrapper from "@/components/BackgroundWrapper.vue";
+
+const BackgroundWrapper = defineAsyncComponent({
+  loader: () => import("@/components/BackgroundWrapper.vue"),
+  delay: 10000,
+  timeout: 10000,
+});
 
 const ModalProvider = defineAsyncComponent({
   loader: () => import("@/components/ModalProvider/ModalProvider.vue"),
@@ -12,6 +17,8 @@ const ModalProvider = defineAsyncComponent({
 
 const NavigationMenu = defineAsyncComponent({
   loader: () => import("@/components/NavigationMenu.vue"),
+  delay: 10000,
+  timeout: 10000,
 });
 
 export default defineComponent({

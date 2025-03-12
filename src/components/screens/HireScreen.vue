@@ -1,8 +1,18 @@
 <script lang="ts">
-import { defineComponent } from "vue";
-import DownloadResume from "@/components/ui/buttons/DownloadResume.vue";
+import { defineAsyncComponent, defineComponent } from "vue";
 import GlassMaterial from "@/components/ui/GlassMaterial.vue";
-import SocialLinks from "@/components/SocialLinks/SocialLinks.vue";
+
+const SocialLinks = defineAsyncComponent({
+  loader: () => import("@/components/SocialLinks/SocialLinks.vue"),
+  delay: 1000,
+  timeout: 1000,
+});
+
+const DownloadResume = defineAsyncComponent({
+  loader: () => import("@/components/ui/buttons/DownloadResume.vue"),
+  delay: 1000,
+  timeout: 1000,
+});
 
 export default defineComponent({
   name: "HireScreen",
