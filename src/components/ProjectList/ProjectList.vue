@@ -21,8 +21,6 @@
       <CardPlaceholder v-for="n in itemsPerPage" :key="n" />
     </template>
   </transition-group>
-
-  <SButton class="load-more-button mx-8" @click="showMore"> Show more </SButton>
 </template>
 
 <script lang="ts">
@@ -72,7 +70,7 @@ export default defineComponent({
       validator: (value: string) => ["grid", "list", "scroll"].includes(value),
     },
   },
-  emits: ["selected", "show-all-projects"],
+  emits: ["selected"],
   setup(props, { emit }) {
     const isLoading = ref(false);
     const itemsPerPage = ref(6);
@@ -117,10 +115,6 @@ export default defineComponent({
       }
     };
 
-    const showMore = () => {
-      emit("show-all-projects");
-    };
-
     const onClose = () => {
       emit("selected", null);
     };
@@ -136,30 +130,12 @@ export default defineComponent({
       isCardActive,
       onClose,
       listRef,
-      showMore,
     };
   },
 });
 </script>
 
 <style scoped lang="scss">
-.load-more-button {
-  margin-top: 1rem;
-  padding: 0.5rem 1rem;
-  cursor: pointer;
-  background: rgba(255, 255, 255, 0.1);
-  border: 1px solid rgba(255, 255, 255, 0.2);
-  border-radius: 8px;
-  backdrop-filter: blur(10px);
-  color: var(--text);
-  transition: background-color 0.3s, border-color 0.3s;
-
-  &:hover {
-    background: rgba(255, 255, 255, 0.2);
-    border-color: rgba(255, 255, 255, 0.4);
-  }
-}
-
 .fade-enter-active,
 .fade-leave-active {
   transition: opacity 0.5s, transform 0.5s;

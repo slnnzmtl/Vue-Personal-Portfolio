@@ -7,6 +7,7 @@ import ScrollableContainer from "@/components/ui/ScrollableContainer.vue";
 import { useProjectsStore } from "@/stores/projectsStore";
 import { storeToRefs } from "pinia";
 import { useWindowSize } from "@/composables/useWindowSize";
+import SButton from "../ui/buttons/SButton.vue";
 
 export default defineComponent({
   name: "ProjectsScreen",
@@ -14,6 +15,7 @@ export default defineComponent({
     FilterPanel,
     ProjectList,
     ScrollableContainer,
+    SButton,
   },
   setup() {
     const router = useRouter();
@@ -92,9 +94,18 @@ export default defineComponent({
           :selected-filters="selectedFilters"
           return-value="id"
           @selected="onProjectClick"
-          @show-all-projects="showAllProjects"
         />
       </ScrollableContainer>
+
+      <div class="flex justify-center">
+        <SButton
+          type="primary"
+          class="load-more-button mt-8 rounded"
+          @click="showAllProjects"
+        >
+          Show more
+        </SButton>
+      </div>
     </template>
   </div>
 </template>
