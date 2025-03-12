@@ -17,7 +17,7 @@
       key="placeholder"
       class="placeholder flex items-center justify-center h-[70vh]"
     >
-      <p class="text-center">Please select an element to view its details.</p>
+      <p class="text-center">Please select a project to view details.</p>
     </div>
   </transition>
 </template>
