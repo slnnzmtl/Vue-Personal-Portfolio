@@ -30,10 +30,10 @@
       </div>
 
       <div class="flex h-full items-end">
-        <a v-if="!active" class="project-card__link" @click="onCardClick">
+        <span v-if="!active" class="project-card__link">
           Read more
           <span class="project-card__link-arrow">→</span>
-        </a>
+        </span>
       </div>
     </div>
   </GlassMaterial>
