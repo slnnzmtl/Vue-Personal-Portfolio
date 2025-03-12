@@ -40,22 +40,31 @@ export default defineComponent({
       router.push(`/projects/${projectId}`);
     };
 
+    const projects = computed(() => {
+      return filteredProjects.value.slice(0, 3);
+    });
+
+    const showAllProjects = () => {
+      return router.push("/projects");
+    };
+
     return {
       tags,
       selectedFilters,
       projectFilterChange,
       onProjectClick,
-      filteredProjects,
+      projects,
       isLoading,
       error,
       projectListLayout,
+      showAllProjects,
     };
   },
 });
 </script>
 
 <template>
-  <div class="projects-screen max-w-screen-2xl">
+  <div class="projects-screen max-w-screen-2xl py-12">
     <div v-if="isLoading" class="loading">Loading projects...</div>
     <div v-else-if="error" class="error">{{ error }}</div>
     <template v-else>
@@ -79,10 +88,11 @@ export default defineComponent({
       <ScrollableContainer :wrap="false">
         <ProjectList
           :layout="projectListLayout"
-          :projects="filteredProjects"
+          :projects="projects"
           :selected-filters="selectedFilters"
           return-value="id"
           @selected="onProjectClick"
+          @show-all-projects="showAllProjects"
         />
       </ScrollableContainer>
     </template>
@@ -91,7 +101,6 @@ export default defineComponent({
 
 <style lang="scss" scoped>
 .projects-screen {
-  padding: 4rem 0;
   text-align: left;
   width: 100vw;
 }

@@ -1,6 +1,6 @@
 <template>
-  <div class="workflow-screen pt-12 pb-24">
-    <h2 class="text-left font-bold mb-10 px-6">My Workflow</h2>
+  <div class="workflow-screen py-12">
+    <h2 class="text-left font-bold mb-10 px-6">How I deliver projects</h2>
     <p class="text-lg sm:text-xl mb-8 text-justify px-6 text-gray-500">
       My structured approach drives project success through deep understanding of business
       needs, precise estimation, exceptional UI design, and delivery that exceeds
@@ -14,8 +14,8 @@
           :key="index"
           class="workflow-item flex flex-col items-center p-3 bg-gray-800 rounded-lg min-w-[250px]"
         >
-          <component :is="point.icon" />
-          <h3 class="font-semibold mb-2">{{ point.title }}</h3>
+          <component class="max-w-16" :is="point.icon" />
+          <h4 class="font-semibold mb-2">{{ point.title }}</h4>
           <p class="text-sm text-center text-gray-400">
             {{ point.description }}
           </p>

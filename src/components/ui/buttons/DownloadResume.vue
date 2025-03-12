@@ -12,8 +12,11 @@ export default defineComponent({
   props: {
     title: {
       type: String,
-      default:
-        "If you are recruiter and want to hire me, you can download my resume below.",
+      default: "If you are recruiter, you can download my resume below.",
+    },
+    buttonText: {
+      type: String,
+      default: "Download CV",
     },
   },
   setup() {
@@ -44,7 +47,7 @@ export default defineComponent({
   >
     <div class="button-content">
       <DownloadIcon class="download-icon" />
-      <span class="button-text">Download CV</span>
+      <span class="button-text">{{ buttonText }}</span>
     </div>
   </SButton>
 </template>

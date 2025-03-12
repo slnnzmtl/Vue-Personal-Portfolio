@@ -1,5 +1,5 @@
 <template>
-  <div class="skills-container">
+  <div class="skills-container py-12">
     <div class="px-6">
       <h2 class="mb-8">Technology stack</h2>
 

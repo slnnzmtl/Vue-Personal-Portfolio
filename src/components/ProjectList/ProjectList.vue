@@ -22,9 +22,7 @@
     </template>
   </transition-group>
 
-  <SButton v-if="hasMoreProjects" class="load-more-button" @click="loadMore">
-    Load More
-  </SButton>
+  <SButton class="load-more-button mx-8" @click="showMore"> Show more </SButton>
 </template>
 
 <script lang="ts">
@@ -74,7 +72,7 @@ export default defineComponent({
       validator: (value: string) => ["grid", "list", "scroll"].includes(value),
     },
   },
-  emits: ["selected"],
+  emits: ["selected", "show-all-projects"],
   setup(props, { emit }) {
     const isLoading = ref(false);
     const itemsPerPage = ref(6);
@@ -86,16 +84,6 @@ export default defineComponent({
       const start = 0;
       return props.projects.slice(start, currentPage.value * itemsPerPage.value);
     });
-
-    const hasMoreProjects = computed(() => {
-      return currentPage.value * itemsPerPage.value < props.projects.length;
-    });
-
-    const loadMore = () => {
-      if (hasMoreProjects.value) {
-        currentPage.value++;
-      }
-    };
 
     const layoutClass = computed(() => {
       switch (props.layout) {
@@ -129,6 +117,10 @@ export default defineComponent({
       }
     };
 
+    const showMore = () => {
+      emit("show-all-projects");
+    };
+
     const onClose = () => {
       emit("selected", null);
     };
@@ -138,14 +130,13 @@ export default defineComponent({
       itemsPerPage,
       currentPage,
       displayedProjects,
-      hasMoreProjects,
-      loadMore,
       layoutClass,
       transitionName,
       onCardClicked,
       isCardActive,
       onClose,
       listRef,
+      showMore,
     };
   },
 });

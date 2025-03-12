@@ -32,13 +32,9 @@ export default defineComponent({
     <div
       class="hire-form-modal flex flex-col gap-4 items-left justify-center max-w-[100vw]"
     >
-      <GlassMaterial class="p-6">
+      <GlassMaterial class="p-6 mb-6">
         <SocialLinks class="gap-6" />
       </GlassMaterial>
-
-      <p class="mt-6">
-        If you are recruiter and want to hire me, you can download my resume below.
-      </p>
 
       <DownloadResume class="" />
     </div>
