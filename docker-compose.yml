@@ -26,6 +26,30 @@ services:
         reservations:
           memory: 128M
 
+  maintenance:
+    container_name: slnnzmtl-xyz-maintenance
+    build:
+      context: ./maintenance
+      dockerfile: Dockerfile
+    ports:
+      - "8080:80"
+    restart: unless-stopped
+    environment:
+      - VIRTUAL_HOST=slnnzmtl.xyz
+      - LETSENCRYPT_HOST=slnnzmtl.xyz
+      - LETSENCRYPT_EMAIL=slonanezametil@example.com
+    networks:
+      - nginx-proxy
+      - prod_network
+    deploy:
+      resources:
+        limits:
+          memory: 64M
+        reservations:
+          memory: 32M
+    volumes:
+      - ./certbot/conf:/etc/letsencrypt:ro
+
   prod:
     container_name: slnnzmtl-xyz-prod
     build:

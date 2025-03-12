@@ -70,9 +70,18 @@ else
     echo "✅ Certificate renewal check completed."
 fi
 
-echo "🏗️ Building and starting production container..."
-# Build and start the production container
-docker compose up -d prod --build
+echo "🚧 Starting maintenance mode..."
+# Start the maintenance container
+docker compose up -d maintenance
+
+echo "🏗️ Building production container in the background..."
+# Build the production container
+docker compose build prod
+
+echo "🔄 Switching from maintenance to production..."
+# Stop the maintenance container and start the production container
+docker compose down maintenance
+docker compose up -d prod
 
 # Wait for the container to be fully up
 echo "⏳ Waiting for the container to be fully up..."
