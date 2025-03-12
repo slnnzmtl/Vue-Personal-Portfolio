@@ -27,10 +27,10 @@
 
 <script lang="ts">
 import { defineComponent, computed } from "vue";
-import UnderstandBusinessIcon from "@/assets/icons/UnderstandBusinessIcon.vue";
-import EstimateProjectIcon from "@/assets/icons/EstimateProjectIcon.vue";
-import ImplementUiIcon from "@/assets/icons/ImplementUiIcon.vue";
-import BestExperienceIcon from "@/assets/icons/BestExperienceIcon.vue";
+import UnderstandBusinessIcon from "@/components/icons/UnderstandBusinessIcon.vue";
+import EstimateProjectIcon from "@/components/icons/EstimateProjectIcon.vue";
+import ImplementUiIcon from "@/components/icons/ImplementUiIcon.vue";
+import BestExperienceIcon from "@/components/icons/BestExperienceIcon.vue";
 import ScrollableContainer from "@/components/ui/ScrollableContainer.vue";
 import GlassMaterial from "@/components/ui/GlassMaterial.vue";
 

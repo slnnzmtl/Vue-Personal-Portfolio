@@ -6,3 +6,7 @@ export { default as PlusIcon } from "./PlusIcon.vue";
 export { default as MinusIcon } from "./MinusIcon.vue";
 export { default as ResetIcon } from "./ResetIcon.vue";
 export { default as DownloadIcon } from "./DownloadIcon.vue";
+export { default as BestExperienceIcon } from "./BestExperienceIcon.vue";
+export { default as ImplementUiIcon } from "./ImplementUiIcon.vue";
+export { default as EstimateProjectIcon } from "./EstimateProjectIcon.vue";
+export { default as UnderstandBusinessIcon } from "./UnderstandBusinessIcon.vue";
