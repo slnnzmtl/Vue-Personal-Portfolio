@@ -8,7 +8,11 @@
       <ProjectsScreen />
     </div>
 
-    <HireScreen class="max-w-screen-2xl w-full mx-auto" id="hire-screen" />
+    <HireScreen
+      v-if="showHireScreen"
+      class="max-w-screen-2xl w-full mx-auto"
+      id="hire-screen"
+    />
   </div>
 </template>
 
@@ -23,13 +27,9 @@ const ProjectsScreen = defineAsyncComponent({
   loader: () => import("@/components/screens/ProjectsScreen.vue"),
 });
 
-const HireScreen = defineAsyncComponent(() => {
-  return new Promise((resolve) => {
-    setTimeout(() => {
-      resolve(import("@/components/screens/HireScreen.vue"));
-    }, 1000);
-  });
-});
+const HireScreen = defineAsyncComponent(
+  () => import("@/components/screens/HireScreen.vue")
+);
 
 export default defineComponent({
   name: "MainView",
@@ -44,6 +44,7 @@ export default defineComponent({
 
   setup() {
     const projectsStore = useProjectsStore();
+    const showHireScreen = ref(false);
 
     const loadProjects = async () => {
       await projectsStore.fetchProjects();
@@ -51,9 +52,15 @@ export default defineComponent({
 
     onMounted(() => {
       loadProjects();
+
+      setTimeout(() => {
+        showHireScreen.value = true;
+      }, 1000);
     });
 
-    return {};
+    return {
+      showHireScreen,
+    };
   },
 });
 </script>

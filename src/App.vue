@@ -7,13 +7,9 @@ const BackgroundWrapper = defineAsyncComponent({
   loader: () => import("@/components/BackgroundWrapper.vue"),
 });
 
-const ModalProvider = defineAsyncComponent(() => {
-  return new Promise((resolve) => {
-    setTimeout(() => {
-      resolve(import("@/components/ModalProvider/ModalProvider.vue"));
-    }, 500);
-  });
-});
+const ModalProvider = defineAsyncComponent(
+  () => import("@/components/ModalProvider/ModalProvider.vue")
+);
 
 const NavigationMenu = defineAsyncComponent({
   loader: () => import("@/components/NavigationMenu.vue"),
@@ -29,13 +25,19 @@ export default defineComponent({
   setup() {
     provideModalService();
     const navService = provideNavigationService();
+    const showModalProvider = ref(false);
 
     onMounted(() => {
       window.dispatchEvent(new Event("scroll"));
+
+      setTimeout(() => {
+        showModalProvider.value = true;
+      }, 500);
     });
 
     return {
       navService,
+      showModalProvider,
     };
   },
 });
@@ -44,7 +46,7 @@ export default defineComponent({
 <template>
   <div>
     <BackgroundWrapper />
-    <ModalProvider />
+    <ModalProvider v-if="showModalProvider" />
     <NavigationMenu />
 
     <router-view v-slot="{ Component }">
