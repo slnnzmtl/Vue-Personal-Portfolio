@@ -68,16 +68,20 @@ export default defineComponent({
 <style scoped lang="scss">
 .form-group {
   position: relative;
-  margin-bottom: 1.5rem;
 }
 
 .input-container {
   position: relative;
+
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  border-radius: 0.5rem;
+  background-color: rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(10px);
 }
 
 .form-label {
   position: absolute;
-  top: 45%;
+  top: 50%;
   transform: translateY(-50%);
   left: 1rem;
   pointer-events: none;
@@ -88,22 +92,25 @@ export default defineComponent({
 }
 
 .form-input {
-  padding: 1rem;
-  padding-top: 1.5rem;
-  border: 1px solid rgba(255, 255, 255, 0.2);
-  border-radius: 0.5rem;
+  border: none;
+  outline: none;
+
+  margin: 1rem;
+  margin-top: 1.5rem;
+  margin-bottom: 0;
   font-size: 1rem;
   line-height: 1.5;
   width: 100%;
   box-sizing: border-box;
   resize: vertical;
-  background-color: rgba(255, 255, 255, 0.1);
-  backdrop-filter: blur(10px);
+  overflow-y: scroll;
+  padding-top: 0.2rem;
+  padding-bottom: 0.2rem;
+  @extend %scrollbar-hidden;
 
   &:focus {
     outline: none;
     border-color: var(--cyan);
-    box-shadow: 0 0 0 0.2rem rgba(0, 31, 63, 0.25);
   }
 
   &:focus + .form-label {

@@ -28,7 +28,7 @@ export default defineComponent({
         Web development with focus on user experience
       </p>
 
-      <p class="sm:text-base text-center text-gray-500 my-2 xl:text-left">
+      <p class="sm:text-base text-center text-white-800 my-2 xl:text-left">
         I bring a strong background in building complex, high-performance solutions across
         e-commerce, online learning, marketing, and sales domains.
       </p>

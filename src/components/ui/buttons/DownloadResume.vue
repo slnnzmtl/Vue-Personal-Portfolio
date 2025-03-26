@@ -35,7 +35,7 @@ export default defineComponent({
 </script>
 
 <template>
-  <p v-if="title" class="text-sm text-gray-500 mb-4">
+  <p v-if="title" class="text-sm text-white-800 mb-4">
     {{ title }}
   </p>
 

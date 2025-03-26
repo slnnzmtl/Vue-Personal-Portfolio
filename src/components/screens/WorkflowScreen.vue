@@ -1,7 +1,7 @@
 <template>
   <div class="workflow-screen py-12">
     <h2 class="text-left font-bold mb-10 px-6">How I deliver projects</h2>
-    <p class="text-lg sm:text-xl mb-8 text-justify px-6 text-gray-500">
+    <p class="text-lg sm:text-xl mb-8 text-justify px-6 text-white-800">
       My structured approach drives project success through deep understanding of business
       needs, precise estimation, exceptional UI design, and delivery that exceeds
       expectations.

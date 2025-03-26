@@ -78,7 +78,7 @@ export default defineComponent({
 <style scoped lang="scss">
 .form-group {
   position: relative;
-  margin-bottom: 1.5rem;
+  // margin-bottom: 1.5rem;
 }
 
 .input-container {
