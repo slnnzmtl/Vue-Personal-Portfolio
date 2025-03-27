@@ -96,7 +96,7 @@ export default defineComponent({
   outline: none;
 
   margin: 1rem;
-  margin-top: 1.5rem;
+  margin-top: 0;
   margin-bottom: 0;
   font-size: 1rem;
   line-height: 1.5;
@@ -104,7 +104,7 @@ export default defineComponent({
   box-sizing: border-box;
   resize: vertical;
   overflow-y: scroll;
-  padding-top: 0.2rem;
+  padding-top: 1.7rem;
   padding-bottom: 0.2rem;
   @extend %scrollbar-hidden;
 

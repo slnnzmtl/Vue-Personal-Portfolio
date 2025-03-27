@@ -30,11 +30,11 @@ export default defineComponent({
       <h2 class="font-bold mb-6">Ready to Work Together?</h2>
 
       <div class="hire-description mb-10">
-        <p class="text-lg text-gray-400 mb-4">
+        <p class="text-lg text-white-800 mb-4">
           I'm currently open to new opportunities and collaborations. If you're looking
           for a developer with a strong background, let's connect!
         </p>
-        <p class="text-lg text-gray-400">
+        <p class="text-lg text-white-800">
           Whether you need a full-stack developer for your team or have a project in mind,
           I'd love to discuss how we can work together to create something amazing.
         </p>

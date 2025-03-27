@@ -51,7 +51,7 @@ export default defineComponent({
 
     <router-view v-slot="{ Component }">
       <keep-alive>
-        <component :is="Component" />
+        <component class="animate-fade-in" :is="Component" />
       </keep-alive>
     </router-view>
   </div>
@@ -61,5 +61,20 @@ export default defineComponent({
 :root {
   background-color: black;
   @extend %scrollbar-tidy;
+}
+
+@keyframes fade-in {
+  from {
+    opacity: 0;
+    transform: translateY(2rem);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.animate-fade-in {
+  animation: fade-in 0.8s ease-out forwards;
 }
 </style>

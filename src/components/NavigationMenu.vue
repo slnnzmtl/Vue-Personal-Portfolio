@@ -73,6 +73,7 @@ export default defineComponent({
       <div class="nav-links pl-4">
         <router-link to="/" @click.stop="closeMenu"> Main </router-link>
         <router-link to="/projects" @click.stop="closeMenu"> Portfolio </router-link>
+        <router-link to="/automations" @click.stop="closeMenu"> Automations </router-link>
       </div>
 
       <div class="hire-button">

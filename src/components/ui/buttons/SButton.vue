@@ -68,6 +68,7 @@ export default defineComponent({
       isLarge && 'button--large',
       disabled && 'button--disabled',
       loading && 'button--loading',
+      'rounded-3xl',
     ]"
     :disabled="disabled"
     v-bind="$attrs"
