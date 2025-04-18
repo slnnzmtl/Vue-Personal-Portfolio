@@ -57,7 +57,7 @@ services:
       dockerfile: Dockerfile
       target: production-stage
     ports:
-      - "5173:5173"
+      - "80:80"
       - "443:443"
     restart: unless-stopped
     environment:
