@@ -32,7 +32,7 @@ mkdir -p ./certbot/conf
 # Handle SSL certificates
 if [ ! -d "./certbot/conf/live/slnnzmtl.xyz" ]; then
     echo "🔒 Generating new SSL certificates..."
-    docker compose -f docker-compose.prod.yml down
+    docker compose down
     docker run --rm -p 80:80 \
         -v $(pwd)/certbot/conf:/etc/letsencrypt \
         -v $(pwd)/certbot/www:/var/www/certbot \
@@ -45,7 +45,7 @@ if [ ! -d "./certbot/conf/live/slnnzmtl.xyz" ]; then
         -d slnnzmtl.xyz
 else
     echo "🔄 Renewing SSL certificates..."
-    docker compose -f docker-compose.prod.yml down
+    docker compose down
     docker run --rm -p 80:80 \
         -v $(pwd)/certbot/conf:/etc/letsencrypt \
         -v $(pwd)/certbot/www:/var/www/certbot \
