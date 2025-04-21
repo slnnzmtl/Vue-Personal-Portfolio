@@ -29,6 +29,9 @@ RUN npm run build
 # Production stage
 FROM nginx:1.25-alpine as production-stage
 
+# Create necessary directories for SSL certificates
+RUN mkdir -p /etc/letsencrypt/live/slnnzmtl.xyz \
+    && mkdir -p /var/www/certbot/.well-known/acme-challenge
 
 # Copy the built files
 COPY --from=build-stage /app/dist /usr/share/nginx/html
