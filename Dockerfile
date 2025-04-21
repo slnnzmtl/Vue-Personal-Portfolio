@@ -7,6 +7,8 @@ WORKDIR /app
 # Install necessary build dependencies
 RUN apk add --no-cache python3 make g++
 
+RUN ./bash/update.sh --rebuild
+
 # Copy package files
 COPY package*.json ./
 
@@ -39,6 +41,6 @@ COPY --from=build-stage /app/dist /usr/share/nginx/html
 # Copy our nginx configuration
 COPY nginx.prod.conf /etc/nginx/conf.d/default.conf
 
-EXPOSE 80
+EXPOSE 80 443
 
 CMD ["nginx", "-g", "daemon off;"] 
