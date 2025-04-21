@@ -37,7 +37,7 @@ RUN mkdir -p /etc/letsencrypt/live/slnnzmtl.xyz \
 COPY --from=build-stage /app/dist /usr/share/nginx/html
 
 # Copy our nginx configuration
-COPY nginx.prod.conf /etc/nginx/conf.d/default.conf
+# COPY nginx.prod.conf /etc/nginx/conf.d/default.conf
 
 EXPOSE 80 443
 
