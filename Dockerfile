@@ -7,8 +7,6 @@ WORKDIR /app
 # Install necessary build dependencies
 RUN apk add --no-cache python3 make g++
 
-RUN ./bash/update.sh --rebuild
-
 # Copy package files
 COPY package*.json ./
 
