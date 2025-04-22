@@ -1,0 +1,22 @@
+version: '3.8'
+
+services:
+  app:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: slnnzmtl-xyz-prod
+    restart: unless-stopped
+    networks:
+      - nginx-proxy
+    volumes:
+      - ./certbot/conf:/etc/letsencrypt
+      - ./certbot/www:/var/www/certbot
+    environment:
+      - VIRTUAL_HOST=slnnzmtl.xyz
+      - LETSENCRYPT_HOST=slnnzmtl.xyz
+      - LETSENCRYPT_EMAIL=slnnzmtl@example.com
+
+networks:
+  nginx-proxy:
+    external: true 
