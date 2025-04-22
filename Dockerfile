@@ -32,7 +32,7 @@ FROM nginx:1.25-alpine as production-stage
 # Copy the built files
 COPY --from=build-stage /app/dist /usr/share/nginx/html
 
-COPY ~/docker/slnnzmtl/nginx.prod.conf /etc/nginx/conf.d/default.conf
+COPY /root/docker/slnnzmtl/nginx.prod.conf /etc/nginx/conf.d/default.conf
 
 EXPOSE 80 443
 
