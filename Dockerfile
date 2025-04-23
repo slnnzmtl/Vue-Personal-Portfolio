@@ -29,11 +29,13 @@ RUN npm run build
 # Production stage
 FROM nginx:1.25-alpine as production-stage
 
+# Create the directory structure
+RUN mkdir -p /usr/share/nginx/html/assets
+
 # Copy the built files
-COPY --from=build-stage /app/dist /usr/share/nginx/html
+COPY --from=build-stage /app/dist/assets /usr/share/nginx/html/assets
+COPY --from=build-stage /app/dist/index.html /usr/share/nginx/html/
 
-COPY ./nginx.prod.conf /etc/nginx/conf.d/default.conf
-
-EXPOSE 8080 443
+EXPOSE 8080
 
 CMD ["nginx", "-g", "daemon off;"] 
