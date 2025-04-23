@@ -32,6 +32,4 @@ FROM nginx:1.25-alpine as production-stage
 # Copy the built files
 COPY --from=build-stage /app/dist/ /usr/share/nginx/html/
 
-EXPOSE 8080
-
 CMD ["nginx", "-g", "daemon off;"] 
