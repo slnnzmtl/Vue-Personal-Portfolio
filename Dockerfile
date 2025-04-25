@@ -32,4 +32,12 @@ FROM nginx:1.25-alpine as production-stage
 # Copy the built files
 COPY --from=build-stage /app/dist/ /usr/share/nginx/html/
 
+# Copy custom nginx configuration
+# COPY nginx.prod.conf /usr/share/nginx/html/
+
+# Copy and set permissions for entrypoint script
+# COPY docker-entrypoint.sh /docker-entrypoint.sh
+# RUN chmod +x /docker-entrypoint.sh
+
+# ENTRYPOINT ["/docker-entrypoint.sh"]
 CMD ["nginx", "-g", "daemon off;"] 
