@@ -4,6 +4,7 @@
 
 <script lang="ts">
 import { defineComponent, computed, defineAsyncComponent } from "vue";
+import { IconName } from "@/types/icons";
 
 const iconMap = {
   UnderstandBusinessIcon: () => import("@/components/icons/UnderstandBusinessIcon.vue"),
@@ -13,8 +14,6 @@ const iconMap = {
   CloseIcon: () => import("@/components/icons/CloseIcon.vue"),
   MailIcon: () => import("@/components/icons/MailIcon.vue"),
 } as const;
-
-type IconName = keyof typeof iconMap;
 
 export default defineComponent({
   name: "SIcon",

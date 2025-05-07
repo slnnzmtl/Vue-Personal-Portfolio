@@ -36,6 +36,15 @@ import GlassMaterial from "@/components/ui/GlassMaterial.vue";
 import { defineComponent, computed } from "vue";
 import productDeliverySteps from "@/assets/product-delivery-steps.json";
 import SIcon from "@/components/ui/SIcon.vue";
+import { IconName } from "@/types/icons";
+
+interface Skill {
+  id: string;
+  icon: IconName;
+  title: string;
+  description: string;
+  strategies: string[];
+}
 
 export default defineComponent({
   name: "SkillCardModal",
@@ -56,8 +65,10 @@ export default defineComponent({
       emit("close");
     };
 
-    const skill = computed(() => {
-      return productDeliverySteps.find((step) => step.id === props.id);
+    const skill = computed<Skill | undefined>(() => {
+      return productDeliverySteps.find((step) => step.id === props.id) as
+        | Skill
+        | undefined;
     });
 
     return {

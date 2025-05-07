@@ -38,10 +38,11 @@ import SButton from "../ui/buttons/SButton.vue";
 import SIcon from "../ui/SIcon.vue";
 import { useModalService } from "@/composables/useModal";
 import { ModalKey } from "@/modals/types";
+import { IconName, ICON_NAMES } from "@/types/icons";
 
 interface WorkflowPoint {
   id: string;
-  icon: string;
+  icon: IconName;
   title: string;
   description: string;
 }
@@ -60,25 +61,25 @@ export default defineComponent({
     const workflowPoints = computed<WorkflowPoint[]>(() => [
       {
         id: "understand-business-needs",
-        icon: "UnderstandBusinessIcon",
+        icon: ICON_NAMES.UNDERSTAND_BUSINESS,
         title: "Understand Business Needs",
         description: "Translating business goals into actionable technical requirements",
       },
       {
         id: "estimate-a-project",
-        icon: "EstimateProjectIcon",
+        icon: ICON_NAMES.ESTIMATE_PROJECT,
         title: "Estimate a Project",
         description: "Delivering realistic timelines with transparent resource planning",
       },
       {
         id: "focus-on-ux",
-        icon: "ImplementUiIcon",
+        icon: ICON_NAMES.IMPLEMENT_UI,
         title: "Focus on UX",
         description: "Building intuitive interfaces that users love to interact with",
       },
       {
         id: "achieve-best-experience",
-        icon: "BestExperienceIcon",
+        icon: ICON_NAMES.BEST_EXPERIENCE,
         title: "Achieve the Best Experience",
         description: "Refining solutions to exceed client and user expectations",
       },

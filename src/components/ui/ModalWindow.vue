@@ -20,9 +20,9 @@ export default defineComponent({
   setup(props, { emit }) {
     const { closeModal } = useModalService();
 
-    const onClose = (result: boolean | null) => {
-      closeModal(props.name, result);
-      emit("close", result);
+    const onClose = () => {
+      closeModal(props.name, null);
+      emit("close", null);
     };
 
     const stopPropagation = (event: MouseEvent) => {
