@@ -19,7 +19,7 @@
             class="workflow-item flex flex-col items-center p-3 rounded-lg w-full h-full"
           >
             <SIcon :name="point.icon" class="max-w-16" />
-            <h3 class="font-semibold mb-2">{{ point.title }}</h3>
+            <h3 class="text-xl font-semibold mb-2">{{ point.title }}</h3>
             <p class="text-sm text-center text-gray-400">
               {{ point.description }}
             </p>
