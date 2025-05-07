@@ -1,12 +1,14 @@
 <template>
   <Teleport to="body">
-    <div v-for="modal in activeModals" :key="modal.name" class="modal-overlay">
-      <component
-        :is="modal.name"
-        v-bind="modal.props"
-        @close="closeModal(modal.name, $event)"
-      />
-    </div>
+    <TransitionGroup name="modal">
+      <div v-for="modal in activeModals" :key="modal.name" class="modal-overlay">
+        <component
+          :is="modal.name"
+          v-bind="modal.props"
+          @close="closeModal(modal.name, $event)"
+        />
+      </div>
+    </TransitionGroup>
   </Teleport>
 </template>
 

@@ -9,17 +9,22 @@
 
     <ScrollableContainer>
       <div class="workflow-items flex flex-nowrap gap-4 pt-4 px-6">
-        <GlassMaterial
+        <button
           v-for="(point, index) in workflowPoints"
           :key="index"
-          class="workflow-item flex flex-col items-center p-3 bg-gray-800 rounded-lg min-w-[250px]"
+          class="w-full max-w-[25%] min-w-[250px]"
+          @click="handleModalOpen(point.id)"
         >
-          <component class="max-w-16" :is="point.icon" />
-          <h3 class="font-semibold mb-2">{{ point.title }}</h3>
-          <p class="text-sm text-center text-gray-400">
-            {{ point.description }}
-          </p>
-        </GlassMaterial>
+          <GlassMaterial
+            class="workflow-item flex flex-col items-center p-3 rounded-lg w-full h-full"
+          >
+            <SIcon :name="point.icon" class="max-w-16" />
+            <h3 class="font-semibold mb-2">{{ point.title }}</h3>
+            <p class="text-sm text-center text-gray-400">
+              {{ point.description }}
+            </p>
+          </GlassMaterial>
+        </button>
       </div>
     </ScrollableContainer>
   </div>
@@ -27,15 +32,16 @@
 
 <script lang="ts">
 import { defineComponent, computed } from "vue";
-import UnderstandBusinessIcon from "@/components/icons/UnderstandBusinessIcon.vue";
-import EstimateProjectIcon from "@/components/icons/EstimateProjectIcon.vue";
-import ImplementUiIcon from "@/components/icons/ImplementUiIcon.vue";
-import BestExperienceIcon from "@/components/icons/BestExperienceIcon.vue";
 import ScrollableContainer from "@/components/ui/ScrollableContainer.vue";
 import GlassMaterial from "@/components/ui/GlassMaterial.vue";
+import SButton from "../ui/buttons/SButton.vue";
+import SIcon from "../ui/SIcon.vue";
+import { useModalService } from "@/composables/useModal";
+import { ModalKey } from "@/modals/types";
 
 interface WorkflowPoint {
-  icon: any;
+  id: string;
+  icon: string;
   title: string;
   description: string;
 }
@@ -43,45 +49,56 @@ interface WorkflowPoint {
 export default defineComponent({
   name: "WorkflowScreen",
   components: {
-    UnderstandBusinessIcon,
-    EstimateProjectIcon,
-    ImplementUiIcon,
-    BestExperienceIcon,
     ScrollableContainer,
     GlassMaterial,
+    SButton,
+    SIcon,
   },
   setup() {
+    const { openModal } = useModalService();
+
     const workflowPoints = computed<WorkflowPoint[]>(() => [
       {
-        icon: UnderstandBusinessIcon,
+        id: "understand-business-needs",
+        icon: "UnderstandBusinessIcon",
         title: "Understand Business Needs",
         description: "Translating business goals into actionable technical requirements",
       },
       {
-        icon: EstimateProjectIcon,
+        id: "estimate-a-project",
+        icon: "EstimateProjectIcon",
         title: "Estimate a Project",
         description: "Delivering realistic timelines with transparent resource planning",
       },
       {
-        icon: ImplementUiIcon,
+        id: "focus-on-ux",
+        icon: "ImplementUiIcon",
         title: "Focus on UX",
         description: "Building intuitive interfaces that users love to interact with",
       },
       {
-        icon: BestExperienceIcon,
+        id: "achieve-best-experience",
+        icon: "BestExperienceIcon",
         title: "Achieve the Best Experience",
         description: "Refining solutions to exceed client and user expectations",
       },
     ]);
 
+    const handleModalOpen = async (id: string) => {
+      await openModal(ModalKey.SkillCard, {
+        id,
+      });
+    };
+
     return {
       workflowPoints,
+      handleModalOpen,
     };
   },
 });
 </script>
 
-<style scoped>
+<style lang="scss" scoped>
 .scrollable-container {
   -ms-overflow-style: none; /* IE and Edge */
   scrollbar-width: none; /* Firefox */
@@ -92,17 +109,17 @@ export default defineComponent({
 }
 
 .workflow-item {
-  max-width: 25%;
-  width: 100%;
   transition: transform 0.3s ease;
-  background: rgba(0, 247, 255, 0.1);
+  animation: none !important;
+  background: rgba(214, 109, 255, 0.1);
+
+  &:hover {
+    transform: translateY(-10px);
+    cursor: pointer;
+  }
 }
 
 @media (min-width: 1024px) {
-  .workflow-item:hover {
-    transform: translateY(-10px);
-  }
-
   .workflow-items {
     justify-content: center;
   }

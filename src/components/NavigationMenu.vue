@@ -7,8 +7,6 @@ import { defineComponent, defineAsyncComponent, computed } from "vue";
 
 const HireMeButton = defineAsyncComponent({
   loader: () => import("@/components/ui/buttons/HireMeButton.vue"),
-  delay: 1000,
-  timeout: 3000,
   suspensible: true,
 });
 
@@ -100,7 +98,6 @@ nav {
     transform: translateY(-100%);
   }
 
-  // Mobile-specific styles
   &.mobile-view {
     .burger-button {
       display: flex;
@@ -127,7 +124,6 @@ nav {
       right: 18px;
     }
 
-    // Mobile menu open state
     &.menu-open {
       height: 100vh;
       padding-bottom: 2rem;
@@ -156,9 +152,8 @@ nav {
     }
   }
 
-  // Desktop and mobile common styles for menu open
   &.menu-open {
-    transform: translateY(0); // Ensure menu is visible when open
+    transform: translateY(0);
 
     .burger-button {
       span {
@@ -193,7 +188,7 @@ nav {
     top: 20px;
     left: 20px;
 
-    display: none; // Hidden by default (desktop)
+    display: none;
     flex-direction: column;
     justify-content: space-between;
     width: 24px;

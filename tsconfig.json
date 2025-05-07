@@ -19,5 +19,7 @@
       "@/modals/*": ["./src/modals/*"],
     },
     "noEmit": true,
+    "resolveJsonModule": true,
+    "esModuleInterop": true
   },
 }

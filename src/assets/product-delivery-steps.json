@@ -1,0 +1,53 @@
+[
+  {
+    "id": "understand-business-needs",
+    "title": "Understand Business Needs",
+    "description": "To build the right solution, I begin by understanding the why behind the product. I work closely with stakeholders to translate business goals into clear, actionable technical requirements. This involves asking the right questions, identifying core user pain points, and aligning development work with measurable business outcomes. My approach ensures that every line of code contributes to real value.",
+    "strategies": [
+      "Conduct stakeholder interviews and workshops",
+      "Create user personas and customer journeys",
+      "Use tools like Miro or FigJam for mapping needs",
+      "Translate goals into epics and user stories"
+    ],
+    "icon": "UnderstandBusinessIcon"
+  },
+  {
+    "id": "estimate-a-project",
+    "title": "Estimate a Project",
+    "description": "Accurate estimation is key to managing expectations and delivering on time. I break down complex features into manageable tasks, assess risks early, and account for both knowns and unknowns. I’m transparent about resource needs, timelines, and trade-offs, helping teams and clients make informed decisions and avoid costly surprises later in the project.",
+    "strategies": [
+      "Break features into atomic tasks using Work Breakdown Structure (WBS)",
+      "Use planning poker or t-shirt sizing for team estimates",
+      "Create optimistic, realistic, and pessimistic scenarios",
+      "Leverage experience from similar past projects",
+      "Track estimates vs actuals using tools like Jira or Asana"
+    ],
+    "icon": "EstimateProjectIcon"
+  },
+  {
+    "id": "focus-on-ux",
+    "title": "Focus on UX",
+    "description": "User experience is more than just design — it’s about how it feels to use your product. I prioritize usability, clarity, and responsiveness in every interface. Through user testing, iterative design, and front-end craftsmanship, I create experiences that are enjoyable and efficient. My goal is for users to feel confident, not confused, when navigating what I build.",
+    "strategies": [
+      "Collaborate closely with designers using Figma",
+      "Apply accessibility best practices (WCAG 2.1)",
+      "Run usability testing with tools like Maze or Hotjar",
+      "Optimize interaction flows and reduce friction",
+      "Use component libraries or design systems for consistency"
+    ],
+    "icon": "ImplementUiIcon"
+  },
+  {
+    "id": "achieve-best-experience",
+    "title": "Achieve the Best Experience",
+    "description": "Delivering the best experience requires polish. I go beyond “just working” by refining interactions, improving performance, and ensuring accessibility. I listen to feedback, test edge cases, and iterate until the product not only meets requirements — but exceeds expectations. It’s about building something users love and stakeholders are proud of.",
+    "strategies": [
+      "Perform performance audits using Lighthouse or WebPageTest",
+      "Implement smooth animations with Framer Motion or GSAP",
+      "Ensure responsive design across all breakpoints",
+      "Include keyboard and screen reader navigation support",
+      "Collect feedback early and iterate quickly"
+    ],
+    "icon": "BestExperienceIcon"
+  }
+]

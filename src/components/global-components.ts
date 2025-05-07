@@ -27,5 +27,13 @@ export default {
         errorComponent,
       }),
     );
+    app.component(
+      ModalKey.SkillCard,
+      defineAsyncComponent({
+        loader: () => import("@/modals/SkillCardModal.vue"),
+        loadingComponent,
+        errorComponent,
+      }),
+    );
   },
 };

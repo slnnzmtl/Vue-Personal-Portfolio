@@ -27,9 +27,6 @@ export default defineComponent({
 <style lang="scss">
 .avatar-background {
   position: relative;
-  background: rgba(255, 255, 255, 0);
-  background-size: 200% 200%;
-  animation: gradient-rotate 6s ease-in-out infinite;
   border-radius: 50% !important;
   overflow: hidden;
   display: flex;
@@ -56,18 +53,6 @@ export default defineComponent({
     width: 100%;
     height: 100%;
     object-fit: cover;
-  }
-}
-
-@keyframes gradient-rotate {
-  0% {
-    background-position: 0% 50%;
-  }
-  50% {
-    background-position: 100% 50%;
-  }
-  100% {
-    background-position: 0% 50%;
   }
 }
 </style>
