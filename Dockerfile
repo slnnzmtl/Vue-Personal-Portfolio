@@ -32,8 +32,8 @@ FROM nginx:stable-alpine as production-stage
 # Copy the built files
 COPY --from=build-stage /app/dist /usr/share/nginx/html
 
-# Copy our nginx configuration
-COPY nginx.prod.conf /etc/nginx/conf.d/default.conf
+# # Copy our nginx configuration
+# COPY nginx.prod.conf /etc/nginx/conf.d/default.conf
 
 EXPOSE 80
 

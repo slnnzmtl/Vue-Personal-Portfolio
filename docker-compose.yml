@@ -1,87 +1,38 @@
-version: '3.8'
-
 services:
-  dev:
-    profiles: ["dev"]
-    container_name: slnnzmtl-xyz-dev
-    build:
-      context: .
-      dockerfile: Dockerfile
-      target: build-stage
-    ports:
-      - "5173:5173"
-    volumes:
-      - ./:/app
-      - /app/node_modules
-    command: npm run dev
-    environment:
-      - NODE_ENV=development
-      - VITE_HOST=0.0.0.0
-    networks:
-      - dev_network
-    deploy:
-      resources:
-        limits:
-          memory: 384M
-        reservations:
-          memory: 128M
 
-  maintenance:
-    container_name: slnnzmtl-xyz-maintenance
-    build:
-      context: ./maintenance
-      dockerfile: Dockerfile
-    ports:
-      - "8080:80"
-    restart: unless-stopped
-    environment:
-      - VIRTUAL_HOST=slnnzmtl.xyz
-      - LETSENCRYPT_HOST=slnnzmtl.xyz
-      - LETSENCRYPT_EMAIL=slonanezametil@example.com
-    networks:
-      - nginx-proxy
-      - prod_network
-    deploy:
-      resources:
-        limits:
-          memory: 64M
-        reservations:
-          memory: 32M
-    volumes:
-      - ./certbot/conf:/etc/letsencrypt:ro
-
-  prod:
-    container_name: slnnzmtl-xyz-prod
+  portfolio-service:
+    container_name: portfolio-service
     build:
       context: .
       dockerfile: Dockerfile
       target: production-stage
-    ports:
-      - "80:80"
-      - "443:443"
     restart: unless-stopped
-    environment:
-      - VIRTUAL_HOST=slnnzmtl.xyz
-      - LETSENCRYPT_HOST=slnnzmtl.xyz
-      - LETSENCRYPT_EMAIL=slonanezametil@example.com
     networks:
       - nginx-proxy
-      - prod_network
+    volumes:
+      - ./nginx.prod.conf:/etc/nginx/nginx.conf
+    environment:
+      - VIRTUAL_HOST=slnnzmtl.xyz
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost"]
+      interval: 10s
+      timeout: 30s
+      retries: 3
+      start_period: 40s
     deploy:
       resources:
         limits:
-          memory: 128M
+          cpus: '1'
+          memory: 1G
         reservations:
-          memory: 64M
-    volumes:
-      - ./certbot/www:/var/www/certbot:ro
-      - ./certbot/conf:/etc/letsencrypt:ro
-      - ./nginx.prod.conf:/etc/nginx/conf.d/default.conf:ro
+          cpus: '0.5'
+          memory: 256M
+    security_opt:
+      - no-new-privileges:true
+
+volumes:
+  html:
 
 networks:
-  dev_network:
-    name: dev_network
   nginx-proxy:
     external: true
-  prod_network:
-    name: prod_network 
