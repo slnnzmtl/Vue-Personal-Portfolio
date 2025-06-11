@@ -8,7 +8,7 @@
         business objectives with tailored solutions that fit your needs.
       </p>
 
-      <div class="flex gap-8 items-center">
+      <div class="flex flex-col lg:flex-row gap-8 items-center">
         <GlassMaterial class="services-table-container p-0 mb-8">
           <div class="overflow-x-auto">
             <table class="services-table w-full">
@@ -36,11 +36,9 @@
           </div>
         </GlassMaterial>
 
-        <div class="mt-16 h-96 flex flex-col justify-center">
+        <div class="mt-8 md:mt-16 h-96 flex flex-col justify-center">
           <ReadyToWorkTogether class="mx-auto text-center" :show-contacts="false">
-            <SButton type="primary" class="w-full sm:w-auto" @click="onContactClick">
-              Contact me
-            </SButton>
+            <SButton type="primary" @click="onContactClick"> Contact me </SButton>
           </ReadyToWorkTogether>
         </div>
       </div>
@@ -187,6 +185,14 @@ export default defineComponent({
         td {
           padding: 0.5rem 0.25rem;
           font-size: 0.85rem;
+
+          &:first-child {
+            padding-left: 1rem;
+          }
+
+          &:last-child {
+            padding-right: 1rem;
+          }
         }
 
         th:nth-child(2),

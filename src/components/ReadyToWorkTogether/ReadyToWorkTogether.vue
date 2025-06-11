@@ -43,7 +43,7 @@ export default defineComponent({
       <SocialLinks />
     </GlassMaterial>
 
-    <div class="pt-6" v-if="$slots.default">
+    <div class="pt-4" v-if="$slots.default">
       <slot></slot>
     </div>
   </div>
