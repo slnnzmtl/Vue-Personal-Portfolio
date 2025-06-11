@@ -3,15 +3,17 @@ services:
     container_name: slnnzmtl-xyz-dev
     build:
       context: .
-      dockerfile: Dockerfile
-      target: production-stage
+      dockerfile: Dockerfile.dev
     ports:
-      - "80:80"
+      - "5173:5173"
     environment:
       - VIRTUAL_HOST=localhost
+    volumes:
+      - .:/app
+      - /app/node_modules
     deploy:
       resources:
         limits:
-          memory: 128M
+          memory: 256M
         reservations:
-          memory: 64M
+          memory: 128M
