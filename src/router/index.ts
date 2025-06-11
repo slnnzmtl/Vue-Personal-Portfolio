@@ -46,6 +46,14 @@ const routes: RouteRecordRaw[] = [
       title: "Automations",
     },
   },
+  {
+    path: "/services",
+    name: "services",
+    component: () => import("../views/ServicesView.vue"),
+    meta: {
+      title: "Services",
+    },
+  },
 ];
 
 const router = createRouter({

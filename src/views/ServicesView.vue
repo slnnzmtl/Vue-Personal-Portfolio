@@ -43,7 +43,6 @@ import { defineComponent } from "vue";
 import ScrollableContainer from "@/components/ui/ScrollableContainer.vue";
 import GlassMaterial from "@/components/ui/GlassMaterial.vue";
 import SButton from "@/components/ui/buttons/SButton.vue";
-import { useNavigation } from "@/composables/useNavigation";
 import { useModalService } from "@/composables/useModal";
 import { ModalKey } from "@/modals/types";
 
