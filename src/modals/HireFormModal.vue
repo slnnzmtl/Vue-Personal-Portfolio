@@ -32,11 +32,9 @@ export default defineComponent({
     <div
       class="hire-form-modal flex flex-col gap-4 items-left justify-center max-w-[100vw]"
     >
-      <GlassMaterial class="p-6 mb-6">
-        <SocialLinks class="gap-6" />
-      </GlassMaterial>
-
-      <DownloadResume class="" />
+      <ReadyToWorkTogether class="text-center">
+        <DownloadResume type="text" />
+      </ReadyToWorkTogether>
     </div>
   </ModalWindow>
 </template>

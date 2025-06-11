@@ -46,6 +46,10 @@ export default defineComponent({
 <template>
   <p v-if="title" class="text-sm text-white-800 mb-4">
     {{ title }}
+
+    <button v-if="!isButton" type="button" @click="handleDownload">
+      <span class="button-text underline cursor-pointer">{{ buttonText }}</span>
+    </button>
   </p>
 
   <SButton

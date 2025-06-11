@@ -16,6 +16,10 @@ export default defineComponent({
       type: String,
       default: "Ready to Work Together?",
     },
+    showContacts: {
+      type: Boolean,
+      default: true,
+    },
   },
 });
 </script>
@@ -35,7 +39,7 @@ export default defineComponent({
       </p>
     </div>
 
-    <GlassMaterial class="p-4 mb-6">
+    <GlassMaterial v-if="showContacts" class="p-4 mb-6">
       <SocialLinks />
     </GlassMaterial>
 

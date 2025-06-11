@@ -43,5 +43,13 @@ export default {
         errorComponent,
       }),
     );
+    app.component(
+      'SButton',
+      defineAsyncComponent({
+        loader: () => import("@/components/ui/buttons/SButton.vue"),
+        loadingComponent,
+        errorComponent,
+      }),
+    );
   },
 };

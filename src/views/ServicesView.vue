@@ -1,39 +1,49 @@
 <template>
   <div class="services-view max-w-[1800px] w-full mx-auto flex justify-center px-6">
     <div class="lg:flex-nowrap gap-4 text-left w-full pt-36">
-      <p class="text-2xl sm:text-4xl font-bold mb-8">I provide the following services:</p>
-      <p class="text-lg xl:text-xl mb-8">
+      <p class="text-2xl sm:text-4xl font-bold mb-8">My services</p>
+      <p class="description text-lg xl:text-xl mb-8">
         I specialize in web development, CRM integration, WordPress development, chat
         bots, AI agents, and automation solutions. My goal is to help you achieve your
         business objectives with tailored solutions that fit your needs.
       </p>
 
-      <GlassMaterial class="services-table-container p-0 mb-8">
-        <div class="overflow-x-auto">
-          <table class="services-table w-full">
-            <thead>
-              <tr>
-                <th class="text-left py-4 px-4 text-cyan">Service</th>
-                <th class="text-left py-4 px-4 text-cyan">Description</th>
-                <th class="text-left py-4 px-8 text-cyan">Price</th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr v-for="(service, index) in services" :key="index" class="service-row">
-                <td class="px-4 font-semibold">{{ service.name }}</td>
-                <td class="px-4">
-                  <div class="service-description">
-                    {{ service.description }}
-                  </div>
-                </td>
-                <td class="py-6 px-8 font-semibold text-cyan text-nowrap">
-                  {{ service.price }}
-                </td>
-              </tr>
-            </tbody>
-          </table>
+      <div class="flex gap-8 items-center">
+        <GlassMaterial class="services-table-container p-0 mb-8">
+          <div class="overflow-x-auto">
+            <table class="services-table w-full">
+              <thead>
+                <tr>
+                  <th class="text-left py-4 px-4 text-cyan">Service</th>
+                  <th class="text-left py-4 px-4 text-cyan">Description</th>
+                  <th class="text-left py-4 px-8 text-cyan">Price</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr v-for="(service, index) in services" :key="index" class="service-row">
+                  <td class="px-4 font-semibold">{{ service.name }}</td>
+                  <td class="px-4">
+                    <div class="service-description">
+                      {{ service.description }}
+                    </div>
+                  </td>
+                  <td class="py-6 px-8 font-semibold text-cyan text-nowrap">
+                    {{ service.price }}
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </GlassMaterial>
+
+        <div class="mt-16 h-96 flex flex-col justify-center">
+          <ReadyToWorkTogether class="mx-auto text-center" :show-contacts="false">
+            <SButton type="primary" class="w-full sm:w-auto" @click="onContactClick">
+              Contact me
+            </SButton>
+          </ReadyToWorkTogether>
         </div>
-      </GlassMaterial>
+      </div>
     </div>
   </div>
 </template>
@@ -111,6 +121,10 @@ export default defineComponent({
 </script>
 
 <style lang="scss" scoped>
+.description {
+  color: var(--white-600);
+}
+
 .services-table-container {
   .services-table {
     border-collapse: separate;
