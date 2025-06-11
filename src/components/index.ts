@@ -9,4 +9,5 @@ export { MarkupViewer } from "./MarkupViewer";
 export { ModalProvider } from "./ModalProvider";
 export { default as ControlPanel } from "./ControlPanel.vue";
 export { default as SocialLinks } from "./SocialLinks/SocialLinks.vue";
+export { default as Footer } from "./Footer.vue";
 export * from "./ui/";

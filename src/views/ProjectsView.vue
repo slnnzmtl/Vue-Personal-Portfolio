@@ -53,16 +53,19 @@ import {
   onBeforeUnmount,
   defineAsyncComponent,
   onMounted,
+  onBeforeMount,
+  onUpdated,
 } from "vue";
 import { useProjectsStore } from "@/stores/projectsStore";
 import ScrollableContainer from "@/components/ui/ScrollableContainer.vue";
 import { Project } from "@/stores/projectTypes";
-import { useRoute } from "vue-router";
+import { onBeforeRouteLeave, useRoute } from "vue-router";
 import router from "@/router";
 import { storeToRefs } from "pinia";
 import { useWindowSize } from "@/composables/useWindowSize";
 import { useNavigation } from "@/composables/useNavigation";
 import { debounce } from "@/utils/debounce";
+import { useFooter } from "@/composables";
 
 const MarkupViewer = defineAsyncComponent({
   loader: () => import("@/components/MarkupViewer/MarkupViewer.vue"),
@@ -89,6 +92,7 @@ export default defineComponent({
     const route = useRoute();
     const { width } = useWindowSize();
     const { handleScroll } = useNavigation();
+    const { hideFooter, showFooter } = useFooter();
 
     const isLgLayout = computed(() => width.value > 1024);
 
@@ -101,6 +105,14 @@ export default defineComponent({
       return (
         sortedProjects.value.find((p) => p.id === Number(activeProjectId.value)) || null
       );
+    });
+
+    onBeforeMount(() => {
+      hideFooter();
+    });
+
+    onUpdated(() => {
+      hideFooter();
     });
 
     onMounted(() => {
@@ -118,6 +130,15 @@ export default defineComponent({
         }, 100);
       }
     };
+
+    onBeforeRouteLeave((to) => {
+      if (to.path.includes("/projects")) {
+        return;
+      }
+
+      projectsStore.clearFilters();
+      showFooter();
+    });
 
     const onScroll = (e: Event) => {
       handleScroll(e);
