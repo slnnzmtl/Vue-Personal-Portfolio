@@ -1,7 +1,7 @@
 <template>
   <div class="services-view max-w-[1800px] w-full mx-auto flex justify-center px-6">
     <div class="lg:flex-nowrap gap-4 text-left w-full pt-36">
-      <p class="text-2xl sm:text-4xl font-bold mb-8">I provide next services</p>
+      <p class="text-2xl sm:text-4xl font-bold mb-8">I provide the following services:</p>
       <p class="text-lg xl:text-xl mb-8">
         I specialize in web development, CRM integration, WordPress development, chat
         bots, AI agents, and automation solutions. My goal is to help you achieve your

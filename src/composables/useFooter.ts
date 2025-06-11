@@ -28,14 +28,12 @@ export function provideFooterService() {
   }
 
   const hideFooter = () => {
-    console.log('hide footer called');
     if (!footerState) return;
     footerState.isFooterVisible.value = false;
   };
 
   const showFooter = () => {
     if (!footerState) return;
-    console.log('show footer called');
     footerState.isFooterVisible.value = true;
   };
 
