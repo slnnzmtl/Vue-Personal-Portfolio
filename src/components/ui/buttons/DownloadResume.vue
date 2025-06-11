@@ -18,6 +18,10 @@ export default defineComponent({
       type: String,
       default: "Download CV",
     },
+    type: {
+      type: String,
+      default: "text",
+    },
   },
   setup() {
     const handleDownload = () => {
@@ -31,6 +35,11 @@ export default defineComponent({
       handleDownload,
     };
   },
+  computed: {
+    isButton(): boolean {
+      return this.type === "button";
+    },
+  },
 });
 </script>
 
@@ -43,6 +52,7 @@ export default defineComponent({
     class="download-resume-button"
     size="large"
     type="primary"
+    v-if="isButton"
     @click="handleDownload"
   >
     <div class="button-content">

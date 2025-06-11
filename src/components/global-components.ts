@@ -35,5 +35,13 @@ export default {
         errorComponent,
       }),
     );
+    app.component(
+      'ReadyToWorkTogether',
+      defineAsyncComponent({
+        loader: () => import("@/components/ReadyToWorkTogether/ReadyToWorkTogether.vue"),
+        loadingComponent,
+        errorComponent,
+      }),
+    );
   },
 };
