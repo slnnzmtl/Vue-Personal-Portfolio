@@ -1,43 +1,43 @@
-# Build stage
 FROM node:20-alpine as build-stage
 
-# Set proper working directory
 WORKDIR /app
 
-# Install necessary build dependencies
+# Consider if all these are strictly necessary for your project's dependencies
 RUN apk add --no-cache python3 make g++
 
-# Copy package files
 COPY package*.json ./
 
-# Install dependencies
 RUN npm install
 
-# Copy project files
 COPY . .
 
-# Set environment variables
-ENV VITE_HOST=0.0.0.0
-ENV NODE_ENV=production
-
-# Build the app with adjusted memory allocation
-ENV NODE_OPTIONS="--max-old-space-size=1024"
-
-# Build the app
 RUN npm run build
 
-# Production stage
 FROM nginx:1.25-alpine as production-stage
 
-# Copy the built files
+# Create a non-root user and group
+RUN addgroup -S appgroup && adduser -S appuser -G appgroup
+
+# Copy built assets
 COPY --from=build-stage /app/dist/ /usr/share/nginx/html/
 
-# Copy custom nginx configuration
-# COPY nginx.prod.conf /usr/share/nginx/html/
+# Copy custom nginx configurations
+COPY nginx.main.conf /etc/nginx/nginx.conf
+COPY nginx.prod.conf /etc/nginx/conf.d/default.conf
 
-# Copy and set permissions for entrypoint script
-# COPY docker-entrypoint.sh /docker-entrypoint.sh
-# RUN chmod +x /docker-entrypoint.sh
+# Ensure nginx logs go to stdout/stderr
+RUN ln -sf /dev/stdout /var/log/nginx/access.log \
+    && ln -sf /dev/stderr /var/log/nginx/error.log
 
-# ENTRYPOINT ["/docker-entrypoint.sh"]
-CMD ["nginx", "-g", "daemon off;"] 
+# Create Nginx runtime directory and then change ownership
+RUN mkdir -p /run/nginx && \
+    chown -R appuser:appgroup /usr/share/nginx/html /var/log/nginx /var/cache/nginx /run/nginx && \
+    chmod -R 755 /usr/share/nginx/html /var/log/nginx /var/cache/nginx /run/nginx
+
+# Switch to the non-root user
+USER appuser
+
+# Expose port 80 (standard HTTP port)
+EXPOSE 80
+
+CMD ["nginx", "-g", "daemon off;"]

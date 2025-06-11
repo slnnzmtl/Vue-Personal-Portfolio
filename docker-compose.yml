@@ -13,7 +13,6 @@ services:
       - LETSENCRYPT_EMAIL=slonanezametil@example.com
     networks:
       - nginx-proxy
-      - prod_network
     deploy:
       resources:
         limits:
@@ -39,7 +38,6 @@ services:
       - LETSENCRYPT_EMAIL=slonanezametil@example.com
     networks:
       - nginx-proxy
-      - prod_network
     deploy:
       resources:
         limits:
@@ -54,5 +52,3 @@ services:
 networks:
   nginx-proxy:
     external: true
-  prod_network:
-    name: prod_network 
