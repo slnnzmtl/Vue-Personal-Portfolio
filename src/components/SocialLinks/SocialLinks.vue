@@ -1,8 +1,8 @@
 <template>
   <div
-    class="social-links flex flex-wrap flex-col sm:flex-row justify-around gap-4 md:gap-8"
+    class="social-links flex flex-wrap flex-col sm:flex-row justify-around gap-4 md:gap-8 px-4"
   >
-    <p class="text-md flex items-center">Contact me:</p>
+    <p v-if="title" class="text-md flex items-center">{{ title }}</p>
     <SButton
       v-for="link in displayLinks"
       :key="link.name"
@@ -31,7 +31,7 @@
 </template>
 
 <script lang="ts">
-import { defineComponent, ref, computed } from "vue";
+import { defineComponent, defineProps, ref, computed } from "vue";
 import SButton from "@/components/ui/buttons/SButton.vue";
 import type { Component } from "vue";
 import GithubIcon from "@/components/icons/GithubIcon.vue";
@@ -55,6 +55,13 @@ export default defineComponent({
     LinkedinIcon,
     TelegramIcon,
     MailIcon,
+  },
+
+  props: {
+    title: {
+      type: String,
+      default: "",
+    },
   },
 
   setup() {

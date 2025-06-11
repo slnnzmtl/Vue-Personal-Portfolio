@@ -34,7 +34,7 @@ export default defineComponent({
       </p>
 
       <GlassMaterial class="p-4 mx-4 md:mx-0 mt-2 w-full lg:w-auto">
-        <SocialLinks />
+        <SocialLinks title="Contact me:" />
       </GlassMaterial>
     </div>
   </div>

@@ -2,6 +2,7 @@
 import { defineAsyncComponent, defineComponent, onMounted, ref } from "vue";
 import { provideModalService } from "@/composables/useModal";
 import { provideNavigationService } from "@/composables/useNavigation";
+import { provideFooterService } from "@/composables/useFooter";
 
 const BackgroundWrapper = defineAsyncComponent({
   loader: () => import("@/components/BackgroundWrapper.vue"),
@@ -15,16 +16,22 @@ const NavigationMenu = defineAsyncComponent({
   loader: () => import("@/components/NavigationMenu.vue"),
 });
 
+const Footer = defineAsyncComponent({
+  loader: () => import("@/components/Footer.vue"),
+});
+
 export default defineComponent({
   name: "App",
   components: {
     BackgroundWrapper,
     NavigationMenu,
     ModalProvider,
+    Footer,
   },
   setup() {
     provideModalService();
     const navService = provideNavigationService();
+    const footerService = provideFooterService();
     const showModalProvider = ref(false);
 
     onMounted(() => {
@@ -37,6 +44,7 @@ export default defineComponent({
 
     return {
       navService,
+      isFooterVisible: footerService.isFooterVisible,
       showModalProvider,
     };
   },
@@ -54,6 +62,8 @@ export default defineComponent({
         <component class="animate-fade-in" :is="Component" />
       </keep-alive>
     </router-view>
+
+    <Footer v-if="isFooterVisible" />
   </div>
 </template>
 
