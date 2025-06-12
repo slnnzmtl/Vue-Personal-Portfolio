@@ -3,7 +3,7 @@
 <template>
   <div class="contacts-bar">
     <a
-      href="https://www.linkedin.com/in/daniel-kazanskiy"
+      href="https://www.linkedin.com/in/daniel-kazansky"
       target="_blank"
       rel="noopener noreferrer"
       class="contact-link"
