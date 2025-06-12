@@ -1,5 +1,5 @@
 <script lang="ts">
-import MaleAvatar from "@/assets/male-avatar.svg";
+import UserPic from "@/assets/userpic.png";
 import { defineComponent } from "vue";
 import GlassMaterial from "@/components/ui/GlassMaterial.vue";
 
@@ -10,7 +10,7 @@ export default defineComponent({
   },
   setup() {
     return {
-      MaleAvatar,
+      UserPic,
     };
   },
 });
@@ -18,8 +18,8 @@ export default defineComponent({
 
 <template>
   <GlassMaterial class="avatar-background">
-    <div class="male-avatar">
-      <img fetchpriority="high" :src="MaleAvatar" alt="Male Avatar" />
+    <div class="user-avatar">
+      <img fetchpriority="high" :src="UserPic" alt="User Avatar" />
     </div>
   </GlassMaterial>
 </template>
@@ -40,7 +40,7 @@ export default defineComponent({
   }
 }
 
-.male-avatar {
+.user-avatar {
   width: 100%;
   height: 100%;
   border-radius: 50%;
@@ -48,11 +48,11 @@ export default defineComponent({
   overflow: hidden;
   opacity: 0.9;
   z-index: 1;
+  padding: 15px;
 
   img {
     width: 100%;
-    height: 100%;
-    object-fit: cover;
+    object-fit: fill;
   }
 }
 </style>
