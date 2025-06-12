@@ -17,11 +17,7 @@
       <span class="ml-2">{{ link.name }}</span>
     </SButton>
 
-    <SButton
-      variant="glass"
-      class="social-button email-button"
-      @click="copyEmailToClipboard"
-    >
+    <SButton variant="glass" class="social-button email-button" @click="mailToOpen">
       <MailIcon class="w-5 h-5" />
       <span class="ml-2">Email</span>
     </SButton>
@@ -92,6 +88,10 @@ export default defineComponent({
       });
     };
 
+    const mailToOpen = () => {
+      window.location.href = `mailto:${EMAIL}`;
+    };
+
     const copyEmailToClipboard = async () => {
       const success = await copyToClipboard(EMAIL);
 
@@ -119,6 +119,7 @@ export default defineComponent({
       showToast,
       copyEmailToClipboard,
       handleLinkClick,
+      mailToOpen,
     };
   },
 });
