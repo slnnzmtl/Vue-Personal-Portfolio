@@ -68,7 +68,7 @@ export default defineComponent({
     const socialLinks: SocialLink[] = [
       {
         name: "LinkedIn",
-        url: "https://linkedin.com/in/daniel-kazanskiy",
+        url: "https://linkedin.com/in/daniel-kazansky",
         icon: LinkedinIcon,
       },
       {
@@ -134,6 +134,7 @@ export default defineComponent({
   display: inline-flex;
   align-items: center;
   transition: transform 0.2s ease;
+  cursor: pointer;
 
   &:hover {
     transform: translateY(-2px);
