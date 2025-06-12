@@ -74,12 +74,12 @@ export default defineComponent({
       {
         name: "Web Development",
         description:
-          "Frontend and fullstack development with a stack: React, React Native, Vue, Node, Python, Chart.js, Google Maps API",
+          "Frontend and fullstack development with technologies including React, React Native, Vue, Node, Python, Chart.js, and Google Maps API",
         price: "$30 / h",
       },
       {
         name: "WordPress Development",
-        description: "Web sites development using a CMS like WordPress",
+        description: "Website development using a CMS like WordPress",
         price: "$25 / h",
       },
       {
@@ -89,19 +89,19 @@ export default defineComponent({
       },
       {
         name: "Chat Bot",
-        description: "Develop a chat bots for Telegram and Instagram",
+        description: "Develop chat bots for Telegram and Instagram",
         price: "From $500",
       },
       {
         name: "AI Agent",
         description:
-          "Develop systems based on AI-agent, based on different models (OpenAI, Gemini, DeepSeek, others by request)",
+          "Develop systems based on AI agents, using different models (OpenAI, Gemini, DeepSeek, others by request)",
         price: "From $500",
       },
       {
         name: "Automation",
         description:
-          "Automate business flow using automation service n8n on a private server",
+          "Automate business flows using the n8n automation service on a private server",
         price: "From $100",
       },
     ];
@@ -147,7 +147,7 @@ export default defineComponent({
       }
 
       td {
-        vertical-align: center;
+        vertical-align: middle;
       }
     }
 
