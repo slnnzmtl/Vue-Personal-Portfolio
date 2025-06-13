@@ -78,12 +78,11 @@ export default defineComponent({
       circle at var(--gradient-pos, 30% 20%),
       #ff00cc,
       #3333ff,
-      #00ffcc,
-      #ff00cc 80%
+      #ff00cc 70%
     );
     background-size: 200% 200%;
     animation: gradient-move 6s linear infinite;
-    opacity: 0.3;
+    opacity: 0.15;
     pointer-events: none;
   }
 
