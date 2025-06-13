@@ -20,15 +20,15 @@ export default defineComponent({
       <AuthorAvatar />
     </div>
 
-    <div class="flex flex-col items-center xl:items-start gap-6 md:gap-3 text-left">
+    <div class="flex flex-col items-center md:items-start gap-6 md:gap-3 text-left">
       <h1 class="text-center text-6xl font-bold">Daniel Kazansky</h1>
       <p
-        class="text-xl lg:text-3xl font-semibold text-center lg:text-left text-secondary text-shadow"
+        class="text-xl lg:text-3xl font-semibold text-center md:text-left text-secondary text-shadow"
       >
         Web development with focus on user experience
       </p>
 
-      <p class="sm:text-base text-center text-white-800 my-2 xl:text-left">
+      <p class="sm:text-base text-center text-white-800 my-2 md:text-left">
         I bring a strong background in building complex, high-performance solutions across
         e-commerce, online learning, marketing, and sales domains.
       </p>
@@ -49,11 +49,10 @@ export default defineComponent({
   gap: 3rem;
   height: 60vh;
   max-height: 800px;
-  min-height: 800px;
 
   @media (max-width: 768px) {
-    height: max-content;
-    max-height: 1000px;
+    max-height: 100%;
+    height: 100%;
     margin-top: 0;
     padding-top: 100px;
   }
@@ -63,12 +62,14 @@ export default defineComponent({
     max-width: 300px;
     margin: 0 auto;
 
+    flex-shrink: 1;
+
     @media (max-width: 1280px) {
-      max-width: 250px;
+      max-width: 200px;
     }
   }
 
-  @media (min-width: 1280px) {
+  @media (min-width: 768px) {
     grid-template-columns: 30% 1fr;
     grid-template-rows: 1fr;
   }
