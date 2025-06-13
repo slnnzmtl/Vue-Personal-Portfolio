@@ -1,5 +1,5 @@
 <template>
-  <div class="light-effects">
+  <div class="light-effects" ref="lightEffectsRef">
     <div v-for="i in 2" :key="i" class="light-group">
       <div class="light light-2"></div>
       <div class="light light-3"></div>
@@ -9,10 +9,31 @@
 </template>
 
 <script lang="ts">
-import { defineComponent } from "vue";
+import { defineComponent, onMounted, onBeforeUnmount, ref } from "vue";
 
 export default defineComponent({
   name: "BackgroundWrapper",
+  setup() {
+    const lightEffectsRef = ref<HTMLElement | null>(null);
+
+    function handleMouseMove(e: MouseEvent) {
+      const x = (e.clientX / window.innerWidth) * 100;
+      const y = (e.clientY / window.innerHeight) * 100;
+      if (lightEffectsRef.value) {
+        lightEffectsRef.value.style.setProperty("--mouse-x", `${x}%`);
+        lightEffectsRef.value.style.setProperty("--mouse-y", `${y}%`);
+      }
+    }
+
+    onMounted(() => {
+      window.addEventListener("mousemove", handleMouseMove);
+    });
+    onBeforeUnmount(() => {
+      window.removeEventListener("mousemove", handleMouseMove);
+    });
+
+    return { lightEffectsRef };
+  },
 });
 </script>
 
@@ -87,8 +108,8 @@ export default defineComponent({
   background: #0800ff;
   width: 60vh;
   height: 60vh;
-  top: 50%;
-  right: -20vw;
+  top: calc(50% + (var(--mouse-y, 50%) - 50%) * 0.5);
+  right: calc(-20vw + (var(--mouse-x, 50%) - 50%) * 0.3);
   animation: transform-float2 25s ease-in-out infinite,
     opacity-pulse 9s ease-in-out infinite, scale 12s ease-in-out infinite;
   transform-origin: center;
@@ -98,8 +119,8 @@ export default defineComponent({
   background: #00eeff;
   width: 40vh;
   height: 40vh;
-  bottom: -10vw;
-  left: 30%;
+  bottom: calc(-10vw + (var(--mouse-y, 50%) - 50%) * 0.2);
+  left: calc(30% + (var(--mouse-x, 50%) - 50%) * 0.2);
   animation: transform-float3 22s ease-in-out infinite,
     opacity-pulse 8s ease-in-out infinite, scale 18s ease-in-out infinite;
 }
@@ -108,8 +129,8 @@ export default defineComponent({
   background: #ff00ea;
   width: 45vh;
   height: 45vh;
-  top: 30%;
-  left: 20%;
+  top: calc(30% + (var(--mouse-y, 50%) - 50%) * 0.3);
+  left: calc(20% + (var(--mouse-x, 50%) - 50%) * 0.3);
   animation: transform-float4 23s ease-in-out infinite,
     opacity-pulse 10s ease-in-out infinite, scale 20s ease-in-out infinite;
 }
