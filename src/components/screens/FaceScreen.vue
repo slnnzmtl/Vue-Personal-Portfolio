@@ -47,7 +47,9 @@ export default defineComponent({
   justify-content: center;
   margin-top: 12rem;
   gap: 3rem;
-  min-height: 600px;
+  height: 60vh;
+  max-height: 800px;
+  min-height: 800px;
 
   @media (max-width: 768px) {
     height: max-content;
@@ -83,7 +85,7 @@ export default defineComponent({
     }
 
     h1 {
-      font-size: 6rem;
+      font-size: 4rem;
     }
   }
 }
