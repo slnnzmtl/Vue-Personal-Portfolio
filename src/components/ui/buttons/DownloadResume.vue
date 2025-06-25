@@ -44,26 +44,28 @@ export default defineComponent({
 </script>
 
 <template>
-  <p v-if="title" class="text-sm text-white-800 mb-4">
-    {{ title }}
+  <div class="flex flex-col items-center">
+    <p v-if="title" class="text-sm text-white-800 mb-4">
+      {{ title }}
 
-    <button v-if="!isButton" type="button" @click="handleDownload">
-      <span class="button-text underline cursor-pointer">{{ buttonText }}</span>
-    </button>
-  </p>
+      <button v-if="!isButton" type="button" @click="handleDownload">
+        <span class="button-text underline cursor-pointer">{{ buttonText }}</span>
+      </button>
+    </p>
 
-  <SButton
-    class="download-resume-button"
-    size="large"
-    type="primary"
-    v-if="isButton"
-    @click="handleDownload"
-  >
-    <div class="button-content">
-      <DownloadIcon class="download-icon" />
-      <span class="button-text">{{ buttonText }}</span>
-    </div>
-  </SButton>
+    <SButton
+      class="download-resume-button"
+      size="large"
+      type="primary"
+      v-if="isButton"
+      @click="handleDownload"
+    >
+      <div class="button-content">
+        <DownloadIcon class="download-icon" />
+        <span class="button-text">{{ buttonText }}</span>
+      </div>
+    </SButton>
+  </div>
 </template>
 
 <style lang="scss" scoped>
