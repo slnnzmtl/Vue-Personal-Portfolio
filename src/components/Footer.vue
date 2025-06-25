@@ -3,7 +3,9 @@
     <GlassMaterial class="footer-content">
       <div class="footer-inner">
         <div class="footer-section">
-          <h3 class="footer-heading">Daniel Kazansky</h3>
+          <a href="https://slnnzmtl.xyz" class="cursor-pointer">
+            <h3>Daniel Kazansky</h3>
+          </a>
         </div>
 
         <div class="footer-section">
@@ -77,11 +79,6 @@ export default defineComponent({
     align-items: center;
     text-align: left;
   }
-}
-
-.footer-heading {
-  color: var(--cyan);
-  font-size: 1.2rem;
 }
 
 .footer-text {
