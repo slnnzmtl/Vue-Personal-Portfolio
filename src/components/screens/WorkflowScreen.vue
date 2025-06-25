@@ -12,13 +12,13 @@
         <button
           v-for="(point, index) in workflowPoints"
           :key="index"
-          class="w-full max-w-[25%] min-w-[250px]"
+          class="w-full max-w-[25%] min-w-[250px] flex-shrink-0 cursor-pointer"
           @click="handleModalOpen(point.id)"
         >
           <GlassMaterial
             class="workflow-item flex flex-col items-center p-3 rounded-lg w-full h-full"
           >
-            <SIcon :name="point.icon" class="max-w-16" />
+            <SIcon :name="point.icon" class="max-w-16 cursor-pointer" />
             <h3 class="text-xl font-semibold mb-2">{{ point.title }}</h3>
             <p class="text-sm text-center text-gray-400">
               {{ point.description }}
@@ -117,6 +117,10 @@ export default defineComponent({
   &:hover {
     transform: translateY(-10px);
     cursor: pointer;
+
+    * {
+      cursor: pointer;
+    }
   }
 }
 

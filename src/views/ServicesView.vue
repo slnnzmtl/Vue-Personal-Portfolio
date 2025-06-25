@@ -1,212 +1,180 @@
 <template>
-  <div class="services-view max-w-[1800px] w-full mx-auto flex justify-center px-6">
-    <div class="lg:flex-nowrap gap-4 text-left w-full pt-36">
-      <p class="text-2xl sm:text-4xl font-bold mb-8">My services</p>
-      <p class="description text-lg xl:text-xl mb-8">
-        I specialize in web development, CRM integration, WordPress development, chat
-        bots, AI agents, and automation solutions. My goal is to help you achieve your
-        business objectives with tailored solutions that fit your needs.
+  <main class="max-w-[1800px] w-full mx-auto pt-36">
+    <header class="mb-12 mx-4">
+      <h1 class="text-2xl sm:text-4xl font-bold mb-6">🔧 Services I Provide</h1>
+      <p class="description text-lg xl:text-xl">
+        As a product-oriented developer with expertise in web technologies and AI, I help
+        businesses grow, automate, and optimize operations through tailor-made software
+        solutions:
       </p>
+    </header>
 
-      <div class="flex flex-col lg:flex-row gap-8 items-center">
-        <GlassMaterial class="services-table-container p-0 mb-8">
-          <div class="overflow-x-auto">
-            <table class="services-table w-full">
-              <thead>
-                <tr>
-                  <th class="text-left py-4 px-4 text-cyan">Service</th>
-                  <th class="text-left py-4 px-4 text-cyan">Description</th>
-                  <th class="text-left py-4 px-8 text-cyan">Price</th>
-                </tr>
-              </thead>
-              <tbody>
-                <tr v-for="(service, index) in services" :key="index" class="service-row">
-                  <td class="px-4 font-semibold">{{ service.name }}</td>
-                  <td class="px-4">
-                    <div class="service-description">
-                      {{ service.description }}
-                    </div>
-                  </td>
-                  <td class="py-6 px-8 font-semibold text-cyan text-nowrap">
-                    {{ service.price }}
-                  </td>
-                </tr>
-              </tbody>
-            </table>
-          </div>
-        </GlassMaterial>
+    <ScrollableContainer>
+      <GlassMaterial class="w-max mx-4">
+        <table class="w-full">
+          <thead>
+            <tr>
+              <th class="text-left py-4 px-6 text-cyan">Service</th>
+              <th class="text-left py-4 px-6 text-cyan">Description</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr v-for="(service, index) in services" :key="index">
+              <td class="py-4 px-6 font-semibold text-md text-cyan align-top">
+                ✅ {{ service.title }}
+                <span v-if="service.isNew" class="text-sm ml-1 text-yellow-400"
+                  >(NEW)</span
+                >
+              </td>
+              <td class="py-4 px-6 text-white-600 leading-relaxed text-left text-sm">
+                {{ service.description }}
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </GlassMaterial>
+    </ScrollableContainer>
 
-        <div class="mt-8 md:mt-16 h-96 flex flex-col justify-center">
-          <ReadyToWorkTogether class="mx-auto text-center" :show-contacts="false">
-            <SButton type="primary" @click="onContactClick"> Contact me </SButton>
-          </ReadyToWorkTogether>
-        </div>
+    <div class="mt-16 grid md:grid-cols-3 gap-8 mb-16 mx-4">
+      <div class="md:col-span-2">
+        <section>
+          <h3 class="text-2xl font-bold mb-6 text-cyan">🎯 Why Choose Me</h3>
+          <ul class="space-y-3">
+            <li class="flex items-start gap-3">
+              <span class="text-cyan text-xl">✔</span>
+              <span>Focus on measurable business value</span>
+            </li>
+            <li class="flex items-start gap-3">
+              <span class="text-cyan text-xl">✔</span>
+              <span>Custom-tailored solutions — no cookie-cutter templates</span>
+            </li>
+            <li class="flex items-start gap-3">
+              <span class="text-cyan text-xl">✔</span>
+              <span>End-to-end ownership: From idea to deployment and support</span>
+            </li>
+            <li class="flex items-start gap-3">
+              <span class="text-cyan text-xl">✔</span>
+              <span>Expertise in modern AI technologies & web frameworks</span>
+            </li>
+            <li class="flex items-start gap-3">
+              <span class="text-cyan text-xl">✔</span>
+              <span>Scalable, secure, and future-proof development</span>
+            </li>
+          </ul>
+        </section>
       </div>
     </div>
-  </div>
+
+    <GlassMaterial class="flex flex-col md:w-max p-8 mx-4">
+      <h3 class="text-2xl font-bold mb-4 text-cyan">📢 Let's Talk About Your Project</h3>
+      <p class="text-lg mb-6 text-white-600">
+        Whether you need to build from scratch, upgrade, or integrate AI — I can help.
+      </p>
+      <SButton type="primary" @click="onContactClick" class="text-lg px-8 py-3">
+        Book a free consultation today
+      </SButton>
+    </GlassMaterial>
+  </main>
 </template>
 
-<script lang="ts">
-import { defineComponent } from "vue";
-import ScrollableContainer from "@/components/ui/ScrollableContainer.vue";
+<script setup lang="ts">
+import { ScrollableContainer } from "@/components";
 import GlassMaterial from "@/components/ui/GlassMaterial.vue";
 import SButton from "@/components/ui/buttons/SButton.vue";
 import { useModalService } from "@/composables/useModal";
 import { ModalKey } from "@/modals/types";
+import { ref } from "vue";
 
 interface Service {
-  name: string;
+  title: string;
   description: string;
-  price: string;
+  isNew?: boolean;
 }
 
-export default defineComponent({
-  name: "ServicesView",
-  components: {
-    ScrollableContainer,
-    GlassMaterial,
-    SButton,
+const services = ref<Service[]>([
+  {
+    title: "Full-Stack Web Development",
+    description:
+      "Complete web apps (Frontend + Backend) using React, Vue.js, Node.js, PHP, etc.",
   },
-  setup() {
-    const { openModal } = useModalService();
-
-    const services: Service[] = [
-      {
-        name: "Web Development",
-        description:
-          "Frontend and fullstack development with technologies including React, React Native, Vue, Node, Python, Chart.js, and Google Maps API",
-        price: "$30 / h",
-      },
-      {
-        name: "WordPress Development",
-        description: "Website development using a CMS like WordPress",
-        price: "$25 / h",
-      },
-      {
-        name: "CRM Integration and Deployment",
-        description: "Integration of open-source license-free CRM system (Espocrm)",
-        price: "From $600",
-      },
-      {
-        name: "Chat Bot",
-        description: "Develop chat bots for Telegram and Instagram",
-        price: "From $500",
-      },
-      {
-        name: "AI Agent",
-        description:
-          "Develop systems based on AI agents, using different models (OpenAI, Gemini, DeepSeek, others by request)",
-        price: "From $500",
-      },
-      {
-        name: "Automation",
-        description:
-          "Automate business flows using the n8n automation service on a private server",
-        price: "From $100",
-      },
-    ];
-
-    const onContactClick = async () => {
-      await openModal(ModalKey.HireForm);
-    };
-
-    return {
-      services,
-      onContactClick,
-    };
+  {
+    title: "E-Commerce Development",
+    description:
+      "Custom online stores, payment integration, SEO-optimized product platforms",
   },
-});
+  {
+    title: "CRM Systems Development",
+    description: "Custom CRM platforms, automations, AI integration for sales & support",
+  },
+  {
+    title: "AI-Powered Sales & Marketing Systems",
+    description:
+      "AI chatbots, automated lead generation, marketing funnels, smart responders",
+  },
+  {
+    title: "Generative AI Integration",
+    description:
+      "AI-driven content generation, chatbots, code assistants, data analysis tools",
+    isNew: true,
+  },
+  {
+    title: "SEO & High-Performance Landing Pages",
+    description:
+      "Fast, mobile-optimized landing pages with SEO best practices for lead capture",
+  },
+  {
+    title: "Business Process Automation",
+    description:
+      "Workflow automation, integrations, task automation, AI-based optimizations",
+  },
+  {
+    title: "Low-Code/No-Code Development",
+    description:
+      "Rapid prototypes & internal tools with platforms like Bubble, Airtable, Make",
+    isNew: true,
+  },
+  {
+    title: "Cloud-First & Serverless Applications",
+    description:
+      "Scalable apps built for AWS, Google Cloud, Azure using serverless architecture",
+    isNew: true,
+  },
+  {
+    title: "Progressive Web Apps (PWA)",
+    description: "Cross-platform web apps with offline access, mobile-native experience",
+    isNew: true,
+  },
+  {
+    title: "UX/UI Design & Omnichannel Experience",
+    description:
+      "Modern, conversion-focused interfaces, seamless multi-device experiences",
+    isNew: true,
+  },
+  {
+    title: "Data Scraping & Analytics Systems",
+    description:
+      "Custom parsers, monitoring dashboards, competitive analytics for social media",
+  },
+  {
+    title: "AI Business Integrations",
+    description:
+      "Implement AI for automation, content creation, decision making, GPT integration",
+  },
+  {
+    title: "WordPress Development",
+    description: "Business sites, WooCommerce, custom plugins, SEO optimization",
+  },
+]);
+
+const { openModal } = useModalService();
+
+const onContactClick = async () => {
+  await openModal(ModalKey.HireForm);
+};
 </script>
 
 <style lang="scss" scoped>
 .description {
   color: var(--white-600);
-}
-
-.services-table-container {
-  .services-table {
-    border-collapse: separate;
-    border-spacing: 0;
-
-    th {
-      font-weight: 600;
-      font-size: 1.1rem;
-      border-bottom: 1px solid rgba(255, 255, 255, 0.1);
-    }
-
-    .service-row {
-      transition: background-color 0.3s ease;
-      border-bottom: 1px solid rgba(255, 255, 255, 0.05);
-
-      &:hover {
-        background-color: rgba(255, 255, 255, 0.05);
-      }
-
-      &:last-child {
-        border-bottom: none;
-      }
-
-      td {
-        vertical-align: middle;
-      }
-    }
-
-    .service-description {
-      line-height: 1.6;
-    }
-  }
-}
-
-.contact-section {
-  background: rgba(170, 0, 200, 0.1);
-  border: 1px solid rgba(170, 0, 200, 0.2);
-}
-
-/* Mobile responsiveness */
-@media (max-width: 768px) {
-  .services-view {
-    .services-table-container {
-      .services-table {
-        th,
-        td {
-          padding: 0.75rem 0.5rem;
-          font-size: 0.9rem;
-        }
-      }
-    }
-  }
-}
-
-@media (max-width: 640px) {
-  .services-view {
-    .services-table-container {
-      .services-table {
-        th,
-        td {
-          padding: 0.5rem 0.25rem;
-          font-size: 0.85rem;
-
-          &:first-child {
-            padding-left: 1rem;
-          }
-
-          &:last-child {
-            padding-right: 1rem;
-          }
-        }
-
-        th:nth-child(2),
-        td:nth-child(2) {
-          width: 50%;
-        }
-
-        th:nth-child(3),
-        td:nth-child(3) {
-          width: 25%;
-          text-align: right;
-        }
-      }
-    }
-  }
 }
 </style>
