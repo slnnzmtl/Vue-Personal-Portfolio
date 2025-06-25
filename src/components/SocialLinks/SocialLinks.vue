@@ -9,7 +9,6 @@
       :href="link.url"
       target="_blank"
       rel="noopener noreferrer"
-      variant="glass"
       class="social-button"
       @click="handleLinkClick(link.name)"
     >
@@ -17,7 +16,7 @@
       <span class="ml-2">{{ link.name }}</span>
     </SButton>
 
-    <SButton variant="glass" class="social-button email-button" @click="mailToOpen">
+    <SButton class="social-button email-button" @click="mailToOpen">
       <MailIcon class="w-5 h-5" />
       <span class="ml-2">Email</span>
     </SButton>

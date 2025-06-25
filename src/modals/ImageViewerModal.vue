@@ -21,13 +21,13 @@
         @click.stop
       />
       <div class="image-viewer__controls" @click.stop>
-        <SButton variant="glass" @click="resetView">
+        <SButton @click="resetView">
           <ResetIcon class="w-5 h-5" />
         </SButton>
-        <SButton variant="glass" @click="zoomIn">
+        <SButton @click="zoomIn">
           <PlusIcon class="w-5 h-5" />
         </SButton>
-        <SButton variant="glass" @click="zoomOut">
+        <SButton @click="zoomOut">
           <MinusIcon class="w-5 h-5" />
         </SButton>
       </div>
