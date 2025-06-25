@@ -234,7 +234,7 @@ export default defineComponent({
         />
       </div>
       <SButton
-        type="primary"
+        variant="primary"
         class="px-6 h-max"
         @click="sendMessage"
         :disabled="isLoading || !inputMessage.trim()"

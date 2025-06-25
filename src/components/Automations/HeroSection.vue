@@ -34,7 +34,7 @@ export default defineComponent({
 
         <SButton
           size="lg"
-          type="primary"
+          variant="primary"
           class="w-max relative overflow-hidden px-4 py-3"
           @click="handleDemoRequest"
         >

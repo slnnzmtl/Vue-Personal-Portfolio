@@ -91,7 +91,7 @@ export default defineComponent({
 
       <div class="flex justify-center">
         <SButton
-          type="primary"
+          variant="primary"
           class="load-more-button mt-8 xl:mt-0 rounded"
           @click="showAllProjects"
         >

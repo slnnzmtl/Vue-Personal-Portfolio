@@ -4,7 +4,7 @@ import { computed, defineComponent, PropType } from "vue";
 export default defineComponent({
   name: "SButton",
   props: {
-    type: {
+    variant: {
       type: String as PropType<"primary" | "secondary" | "tertiary">,
       default: "button",
     },
@@ -30,9 +30,9 @@ export default defineComponent({
     },
   },
   setup(props) {
-    const isPrimary = computed(() => props.type === "primary");
-    const isSecondary = computed(() => props.type === "secondary");
-    const isTertiary = computed(() => props.type === "tertiary");
+    const isPrimary = computed(() => props.variant === "primary");
+    const isSecondary = computed(() => props.variant === "secondary");
+    const isTertiary = computed(() => props.variant === "tertiary");
 
     const isSmall = computed(() => props.size === "small");
     const isMedium = computed(() => props.size === "medium");

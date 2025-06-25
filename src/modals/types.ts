@@ -13,6 +13,7 @@ export enum ModalKey {
   HireForm = "HireFormModal",
   ImageViewer = "ImageViewerModal",
   SkillCard = "SkillCardModal",
+  ConsultationForm = "ConsultationFormModal",
 }
 
 export interface ModalInstance<T = any> {

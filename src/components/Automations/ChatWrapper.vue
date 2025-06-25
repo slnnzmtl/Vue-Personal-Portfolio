@@ -63,7 +63,7 @@ export default defineComponent({
     <Transition name="fade">
       <div v-if="mode === 'toggle' && !isExpanded" class="fixed bottom-10 right-10 z-50">
         <SButton
-          type="primary"
+          variant="primary"
           class="rounded-full w-14 h-14 shadow-lg cursor-pointer"
           @click.stop="toggleChat"
         >

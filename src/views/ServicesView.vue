@@ -70,7 +70,7 @@
       <p class="text-lg mb-6 text-white-600">
         Whether you need to build from scratch, upgrade, or integrate AI — I can help.
       </p>
-      <SButton type="primary" @click="onContactClick" class="text-lg px-8 py-3">
+      <SButton variant="primary" @click="onContactClick" class="text-lg px-8 py-3">
         Book a free consultation today
       </SButton>
     </GlassMaterial>
@@ -169,7 +169,7 @@ const services = ref<Service[]>([
 const { openModal } = useModalService();
 
 const onContactClick = async () => {
-  await openModal(ModalKey.HireForm);
+  await openModal(ModalKey.ConsultationForm);
 };
 </script>
 

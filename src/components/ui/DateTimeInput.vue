@@ -2,19 +2,15 @@
 import { defineComponent, computed } from "vue";
 
 export default defineComponent({
-  name: "TextareaField",
+  name: "DateTimeInput",
   props: {
+    label: {
+      type: String,
+      default: "",
+    },
     modelValue: {
       type: String,
       required: true,
-    },
-    label: {
-      type: String,
-      required: true,
-    },
-    placeholder: {
-      type: String,
-      default: "",
     },
     required: {
       type: Boolean,
@@ -24,15 +20,27 @@ export default defineComponent({
       type: String,
       default: "",
     },
-    rows: {
-      type: Number,
-      default: 3,
+    min: {
+      type: String,
+      default: "",
+    },
+    max: {
+      type: String,
+      default: "",
+    },
+    placeholder: {
+      type: String,
+      default: "",
     },
   },
   emits: ["update:modelValue"],
   setup(props, { emit }) {
     const isInputFilled = computed(() => {
       return !!props.modelValue;
+    });
+
+    const displayLabel = computed(() => {
+      return props.required ? `${props.label} *` : props.label;
     });
 
     const value = computed({
@@ -46,6 +54,7 @@ export default defineComponent({
 
     return {
       isInputFilled,
+      displayLabel,
       value,
     };
   },
@@ -55,22 +64,19 @@ export default defineComponent({
 <template>
   <div class="form-group">
     <div class="input-container">
-      <textarea
+      <input
         :id="name"
-        v-model="value"
-        class="form-input"
-        :placeholder="placeholder"
-        :required="required"
         :name="name"
-        :rows="rows"
         :autocomplete="name"
+        v-model="value"
+        type="datetime-local"
+        class="form-input"
+        :required="required"
+        :min="min"
+        :max="max"
       />
-      <label
-        :for="label"
-        :class="{ floating: isInputFilled || !!placeholder }"
-        class="form-label"
-      >
-        {{ label }}
+      <label :for="name" :class="{ floating: isInputFilled }" class="form-label">
+        {{ displayLabel }}
       </label>
     </div>
   </div>
@@ -83,11 +89,6 @@ export default defineComponent({
 
 .input-container {
   position: relative;
-
-  border: 1px solid rgba(255, 255, 255, 0.2);
-  border-radius: 0.5rem;
-  background-color: rgba(255, 255, 255, 0.1);
-  backdrop-filter: blur(10px);
 }
 
 .form-label {
@@ -103,24 +104,39 @@ export default defineComponent({
 }
 
 .form-input {
-  border: none;
-  outline: none;
-
+  padding: 1rem;
+  padding-top: 1.5rem;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  border-radius: 0.5rem;
   font-size: 1rem;
   line-height: 1.5;
   width: 100%;
   box-sizing: border-box;
-  resize: vertical;
-  overflow-y: scroll;
-  @extend %scrollbar-hidden;
+  background-color: rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(10px);
+  transition: 0.2s ease all;
+  color: white;
 
-  padding: 1rem;
-  padding-top: 0;
-  margin-top: 2rem;
+  &::-webkit-datetime-edit-fields-wrapper {
+    opacity: 0;
+    pointer-events: none;
+  }
+
+  &::-webkit-calendar-picker-indicator {
+    opacity: 0.7;
+    cursor: pointer;
+  }
 
   &:focus {
     outline: none;
     border-color: var(--cyan);
+    box-shadow: 0 0 0 0.2rem rgba(0, 31, 63, 0.25);
+  }
+
+  &:focus::-webkit-datetime-edit-fields-wrapper {
+    opacity: 1;
+    pointer-events: auto;
+    transition: opacity 0.3s ease;
   }
 
   &:focus + .form-label {

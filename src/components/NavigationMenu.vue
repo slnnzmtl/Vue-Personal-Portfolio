@@ -43,7 +43,7 @@ export default defineComponent({
     };
 
     const onModalOpen = async () => {
-      await openModal(ModalKey.HireForm);
+      await openModal(ModalKey.ConsultationForm);
       showMenu(true);
     };
 

@@ -36,6 +36,14 @@ export default {
       }),
     );
     app.component(
+      ModalKey.ConsultationForm,
+      defineAsyncComponent({
+        loader: () => import("@/modals/ConsultationFormModal.vue"),
+        loadingComponent,
+        errorComponent,
+      }),
+    );
+    app.component(
       'ReadyToWorkTogether',
       defineAsyncComponent({
         loader: () => import("@/components/ReadyToWorkTogether/ReadyToWorkTogether.vue"),

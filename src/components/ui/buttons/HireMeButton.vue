@@ -10,8 +10,8 @@ export default defineComponent({
 </script>
 
 <template>
-  <SButton class="hire-me-button rounded-3xl" size="medium" type="primary">
-    Hire me
+  <SButton class="hire-me-button rounded-3xl" size="medium" variant="primary">
+    Get a FREE consultation
   </SButton>
 </template>
 

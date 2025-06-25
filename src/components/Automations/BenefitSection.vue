@@ -103,7 +103,7 @@ export default defineComponent({
         <p class="text-lg text-muted-foreground mb-8">
           Ready to transform your marketing strategy?
         </p>
-        <SButton size="lg" type="primary" class="group px-8 py-6">
+        <SButton size="lg" variant="primary" class="group px-8 py-6">
           <span class="relative z-10">Start Automating Today</span>
         </SButton>
       </div>

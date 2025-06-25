@@ -6,7 +6,7 @@ export default defineComponent({
   props: {
     label: {
       type: String,
-      required: true,
+      default: "",
     },
     modelValue: {
       type: String,
@@ -23,6 +23,10 @@ export default defineComponent({
     required: {
       type: Boolean,
       default: false,
+    },
+    name: {
+      type: String,
+      default: "",
     },
   },
   emits: ["update:modelValue"],
@@ -57,7 +61,8 @@ export default defineComponent({
   <div class="form-group">
     <div class="input-container">
       <input
-        :id="label"
+        :id="name"
+        :autocomplete="name"
         v-model="value"
         :type="type || 'text'"
         class="form-input"
@@ -78,7 +83,6 @@ export default defineComponent({
 <style scoped lang="scss">
 .form-group {
   position: relative;
-  // margin-bottom: 1.5rem;
 }
 
 .input-container {

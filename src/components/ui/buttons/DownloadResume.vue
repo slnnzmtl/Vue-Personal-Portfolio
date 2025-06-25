@@ -56,7 +56,7 @@ export default defineComponent({
     <SButton
       class="download-resume-button"
       size="large"
-      type="primary"
+      variant="primary"
       v-if="isButton"
       @click="handleDownload"
     >
