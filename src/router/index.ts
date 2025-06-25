@@ -54,6 +54,14 @@ const routes: RouteRecordRaw[] = [
       title: "Services",
     },
   },
+  {
+    path: "/privacy-policy",
+    name: "privacy-policy",
+    component: () => import("../views/PrivacyPolicy.vue"),
+    meta: {
+      title: "Privacy Policy",
+    },
+  },
 ];
 
 const router = createRouter({

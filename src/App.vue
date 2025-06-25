@@ -53,7 +53,7 @@ export default defineComponent({
 
 <template>
   <div>
-    <!-- <BackgroundWrapper /> -->
+    <BackgroundWrapper />
     <ModalProvider v-if="showModalProvider" />
     <NavigationMenu />
 

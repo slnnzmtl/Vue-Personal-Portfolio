@@ -12,6 +12,12 @@
           <SocialLinks class="text-sm" />
         </div>
 
+        <div class="footer-section footer-links">
+          <router-link to="/privacy-policy" class="footer-link">
+            Privacy Policy
+          </router-link>
+        </div>
+
         <div class="footer-section copyright-section">
           <p class="footer-text">
             © {{ currentYear }} Daniel Kazansky<br />
@@ -84,6 +90,29 @@ export default defineComponent({
 .footer-text {
   color: var(--text-gray);
   font-size: 0.9rem;
+}
+
+.footer-links {
+  display: flex;
+  gap: 1rem;
+  flex-wrap: wrap;
+  justify-content: center;
+
+  @media (min-width: 1024px) {
+    justify-content: flex-start;
+  }
+}
+
+.footer-link {
+  color: var(--text-gray);
+  font-size: 0.9rem;
+  text-decoration: none;
+  transition: color 0.3s ease;
+
+  &:hover {
+    color: var(--primary-color);
+    text-decoration: underline;
+  }
 }
 
 .copyright-section {
