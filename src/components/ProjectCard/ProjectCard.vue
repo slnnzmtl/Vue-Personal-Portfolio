@@ -19,6 +19,7 @@
       <h1 class="project-card__title">
         {{ project?.title }}
       </h1>
+      <a :href="getProjectUrl(project?.url)" target="_blank">{{ project?.url }}</a>
       <p class="project-card__description text-sm sm:text-base">
         {{ project?.description }}
       </p>
@@ -58,6 +59,8 @@
         <h2 class="project-card__title">
           {{ project?.title }}
         </h2>
+
+        <a :href="getProjectUrl(project?.url)" target="_blank">{{ project?.url }}</a>
 
         <TagsBar :tags="project?.tags" :selected-filters="selectedFilters" />
       </div>
@@ -129,6 +132,10 @@ export default defineComponent({
       }
     };
 
+    const getProjectUrl = (url: string) => {
+      return url ? `https://${url}` : "#";
+    };
+
     const onClose = () => {
       emit("close");
     };
@@ -141,6 +148,7 @@ export default defineComponent({
       onClose,
       onCardClick,
       scrollableClass,
+      getProjectUrl
     };
   },
 });
