@@ -55,7 +55,7 @@ export default defineComponent({
 
       setTimeout(() => {
         showHireScreen.value = true;
-      }, 1000);
+      }, 100);
     });
 
     return {

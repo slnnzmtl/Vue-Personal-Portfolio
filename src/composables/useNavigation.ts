@@ -26,7 +26,7 @@ const createState = (): NavigationState => {
     isNavVisible: ref(true),
     isMenuOpen: ref(false),
     lastScrollPosition: ref(0),
-    isMobileView: ref(window.innerWidth <= 768),
+    isMobileView: ref(window.innerWidth <= 1024),
     scrollElement: ref(null)
   };
   return state;
@@ -66,7 +66,7 @@ const handleScroll = (event: Event) => {
 const handleResize = () => {
   if (!navigationState) return;
   
-  const newIsMobileView = window.innerWidth <= 768;
+  const newIsMobileView = window.innerWidth <= 1024;
   navigationState.isMobileView.value = newIsMobileView;
   
   if (!newIsMobileView && navigationState.isMenuOpen.value) {

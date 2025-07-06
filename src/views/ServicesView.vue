@@ -71,7 +71,7 @@
         Whether you need to build from scratch, upgrade, or integrate AI — I can help.
       </p>
       <SButton variant="primary" @click="onContactClick" class="text-lg px-8 py-3">
-        Book a free consultation today
+        Book a free strategy session
       </SButton>
     </GlassMaterial>
   </main>

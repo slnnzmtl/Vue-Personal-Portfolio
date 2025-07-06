@@ -4,7 +4,7 @@
       class="consultation-form-modal flex flex-col gap-4 items-left justify-center max-w-[100vw]"
     >
       <h2 class="form-title text-2xl font-bold" v-if="!showConfirmation">
-        Book a free consultation
+        Book a free strategy session
       </h2>
       <p class="form-description" v-if="!showConfirmation">
         Please fill this form to schedule a consultation. I will get back to you as soon

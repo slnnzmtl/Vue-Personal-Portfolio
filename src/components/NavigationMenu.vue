@@ -4,7 +4,6 @@ import { useModalService } from "@/composables/useModal";
 import { useNavigation } from "@/composables/useNavigation";
 import { ModalKey } from "@/modals/types";
 import { defineComponent, defineAsyncComponent, computed } from "vue";
-import { useRoute } from "vue-router";
 
 const HireMeButton = defineAsyncComponent({
   loader: () => import("@/components/ui/buttons/HireMeButton.vue"),
@@ -19,7 +18,6 @@ export default defineComponent({
   },
   setup() {
     const { openModal } = useModalService();
-    const route = useRoute();
     const {
       isMenuOpen,
       isNavVisible,

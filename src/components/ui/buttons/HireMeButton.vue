@@ -11,7 +11,8 @@ export default defineComponent({
 
 <template>
   <SButton class="hire-me-button rounded-3xl" size="medium" variant="primary">
-    Get a FREE consultation
+    <span class="hidden sm:block">Book FREE strategy session</span>
+    <span class="block sm:hidden">Book strategy session</span>
   </SButton>
 </template>
 

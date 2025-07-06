@@ -73,10 +73,21 @@ const router = createRouter({
       return savedPosition;
     }
     if (to.hash) {
-      return {
-        el: to.hash,
-        behavior: "smooth",
-      };
+      return new Promise((resolve) => {
+        const scrollToElement = () => {
+          const element = document.querySelector(to.hash);
+          if (element) {
+            resolve({
+              el: to.hash,
+              behavior: "smooth"
+            });
+          } else {
+            setTimeout(scrollToElement, 100);
+          }
+        };
+        
+        setTimeout(scrollToElement, 50);
+      });
     }
     return { top: 0 };
   },
