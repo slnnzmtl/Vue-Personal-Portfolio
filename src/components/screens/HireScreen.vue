@@ -1,11 +1,11 @@
 <script lang="ts">
 import { defineComponent } from "vue";
-import DownloadResume from "../ui/buttons/DownloadResume.vue";
+import HireMeButton from "../ui/buttons/HireMeButton.vue";
 
 export default defineComponent({
   name: "HireScreen",
   components: {
-    DownloadResume,
+    HireMeButton,
   },
 });
 </script>
@@ -13,7 +13,9 @@ export default defineComponent({
 <template>
   <div class="hire-screen py-20 px-4">
     <ReadyToWorkTogether title="Ready to Work Together?">
-      <DownloadResume type="button" />
+      <div class="flex flex-col items-center">
+        <HireMeButton class="w-max" />
+      </div>
     </ReadyToWorkTogether>
   </div>
 </template>

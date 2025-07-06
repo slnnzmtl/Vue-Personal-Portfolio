@@ -1,11 +1,11 @@
 <template>
   <main class="max-w-[1200px] w-full mx-auto pt-36 px-4">
     <header class="mb-12">
-      <h1 class="text-2xl sm:text-4xl font-bold mb-6">What we are doing</h1>
+      <h1 class="text-2xl sm:text-4xl font-bold mb-6">What I'm doing</h1>
       <p class="intro text-lg xl:text-xl">
-        We help businesses grow, streamline operations, and boost revenue with tailor-made
-        software and AI solutions — designed for scalability, automation, and measurable
-        results.
+        My studio businesses grow, streamline operations, and boost revenue with
+        tailor-made software and AI solutions — designed for scalability, automation, and
+        measurable results.
       </p>
     </header>
 
