@@ -4,6 +4,7 @@ import { useModalService } from "@/composables/useModal";
 import { useNavigation } from "@/composables/useNavigation";
 import { ModalKey } from "@/modals/types";
 import { defineComponent, defineAsyncComponent, computed } from "vue";
+import { useRoute } from "vue-router";
 
 const HireMeButton = defineAsyncComponent({
   loader: () => import("@/components/ui/buttons/HireMeButton.vue"),
@@ -18,6 +19,7 @@ export default defineComponent({
   },
   setup() {
     const { openModal } = useModalService();
+    const route = useRoute();
     const {
       isMenuOpen,
       isNavVisible,
@@ -33,15 +35,6 @@ export default defineComponent({
       "mobile-view": isMobileView.value,
     }));
 
-    const smoothScroll = (event: MouseEvent, targetId: string) => {
-      event.preventDefault();
-      const targetElement = document.getElementById(targetId);
-      if (targetElement) {
-        targetElement.scrollIntoView({ behavior: "smooth" });
-        closeMenu();
-      }
-    };
-
     const onModalOpen = async () => {
       await openModal(ModalKey.ConsultationForm);
       showMenu(true);
@@ -53,7 +46,6 @@ export default defineComponent({
       toggleMenu,
       closeMenu,
       onModalOpen,
-      smoothScroll,
     };
   },
 });
@@ -72,7 +64,14 @@ export default defineComponent({
         <router-link to="/" @click.stop="closeMenu"> Main </router-link>
         <router-link to="/projects" @click.stop="closeMenu"> Portfolio </router-link>
         <router-link to="/services" @click.stop="closeMenu"> Services </router-link>
-        <!-- <router-link to="/automations" @click.stop="closeMenu"> Automations </router-link> -->
+        <router-link
+          to="/#hire-screen"
+          active-class=""
+          exact-active-class=""
+          @click.stop="closeMenu"
+        >
+          Contacts
+        </router-link>
       </div>
 
       <div class="hire-button">
