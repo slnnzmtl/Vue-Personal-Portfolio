@@ -8,7 +8,7 @@
     </p>
 
     <ScrollableContainer>
-      <div class="workflow-items flex flex-nowrap gap-4 pt-4 px-6">
+      <div class="workflow-items flex flex-nowrap gap-4 pt-4 px-12">
         <button
           v-for="(point, index) in workflowPoints"
           :key="index"
