@@ -97,6 +97,10 @@ nav {
 
   &.nav-hidden {
     transform: translateY(-100%);
+
+    &:hover {
+      transform: translateY(0);
+    }
   }
 
   &.mobile-view {
