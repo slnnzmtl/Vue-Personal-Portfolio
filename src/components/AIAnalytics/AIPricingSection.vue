@@ -2,6 +2,7 @@
 import { defineComponent } from "vue";
 import GlassMaterial from "../ui/GlassMaterial.vue";
 import SButton from "@/components/ui/buttons/SButton.vue";
+import { useConsultationService } from "@/composables";
 
 export default defineComponent({
   name: "AIPricingSection",
@@ -32,8 +33,10 @@ export default defineComponent({
       },
     ];
 
+    const { openConsultation, ServiceType } = useConsultationService();
+
     const handleRequestSubmit = () => {
-      console.log("Request submitted");
+      openConsultation(ServiceType.AIAnalytics);
     };
 
     return { pricingOptions, handleRequestSubmit };
@@ -44,9 +47,7 @@ export default defineComponent({
 <template>
   <section class="bg-background py-16">
     <div class="mx-auto">
-      <h2 class="text-3xl md:text-4xl font-bold text-center mb-6 px-4">
-        Тарифи
-      </h2>
+      <h2 class="text-3xl md:text-4xl font-bold text-center mb-12 px-4">Тарифи</h2>
 
       <div class="grid md:grid-cols-3 gap-6 max-w-6xl mx-auto mb-12">
         <GlassMaterial
@@ -54,20 +55,25 @@ export default defineComponent({
           :key="option.title"
           :class="[
             'p-6 text-center relative',
-            option.featured ? 'ring-2 ring-purple-500 transform scale-105' : ''
+            option.featured ? 'ring-2 ring-purple-500 transform scale-105' : '',
           ]"
         >
-          <div v-if="option.featured" class="absolute -top-3 left-1/2 transform -translate-x-1/2">
-            <span class="bg-purple-600 text-white px-4 py-1 rounded-full text-sm font-semibold">
+          <div
+            v-if="option.featured"
+            class="absolute -top-3 left-1/2 transform -translate-x-1/2"
+          >
+            <span
+              class="bg-purple-600 text-white px-4 py-1 rounded-full text-sm font-semibold"
+            >
               Популярний
             </span>
           </div>
-          
+
           <div class="text-4xl mb-4">{{ option.icon }}</div>
           <h3 class="text-xl font-semibold mb-3">{{ option.title }}</h3>
           <div class="text-3xl font-bold text-purple-600 mb-4">{{ option.price }}</div>
           <p class="text-muted-foreground mb-6">{{ option.description }}</p>
-          
+
           <div class="flex items-center gap-2 justify-center">
             <span class="text-green-500 text-lg">✔️</span>
             <span class="text-sm">{{ option.title }}</span>

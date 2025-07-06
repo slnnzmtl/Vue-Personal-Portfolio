@@ -50,7 +50,7 @@ export default defineComponent({
         Що ви отримаєте
       </h2>
 
-      <div class="grid grid-cols-2 gap-6">
+      <div class="grid sm:grid-cols-2 gap-6">
         <GlassMaterial
           v-for="benefit in benefits"
           :key="benefit.title"

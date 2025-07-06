@@ -2,6 +2,7 @@
 import { defineComponent } from "vue";
 import SButton from "@/components/ui/buttons/SButton.vue";
 import GlassMaterial from "../ui/GlassMaterial.vue";
+import { useConsultationService } from "@/composables";
 
 export default defineComponent({
   name: "AIFinalCTASection",
@@ -10,8 +11,10 @@ export default defineComponent({
     GlassMaterial,
   },
   setup() {
+    const { openConsultation, ServiceType } = useConsultationService();
+
     const handleConsultationRequest = () => {
-      console.log("Free consultation requested");
+      openConsultation(ServiceType.AIAnalytics);
     };
 
     return { handleConsultationRequest };
@@ -44,7 +47,7 @@ export default defineComponent({
         </SButton>
 
         <div
-          class="mt-8 flex justify-center items-center gap-4 text-sm text-muted-foreground"
+          class="mt-8 flex flex-wrap justify-center items-center gap-4 text-sm text-muted-foreground"
         >
           <span>⏰ Консультація займає 30 хвилин</span>
           <span>•</span>

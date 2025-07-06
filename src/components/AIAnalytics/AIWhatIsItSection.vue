@@ -35,12 +35,12 @@ export default defineComponent({
 <template>
   <section class="bg-background py-16">
     <div class="mx-auto">
-      <h2 class="text-3xl md:text-4xl font-bold text-center mb-12 px-4">
+      <h2 class="text-3xl md:text-4xl font-bold text-center mb-8 px-4">
         Що таке AI-аналітика для продажів
       </h2>
 
       <div class="text-center mb-8">
-        <p class="text-lg text-muted-foreground mb-6 px-4">
+        <p class="text-lg text-purple-600 mb-12 px-4">
           Це повністю автоматизований агент на базі ChatGPT, який самостійно:
         </p>
       </div>

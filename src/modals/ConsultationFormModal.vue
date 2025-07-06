@@ -4,15 +4,15 @@
       class="consultation-form-modal flex flex-col gap-4 items-left justify-center max-w-[100vw]"
     >
       <h2 class="form-title text-2xl font-bold" v-if="!showConfirmation">
-        Book a free strategy session
+        {{ title }}
       </h2>
       <p class="form-description" v-if="!showConfirmation">
-        Please fill this form to schedule a consultation. I will get back to you as soon
-        as possible.
+        {{ description }}
       </p>
       <form v-if="!showConfirmation" class="form-container" @submit="submitForm">
         <div class="grid md:gap-2 md:grid-cols-2">
           <InputField
+            ref="nameInputRef"
             id="name"
             name="name"
             label="Name"
@@ -31,14 +31,6 @@
             :disabled="isLoading"
           />
         </div>
-
-        <!-- <DateTimeInput
-          id="scheduledTime"
-          name="scheduledTime"
-          label="Preferred Date & Time"
-          required
-          v-model="formData.scheduledTime"
-        /> -->
 
         <TextareaField
           id="message"
@@ -73,7 +65,7 @@ import ModalWindow from "@/components/ui/ModalWindow.vue";
 import TextareaField from "@/components/ui/TextareaField.vue";
 import DateTimeInput from "@/components/ui/DateTimeInput.vue";
 import LoadingIndicator from "@/components/ui/LoadingIndicator.vue";
-import { defineComponent, reactive, ref } from "vue";
+import { defineComponent, reactive, ref, onMounted, nextTick } from "vue";
 import SButton from "@/components/ui/buttons/SButton.vue";
 
 export default defineComponent({
@@ -84,14 +76,32 @@ export default defineComponent({
     TextareaField,
     DateTimeInput,
     LoadingIndicator,
+    SButton,
+  },
+  props: {
+    title: {
+      type: String,
+      default: "Book a free strategy session",
+    },
+    description: {
+      type: String,
+      default:
+        "Please fill this form to schedule a consultation. I will get back to you as soon as possible.",
+    },
+    prefill: {
+      type: Object,
+      default: () => ({}),
+    },
   },
   emits: ["close"],
   setup(props, { emit }) {
+    const nameInputRef = ref<InstanceType<typeof InputField> | null>(null);
+    
     const formData = reactive({
-      name: "",
-      email: "",
-      scheduledTime: "",
-      message: "",
+      name: props.prefill?.name || "",
+      email: props.prefill?.email || "",
+      scheduledTime: props.prefill?.scheduledTime || "",
+      message: props.prefill?.message || "",
     });
 
     const showConfirmation = ref(false);
@@ -117,6 +127,7 @@ export default defineComponent({
               name: formData.name,
               email: formData.email,
               message: formData.message,
+              service: props.prefill?.service || "",
               source: "main-site",
             }),
           }
@@ -134,12 +145,25 @@ export default defineComponent({
       }
     };
 
+    onMounted(async () => {
+      await nextTick();
+      if (nameInputRef.value && nameInputRef.value.$el) {
+        const input = nameInputRef.value.$el.querySelector('input');
+        if (input) {
+          input.focus();
+        }
+      }
+    });
+
     return {
+      nameInputRef,
       formData,
       closeModal,
       submitForm,
       showConfirmation,
       isLoading,
+      title: props.title,
+      description: props.description,
     };
   },
 });
