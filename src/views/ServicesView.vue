@@ -1,71 +1,146 @@
 <template>
-  <main class="max-w-[1800px] w-full mx-auto pt-36">
-    <header class="mb-12 mx-4">
-      <h1 class="text-2xl sm:text-4xl font-bold mb-6">🔧 Services I Provide</h1>
-      <p class="description text-lg xl:text-xl">
-        As a product-oriented developer with expertise in web technologies and AI, I help
-        businesses grow, automate, and optimize operations through tailor-made software
-        solutions:
+  <main class="max-w-[1200px] w-full mx-auto pt-36 px-4">
+    <header class="mb-12">
+      <h1 class="text-2xl sm:text-4xl font-bold mb-6">What we are doing</h1>
+      <p class="intro text-lg xl:text-xl">
+        We help businesses grow, streamline operations, and boost revenue with tailor-made
+        software and AI solutions — designed for scalability, automation, and measurable
+        results.
       </p>
     </header>
 
-    <ScrollableContainer>
-      <GlassMaterial class="w-max mx-4">
-        <table class="w-full">
-          <thead>
-            <tr>
-              <th class="text-left py-4 px-6 text-cyan">Service</th>
-              <th class="text-left py-4 px-6 text-cyan">Description</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr v-for="(service, index) in services" :key="index">
-              <td class="py-4 px-6 font-semibold text-md text-cyan align-top">
-                ✅ {{ service.title }}
-                <span v-if="service.isNew" class="text-sm ml-1 text-yellow-400"
-                  >(NEW)</span
-                >
-              </td>
-              <td class="py-4 px-6 text-white-600 leading-relaxed text-left text-sm">
-                {{ service.description }}
-              </td>
-            </tr>
-          </tbody>
-        </table>
-      </GlassMaterial>
-    </ScrollableContainer>
+    <div class="grid sm:grid-cols-2 gap-6">
+      <div class="category">
+        <h2 class="text-2xl font-bold mb-6 text-cyan">🌐 Web Development</h2>
 
-    <div class="mt-16 grid md:grid-cols-3 gap-8 mb-16 mx-4">
-      <div class="md:col-span-2">
-        <section>
-          <h3 class="text-2xl font-bold mb-6 text-cyan">🎯 Why Choose Me</h3>
-          <ul class="space-y-3">
-            <li class="flex items-start gap-3">
-              <span class="text-cyan text-xl">✔</span>
-              <span>Focus on measurable business value</span>
-            </li>
-            <li class="flex items-start gap-3">
-              <span class="text-cyan text-xl">✔</span>
-              <span>Custom-tailored solutions — no cookie-cutter templates</span>
-            </li>
-            <li class="flex items-start gap-3">
-              <span class="text-cyan text-xl">✔</span>
-              <span>End-to-end ownership: From idea to deployment and support</span>
-            </li>
-            <li class="flex items-start gap-3">
-              <span class="text-cyan text-xl">✔</span>
-              <span>Expertise in modern AI technologies & web frameworks</span>
-            </li>
-            <li class="flex items-start gap-3">
-              <span class="text-cyan text-xl">✔</span>
-              <span>Scalable, secure, and future-proof development</span>
-            </li>
-          </ul>
-        </section>
+        <GlassMaterial class="service-card mb-4 p-6">
+          <div class="service-title">Full-stack Development</div>
+          <div class="service-description">
+            Complete web apps (frontend & backend) with modern tech like React, Vue,
+            Node.js.
+          </div>
+        </GlassMaterial>
+
+        <GlassMaterial class="service-card mb-4 p-6">
+          <div class="service-title">E-commerce Development</div>
+          <div class="service-description">
+            Custom online stores, payment integration, SEO-optimized product platforms.
+          </div>
+        </GlassMaterial>
+
+        <GlassMaterial class="service-card mb-4 p-6">
+          <div class="service-title">WordPress Development</div>
+          <div class="service-description">
+            Business sites, WooCommerce, custom plugins, SEO optimization.
+          </div>
+        </GlassMaterial>
+
+        <GlassMaterial class="service-card mb-4 p-6">
+          <div class="service-title">High-Performance Landing Pages</div>
+          <div class="service-description">
+            SEO-optimized, fast-loading landing pages with best practices for lead
+            capture.
+          </div>
+        </GlassMaterial>
+
+        <GlassMaterial class="service-card mb-4 p-6">
+          <div class="service-title">Cloud-First & Serverless Applications</div>
+          <div class="service-description">
+            Scalable apps on AWS, Google Cloud, Azure with modern serverless architecture.
+          </div>
+        </GlassMaterial>
+
+        <GlassMaterial class="service-card mb-4 p-6">
+          <div class="service-title">Progressive Web Apps (PWA)</div>
+          <div class="service-description">
+            Cross-platform apps with offline access and mobile-first experience.
+          </div>
+        </GlassMaterial>
+
+        <GlassMaterial class="service-card mb-4 p-6">
+          <div class="service-title">UX/UI Design & Omnichannel Experience</div>
+          <div class="service-description">
+            Modern, conversion-focused interfaces and seamless multi-device experiences.
+          </div>
+        </GlassMaterial>
+      </div>
+
+      <div class="category">
+        <h2 class="text-2xl font-bold mb-6 text-cyan">🤖 Automation & AI Solutions</h2>
+
+        <GlassMaterial class="service-card mb-4 p-6">
+          <div class="service-title">AI-Powered Sales & Marketing Systems</div>
+          <div class="service-description">
+            Automated lead generation, marketing funnels, chatbots to boost your
+            conversions.
+          </div>
+          <router-link to="/ai-sales-analytics" class="learn-more">
+            Learn more →
+          </router-link>
+        </GlassMaterial>
+
+        <GlassMaterial class="service-card mb-4 p-6">
+          <div class="service-title">Generative AI Integration</div>
+          <div class="service-description">
+            AI content generation, chatbots, code assistants, and AI tools to enhance
+            productivity.
+          </div>
+        </GlassMaterial>
+
+        <GlassMaterial class="service-card mb-4 p-6">
+          <div class="service-title">Business Process Automation</div>
+          <div class="service-description">
+            Workflow automation, integrations, task reduction, and AI-based optimizations.
+          </div>
+        </GlassMaterial>
+
+        <GlassMaterial class="service-card mb-4 p-6">
+          <div class="service-title">AI Business Integrations</div>
+          <div class="service-description">
+            AI tools for automation, content creation, decision-making, and CRM
+            integrations.
+          </div>
+        </GlassMaterial>
+
+        <GlassMaterial class="service-card mb-4 p-6">
+          <div class="service-title">Data Scripting & Analytics Systems</div>
+          <div class="service-description">
+            Custom parsers, monitoring dashboards, and competitive analysis tools for
+            insights.
+          </div>
+        </GlassMaterial>
       </div>
     </div>
 
-    <GlassMaterial class="flex flex-col md:w-max p-8 mx-4">
+    <section class="mb-12 py-12">
+      <div class="mt-16 flex flex-col items-center gap-8">
+        <h2 class="text-6xl font-bold mb-6 text-cyan">🎯 Why clients choose us</h2>
+        <ul class="space-y-3">
+          <li class="flex items-start gap-3">
+            <span class="text-cyan text-xl">✔</span>
+            <span>Focus on measurable business value</span>
+          </li>
+          <li class="flex items-start gap-3">
+            <span class="text-cyan text-xl">✔</span>
+            <span>Custom-tailored solutions — no cookie-cutter templates</span>
+          </li>
+          <li class="flex items-start gap-3">
+            <span class="text-cyan text-xl">✔</span>
+            <span>End-to-end ownership: From idea to deployment and support</span>
+          </li>
+          <li class="flex items-start gap-3">
+            <span class="text-cyan text-xl">✔</span>
+            <span>Expertise in modern AI technologies & web frameworks</span>
+          </li>
+          <li class="flex items-start gap-3">
+            <span class="text-cyan text-xl">✔</span>
+            <span>Scalable, secure, and future-proof development</span>
+          </li>
+        </ul>
+      </div>
+    </section>
+
+    <GlassMaterial class="flex flex-col mx-auto md:w-max p-8">
       <h3 class="text-2xl font-bold mb-4 text-cyan">📢 Let's Talk About Your Project</h3>
       <p class="text-lg mb-6 text-white-600">
         Whether you need to build from scratch, upgrade, or integrate AI — I can help.
@@ -78,93 +153,10 @@
 </template>
 
 <script setup lang="ts">
-import { ScrollableContainer } from "@/components";
 import GlassMaterial from "@/components/ui/GlassMaterial.vue";
 import SButton from "@/components/ui/buttons/SButton.vue";
 import { useModalService } from "@/composables/useModal";
 import { ModalKey } from "@/modals/types";
-import { ref } from "vue";
-
-interface Service {
-  title: string;
-  description: string;
-  isNew?: boolean;
-}
-
-const services = ref<Service[]>([
-  {
-    title: "Full-Stack Web Development",
-    description:
-      "Complete web apps (Frontend + Backend) using React, Vue.js, Node.js, PHP, etc.",
-  },
-  {
-    title: "E-Commerce Development",
-    description:
-      "Custom online stores, payment integration, SEO-optimized product platforms",
-  },
-  {
-    title: "CRM Systems Development",
-    description: "Custom CRM platforms, automations, AI integration for sales & support",
-  },
-  {
-    title: "AI-Powered Sales & Marketing Systems",
-    description:
-      "AI chatbots, automated lead generation, marketing funnels, smart responders",
-  },
-  {
-    title: "Generative AI Integration",
-    description:
-      "AI-driven content generation, chatbots, code assistants, data analysis tools",
-    isNew: true,
-  },
-  {
-    title: "SEO & High-Performance Landing Pages",
-    description:
-      "Fast, mobile-optimized landing pages with SEO best practices for lead capture",
-  },
-  {
-    title: "Business Process Automation",
-    description:
-      "Workflow automation, integrations, task automation, AI-based optimizations",
-  },
-  {
-    title: "Low-Code/No-Code Development",
-    description:
-      "Rapid prototypes & internal tools with platforms like Bubble, Airtable, Make",
-    isNew: true,
-  },
-  {
-    title: "Cloud-First & Serverless Applications",
-    description:
-      "Scalable apps built for AWS, Google Cloud, Azure using serverless architecture",
-    isNew: true,
-  },
-  {
-    title: "Progressive Web Apps (PWA)",
-    description: "Cross-platform web apps with offline access, mobile-native experience",
-    isNew: true,
-  },
-  {
-    title: "UX/UI Design & Omnichannel Experience",
-    description:
-      "Modern, conversion-focused interfaces, seamless multi-device experiences",
-    isNew: true,
-  },
-  {
-    title: "Data Scraping & Analytics Systems",
-    description:
-      "Custom parsers, monitoring dashboards, competitive analytics for social media",
-  },
-  {
-    title: "AI Business Integrations",
-    description:
-      "Implement AI for automation, content creation, decision making, GPT integration",
-  },
-  {
-    title: "WordPress Development",
-    description: "Business sites, WooCommerce, custom plugins, SEO optimization",
-  },
-]);
 
 const { openModal } = useModalService();
 
@@ -174,7 +166,38 @@ const onContactClick = async () => {
 </script>
 
 <style lang="scss" scoped>
-.description {
+.intro {
   color: var(--white-600);
+}
+
+.service-card {
+  transition: all 0.3s ease;
+
+  &:hover {
+    transform: translateY(-2px);
+  }
+}
+
+.service-title {
+  font-size: 1.125rem;
+  font-weight: 600;
+  color: var(--cyan);
+  margin-bottom: 0.5rem;
+}
+
+.service-description {
+  color: var(--white-600);
+  line-height: 1.6;
+}
+
+.learn-more {
+  color: var(--cyan);
+  text-decoration: none;
+  font-weight: 500;
+  transition: color 0.3s ease;
+
+  &:hover {
+    color: var(--white);
+  }
 }
 </style>
