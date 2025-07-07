@@ -39,7 +39,7 @@ export default defineComponent({
 </script>
 
 <template>
-  <section class="bg-background py-16">
+  <section class="bg-background">
     <div class="mx-auto flex flex-col gap-12">
       <h2 class="text-3xl md:text-4xl font-bold text-center px-4">What I am doing</h2>
 

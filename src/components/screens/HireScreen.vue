@@ -11,7 +11,7 @@ export default defineComponent({
 </script>
 
 <template>
-  <div class="hire-screen py-20 px-4">
+  <div class="hire-screen px-4 text-center mx-auto">
     <ReadyToWorkTogether title="Ready to Work Together?">
       <div class="flex flex-col items-center">
         <HireMeButton class="w-max" />
@@ -25,5 +25,6 @@ export default defineComponent({
   display: flex;
   justify-content: center;
   min-height: 600px;
+  max-width: 800px;
 }
 </style>

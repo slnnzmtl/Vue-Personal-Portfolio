@@ -58,7 +58,7 @@ export default defineComponent({
 </script>
 
 <template>
-  <div class="projects-screen max-w-screen-2xl py-12">
+  <div class="projects-screen max-w-screen-2xl">
     <div v-if="isLoading" class="loading">Loading projects...</div>
     <div v-else-if="error" class="error">{{ error }}</div>
     <template v-else>
@@ -91,7 +91,7 @@ export default defineComponent({
 
       <div class="flex justify-center">
         <SButton
-          variant="primary"
+          variant="tertiary"
           class="load-more-button mt-8 xl:mt-0 rounded"
           @click="showAllProjects"
         >

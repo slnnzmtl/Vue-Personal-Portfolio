@@ -1,26 +1,26 @@
 <template>
-  <div class="workflow-screen py-12">
-    <h2 class="text-left font-bold mb-10 px-6">How I deliver projects</h2>
-    <p class="text-lg sm:text-xl mb-8 text-justify px-6 text-white-800">
+  <div class="flex flex-col gap-6 text-justify">
+    <h2 class="font-bold px-6">How I deliver projects</h2>
+    <p class="text-lg sm:text-xl px-6 text-white-800">
       My structured approach drives project success through deep understanding of business
-      needs, precise estimation, exceptional UI design, and delivery that exceeds
-      expectations.
+      needs, <br class="hidden xl:inline-block" />
+      precise estimation, exceptional UI design, and delivery that exceeds expectations.
     </p>
 
     <ScrollableContainer>
-      <div class="workflow-items flex flex-nowrap gap-4 pt-4 px-12">
+      <div class="workflow-items flex flex-nowrap gap-4 sm:pt-4 px-6 xl:px-12">
         <button
           v-for="(point, index) in workflowPoints"
           :key="index"
-          class="w-full max-w-[25%] min-w-[250px] flex-shrink-0 cursor-pointer"
+          class="workflow-item w-full max-w-[25%] min-w-[250px] flex-shrink-0 cursor-pointer"
           @click="handleModalOpen(point.id)"
         >
           <GlassMaterial
-            class="workflow-item flex flex-col items-center p-3 rounded-lg w-full h-full"
+            class="workflow-item-container flex flex-col items-center p-3 rounded-lg w-full h-full"
           >
             <SIcon :name="point.icon" class="max-w-16 cursor-pointer" />
-            <h3 class="text-xl font-semibold mb-2">{{ point.title }}</h3>
-            <p class="text-sm text-center text-gray-400">
+            <h3 class="font-semibold mb-4">{{ point.title }}</h3>
+            <p class="text-sm text-center text-gray-400 mb-4">
               {{ point.description }}
             </p>
           </GlassMaterial>
@@ -100,6 +100,11 @@ export default defineComponent({
 </script>
 
 <style lang="scss" scoped>
+h3 {
+  font-size: 1.2rem;
+  line-height: 1.5;
+}
+
 .scrollable-container {
   -ms-overflow-style: none; /* IE and Edge */
   scrollbar-width: none; /* Firefox */
@@ -112,7 +117,10 @@ export default defineComponent({
 .workflow-item {
   transition: transform 0.3s ease;
   animation: none !important;
-  background: rgba(214, 109, 255, 0.1);
+
+  &-container {
+    background: rgba(214, 109, 255, 0.1);
+  }
 
   &:hover {
     transform: translateY(-10px);
@@ -124,7 +132,7 @@ export default defineComponent({
   }
 }
 
-@media (min-width: 1024px) {
+@media (min-width: 1268px) {
   .workflow-items {
     justify-content: center;
   }

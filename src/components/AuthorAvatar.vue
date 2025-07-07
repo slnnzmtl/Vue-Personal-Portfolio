@@ -47,12 +47,12 @@ export default defineComponent({
   overflow: hidden;
   display: flex;
   flex-shrink: 0;
-  height: 400px;
-  width: 400px;
+  height: 350px;
+  width: 350px;
 
   @media (max-width: 1280px) {
-    height: 250px;
-    width: 250px;
+    height: 300px;
+    width: 300px;
   }
 }
 

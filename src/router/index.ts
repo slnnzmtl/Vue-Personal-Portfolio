@@ -90,11 +90,11 @@ const router = createRouter({
               behavior: "smooth"
             });
           } else {
-            setTimeout(scrollToElement, 100);
+            setTimeout(scrollToElement, 200);
           }
         };
         
-        setTimeout(scrollToElement, 50);
+        setTimeout(scrollToElement, 200);
       });
     }
     return { top: 0 };

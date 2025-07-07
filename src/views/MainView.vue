@@ -1,9 +1,11 @@
 <template>
-  <div class="main-view flex flex-col w-full">
-    <FaceScreen class="max-w-screen-2xl w-full mx-auto" />
+  <div class="main-view flex flex-col gap-24 w-full">
+    <FaceScreen class="mt-32 max-w-screen-2xl w-full mx-auto" />
     <WorkflowScreen class="max-w-screen-2xl w-full mx-auto" />
-    <SkillsScreen class="max-w-screen-2xl w-full mx-auto" />
     <ServicesScreen class="max-w-screen-2xl w-full mx-auto px-6" />
+    <HireMeButton @click="handleConsultationForm" class="w-max mx-auto" />
+
+    <SkillsScreen class="max-w-screen-2xl w-full mx-auto" />
 
     <div class="max-w-screen-2xl mx-auto">
       <ProjectsScreen />
@@ -24,6 +26,10 @@ import { useProjectsStore } from "@/stores/projectsStore";
 import WorkflowScreen from "@/components/screens/WorkflowScreen.vue";
 import SkillsScreen from "@/components/screens/SkillsScreen.vue";
 import ServicesScreen from "@/components/screens/ServicesScreen.vue";
+import HireMeButton from "@/components/ui/buttons/HireMeButton.vue";
+import { useConsultationService } from "@/composables/useAIAnalyticsConsultation";
+import { useModalService } from "@/composables";
+import { ModalKey } from "@/modals/types";
 
 const ProjectsScreen = defineAsyncComponent({
   loader: () => import("@/components/screens/ProjectsScreen.vue"),
@@ -43,14 +49,21 @@ export default defineComponent({
     ProjectsScreen,
     HireScreen,
     ServicesScreen,
+    HireMeButton,
   },
 
   setup() {
+    const { openModal } = useModalService();
+
     const projectsStore = useProjectsStore();
     const showHireScreen = ref(false);
 
     const loadProjects = async () => {
       await projectsStore.fetchProjects();
+    };
+
+    const handleConsultationForm = () => {
+      openModal(ModalKey.ConsultationForm);
     };
 
     onMounted(() => {
@@ -63,6 +76,7 @@ export default defineComponent({
 
     return {
       showHireScreen,
+      handleConsultationForm,
     };
   },
 });

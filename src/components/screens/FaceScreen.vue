@@ -31,32 +31,39 @@ export default defineComponent({
 </script>
 
 <template>
-  <div class="face-screen items-center py-10 px-3">
-    <div class="author-avatar relative w-full flex justify-center">
-      <AuthorAvatar />
-    </div>
+  <div class="face-screen flex justify-center items-center px-3">
+    <div
+      class="flex flex-col lg:flex-row gap-12 lg:gap-22 xl:gap-36 items-center mt-[150px] lg:mt-0"
+    >
+      <div class="author-avatar relative w-full flex justify-center">
+        <AuthorAvatar />
+      </div>
 
-    <div class="flex flex-col items-center md:items-start gap-6 md:gap-3 text-left">
-      <h1 class="text-center text-6xl font-bold">Kazansky Development</h1>
-      <p
-        class="text-xl lg:text-3xl font-semibold text-center md:text-left text-secondary text-shadow"
-      >
-        Software development & AI solutions studio
-      </p>
+      <div class="flex flex-col items-center lg:items-start gap-6 lg:gap-3 text-left">
+        <h1 class="text-center text-6xl font-bold">Kazansky Development</h1>
+        <p
+          class="text-xl lg:text-3xl font-semibold text-center md:text-left text-secondary text-shadow mb-4"
+        >
+          Software development & AI solutions studio
+        </p>
 
-      <p class="sm:text-base text-center text-white-800 my-2 md:text-left">
-        Building high-quality software and AI solutions with trusted partners — empowering
-        businesses to thrive <br class="hidden xl:block" />
-        in the digital age.
-      </p>
+        <p
+          class="sm:text-base max-w-[800px] xl:max-w-full text-center text-white-800 lg:text-left mb-4"
+        >
+          Building high-quality software and AI solutions with trusted partners —
+          empowering businesses to thrive <br class="hidden xl:block" />
+          in the digital age.
+        </p>
 
-      <GlassMaterial class="p-4 mx-4 md:mx-0 mt-2 w-full lg:w-auto">
-        <SocialLinks title="Contact me:" />
-      </GlassMaterial>
-      <div class="md:hidden">
-        <SButton variant="primary" @click="onModalOpen" class="mt-2">
-          Book a FREE strategy session
-        </SButton>
+        <GlassMaterial class="max-w-[600px] p-4 mx-4 md:mx-0 mb-4 w-full lg:w-auto">
+          <SocialLinks title="Contact me:" />
+        </GlassMaterial>
+
+        <div class="lg:hidden mt-4 sm:mt-2">
+          <SButton variant="primary" @click="onModalOpen">
+            Book FREE strategy session
+          </SButton>
+        </div>
       </div>
     </div>
   </div>
@@ -64,34 +71,26 @@ export default defineComponent({
 
 <style lang="scss" scoped>
 .face-screen {
-  display: grid;
-  grid-template-columns: 1fr;
-  justify-content: center;
-  margin-top: 12rem;
-  gap: 3rem;
-  height: 60vh;
-  max-height: 800px;
+  height: 80vh;
+  max-height: 900px;
+  width: 100%;
 
-  @media (max-width: 768px) {
+  @media (max-width: 1024px) {
     max-height: 100%;
+    min-height: 100vh;
     height: 100%;
     margin-top: 0;
-    padding-top: 100px;
   }
+}
 
-  .author-avatar {
-    align-items: center;
-    max-width: 300px;
-    margin: 0 auto;
+.author-avatar {
+  align-items: center;
+  max-width: 250px;
+  margin: 0 auto;
 
-    flex-shrink: 1;
+  flex-shrink: 0;
 
-    @media (max-width: 1280px) {
-      max-width: 200px;
-    }
-  }
-
-  @media (min-width: 768px) {
+  @media (min-width: 1024px) {
     grid-template-columns: 30% 1fr;
     grid-template-rows: 1fr;
   }
