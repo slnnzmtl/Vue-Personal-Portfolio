@@ -44,7 +44,7 @@ export default defineComponent({
 <template>
   <section class="bg-background py-16">
     <div class="mx-auto flex flex-col gap-12">
-      <h2 class="text-3xl md:text-4xl font-bold text-center px-4">Для кого це рішення</h2>
+      <h2 class="font-bold text-center px-4">Для кого це рішення</h2>
 
       <div class="grid gap-4">
         <GlassMaterial
@@ -58,7 +58,7 @@ export default defineComponent({
             </div>
 
             <div class="flex flex-col gap-2">
-              <h3 class="text-lg font-semibold">{{ group.title }}</h3>
+              <h3 class="font-semibold">{{ group.title }}</h3>
               <p class="text-muted-foreground">{{ group.description }}</p>
             </div>
           </div>
@@ -72,5 +72,6 @@ export default defineComponent({
 h3 {
   margin: 0;
   line-height: 1.4;
+  font-size: 1.2rem;
 }
 </style>

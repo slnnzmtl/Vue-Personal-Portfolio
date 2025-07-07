@@ -46,7 +46,7 @@ export default defineComponent({
 <template>
   <section class="bg-background py-16">
     <div class="mx-auto flex flex-col gap-12">
-      <h2 class="text-3xl md:text-4xl font-bold text-center px-4">Що ви отримаєте</h2>
+      <h2 class="font-bold text-center px-4">Що ви отримаєте</h2>
 
       <div class="grid sm:grid-cols-2 gap-6">
         <GlassMaterial
@@ -59,7 +59,7 @@ export default defineComponent({
               benefit.icon
             }}</span>
             <div class="flex flex-col gap-2">
-              <h3 class="text-lg font-semibold">{{ benefit.title }}</h3>
+              <h3 class="font-semibold">{{ benefit.title }}</h3>
               <p class="text-muted-foreground">{{ benefit.description }}</p>
             </div>
           </div>
@@ -73,5 +73,6 @@ export default defineComponent({
 h3 {
   margin: 0;
   line-height: 1.4;
+  font-size: 1.2rem;
 }
 </style>
