@@ -12,7 +12,7 @@ export default defineComponent({
   },
   setup() {
     const router = useRouter();
-    const isHovered = ref(false);
+    const hovered = ref("");
     const active = ref(false);
 
     const services = [
@@ -22,6 +22,7 @@ export default defineComponent({
           "Creating modern web applications and websites using the latest technologies",
         icon: "💻",
         path: "/services",
+        name: "web-development",
       },
       {
         title: "AI & Automation Systems",
@@ -29,6 +30,7 @@ export default defineComponent({
           "Development of intelligent automation systems and artificial intelligence for your business",
         icon: "🤖",
         path: "/services",
+        name: "ai-automation",
       },
     ];
 
@@ -38,21 +40,25 @@ export default defineComponent({
       });
     };
 
-    const onMouseEnter = () => {
-      isHovered.value = true;
+    const onMouseEnter = (name: string) => {
+      hovered.value = name;
     };
 
-    const onMouseLeave = () => {
-      isHovered.value = false;
+    const onMouseLeave = (name: string) => {
+      hovered.value = name;
+    };
+
+    const isHovered = (name: string) => {
+      return hovered.value === name;
     };
 
     return {
       services,
       handleCardClick,
-      isHovered,
       active,
       onMouseEnter,
       onMouseLeave,
+      isHovered,
     };
   },
 });
@@ -69,15 +75,15 @@ export default defineComponent({
           :key="service.title"
           class="service-card cursor-pointer p-6 text-center flex flex-col gap-6"
           @click="handleCardClick(service)"
-          @mouseenter="onMouseEnter"
-          @mouseleave="onMouseLeave"
+          @mouseenter="onMouseEnter(service.name)"
+          @mouseleave="onMouseLeave(service.name)"
         >
           <div class="text-4xl">{{ service.icon }}</div>
           <h3 class="text-xl font-semibold">{{ service.title }}</h3>
           <p class="text-muted-foreground">{{ service.description }}</p>
 
           <div class="flex h-full items-end justify-center">
-            <ReadMore v-if="!active" :hovered="isHovered" />
+            <ReadMore v-if="!active" :hovered="isHovered(service.name)" />
           </div>
         </GlassMaterial>
       </div>
