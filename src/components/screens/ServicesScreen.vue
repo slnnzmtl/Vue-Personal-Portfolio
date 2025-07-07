@@ -67,7 +67,7 @@ export default defineComponent({
         <GlassMaterial
           v-for="service in services"
           :key="service.title"
-          class="service-card p-6 text-center flex flex-col gap-6"
+          class="service-card cursor-pointer p-6 text-center flex flex-col gap-6"
           @click="handleCardClick(service)"
           @mouseenter="onMouseEnter"
           @mouseleave="onMouseLeave"
