@@ -3,6 +3,7 @@
     <FaceScreen class="max-w-screen-2xl w-full mx-auto" />
     <WorkflowScreen class="max-w-screen-2xl w-full mx-auto" />
     <SkillsScreen class="max-w-screen-2xl w-full mx-auto" />
+    <ServicesScreen class="max-w-screen-2xl w-full mx-auto px-6" />
 
     <div class="max-w-screen-2xl mx-auto">
       <ProjectsScreen />
@@ -22,6 +23,7 @@ import FaceScreen from "@/components/screens/FaceScreen.vue";
 import { useProjectsStore } from "@/stores/projectsStore";
 import WorkflowScreen from "@/components/screens/WorkflowScreen.vue";
 import SkillsScreen from "@/components/screens/SkillsScreen.vue";
+import ServicesScreen from "@/components/screens/ServicesScreen.vue";
 
 const ProjectsScreen = defineAsyncComponent({
   loader: () => import("@/components/screens/ProjectsScreen.vue"),
@@ -40,6 +42,7 @@ export default defineComponent({
     SkillsScreen,
     ProjectsScreen,
     HireScreen,
+    ServicesScreen,
   },
 
   setup() {

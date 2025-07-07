@@ -16,12 +16,16 @@
     </div>
 
     <div class="project-card__content flex flex-col gap-4 p-4 text-left">
-      <h1 class="project-card__title">
-        {{ project?.title }}
-      </h1>
-      <a :href="getProjectUrl(project?.url)" target="_blank" class="w-min">{{
-        project?.url
-      }}</a>
+      <div>
+        <h1 class="project-card__title mb-2">
+          {{ project?.title }}
+        </h1>
+
+        <a :href="getProjectUrl(project?.url)" target="_blank" class="w-min">{{
+          project?.url
+        }}</a>
+      </div>
+
       <p class="project-card__description text-sm sm:text-base">
         {{ project?.description }}
       </p>
@@ -58,13 +62,15 @@
       </div>
 
       <div class="flex flex-col gap-2 justify-around flex-grow">
-        <h2 class="project-card__title">
-          {{ project?.title }}
-        </h2>
+        <div>
+          <h2 class="project-card__title mb-1">
+            {{ project?.title }}
+          </h2>
 
-        <a :href="getProjectUrl(project?.url)" target="_blank" class="w-min">{{
-          project?.url
-        }}</a>
+          <a :href="getProjectUrl(project?.url)" target="_blank" class="w-min">{{
+            project?.url
+          }}</a>
+        </div>
 
         <TagsBar :tags="project?.tags" :selected-filters="selectedFilters" />
       </div>
