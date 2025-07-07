@@ -13,12 +13,13 @@
       <div class="category">
         <h2 class="text-2xl font-bold mb-6 text-cyan">🌐 Web Development</h2>
 
-        <GlassMaterial class="service-card mb-4 p-6">
+        <GlassMaterial class="service-card has-link mb-4 p-6">
           <div class="service-title">Full-stack Development</div>
           <div class="service-description">
             Complete web apps (frontend & backend) with modern tech like React, Vue,
             Node.js.
           </div>
+          <router-link to="/projects" class="learn-more"> Learn more → </router-link>
         </GlassMaterial>
 
         <GlassMaterial class="service-card mb-4 p-6">
@@ -68,7 +69,7 @@
       <div class="category">
         <h2 class="text-2xl font-bold mb-6 text-cyan">🤖 Automation & AI Solutions</h2>
 
-        <GlassMaterial class="service-card mb-4 p-6">
+        <GlassMaterial class="service-card has-link mb-4 p-6">
           <div class="service-title">AI-Powered Sales & Marketing Systems</div>
           <div class="service-description">
             Automated lead generation, marketing funnels, chatbots to boost your
@@ -172,9 +173,16 @@ const onContactClick = async () => {
 
 .service-card {
   transition: all 0.3s ease;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
 
   &:hover {
     transform: translateY(-2px);
+  }
+
+  &.has-link {
+    background: rgba(0, 255, 145, 0.1);
   }
 }
 
@@ -182,7 +190,6 @@ const onContactClick = async () => {
   font-size: 1.125rem;
   font-weight: 600;
   color: var(--cyan);
-  margin-bottom: 0.5rem;
 }
 
 .service-description {
