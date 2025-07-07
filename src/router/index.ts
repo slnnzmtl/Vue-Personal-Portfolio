@@ -47,7 +47,7 @@ const routes: RouteRecordRaw[] = [
     },
   },
   {
-    path: "/ai-sales-analytics",
+    path: "/services/ai-sales-analytics",
     name: "ai-sales-analytics",
     component: () => import("../views/AIAnalyticsView.vue"),
     meta: {

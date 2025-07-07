@@ -74,7 +74,7 @@
             Automated lead generation, marketing funnels, chatbots to boost your
             conversions.
           </div>
-          <router-link to="/ai-sales-analytics" class="learn-more">
+          <router-link to="/services/ai-sales-analytics" class="learn-more">
             Learn more →
           </router-link>
         </GlassMaterial>
