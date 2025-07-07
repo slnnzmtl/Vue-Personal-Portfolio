@@ -13,13 +13,19 @@
       <div class="category">
         <h2 class="text-2xl font-bold mb-6 text-cyan">🌐 Web Development</h2>
 
-        <GlassMaterial class="service-card has-link mb-4 p-6">
+        <GlassMaterial
+          class="service-card has-link mb-4 p-6"
+          @mouseenter="onMouseEnter"
+          @mouseleave="onMouseLeave"
+        >
           <div class="service-title">Full-stack Development</div>
           <div class="service-description">
             Complete web apps (frontend & backend) with modern tech like React, Vue,
             Node.js.
           </div>
-          <router-link to="/projects" class="learn-more"> Learn more → </router-link>
+          <router-link to="/projects" class="read-more-link">
+            <ReadMore :hovered="isHovered" />
+          </router-link>
         </GlassMaterial>
 
         <GlassMaterial class="service-card mb-4 p-6">
@@ -69,14 +75,18 @@
       <div class="category">
         <h2 class="text-2xl font-bold mb-6 text-cyan">🤖 Automation & AI Solutions</h2>
 
-        <GlassMaterial class="service-card has-link mb-4 p-6">
+        <GlassMaterial
+          class="service-card has-link mb-4 p-6"
+          @mouseenter="onMouseEnter"
+          @mouseleave="onMouseLeave"
+        >
           <div class="service-title">AI-Powered Sales & Marketing Systems</div>
           <div class="service-description">
             Automated lead generation, marketing funnels, chatbots to boost your
             conversions.
           </div>
-          <router-link to="/services/ai-sales-analytics" class="learn-more">
-            Learn more →
+          <router-link to="/services/ai-sales-analytics" class="read-more-link">
+            <ReadMore :hovered="isHovered" />
           </router-link>
         </GlassMaterial>
 
@@ -154,15 +164,26 @@
 </template>
 
 <script setup lang="ts">
+import { ref } from "vue";
 import GlassMaterial from "@/components/ui/GlassMaterial.vue";
+import ReadMore from "@/components/ui/ReadMore.vue";
 import SButton from "@/components/ui/buttons/SButton.vue";
 import { useModalService } from "@/composables/useModal";
 import { ModalKey } from "@/modals/types";
 
 const { openModal } = useModalService();
+const isHovered = ref(false);
 
 const onContactClick = async () => {
   await openModal(ModalKey.ConsultationForm);
+};
+
+const onMouseEnter = () => {
+  isHovered.value = true;
+};
+
+const onMouseLeave = () => {
+  isHovered.value = false;
 };
 </script>
 
@@ -197,14 +218,7 @@ const onContactClick = async () => {
   line-height: 1.6;
 }
 
-.learn-more {
-  color: var(--cyan);
+.read-more-link {
   text-decoration: none;
-  font-weight: 500;
-  transition: color 0.3s ease;
-
-  &:hover {
-    color: var(--white);
-  }
 }
 </style>

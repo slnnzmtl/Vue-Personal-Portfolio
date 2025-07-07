@@ -1,15 +1,20 @@
 <script lang="ts">
-import { defineComponent } from "vue";
+import { defineComponent, ref } from "vue";
 import GlassMaterial from "../ui/GlassMaterial.vue";
 import { useRouter } from "vue-router";
+import ReadMore from "../ui/ReadMore.vue";
 
 export default defineComponent({
   name: "ServicesScreen",
   components: {
     GlassMaterial,
+    ReadMore,
   },
   setup() {
     const router = useRouter();
+    const isHovered = ref(false);
+    const active = ref(false);
+
     const services = [
       {
         title: "Web Development",
@@ -33,7 +38,22 @@ export default defineComponent({
       });
     };
 
-    return { services, handleCardClick };
+    const onMouseEnter = () => {
+      isHovered.value = true;
+    };
+
+    const onMouseLeave = () => {
+      isHovered.value = false;
+    };
+
+    return {
+      services,
+      handleCardClick,
+      isHovered,
+      active,
+      onMouseEnter,
+      onMouseLeave,
+    };
   },
 });
 </script>
@@ -49,17 +69,23 @@ export default defineComponent({
           :key="service.title"
           class="service-card p-6 text-center flex flex-col gap-6"
           @click="handleCardClick(service)"
+          @mouseenter="onMouseEnter"
+          @mouseleave="onMouseLeave"
         >
           <div class="text-4xl">{{ service.icon }}</div>
           <h3 class="text-xl font-semibold">{{ service.title }}</h3>
           <p class="text-muted-foreground">{{ service.description }}</p>
+
+          <div class="flex h-full items-end">
+            <ReadMore v-if="!active" :hovered="isHovered" />
+          </div>
         </GlassMaterial>
       </div>
     </div>
   </section>
 </template>
 
-<style scoped>
+<style lang="scss" scoped>
 h3 {
   margin: 0;
   line-height: 1.4;
@@ -68,8 +94,26 @@ h3 {
 .service-card {
   transition: transform 0.3s ease;
   cursor: pointer;
+
   &:hover {
     transform: translateY(-10px);
+
+    .link-arrow {
+      transform: translateX(5px);
+    }
+  }
+
+  .link {
+    display: inline-flex;
+    align-items: center;
+    color: var(--cyan);
+    text-decoration: none;
+    font-weight: 500;
+
+    &-arrow {
+      margin-left: 0.5rem;
+      transition: transform 0.3s ease;
+    }
   }
 }
 </style>

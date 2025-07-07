@@ -4,6 +4,8 @@
     class="project-card flex flex-col relative radius-md overflow-hidden"
     :class="[activeClass, scrollableClass]"
     @click="onCardClick"
+    @mouseenter="onMouseEnter"
+    @mouseleave="onMouseLeave"
   >
     <div class="project-card__image">
       <div v-if="isImageLoading" class="image-loader shimmer"></div>
@@ -37,10 +39,7 @@
       </div>
 
       <div class="flex h-full items-end">
-        <span v-if="!active" class="project-card__link">
-          Read more
-          <span class="project-card__link-arrow">→</span>
-        </span>
+        <ReadMore v-if="!active" :hovered="isHovered" />
       </div>
     </div>
   </GlassMaterial>
@@ -49,6 +48,8 @@
     v-else
     :class="`project-card project-card--list relative radius-md overflow-hidden p-4 ${activeClass}`"
     @click="onCardClick"
+    @mouseenter="onMouseEnter"
+    @mouseleave="onMouseLeave"
   >
     <div class="flex gap-4">
       <div class="project-card__image">
@@ -88,12 +89,14 @@
 import { defineComponent, computed, ref } from "vue";
 import type { Project } from "@/stores/projectTypes";
 import GlassMaterial from "@/components/ui/GlassMaterial.vue";
+import ReadMore from "@/components/ui/ReadMore.vue";
 import TagsBar from "@/components/Tags/TagsBar.vue";
 
 export default defineComponent({
   name: "ProjectCard",
   components: {
     GlassMaterial,
+    ReadMore,
     TagsBar,
   },
   props: {
@@ -117,6 +120,7 @@ export default defineComponent({
   emits: ["click", "close"],
   setup(props, { emit }) {
     const isImageLoading = ref(true);
+    const isHovered = ref(false);
 
     const isGridLayout = computed(
       () => props.layout === "grid" || props.layout === "scroll",
@@ -150,13 +154,24 @@ export default defineComponent({
       emit("close");
     };
 
+    const onMouseEnter = () => {
+      isHovered.value = true;
+    };
+
+    const onMouseLeave = () => {
+      isHovered.value = false;
+    };
+
     return {
       isImageLoading,
       isGridLayout,
+      isHovered,
       activeClass,
       handleImageLoad,
       onClose,
       onCardClick,
+      onMouseEnter,
+      onMouseLeave,
       scrollableClass,
       getProjectUrl
     };
@@ -190,10 +205,6 @@ export default defineComponent({
 
   &:hover {
     transform: translateY(-5px);
-
-    .project-card__link-arrow {
-      transform: translateX(5px);
-    }
   }
 
   &:active {
@@ -251,24 +262,6 @@ export default defineComponent({
     color: var(--text-secondary);
     margin-bottom: var(--spacing-md);
     line-height: 1.4;
-  }
-
-  &__link {
-    display: inline-flex;
-    align-items: center;
-    color: var(--cyan);
-    text-decoration: none;
-    font-weight: 500;
-    transition: color var(--card-transition);
-
-    &:hover {
-      color: var(--cyan-dark);
-    }
-
-    &-arrow {
-      margin-left: 0.5rem;
-      transition: transform 0.3s;
-    }
   }
 
   &--list {
