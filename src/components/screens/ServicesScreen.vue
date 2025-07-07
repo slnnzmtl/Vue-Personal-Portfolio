@@ -76,7 +76,7 @@ export default defineComponent({
           <h3 class="text-xl font-semibold">{{ service.title }}</h3>
           <p class="text-muted-foreground">{{ service.description }}</p>
 
-          <div class="flex h-full items-end">
+          <div class="flex h-full items-end justify-center">
             <ReadMore v-if="!active" :hovered="isHovered" />
           </div>
         </GlassMaterial>
