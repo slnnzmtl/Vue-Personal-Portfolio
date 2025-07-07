@@ -70,6 +70,14 @@ const routes: RouteRecordRaw[] = [
       title: "Privacy Policy",
     },
   },
+  {
+    path: "/:pathMatch(.*)*",
+    name: "not-found",
+    component: () => import("../views/NotFoundView.vue"),
+    meta: {
+      title: "Page Not Found",
+    },
+  },
 ];
 
 const router = createRouter({
