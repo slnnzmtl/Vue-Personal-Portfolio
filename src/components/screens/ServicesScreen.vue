@@ -44,8 +44,8 @@ export default defineComponent({
       hovered.value = name;
     };
 
-    const onMouseLeave = (name: string) => {
-      hovered.value = name;
+    const onMouseLeave = () => {
+      hovered.value = "";
     };
 
     const isHovered = (name: string) => {
@@ -76,7 +76,7 @@ export default defineComponent({
           class="service-card cursor-pointer p-6 text-center flex flex-col gap-6"
           @click="handleCardClick(service)"
           @mouseenter="onMouseEnter(service.name)"
-          @mouseleave="onMouseLeave(service.name)"
+          @mouseleave="onMouseLeave"
         >
           <div class="text-4xl">{{ service.icon }}</div>
           <h3 class="text-xl font-semibold">{{ service.title }}</h3>
