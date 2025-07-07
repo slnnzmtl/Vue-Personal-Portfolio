@@ -93,6 +93,7 @@ export default defineComponent({
   &__tags {
     display: flex;
     flex-wrap: wrap;
+    padding-top: 1rem;
   }
 
   &__tag {
