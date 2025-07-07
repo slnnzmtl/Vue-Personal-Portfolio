@@ -151,9 +151,9 @@
       </div>
     </section>
 
-    <GlassMaterial class="flex flex-col mx-auto md:w-max p-8">
-      <h3 class="text-2xl font-bold mb-4 text-cyan">📢 Let's Talk About Your Project</h3>
-      <p class="text-lg mb-6 text-white-600">
+    <GlassMaterial class="flex flex-col gap-6 mx-auto md:w-max p-8 max-w-2xl text-center">
+      <h3 class="text-2xl font-bold text-cyan">📢 Let's Talk About Your Project</h3>
+      <p class="text-lg text-white-600">
         Whether you need to build from scratch, upgrade, or integrate AI — I can help.
       </p>
       <SButton variant="primary" @click="onContactClick" class="text-lg px-8 py-3">
