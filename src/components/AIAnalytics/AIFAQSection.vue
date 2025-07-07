@@ -33,21 +33,20 @@ export default defineComponent({
 
 <template>
   <section class="bg-background py-16">
-    <div class="mx-auto">
-      <h2 class="text-3xl md:text-4xl font-bold text-center mb-12 px-4">
-        Часті питання
-      </h2>
+    <div class="mx-auto flex flex-col gap-12">
+      <h2 class="font-bold text-center px-4">Часті питання</h2>
 
-      <div class="max-w-4xl mx-auto space-y-6">
+      <div class="max-w-4xl mx-auto flex flex-col gap-6">
         <GlassMaterial
           v-for="faq in faqs"
           :key="faq.question"
-          class="p-6"
+          class="p-6 flex items-center gap-6"
         >
+          <div class="text-3xl flex-shrink-0">{{ faq.icon }}</div>
+
           <div class="flex items-start gap-4">
-            <div class="text-3xl flex-shrink-0">{{ faq.icon }}</div>
-            <div class="flex-1">
-              <h3 class="text-lg font-semibold mb-3 text-purple-600">
+            <div class="flex flex-col gap-2 flex-1">
+              <h3 class="text-lg font-semibold text-purple-600">
                 {{ faq.question }}
               </h3>
               <p class="text-muted-foreground text-lg">

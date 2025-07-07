@@ -12,8 +12,8 @@ export default defineComponent({
 
 <template>
   <section class="bg-background py-16">
-    <div class="mx-auto">
-      <h2 class="text-3xl md:text-4xl font-bold text-center mb-12 px-4">
+    <div class="mx-auto flex flex-col gap-12">
+      <h2 class="text-3xl md:text-4xl font-bold text-center px-4">
         Приклад звіту від AI
       </h2>
 

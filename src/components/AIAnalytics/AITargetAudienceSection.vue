@@ -43,23 +43,22 @@ export default defineComponent({
 
 <template>
   <section class="bg-background py-16">
-    <div class="mx-auto">
-      <h2 class="text-3xl md:text-4xl font-bold text-center mb-12 px-4">
-        Для кого це рішення
-      </h2>
+    <div class="mx-auto flex flex-col gap-12">
+      <h2 class="text-3xl md:text-4xl font-bold text-center px-4">Для кого це рішення</h2>
 
-      <div class="grid gap-3">
+      <div class="grid gap-4">
         <GlassMaterial
           v-for="group in targetGroups"
           :key="group.title"
           class="group p-6 min-w-[300px] lg:min-w-auto text-left"
         >
-          <div class="flex items-start gap-4 mb-4">
-            <div class="text-4xl flex-shrink-0">{{ group.icon }}</div>
-            <div>
-              <div class="flex items-center gap-2 mb-3">
-                <h3 class="text-lg font-semibold">{{ group.title }}</h3>
-              </div>
+          <div class="flex sm:items-center gap-4">
+            <div class="w-[32px] text-3xl mt-2 sm:mt-0 flex-shrink-0">
+              {{ group.icon }}
+            </div>
+
+            <div class="flex flex-col gap-2">
+              <h3 class="text-lg font-semibold">{{ group.title }}</h3>
               <p class="text-muted-foreground">{{ group.description }}</p>
             </div>
           </div>

@@ -46,19 +46,19 @@ export default defineComponent({
 
 <template>
   <section class="bg-background py-16">
-    <div class="mx-auto">
-      <h2 class="text-3xl md:text-4xl font-bold text-center mb-12 px-4">Як це працює</h2>
+    <div class="mx-auto flex flex-col gap-12">
+      <h2 class="text-3xl md:text-4xl font-bold text-center px-4">Як це працює</h2>
 
       <ScrollableContainer>
         <div class="flex flex-nowrap gap-6">
           <GlassMaterial
             v-for="step in steps"
             :key="step.title"
-            class="group p-6 min-w-[280px] lg:min-w-auto text-left relative"
+            class="flex flex-col gap-4 group p-6 min-w-[280px] lg:min-w-auto text-left relative"
           >
-            <div class="flex flex-nowrap gap-4 mb-6">
+            <div class="flex flex-nowrap items-center gap-4">
               <div class="text-4xl">{{ step.icon }}</div>
-              <h3 class="text-xl font-semibold">{{ step.title }}</h3>
+              <h3 class="text-lg font-semibold">{{ step.title }}</h3>
             </div>
             <p class="text-muted-foreground">{{ step.description }}</p>
           </GlassMaterial>
@@ -70,8 +70,8 @@ export default defineComponent({
 
 <style scoped>
 h3 {
-  font-size: 1.25rem;
+  /* font-size: 1.25rem;
   margin: 0;
-  line-height: 1.4;
+  line-height: 1.4; */
 }
 </style>

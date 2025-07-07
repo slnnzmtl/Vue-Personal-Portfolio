@@ -1,6 +1,6 @@
 <template>
   <div class="ai-analytics-view mt-10 animate-fade-in">
-    <div class="relative grid gap-15">
+    <div class="relative grid gap-12">
       <AIHeroSection
         class="mt-[10vh] max-w-[90vw] min-h-[60vh] lg:max-w-screen-xl mx-auto flex flex-col justify-center"
       />

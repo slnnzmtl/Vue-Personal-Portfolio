@@ -46,15 +46,15 @@ export default defineComponent({
 
 <template>
   <section class="bg-background py-16">
-    <div class="mx-auto">
-      <h2 class="text-3xl md:text-4xl font-bold text-center mb-12 px-4">Тарифи</h2>
+    <div class="mx-auto flex flex-col gap-12">
+      <h2 class="text-3xl md:text-4xl font-bold text-center px-4">Тарифи</h2>
 
-      <div class="grid md:grid-cols-3 gap-6 max-w-6xl mx-auto mb-12">
+      <div class="grid md:grid-cols-3 gap-6 max-w-6xl mx-auto">
         <GlassMaterial
           v-for="option in pricingOptions"
           :key="option.title"
           :class="[
-            'p-6 text-center relative',
+            'p-6 text-center relative flex flex-col gap-6',
             option.featured ? 'ring-2 ring-purple-500 transform scale-105' : '',
           ]"
         >
@@ -69,10 +69,10 @@ export default defineComponent({
             </span>
           </div>
 
-          <div class="text-4xl mb-4">{{ option.icon }}</div>
-          <h3 class="text-xl font-semibold mb-3">{{ option.title }}</h3>
-          <div class="text-3xl font-bold text-purple-600 mb-4">{{ option.price }}</div>
-          <p class="text-muted-foreground mb-6">{{ option.description }}</p>
+          <div class="text-4xl">{{ option.icon }}</div>
+          <h3 class="text-xl font-semibold">{{ option.title }}</h3>
+          <div class="text-3xl font-bold text-purple-600">{{ option.price }}</div>
+          <p class="text-muted-foreground">{{ option.description }}</p>
 
           <div class="flex items-center gap-2 justify-center">
             <span class="text-green-500 text-lg">✔️</span>

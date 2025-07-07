@@ -34,16 +34,12 @@ export default defineComponent({
 
 <template>
   <section class="bg-background py-16">
-    <div class="mx-auto">
-      <h2 class="text-3xl md:text-4xl font-bold text-center mb-8 px-4">
-        Що таке AI-аналітика для продажів
-      </h2>
+    <div class="mx-auto flex flex-col gap-6">
+      <h2 class="font-bold text-center px-4">Що таке AI-аналітика для продажів</h2>
 
-      <div class="text-center mb-8">
-        <p class="text-lg text-purple-600 mb-12 px-4">
-          Це повністю автоматизований агент на базі ChatGPT, який самостійно:
-        </p>
-      </div>
+      <p class="text-md text-center text-cyan-400 mb-6">
+        Це повністю автоматизований агент на базі ChatGPT, який самостійно:
+      </p>
 
       <div class="grid md:grid-cols-2 gap-6">
         <div
@@ -51,10 +47,11 @@ export default defineComponent({
           :key="feature.title"
           class="flex items-start gap-4"
         >
-          <span class="text-green-500 text-xl font-bold flex-shrink-0">{{
+          <span class="text-green-500 text-md font-bold flex-shrink-0">{{
             feature.icon
           }}</span>
-          <p class="text-lg">{{ feature.title }}</p>
+
+          <p class="text-md">{{ feature.title }}</p>
         </div>
       </div>
     </div>

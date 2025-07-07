@@ -45,23 +45,21 @@ export default defineComponent({
 
 <template>
   <section class="bg-background py-16">
-    <div class="mx-auto">
-      <h2 class="text-3xl md:text-4xl font-bold text-center mb-12 px-4">
-        Що ви отримаєте
-      </h2>
+    <div class="mx-auto flex flex-col gap-12">
+      <h2 class="text-3xl md:text-4xl font-bold text-center px-4">Що ви отримаєте</h2>
 
       <div class="grid sm:grid-cols-2 gap-6">
         <GlassMaterial
           v-for="benefit in benefits"
           :key="benefit.title"
-          class="group p-6 min-w-[280px] lg:min-w-auto text-left"
+          class="group p-6 min-w-[280px] lg:min-w-auto text-left flex flex-col gap-4"
         >
-          <div class="flex items-start gap-4 mb-4">
-            <span class="text-green-500 text-2xl font-bold flex-shrink-0">{{
+          <div class="flex items-center h-full gap-6">
+            <span class="text-green-500 text-2xl font-bold flex-shrink">{{
               benefit.icon
             }}</span>
-            <div>
-              <h3 class="text-lg font-semibold mb-3">{{ benefit.title }}</h3>
+            <div class="flex flex-col gap-2">
+              <h3 class="text-lg font-semibold">{{ benefit.title }}</h3>
               <p class="text-muted-foreground">{{ benefit.description }}</p>
             </div>
           </div>

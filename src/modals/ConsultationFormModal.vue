@@ -96,7 +96,7 @@ export default defineComponent({
   emits: ["close"],
   setup(props, { emit }) {
     const nameInputRef = ref<InstanceType<typeof InputField> | null>(null);
-    
+
     const formData = reactive({
       name: props.prefill?.name || "",
       email: props.prefill?.email || "",
@@ -148,7 +148,7 @@ export default defineComponent({
     onMounted(async () => {
       await nextTick();
       if (nameInputRef.value && nameInputRef.value.$el) {
-        const input = nameInputRef.value.$el.querySelector('input');
+        const input = nameInputRef.value.$el.querySelector("input");
         if (input) {
           input.focus();
         }
@@ -172,6 +172,7 @@ export default defineComponent({
 <style lang="scss" scoped>
 .consultation-form-modal {
   padding: 2rem;
+  padding-top: 6rem;
   width: 600px;
 
   position: absolute;

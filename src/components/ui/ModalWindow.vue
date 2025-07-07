@@ -79,6 +79,7 @@ export default defineComponent({
   align-items: center;
   justify-content: center;
   cursor: pointer;
+  z-index: 100;
 
   &:hover {
     transform: scale(1.1);
