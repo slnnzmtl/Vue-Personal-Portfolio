@@ -19,7 +19,9 @@
       <h1 class="project-card__title">
         {{ project?.title }}
       </h1>
-      <a :href="getProjectUrl(project?.url)" target="_blank">{{ project?.url }}</a>
+      <a :href="getProjectUrl(project?.url)" target="_blank" class="w-min">{{
+        project?.url
+      }}</a>
       <p class="project-card__description text-sm sm:text-base">
         {{ project?.description }}
       </p>
@@ -60,7 +62,9 @@
           {{ project?.title }}
         </h2>
 
-        <a :href="getProjectUrl(project?.url)" target="_blank">{{ project?.url }}</a>
+        <a :href="getProjectUrl(project?.url)" target="_blank" class="w-min">{{
+          project?.url
+        }}</a>
 
         <TagsBar :tags="project?.tags" :selected-filters="selectedFilters" />
       </div>
