@@ -24,6 +24,6 @@ jobs:
           script: |
             cd /home/${{ secrets.VPS_USERNAME }} 
             
-            ./github-actions-rebuild.sh
+            ./github-actions-rebuild.sh slnnzmtl-xyz
             
             echo "Rebuild script execution finished on VPS."
