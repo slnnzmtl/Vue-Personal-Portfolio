@@ -12,21 +12,26 @@ RUN npm run build
 
 FROM nginx:1.25-alpine as production-stage
 
-RUN addgroup -S appgroup && adduser -S appuser -G appgroup
-
+# Copy built files first
 COPY --from=build-stage /app/dist/ /usr/share/nginx/html/
 
+# Copy nginx configurations
 COPY nginx.main.conf /etc/nginx/nginx.conf
 COPY nginx.prod.conf /etc/nginx/conf.d/default.conf
 
+# Set up logging
 RUN ln -sf /dev/stdout /var/log/nginx/access.log \
     && ln -sf /dev/stderr /var/log/nginx/error.log
 
-RUN mkdir -p /run/nginx && \
-    chown -R appuser:appgroup /usr/share/nginx/html /var/log/nginx /var/cache/nginx /run/nginx && \
-    chmod -R 755 /usr/share/nginx/html /var/log/nginx /var/cache/nginx /run/nginx
+# Create nginx directories and set permissions
+RUN mkdir -p /run/nginx /var/cache/nginx && \
+    chmod -R 755 /usr/share/nginx/html && \
+    chmod -R 755 /var/log/nginx && \
+    chmod -R 755 /var/cache/nginx && \
+    chmod -R 755 /run/nginx
 
-USER appuser
+# Test nginx configuration
+RUN nginx -t
 
 EXPOSE 80
 
