@@ -15,9 +15,12 @@ FROM nginx:1.25-alpine as production-stage
 # Copy built files first
 COPY --from=build-stage /app/dist/ /usr/share/nginx/html/
 
-# Copy nginx configurations
-COPY nginx.main.conf /etc/nginx/nginx.conf
-COPY nginx.prod.conf /etc/nginx/conf.d/default.conf
+# Debug: List what's in the html directory
+RUN ls -la /usr/share/nginx/html/
+
+# Copy LOCAL nginx configurations (not from the git repo)
+COPY ./nginx.main.conf /etc/nginx/nginx.conf
+COPY ./nginx.prod.conf /etc/nginx/conf.d/default.conf
 
 # Set up logging
 RUN ln -sf /dev/stdout /var/log/nginx/access.log \
