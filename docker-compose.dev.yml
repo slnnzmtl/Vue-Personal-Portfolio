@@ -8,9 +8,6 @@ services:
       - "5173:5173"
     environment:
       - VIRTUAL_HOST=localhost
-    volumes:
-      - .:/app
-      - /app/node_modules
     deploy:
       resources:
         limits:
