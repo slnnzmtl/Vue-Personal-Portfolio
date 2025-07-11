@@ -53,7 +53,10 @@
     "required": "This field is required",
     "invalidEmail": "Please enter a valid email address",
     "messageSent": "Message sent successfully",
-    "messageError": "Failed to send message"
+    "messageError": "Failed to send message",
+    "yourMessage": "Your message here",
+    "privacyPolicyMessage": "By submitting this form, you agree to our {link}",
+    "privacyPolicy": "Privacy Policy"
   },
   "consultation": {
     "title": "Book a Consultation",
@@ -190,5 +193,9 @@
   "readyToWorkTogether": {
     "title": "Ready to Work Together?",
     "content": "I'm currently open to new opportunities and collaborations. If you're looking \n for a developer with a strong background, let's connect!"
+  },
+  "consultationFormModal": {
+    "title": "Book a free strategy session",
+    "description": "Please fill this form to schedule a consultation. I will get back to you as soon as possible."
   }
 }

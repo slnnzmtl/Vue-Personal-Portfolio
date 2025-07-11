@@ -12,18 +12,22 @@
 </template>
 
 <script setup lang="ts">
-import { onMounted } from 'vue';
-import { useTranslation } from '@/composables/useTranslation';
+import { onMounted } from "vue";
+import { useTranslation } from "@/composables/useTranslation";
 
-const { switchLanguage, getCurrentLanguage, getAvailableLanguages, initializeLanguage } = useTranslation();
+const {
+  switchLanguage,
+  currentLanguage,
+  getAvailableLanguages,
+  initializeLanguage,
+} = useTranslation();
 
 const availableLanguages = getAvailableLanguages();
-const currentLanguage = getCurrentLanguage();
 
 const getLanguageLabel = (lang: string) => {
   const labels: Record<string, string> = {
-    en: 'EN',
-    uk: 'УКР'
+    en: "EN",
+    uk: "UA",
   };
   return labels[lang] || lang.toUpperCase();
 };
@@ -41,10 +45,9 @@ onMounted(() => {
 }
 
 .language-btn {
-  padding: 0.5rem 1rem;
-  border: 1px solid var(--cyan);
+  padding: 0.2rem 0.4rem;
   background: transparent;
-  color: var(--cyan);
+  color: var(--white);
   border-radius: 4px;
   cursor: pointer;
   transition: all 0.3s ease;
@@ -52,13 +55,12 @@ onMounted(() => {
   font-weight: 500;
 
   &:hover {
-    background: var(--cyan);
+    background: rgba(1, 238, 255, 0.2);
     color: var(--dark-bg);
   }
 
   &.active {
-    background: var(--cyan);
-    color: var(--dark-bg);
+    color: var(--cyan);
   }
 }
 
