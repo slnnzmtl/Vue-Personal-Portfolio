@@ -14,3 +14,7 @@ services:
           memory: 256M
         reservations:
           memory: 128M
+
+networks:
+  nginx-proxy:
+    external: true
