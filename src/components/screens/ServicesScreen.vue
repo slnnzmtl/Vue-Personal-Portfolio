@@ -19,15 +19,15 @@ export default defineComponent({
 
     const services = [
       {
-        title: t("services.webDevelopment.title"),
-        description: t("services.webDevelopment.description"),
+        title: "services.webDevelopment.title",
+        description: "services.webDevelopment.description",
         icon: "💻",
         path: "/services",
         name: "web-development",
       },
       {
-        title: t("services.aiAutomation.title"),
-        description: t("services.aiAutomation.description"),
+        title: "services.aiAutomation.title",
+        description: "services.aiAutomation.description",
         icon: "🤖",
         path: "/services",
         name: "ai-automation",
@@ -60,6 +60,7 @@ export default defineComponent({
       onMouseEnter,
       onMouseLeave,
       isHovered,
+      t
     };
   },
 });
@@ -80,8 +81,8 @@ export default defineComponent({
           @mouseleave="onMouseLeave"
         >
           <div class="text-4xl">{{ service.icon }}</div>
-          <h3 class="font-semibold">{{ service.title }}</h3>
-          <p class="text-xs text-muted-foreground">{{ service.description }}</p>
+          <h3 class="font-semibold">{{ t(service.title) }}</h3>
+          <p class="text-xs text-muted-foreground">{{ t(service.description) }}</p>
 
           <div class="flex h-full items-end justify-center">
             <ReadMore v-if="!active" :hovered="isHovered(service.name)" />
