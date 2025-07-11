@@ -83,7 +83,7 @@ export default defineComponent({
         </router-link>
       </div>
 
-      <div class="language-switcher-container">
+      <div class="language-switcher-container hidden lg:flex">
         <LanguageSwitcher />
       </div>
 
@@ -141,12 +141,6 @@ nav {
       right: 18px;
     }
 
-    .language-switcher-container {
-      position: absolute;
-      top: 10px;
-      right: 120px;
-    }
-
     &.menu-open {
       height: 100vh;
       padding-bottom: 2rem;
@@ -179,7 +173,8 @@ nav {
         display: flex;
         justify-content: center;
         width: 100%;
-        margin-top: 1rem;
+        margin-top: 4rem;
+        order: 1;
       }
     }
   }
