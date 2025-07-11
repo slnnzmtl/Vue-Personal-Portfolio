@@ -7,7 +7,7 @@ import ScrollableContainer from "@/components/ui/ScrollableContainer.vue";
 import { useProjectsStore } from "@/stores/projectsStore";
 import { storeToRefs } from "pinia";
 import SButton from "@/components/ui/buttons/SButton.vue";
-import { useI18n } from "vue-i18n";
+import { useTranslation } from "@/composables";
 
 export default defineComponent({
   name: "ProjectsScreen",
@@ -20,7 +20,7 @@ export default defineComponent({
   setup() {
     const router = useRouter();
     const store = useProjectsStore();
-    const { t } = useI18n();
+    const { t } = useTranslation();
     const { filteredProjects, selectedFilters, isLoading, error, tags } = storeToRefs(
       store
     );
