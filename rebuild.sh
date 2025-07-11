@@ -2,6 +2,9 @@
 
 $stage = ${1}
 
+echo "🔧 Rebuilding project in stage: $stage"
+echo "Props:: ${@:2}"
+
 cd /root/containers/slnnzmtl-xyz || {
     echo "❌ Failed to change to project directory"
     exit 1
