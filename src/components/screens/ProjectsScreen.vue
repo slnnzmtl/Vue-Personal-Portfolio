@@ -7,7 +7,7 @@ import ScrollableContainer from "@/components/ui/ScrollableContainer.vue";
 import { useProjectsStore } from "@/stores/projectsStore";
 import { storeToRefs } from "pinia";
 import SButton from "@/components/ui/buttons/SButton.vue";
-import { useTranslation } from "@/composables";
+import { useTranslation } from "@/composables/useTranslation";
 
 export default defineComponent({
   name: "ProjectsScreen",

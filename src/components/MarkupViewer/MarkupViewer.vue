@@ -34,7 +34,7 @@ import {
 import { marked } from "marked";
 import { useModalService } from "@/composables/useModal";
 import { ModalKey } from "@/modals/types";
-import { useTranslation } from "@/composables";
+import { useTranslation } from "@/composables/useTranslation";
 
 const ImageViewer = defineAsyncComponent({
   loader: () => import("@/components/MarkupViewer/ImageViewer.vue"),
@@ -62,7 +62,8 @@ export default defineComponent({
 
     const renderedContent = computed(() => {
       if (props.activeProject && props.activeProject.html) {
-        return marked(t(props.activeProject.html));
+        // return marked(t(props.activeProject.html));
+        return "";
       }
       return "";
     });
