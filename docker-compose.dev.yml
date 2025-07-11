@@ -8,6 +8,8 @@ services:
       - "5173"
     environment:
       - VIRTUAL_HOST=localhost
+    networks:
+      - nginx-proxy
     deploy:
       resources:
         limits:
