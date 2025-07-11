@@ -163,7 +163,7 @@ export default defineComponent({
 @media (max-width: 600px) {
   .skill-card-modal-glass {
     max-width: 98vw;
-    margin: 1.5rem auto;
+    margin: 10rem auto;
     border-radius: 1rem;
   }
   .skill-card-modal {

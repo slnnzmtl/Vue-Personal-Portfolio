@@ -87,7 +87,7 @@ nav {
   right: 0;
   z-index: 100;
   width: 100%;
-  transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1), height 0.3s ease;
+  transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1), height 1s ease;
   height: 60px;
   overflow: hidden;
   margin-top: 1rem;
@@ -134,7 +134,8 @@ nav {
         display: flex;
         flex-direction: column;
         justify-content: center;
-        height: 90%;
+        height: max-content;
+        padding: 3rem 0;
       }
 
       .nav-links {
@@ -180,7 +181,7 @@ nav {
     height: 60px;
     min-height: 60px;
     position: relative;
-    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    transition: all 1s cubic-bezier(0.4, 0, 0.2, 1);
     border-radius: 30px;
     padding: 0 1rem;
   }
@@ -204,7 +205,7 @@ nav {
       width: 100%;
       height: 2px;
       background-color: var(--text);
-      transition: all 0.3s ease;
+      transition: all 1s ease;
     }
   }
 
@@ -216,7 +217,7 @@ nav {
       color: var(--text);
       text-decoration: none;
       font-weight: 500;
-      transition: color 0.3s ease;
+      transition: color 1s ease;
       font-size: 1.5rem;
 
       &:hover {

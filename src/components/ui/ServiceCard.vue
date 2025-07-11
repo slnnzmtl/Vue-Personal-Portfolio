@@ -1,6 +1,7 @@
 <template>
   <GlassMaterial
     :class="['service-card p-6 mb-4', { 'has-link': hasLink }]"
+    @click="handleClick"
     @mouseenter="onMouseEnter"
     @mouseleave="onMouseLeave"
   >
@@ -8,9 +9,8 @@
     <div class="service-description">
       {{ description }}
     </div>
-    <router-link v-if="hasLink" :to="linkTo" class="read-more-link">
-      <ReadMore :hovered="isHovered" />
-    </router-link>
+
+    <ReadMore v-if="hasLink" class="mt-2" :hovered="isHovered" />
   </GlassMaterial>
 </template>
 
@@ -18,6 +18,7 @@
 import { ref } from "vue";
 import GlassMaterial from "@/components/ui/GlassMaterial.vue";
 import ReadMore from "@/components/ui/ReadMore.vue";
+import { useRouter } from "vue-router";
 
 interface Props {
   title: string;
@@ -26,6 +27,7 @@ interface Props {
 }
 
 const props = defineProps<Props>();
+const router = useRouter();
 
 const isHovered = ref(false);
 const hasLink = !!props.linkTo;
@@ -36,6 +38,12 @@ const onMouseEnter = () => {
 
 const onMouseLeave = () => {
   isHovered.value = false;
+};
+
+const handleClick = () => {
+  if (props.linkTo) {
+    router.push(props.linkTo);
+  }
 };
 </script>
 
@@ -52,6 +60,7 @@ const onMouseLeave = () => {
 
   &.has-link {
     background: rgba(0, 255, 145, 0.1);
+    cursor: pointer;
   }
 }
 

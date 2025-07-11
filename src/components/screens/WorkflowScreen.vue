@@ -122,12 +122,14 @@ h3 {
     background: rgba(214, 109, 255, 0.1);
   }
 
-  &:hover {
-    transform: translateY(-10px);
-    cursor: pointer;
-
-    * {
+  @media (min-width: 1024px) {
+    &:hover {
+      transform: translateY(-10px);
       cursor: pointer;
+
+      * {
+        cursor: pointer;
+      }
     }
   }
 }
