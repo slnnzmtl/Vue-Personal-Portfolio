@@ -51,7 +51,7 @@
       </div>
 
       <div id="ai-automation" class="category">
-        <h2 class="text-2xl font-bold mb-6 text-cyan">
+        <h2 class="font-bold mb-6 text-cyan">
           {{ t("serviceView.aiAutomation.title") }}
         </h2>
 
@@ -138,6 +138,10 @@ const onContactClick = async () => {
 </script>
 
 <style lang="scss" scoped>
+h2 {
+  font-size: 1.6rem;
+}
+
 .intro {
   color: var(--white-600);
 }
