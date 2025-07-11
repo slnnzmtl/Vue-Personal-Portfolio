@@ -38,6 +38,7 @@ export default defineComponent({
     onMounted(() => {
       store.setFilters(["React", "Vue 3"]);
     });
+
     const projects = computed(() => {
       return filteredProjects.value.slice(0, 3);
     });
