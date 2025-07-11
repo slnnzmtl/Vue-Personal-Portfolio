@@ -89,7 +89,7 @@ export default defineComponent({
         />
       </ScrollableContainer>
 
-      <div class="flex justify-center">
+      <div class="flex justify-center mt-8">
         <SButton
           variant="tertiary"
           class="load-more-button mt-8 xl:mt-0 rounded"

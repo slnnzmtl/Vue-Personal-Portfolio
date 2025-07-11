@@ -24,6 +24,7 @@ export default defineComponent({
 .hire-screen {
   display: flex;
   justify-content: center;
+  align-items: center;
   min-height: 600px;
   max-width: 800px;
 }

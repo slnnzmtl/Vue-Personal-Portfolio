@@ -1,15 +1,12 @@
 <template>
   <div class="main-view flex flex-col gap-24 w-full">
-    <FaceScreen class="mt-32 max-w-screen-2xl w-full mx-auto" />
+    <FaceScreen class="mt-30 max-w-screen-2xl w-full mx-auto" />
+    <ProjectsScreen class="max-w-screen-2xl mx-auto" />
     <WorkflowScreen class="max-w-screen-2xl w-full mx-auto" />
-    <ServicesScreen class="max-w-screen-2xl w-full mx-auto px-6" />
+
     <HireMeButton @click="handleConsultationForm" class="w-max mx-auto" />
 
     <SkillsScreen class="max-w-screen-2xl w-full mx-auto" />
-
-    <div class="max-w-screen-2xl mx-auto">
-      <ProjectsScreen />
-    </div>
 
     <HireScreen
       v-if="showHireScreen"
@@ -25,9 +22,7 @@ import FaceScreen from "@/components/screens/FaceScreen.vue";
 import { useProjectsStore } from "@/stores/projectsStore";
 import WorkflowScreen from "@/components/screens/WorkflowScreen.vue";
 import SkillsScreen from "@/components/screens/SkillsScreen.vue";
-import ServicesScreen from "@/components/screens/ServicesScreen.vue";
 import HireMeButton from "@/components/ui/buttons/HireMeButton.vue";
-import { useConsultationService } from "@/composables/useAIAnalyticsConsultation";
 import { useModalService } from "@/composables";
 import { ModalKey } from "@/modals/types";
 
@@ -48,7 +43,6 @@ export default defineComponent({
     SkillsScreen,
     ProjectsScreen,
     HireScreen,
-    ServicesScreen,
     HireMeButton,
   },
 

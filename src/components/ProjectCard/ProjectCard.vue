@@ -28,11 +28,11 @@
         }}</a>
       </div>
 
+      <TagsBar :tags="project?.tags" :selected-filters="selectedFilters" />
+
       <p class="project-card__description text-sm sm:text-base">
         {{ project?.description }}
       </p>
-
-      <TagsBar :tags="project?.tags" :selected-filters="selectedFilters" />
 
       <div v-if="active" class="mt-6">
         <slot :active="active" />
@@ -188,9 +188,9 @@ export default defineComponent({
 
 .project-card {
   cursor: pointer;
-  height: 100%;
 
   width: 100%;
+  align-self: stretch;
 
   @media (min-width: 768px) {
     width: calc(100% / 2 - 1rem);
@@ -198,9 +198,11 @@ export default defineComponent({
 
   &.scrollable {
     min-width: calc(100% / 3 - 1rem);
-    height: max-content;
     flex-shrink: 0;
-    max-width: 300px;
+
+    @media (min-width: 1024px) {
+      max-width: 300px;
+    }
   }
 
   &:hover {

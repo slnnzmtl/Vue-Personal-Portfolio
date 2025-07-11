@@ -7,6 +7,7 @@ import { ModalKey } from "@/modals/types";
 import { useModalService } from "@/composables";
 import HireMeButton from "../ui/buttons/HireMeButton.vue";
 import SButton from "../ui/buttons/SButton.vue";
+import ServicesScreen from "./ServicesScreen.vue";
 
 export default defineComponent({
   name: "AuthorFace",
@@ -15,6 +16,7 @@ export default defineComponent({
     SocialLinks,
     GlassMaterial,
     HireMeButton,
+    ServicesScreen,
   },
   setup() {
     const { openModal } = useModalService();
@@ -31,29 +33,31 @@ export default defineComponent({
 </script>
 
 <template>
-  <div class="face-screen flex justify-center items-center px-3">
+  <div
+    class="face-screen flex flex-col xl:flex-row gap-24 xl:gap-12 justify-center xl:justify-between xl:items-center px-6 w-full"
+  >
     <div
-      class="flex flex-col lg:flex-row gap-12 lg:gap-22 xl:gap-36 items-center mt-[150px] lg:mt-0"
+      class="flex flex-col lg:flex-row gap-12 lg:gap-22 xl:gap-22 items-center mt-[150px] lg:mt-0"
     >
       <div class="author-avatar relative w-full flex justify-center">
         <AuthorAvatar />
       </div>
 
       <div class="flex flex-col items-center lg:items-start gap-6 lg:gap-3 text-left">
-        <h1 class="text-center text-6xl font-bold">Kazansky Development</h1>
+        <h1 class="text-center lg:text-left font-bold">Kazansky Development</h1>
         <p
-          class="text-xl lg:text-3xl font-semibold text-center md:text-left text-secondary text-shadow mb-4"
+          class="text-xl lg:text-2xl font-semibold text-center lg:text-left text-secondary text-shadow mb-4"
         >
-          Software development & AI solutions studio
+          Software development & <br />
+          AI solutions studio
         </p>
 
-        <p
+        <!-- <p
           class="sm:text-base max-w-[800px] xl:max-w-full text-center text-white-800 lg:text-left mb-4"
         >
           Building high-quality software and AI solutions with trusted partners —
-          empowering businesses to thrive <br class="hidden xl:block" />
-          in the digital age.
-        </p>
+          empowering businesses to thrive in the digital age.
+        </p> -->
 
         <GlassMaterial class="max-w-[600px] p-4 mx-4 md:mx-0 mb-4 w-full lg:w-auto">
           <SocialLinks title="Contact me:" />
@@ -66,6 +70,8 @@ export default defineComponent({
         </div>
       </div>
     </div>
+
+    <ServicesScreen />
   </div>
 </template>
 
@@ -74,6 +80,11 @@ export default defineComponent({
   height: 80vh;
   max-height: 900px;
   width: 100%;
+
+  h1 {
+    font-size: 2.5rem;
+    line-height: 1.2;
+  }
 
   @media (max-width: 1024px) {
     max-height: 100%;
@@ -85,7 +96,7 @@ export default defineComponent({
 
 .author-avatar {
   align-items: center;
-  max-width: 250px;
+  max-width: min-content;
   margin: 0 auto;
 
   flex-shrink: 0;
