@@ -10,6 +10,7 @@ export default defineConfig({
   server: {
     host: "0.0.0.0",
     port: 5173,
+    allowedHosts: ["localhost", "dev.slnnzmtl.xyz"],
     watch: {
       usePolling: true,
     },
@@ -30,6 +31,11 @@ export default defineConfig({
         },
       },
     },
+  },
+  define: {
+    __VUE_I18N_FULL_INSTALL__: JSON.stringify(true),
+    __VUE_I18N_LEGACY_API__: JSON.stringify(false),
+    __VUE_I18N_COMPOSITION_API__: JSON.stringify(true),
   },
   resolve: {
     alias: {

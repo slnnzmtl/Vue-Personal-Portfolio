@@ -1,12 +1,13 @@
 <template>
   <span class="read-more" :class="{ 'read-more--hovered': hovered }">
-    Read more
+    {{ t('common.readMore') }}
     <span class="read-more__arrow">→</span>
   </span>
 </template>
 
 <script lang="ts">
 import { defineComponent } from "vue";
+import { useTranslation } from "@/composables/useTranslation";
 
 export default defineComponent({
   name: "ReadMore",
@@ -15,6 +16,13 @@ export default defineComponent({
       type: Boolean,
       default: false,
     },
+  },
+  setup() {
+    const { t } = useTranslation();
+    
+    return {
+      t,
+    };
   },
 });
 </script>

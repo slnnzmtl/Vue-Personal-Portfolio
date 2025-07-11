@@ -19,6 +19,7 @@ import { ref } from "vue";
 import GlassMaterial from "@/components/ui/GlassMaterial.vue";
 import ReadMore from "@/components/ui/ReadMore.vue";
 import { useRouter } from "vue-router";
+import { useTranslation } from "@/composables/useTranslation";
 
 interface Props {
   title: string;
@@ -28,6 +29,7 @@ interface Props {
 
 const props = defineProps<Props>();
 const router = useRouter();
+const { t } = useTranslation();
 
 const isHovered = ref(false);
 const hasLink = !!props.linkTo;

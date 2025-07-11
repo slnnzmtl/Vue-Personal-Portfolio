@@ -22,8 +22,6 @@ export const useProjectsStore = defineStore("projects", {
         return;
       }
 
-      console.log("fetching projects");
-
       this.isLoading = true;
       this.error = null;
 
@@ -33,7 +31,7 @@ export const useProjectsStore = defineStore("projects", {
           throw new Error("Failed to fetch projects data");
         }
         const data = await response.json();
-        this.projects = data.projects;
+        this.projects = data.projects.map((project) => new Project(project));
         this.lastFetched = Date.now();
       } catch (err) {
         this.error = (err as Error).message;

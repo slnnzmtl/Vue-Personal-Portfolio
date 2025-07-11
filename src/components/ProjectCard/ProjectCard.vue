@@ -31,7 +31,7 @@
       <TagsBar :tags="project?.tags" :selected-filters="selectedFilters" />
 
       <p class="project-card__description text-sm sm:text-base">
-        {{ project?.description }}
+        {{ t(project?.description) }}
       </p>
 
       <div v-if="active" class="mt-6">
@@ -79,7 +79,7 @@
 
     <div class="project-card__content">
       <p class="project-card__description text-sm sm:text-base py-4">
-        {{ project?.description }}
+        {{ t(project?.description) }}
       </p>
     </div>
   </GlassMaterial>
@@ -91,6 +91,7 @@ import type { Project } from "@/stores/projectTypes";
 import GlassMaterial from "@/components/ui/GlassMaterial.vue";
 import ReadMore from "@/components/ui/ReadMore.vue";
 import TagsBar from "@/components/Tags/TagsBar.vue";
+import { useTranslation } from "@/composables/useTranslation";
 
 export default defineComponent({
   name: "ProjectCard",
@@ -121,6 +122,8 @@ export default defineComponent({
   setup(props, { emit }) {
     const isImageLoading = ref(true);
     const isHovered = ref(false);
+
+    const { t } = useTranslation();
 
     const isGridLayout = computed(
       () => props.layout === "grid" || props.layout === "scroll",
@@ -173,7 +176,8 @@ export default defineComponent({
       onMouseEnter,
       onMouseLeave,
       scrollableClass,
-      getProjectUrl
+      getProjectUrl,
+      t,
     };
   },
 });

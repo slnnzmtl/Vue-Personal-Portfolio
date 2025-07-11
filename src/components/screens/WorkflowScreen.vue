@@ -1,10 +1,8 @@
 <template>
   <div class="flex flex-col gap-6 text-justify">
-    <h2 class="font-bold px-6">How I deliver projects</h2>
+    <h2 class="font-bold px-6">{{ t("workflowScreen.title") }}</h2>
     <p class="text-lg sm:text-xl px-6 text-white-800">
-      My structured approach drives project success through deep understanding of business
-      needs, <br class="hidden xl:inline-block" />
-      precise estimation, exceptional UI design, and delivery that exceeds expectations.
+      {{ t("workflowScreen.description") }}
     </p>
 
     <ScrollableContainer>
@@ -39,6 +37,7 @@ import SIcon from "../ui/SIcon.vue";
 import { useModalService } from "@/composables/useModal";
 import { ModalKey } from "@/modals/types";
 import { IconName, ICON_NAMES } from "@/types/icons";
+import { useTranslation } from "@/composables/useTranslation";
 
 interface WorkflowPoint {
   id: string;
@@ -57,31 +56,32 @@ export default defineComponent({
   },
   setup() {
     const { openModal } = useModalService();
+    const { t } = useTranslation();
 
     const workflowPoints = computed<WorkflowPoint[]>(() => [
       {
         id: "understand-business-needs",
         icon: ICON_NAMES.UNDERSTAND_BUSINESS,
-        title: "Understand Business Needs",
-        description: "Translating business goals into actionable technical requirements",
+        title: t("workflowScreen.points.understandBusinessNeeds.title"),
+        description: t("workflowScreen.points.understandBusinessNeeds.description"),
       },
       {
         id: "estimate-a-project",
         icon: ICON_NAMES.ESTIMATE_PROJECT,
-        title: "Estimate a Project",
-        description: "Delivering realistic timelines with transparent resource planning",
+        title: t("workflowScreen.points.estimateProject.title"),
+        description: t("workflowScreen.points.estimateProject.description"),
       },
       {
         id: "focus-on-ux",
         icon: ICON_NAMES.IMPLEMENT_UI,
-        title: "Focus on UX",
-        description: "Building intuitive interfaces that users love to interact with",
+        title: t("workflowScreen.points.focusOnUX.title"),
+        description: t("workflowScreen.points.focusOnUX.description"),
       },
       {
         id: "achieve-best-experience",
         icon: ICON_NAMES.BEST_EXPERIENCE,
-        title: "Achieve the Best Experience",
-        description: "Refining solutions to exceed client and user expectations",
+        title: t("workflowScreen.points.achieveBestExperience.title"),
+        description: t("workflowScreen.points.achieveBestExperience.description"),
       },
     ]);
 
@@ -94,6 +94,7 @@ export default defineComponent({
     return {
       workflowPoints,
       handleModalOpen,
+      t,
     };
   },
 });

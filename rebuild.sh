@@ -1,19 +1,17 @@
 #!/bin/bash
-
-$stage = ${1}
+stage=$1
 
 echo "🔧 Rebuilding project in stage: $stage"
-echo "Props:: ${@:2}"
+echo "Props: $@"
 
 cd /root/containers/slnnzmtl-xyz || {
     echo "❌ Failed to change to project directory"
     exit 1
 }
 
-$docker_compose_file = "docker-compose.yml" 
-
+docker_compose_file="docker-compose.yml"
 if [ "$stage" == "dev" ]; then
-    $docker_compose_file = "docker-compose.dev.yml"
+    docker_compose_file="docker-compose.dev.yml"
 fi
 
 echo "🔄 Starting Docker Compose rebuild process..."

@@ -3,6 +3,7 @@ import { defineComponent } from "vue";
 import GlassMaterial from "@/components/ui/GlassMaterial.vue";
 import DownloadResume from "@/components/ui/buttons/DownloadResume.vue";
 import SocialLinks from "@/components/SocialLinks/SocialLinks.vue";
+import { useTranslation } from "@/composables/useTranslation";
 
 export default defineComponent({
   name: "ReadyToWorkTogether",
@@ -21,20 +22,26 @@ export default defineComponent({
       default: true,
     },
   },
+  setup() {
+    const { t } = useTranslation();
+
+    return {
+      t,
+    };
+  },
 });
 </script>
 
 <template>
   <div class="hire-content">
     <h2 class="title text-6xl font-bold mb-8">
-      <slot name="title"> Ready to Work Together? </slot>
+      <slot name="title"> {{ t("readyToWorkTogether.title") }} </slot>
     </h2>
 
     <div class="mb-10">
       <p class="text-lg text-white-800 mb-4">
         <slot name="content">
-          I'm currently open to new opportunities and collaborations. If you're looking
-          for a developer with a strong background, let's connect!
+          {{ t("readyToWorkTogether.content") }}
         </slot>
       </p>
     </div>

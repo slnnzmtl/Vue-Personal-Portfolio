@@ -6,7 +6,7 @@
         <div v-html="renderedContent" @click="handleContentClick"></div>
       </div>
 
-      <div v-if="activeProject.images">
+      <div v-if="activeProject.images.length">
         <h2 class="text-lg sm:text-xl mb-4">Images</h2>
         <ImageViewer :images="activeProject.images" />
       </div>
@@ -34,6 +34,7 @@ import {
 import { marked } from "marked";
 import { useModalService } from "@/composables/useModal";
 import { ModalKey } from "@/modals/types";
+import { useTranslation } from "@/composables/useTranslation";
 
 const ImageViewer = defineAsyncComponent({
   loader: () => import("@/components/MarkupViewer/ImageViewer.vue"),
@@ -57,9 +58,12 @@ export default defineComponent({
     const project = ref(null);
     const contentRef = ref<HTMLElement | null>(null);
     const { openModal } = useModalService();
+    const { t } = useTranslation();
+
     const renderedContent = computed(() => {
       if (props.activeProject && props.activeProject.html) {
-        return marked(props.activeProject.html);
+        // return marked(t(props.activeProject.html));
+        return "";
       }
       return "";
     });

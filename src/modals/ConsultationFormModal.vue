@@ -4,18 +4,18 @@
       class="consultation-form-modal flex flex-col gap-4 items-left justify-center max-w-[100vw]"
     >
       <h2 class="form-title text-2xl font-bold" v-if="!showConfirmation">
-        {{ title }}
+        {{ t(title) }}
       </h2>
       <p class="form-description" v-if="!showConfirmation">
-        {{ description }}
+        {{ t(description) }}
       </p>
-      <form v-if="!showConfirmation" class="form-container" @submit="submitForm">
+      <form v-if="!showConfirmation" class="form-container mt-4" @submit="submitForm">
         <div class="grid md:gap-2 md:grid-cols-2">
           <InputField
             ref="nameInputRef"
             id="name"
             name="name"
-            label="Name"
+            :label="t('forms.name')"
             type="text"
             required
             v-model="formData.name"
@@ -24,7 +24,7 @@
 
           <InputField
             id="email"
-            label="Email"
+            :label="t('forms.email')"
             type="email"
             required
             v-model="formData.email"
@@ -35,13 +35,13 @@
         <TextareaField
           id="message"
           type="textarea"
-          label="Your message here..."
+          :label="t('forms.yourMessage')"
           v-model="formData.message"
           :disabled="isLoading"
         />
         <div class="flex items-center gap-2 mt-4">
           <SButton type="submit" variant="primary" class="mt-0" :disabled="isLoading">
-            <span v-if="!isLoading">Submit</span>
+            <span v-if="!isLoading">{{ t("common.submit") }}</span>
             <span v-else>Submitting...</span>
           </SButton>
           <LoadingIndicator v-if="isLoading" size="sm" />
@@ -51,10 +51,13 @@
         Thank you! Your consultation request has been submitted.<br />
         I will get back to you as soon as possible.
       </div>
-      <p class="form-footer" v-if="!showConfirmation">
-        By submitting this form, you agree to our
-        <a href="/privacy-policy" class="form-link">Privacy Policy</a>.
-      </p>
+      <div class="form-footer mt-4" v-if="!showConfirmation">
+        <i18n-t keypath="forms.privacyPolicyMessage">
+          <template v-slot:link>
+            <a href="/privacy-policy" target="_blank">{{ t("forms.privacyPolicy") }}</a>
+          </template>
+        </i18n-t>
+      </div>
     </div>
   </ModalWindow>
 </template>
@@ -67,6 +70,7 @@ import DateTimeInput from "@/components/ui/DateTimeInput.vue";
 import LoadingIndicator from "@/components/ui/LoadingIndicator.vue";
 import { defineComponent, reactive, ref, onMounted, nextTick } from "vue";
 import SButton from "@/components/ui/buttons/SButton.vue";
+import { useTranslation } from "@/composables/useTranslation";
 
 export default defineComponent({
   name: "ConsultationFormModal",
@@ -81,12 +85,11 @@ export default defineComponent({
   props: {
     title: {
       type: String,
-      default: "Book a free strategy session",
+      default: "consultationFormModal.title",
     },
     description: {
       type: String,
-      default:
-        "Please fill this form to schedule a consultation. I will get back to you as soon as possible.",
+      default: "consultationFormModal.description",
     },
     prefill: {
       type: Object,
@@ -95,6 +98,8 @@ export default defineComponent({
   },
   emits: ["close"],
   setup(props, { emit }) {
+    const { t } = useTranslation();
+
     const nameInputRef = ref<InstanceType<typeof InputField> | null>(null);
 
     const formData = reactive({
@@ -164,6 +169,7 @@ export default defineComponent({
       isLoading,
       title: props.title,
       description: props.description,
+      t,
     };
   },
 });
