@@ -1,84 +1,84 @@
 <template>
   <main class="max-w-[1200px] w-full mx-auto pt-36 px-4">
     <header class="mb-12">
-      <h1 class="text-2xl sm:text-4xl font-bold mb-6">{{ $t("serviceView.title") }}</h1>
+      <h1 class="text-2xl sm:text-4xl font-bold mb-6">{{ t("serviceView.title") }}</h1>
       <p class="intro text-lg xl:text-xl">
-        {{ $t("serviceView.intro") }}
+        {{ t("serviceView.intro") }}
       </p>
     </header>
 
     <div class="grid sm:grid-cols-2 gap-6">
       <div id="web-development" class="category">
         <h2 class="text-2xl font-bold mb-6 text-cyan">
-          {{ $t("serviceView.webDevelopment.title") }}
+          {{ t("serviceView.webDevelopment.title") }}
         </h2>
 
         <ServiceCard
-          :title="$t('serviceView.webDevelopment.fullStack.title')"
-          :description="$t('serviceView.webDevelopment.fullStack.description')"
+          :title="t('serviceView.webDevelopment.fullStack.title')"
+          :description="t('serviceView.webDevelopment.fullStack.description')"
           link-to="/projects"
         />
 
         <ServiceCard
-          :title="$t('serviceView.webDevelopment.ecommerce.title')"
-          :description="$t('serviceView.webDevelopment.ecommerce.description')"
+          :title="t('serviceView.webDevelopment.ecommerce.title')"
+          :description="t('serviceView.webDevelopment.ecommerce.description')"
         />
 
         <ServiceCard
-          :title="$t('serviceView.webDevelopment.wordpress.title')"
-          :description="$t('serviceView.webDevelopment.wordpress.description')"
+          :title="t('serviceView.webDevelopment.wordpress.title')"
+          :description="t('serviceView.webDevelopment.wordpress.description')"
         />
 
         <ServiceCard
-          :title="$t('serviceView.webDevelopment.landingPages.title')"
-          :description="$t('serviceView.webDevelopment.landingPages.description')"
+          :title="t('serviceView.webDevelopment.landingPages.title')"
+          :description="t('serviceView.webDevelopment.landingPages.description')"
         />
 
         <ServiceCard
-          :title="$t('serviceView.webDevelopment.cloudServerless.title')"
-          :description="$t('serviceView.webDevelopment.cloudServerless.description')"
+          :title="t('serviceView.webDevelopment.cloudServerless.title')"
+          :description="t('serviceView.webDevelopment.cloudServerless.description')"
         />
 
         <ServiceCard
-          :title="$t('serviceView.webDevelopment.pwa.title')"
-          :description="$t('serviceView.webDevelopment.pwa.description')"
+          :title="t('serviceView.webDevelopment.pwa.title')"
+          :description="t('serviceView.webDevelopment.pwa.description')"
         />
 
         <ServiceCard
-          :title="$t('serviceView.webDevelopment.uxui.title')"
-          :description="$t('serviceView.webDevelopment.uxui.description')"
+          :title="t('serviceView.webDevelopment.uxui.title')"
+          :description="t('serviceView.webDevelopment.uxui.description')"
         />
       </div>
 
       <div id="ai-automation" class="category">
         <h2 class="text-2xl font-bold mb-6 text-cyan">
-          {{ $t("serviceView.aiAutomation.title") }}
+          {{ t("serviceView.aiAutomation.title") }}
         </h2>
 
         <ServiceCard
-          :title="$t('serviceView.aiAutomation.salesMarketing.title')"
-          :description="$t('serviceView.aiAutomation.salesMarketing.description')"
+          :title="t('serviceView.aiAutomation.salesMarketing.title')"
+          :description="t('serviceView.aiAutomation.salesMarketing.description')"
           link-to="/services/ai-sales-analytics"
         />
 
         <ServiceCard
-          :title="$t('serviceView.aiAutomation.generativeAI.title')"
-          :description="$t('serviceView.aiAutomation.generativeAI.description')"
+          :title="t('serviceView.aiAutomation.generativeAI.title')"
+          :description="t('serviceView.aiAutomation.generativeAI.description')"
         />
 
         <ServiceCard
-          :title="$t('serviceView.aiAutomation.processAutomation.title')"
-          :description="$t('serviceView.aiAutomation.processAutomation.description')"
+          :title="t('serviceView.aiAutomation.processAutomation.title')"
+          :description="t('serviceView.aiAutomation.processAutomation.description')"
         />
 
         <ServiceCard
-          :title="$t('serviceView.aiAutomation.businessIntegrations.title')"
-          :description="$t('serviceView.aiAutomation.businessIntegrations.description')"
+          :title="t('serviceView.aiAutomation.businessIntegrations.title')"
+          :description="t('serviceView.aiAutomation.businessIntegrations.description')"
         />
 
         <ServiceCard
-          :title="$t('serviceView.aiAutomation.dataAnalytics.title')"
-          :description="$t('serviceView.aiAutomation.dataAnalytics.description')"
+          :title="t('serviceView.aiAutomation.dataAnalytics.title')"
+          :description="t('serviceView.aiAutomation.dataAnalytics.description')"
         />
       </div>
     </div>
@@ -86,7 +86,7 @@
     <section class="mb-12 py-12">
       <div class="mt-16 flex flex-col items-center gap-8">
         <h2 class="text-6xl font-bold mb-6 text-cyan">
-          {{ $t("serviceView.whyClients.title") }}
+          {{ t("serviceView.whyClients.title") }}
         </h2>
         <ul class="space-y-3">
           <li
@@ -102,12 +102,12 @@
     </section>
 
     <GlassMaterial class="flex flex-col gap-6 mx-auto md:w-max p-8 max-w-2xl text-center">
-      <h3 class="text-2xl font-bold text-cyan">{{ $t("serviceView.cta.title") }}</h3>
+      <h3 class="text-2xl font-bold text-cyan">{{ t("serviceView.cta.title") }}</h3>
       <p class="text-lg text-white-600">
-        {{ $t("serviceView.cta.description") }}
+        {{ t("serviceView.cta.description") }}
       </p>
       <SButton variant="primary" @click="onContactClick" class="text-lg px-8 py-3">
-        {{ $t("serviceView.cta.button") }}
+        {{ t("serviceView.cta.button") }}
       </SButton>
     </GlassMaterial>
   </main>

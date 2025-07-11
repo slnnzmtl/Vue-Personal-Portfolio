@@ -3,7 +3,7 @@ import { defineComponent, ref } from "vue";
 import GlassMaterial from "../ui/GlassMaterial.vue";
 import { useRouter } from "vue-router";
 import ReadMore from "../ui/ReadMore.vue";
-import { useI18n } from "vue-i18n";
+import { useTranslation } from "@/composables/useTranslation";
 
 export default defineComponent({
   name: "ServicesScreen",
@@ -13,7 +13,7 @@ export default defineComponent({
   },
   setup() {
     const router = useRouter();
-    const { t } = useI18n();
+    const { t } = useTranslation();
     const hovered = ref("");
     const active = ref(false);
 
