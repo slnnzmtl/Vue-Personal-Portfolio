@@ -197,5 +197,78 @@
   "consultationFormModal": {
     "title": "Book a free strategy session",
     "description": "Please fill this form to schedule a consultation. I will get back to you as soon as possible."
+  },
+    "serviceView": {
+    "title": "What I'm doing",
+    "intro": "My studio helps businesses grow, streamline operations, and boost revenue with tailor-made software and AI solutions — designed for scalability, automation, and measurable results.",
+    "webDevelopment": {
+      "title": "🌐 Web Development",
+      "fullStack": {
+        "title": "Full-stack Development",
+        "description": "Complete web apps (frontend & backend) with modern tech like React, Vue, Node.js."
+      },
+      "ecommerce": {
+        "title": "E-commerce Development",
+        "description": "Custom online stores, payment integration, SEO-optimized product platforms."
+      },
+      "wordpress": {
+        "title": "WordPress Development",
+        "description": "Business sites, WooCommerce, custom plugins, SEO optimization."
+      },
+      "landingPages": {
+        "title": "High-Performance Landing Pages",
+        "description": "SEO-optimized, fast-loading landing pages with best practices for lead capture."
+      },
+      "cloudServerless": {
+        "title": "Cloud-First & Serverless Applications",
+        "description": "Scalable apps on AWS, Google Cloud, Azure with modern serverless architecture."
+      },
+      "pwa": {
+        "title": "Progressive Web Apps (PWA)",
+        "description": "Cross-platform apps with offline access and mobile-first experience."
+      },
+      "uxui": {
+        "title": "UX/UI Design & Omnichannel Experience",
+        "description": "Modern, conversion-focused interfaces and seamless multi-device experiences."
+      }
+    },
+    "whyClients": {
+      "title": "🎯 Why clients choose us",
+      "reasons": {
+        "0": "Focus on measurable business value",
+        "1": "Custom-tailored solutions — no cookie-cutter templates",
+        "2": "End-to-end ownership: From idea to deployment and support",
+        "3": "Expertise in modern AI technologies & web frameworks",
+        "4": "Scalable, secure, and future-proof development"
+      }
+    },
+    "cta": {
+      "title": "📢 Let's Talk About Your Project",
+      "description": "Whether you need to build from scratch, upgrade, or integrate AI — I can help.",
+      "button": "Book a free strategy session"
+    },
+    "aiAutomation": {
+      "title": "🤖 Automation & AI Solutions",
+      "salesMarketing": {
+        "title": "AI-Powered Sales & Marketing Systems",
+        "description": "Automated lead generation, marketing funnels, chatbots to boost your conversions."
+      },
+      "generativeAI": {
+        "title": "Generative AI Integration",
+        "description": "AI content generation, chatbots, code assistants, and AI tools to enhance productivity."
+      },
+      "processAutomation": {
+        "title": "Business Process Automation",
+        "description": "Workflow automation, integrations, task reduction, and AI-based optimizations."
+      },
+      "businessIntegrations": {
+        "title": "AI Business Integrations",
+        "description": "AI tools for automation, content creation, decision-making, and CRM integrations."
+      },
+      "dataAnalytics": {
+        "title": "Data Scripting & Analytics Systems",
+        "description": "Custom parsers, monitoring dashboards, and competitive analysis tools for insights."
+      }
+    }
   }
 }

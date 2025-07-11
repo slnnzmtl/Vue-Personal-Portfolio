@@ -1,10 +1,10 @@
 <template>
   <div class="skills-container">
     <div class="px-6">
-      <h2 class="mb-8">{{$t('skillsScreen.title')}}</h2>
+      <h2 class="mb-8">{{ $t("skillsScreen.title") }}</h2>
 
       <p class="text-lg sm:text-xl mb-8 text-justify text-white-800">
-        {{$t('skillsScreen.description')}}
+        {{ $t("skillsScreen.description") }}
       </p>
     </div>
 

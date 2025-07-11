@@ -1,128 +1,120 @@
 <template>
   <main class="max-w-[1200px] w-full mx-auto pt-36 px-4">
     <header class="mb-12">
-      <h1 class="text-2xl sm:text-4xl font-bold mb-6">What I'm doing</h1>
+      <h1 class="text-2xl sm:text-4xl font-bold mb-6">{{ $t("serviceView.title") }}</h1>
       <p class="intro text-lg xl:text-xl">
-        My studio businesses grow, streamline operations, and boost revenue with
-        tailor-made software and AI solutions — designed for scalability, automation, and
-        measurable results.
+        {{ $t("serviceView.intro") }}
       </p>
     </header>
 
     <div class="grid sm:grid-cols-2 gap-6">
       <div id="web-development" class="category">
-        <h2 class="text-2xl font-bold mb-6 text-cyan">🌐 Web Development</h2>
+        <h2 class="text-2xl font-bold mb-6 text-cyan">
+          {{ $t("serviceView.webDevelopment.title") }}
+        </h2>
 
         <ServiceCard
-          title="Full-stack Development"
-          description="Complete web apps (frontend & backend) with modern tech like React, Vue, Node.js."
+          :title="$t('serviceView.webDevelopment.fullStack.title')"
+          :description="$t('serviceView.webDevelopment.fullStack.description')"
           link-to="/projects"
         />
 
         <ServiceCard
-          title="E-commerce Development"
-          description="Custom online stores, payment integration, SEO-optimized product platforms."
+          :title="$t('serviceView.webDevelopment.ecommerce.title')"
+          :description="$t('serviceView.webDevelopment.ecommerce.description')"
         />
 
         <ServiceCard
-          title="WordPress Development"
-          description="Business sites, WooCommerce, custom plugins, SEO optimization."
+          :title="$t('serviceView.webDevelopment.wordpress.title')"
+          :description="$t('serviceView.webDevelopment.wordpress.description')"
         />
 
         <ServiceCard
-          title="High-Performance Landing Pages"
-          description="SEO-optimized, fast-loading landing pages with best practices for lead capture."
+          :title="$t('serviceView.webDevelopment.landingPages.title')"
+          :description="$t('serviceView.webDevelopment.landingPages.description')"
         />
 
         <ServiceCard
-          title="Cloud-First & Serverless Applications"
-          description="Scalable apps on AWS, Google Cloud, Azure with modern serverless architecture."
+          :title="$t('serviceView.webDevelopment.cloudServerless.title')"
+          :description="$t('serviceView.webDevelopment.cloudServerless.description')"
         />
 
         <ServiceCard
-          title="Progressive Web Apps (PWA)"
-          description="Cross-platform apps with offline access and mobile-first experience."
+          :title="$t('serviceView.webDevelopment.pwa.title')"
+          :description="$t('serviceView.webDevelopment.pwa.description')"
         />
 
         <ServiceCard
-          title="UX/UI Design & Omnichannel Experience"
-          description="Modern, conversion-focused interfaces and seamless multi-device experiences."
+          :title="$t('serviceView.webDevelopment.uxui.title')"
+          :description="$t('serviceView.webDevelopment.uxui.description')"
         />
       </div>
 
       <div id="ai-automation" class="category">
-        <h2 class="text-2xl font-bold mb-6 text-cyan">🤖 Automation & AI Solutions</h2>
+        <h2 class="text-2xl font-bold mb-6 text-cyan">
+          {{ $t("serviceView.aiAutomation.title") }}
+        </h2>
 
         <ServiceCard
-          title="AI-Powered Sales & Marketing Systems"
-          description="Automated lead generation, marketing funnels, chatbots to boost your conversions."
+          :title="$t('serviceView.aiAutomation.salesMarketing.title')"
+          :description="$t('serviceView.aiAutomation.salesMarketing.description')"
           link-to="/services/ai-sales-analytics"
         />
 
         <ServiceCard
-          title="Generative AI Integration"
-          description="AI content generation, chatbots, code assistants, and AI tools to enhance productivity."
+          :title="$t('serviceView.aiAutomation.generativeAI.title')"
+          :description="$t('serviceView.aiAutomation.generativeAI.description')"
         />
 
         <ServiceCard
-          title="Business Process Automation"
-          description="Workflow automation, integrations, task reduction, and AI-based optimizations."
+          :title="$t('serviceView.aiAutomation.processAutomation.title')"
+          :description="$t('serviceView.aiAutomation.processAutomation.description')"
         />
 
         <ServiceCard
-          title="AI Business Integrations"
-          description="AI tools for automation, content creation, decision-making, and CRM integrations."
+          :title="$t('serviceView.aiAutomation.businessIntegrations.title')"
+          :description="$t('serviceView.aiAutomation.businessIntegrations.description')"
         />
 
         <ServiceCard
-          title="Data Scripting & Analytics Systems"
-          description="Custom parsers, monitoring dashboards, and competitive analysis tools for insights."
+          :title="$t('serviceView.aiAutomation.dataAnalytics.title')"
+          :description="$t('serviceView.aiAutomation.dataAnalytics.description')"
         />
       </div>
     </div>
 
     <section class="mb-12 py-12">
       <div class="mt-16 flex flex-col items-center gap-8">
-        <h2 class="text-6xl font-bold mb-6 text-cyan">🎯 Why clients choose us</h2>
+        <h2 class="text-6xl font-bold mb-6 text-cyan">
+          {{ $t("serviceView.whyClients.title") }}
+        </h2>
         <ul class="space-y-3">
-          <li class="flex items-start gap-3">
+          <li
+            class="flex items-start gap-3"
+            v-for="(reason, idx) in reasonsArray"
+            :key="idx"
+          >
             <span class="text-cyan text-xl">✔</span>
-            <span>Focus on measurable business value</span>
-          </li>
-          <li class="flex items-start gap-3">
-            <span class="text-cyan text-xl">✔</span>
-            <span>Custom-tailored solutions — no cookie-cutter templates</span>
-          </li>
-          <li class="flex items-start gap-3">
-            <span class="text-cyan text-xl">✔</span>
-            <span>End-to-end ownership: From idea to deployment and support</span>
-          </li>
-          <li class="flex items-start gap-3">
-            <span class="text-cyan text-xl">✔</span>
-            <span>Expertise in modern AI technologies & web frameworks</span>
-          </li>
-          <li class="flex items-start gap-3">
-            <span class="text-cyan text-xl">✔</span>
-            <span>Scalable, secure, and future-proof development</span>
+            <span>{{ reason }}</span>
           </li>
         </ul>
       </div>
     </section>
 
     <GlassMaterial class="flex flex-col gap-6 mx-auto md:w-max p-8 max-w-2xl text-center">
-      <h3 class="text-2xl font-bold text-cyan">📢 Let's Talk About Your Project</h3>
+      <h3 class="text-2xl font-bold text-cyan">{{ $t("serviceView.cta.title") }}</h3>
       <p class="text-lg text-white-600">
-        Whether you need to build from scratch, upgrade, or integrate AI — I can help.
+        {{ $t("serviceView.cta.description") }}
       </p>
       <SButton variant="primary" @click="onContactClick" class="text-lg px-8 py-3">
-        Book a free strategy session
+        {{ $t("serviceView.cta.button") }}
       </SButton>
     </GlassMaterial>
   </main>
 </template>
 
 <script setup lang="ts">
-import { ref } from "vue";
+import { useTranslation } from "@/composables/useTranslation";
 import GlassMaterial from "@/components/ui/GlassMaterial.vue";
 import ServiceCard from "@/components/ui/ServiceCard.vue";
 import SButton from "@/components/ui/buttons/SButton.vue";
@@ -130,6 +122,15 @@ import { useModalService } from "@/composables/useModal";
 import { ModalKey } from "@/modals/types";
 
 const { openModal } = useModalService();
+const { t } = useTranslation();
+
+const reasonsArray = [
+  t("serviceView.whyClients.reasons.0"),
+  t("serviceView.whyClients.reasons.1"),
+  t("serviceView.whyClients.reasons.2"),
+  t("serviceView.whyClients.reasons.3"),
+  t("serviceView.whyClients.reasons.4"),
+];
 
 const onContactClick = async () => {
   await openModal(ModalKey.ConsultationForm);
