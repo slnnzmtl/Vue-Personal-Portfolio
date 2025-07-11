@@ -10,7 +10,7 @@
     </header>
 
     <div class="grid sm:grid-cols-2 gap-6">
-      <div class="category">
+      <div id="web-development" class="category">
         <h2 class="text-2xl font-bold mb-6 text-cyan">🌐 Web Development</h2>
 
         <ServiceCard
@@ -50,7 +50,7 @@
         />
       </div>
 
-      <div class="category">
+      <div id="ai-automation" class="category">
         <h2 class="text-2xl font-bold mb-6 text-cyan">🤖 Automation & AI Solutions</h2>
 
         <ServiceCard

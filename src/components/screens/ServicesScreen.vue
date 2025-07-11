@@ -37,6 +37,7 @@ export default defineComponent({
     const handleCardClick = (service: typeof services[0]) => {
       router.push({
         name: "services",
+        hash: `#${service.name}`,
       });
     };
 

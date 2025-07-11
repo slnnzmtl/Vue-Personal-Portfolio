@@ -34,7 +34,7 @@ export default defineComponent({
 
 <template>
   <div
-    class="face-screen flex flex-col xl:flex-row gap-24 xl:gap-12 justify-center xl:justify-between xl:items-center px-6 w-full"
+    class="face-screen flex flex-col xl:flex-row gap-12 xl:gap-12 justify-center xl:justify-between xl:items-center px-6 w-full"
   >
     <div
       class="flex flex-col lg:flex-row gap-12 lg:gap-22 xl:gap-22 items-center mt-[150px] lg:mt-0"
