@@ -1,5 +1,5 @@
 <script lang="ts">
-import { computed, defineComponent } from "vue";
+import { computed, defineComponent, onMounted } from "vue";
 import { useRouter } from "vue-router";
 import FilterPanel from "@/components/FilterPanel/FilterPanel.vue";
 import ProjectList from "@/components/ProjectList/ProjectList.vue";
@@ -35,6 +35,9 @@ export default defineComponent({
       router.push(`/projects/${projectId}`);
     };
 
+    onMounted(() => {
+      store.setFilters(["React", "Vue 3"]);
+    });
     const projects = computed(() => {
       return filteredProjects.value.slice(0, 3);
     });
