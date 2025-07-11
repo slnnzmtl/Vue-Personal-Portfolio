@@ -110,7 +110,7 @@ const router = createRouter({
 });
 
 router.beforeEach((to, from, next) => {
-  document.title = `${to.meta.title || "Portfolio"} | Daniel Kazansky`;
+  document.title = `${to.meta.title || "Portfolio"} | Kazansky Development`;
 
   next();
 });
