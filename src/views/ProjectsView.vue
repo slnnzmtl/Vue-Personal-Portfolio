@@ -8,10 +8,11 @@
         hide-scrollbar
         @scroll="onScroll"
       >
-        <p class="text-2xl sm:text-4xl font-bold mb-8">Projects</p>
+        <p class="text-2xl sm:text-4xl font-bold mb-8">
+          {{ t("projectsScreen.title") }}
+        </p>
         <p class="text-lg xl:text-xl mb-8">
-          Here, you'll find projects I've built or contributed to. Use the filters below
-          to explore projects based on the tech stack you're interested in.
+          {{ t("projectsScreen.description") }}
         </p>
 
         <ControlPanel
@@ -66,6 +67,7 @@ import { useWindowSize } from "@/composables/useWindowSize";
 import { useNavigation } from "@/composables/useNavigation";
 import { debounce } from "@/utils/debounce";
 import { useFooter } from "@/composables";
+import { useTranslation } from "@/composables/useTranslation";
 
 const MarkupViewer = defineAsyncComponent({
   loader: () => import("@/components/MarkupViewer/MarkupViewer.vue"),
@@ -93,6 +95,8 @@ export default defineComponent({
     const { width } = useWindowSize();
     const { handleScroll } = useNavigation();
     const { hideFooter, showFooter } = useFooter();
+
+    const { t } = useTranslation();
 
     const isLgLayout = computed(() => width.value > 1024);
 
@@ -157,6 +161,8 @@ export default defineComponent({
           return;
         }
 
+        console.log("Active project changed:", current);
+
         debouncedGtag(current.title);
 
         if (isLgLayout.value) {
@@ -194,6 +200,7 @@ export default defineComponent({
       onActiveProjectChange,
       tags,
       onScroll,
+      t,
     };
   },
 });

@@ -64,16 +64,22 @@ export default defineComponent({
       </button>
 
       <div class="nav-links pl-4">
-        <router-link to="/" @click.stop="closeMenu">{{ t('navigation.home') }}</router-link>
-        <router-link to="/projects" @click.stop="closeMenu">{{ t('navigation.projects') }}</router-link>
-        <router-link to="/services" @click.stop="closeMenu">{{ t('navigation.services') }}</router-link>
+        <router-link to="/" @click.stop="closeMenu">
+          {{ t("navigation.home") }}
+        </router-link>
+        <router-link to="/projects" @click.stop="closeMenu">
+          {{ t("navigation.projects") }}
+        </router-link>
+        <router-link to="/services" @click.stop="closeMenu">
+          {{ t("navigation.services") }}
+        </router-link>
         <router-link
           to="/#hire-screen"
           active-class=""
           exact-active-class=""
           @click.stop="closeMenu"
         >
-          {{ t('navigation.contact') }}
+          {{ t("navigation.contact") }}
         </router-link>
       </div>
 

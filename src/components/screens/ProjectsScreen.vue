@@ -7,6 +7,7 @@ import ScrollableContainer from "@/components/ui/ScrollableContainer.vue";
 import { useProjectsStore } from "@/stores/projectsStore";
 import { storeToRefs } from "pinia";
 import SButton from "@/components/ui/buttons/SButton.vue";
+import { useI18n } from "vue-i18n";
 
 export default defineComponent({
   name: "ProjectsScreen",
@@ -19,6 +20,7 @@ export default defineComponent({
   setup() {
     const router = useRouter();
     const store = useProjectsStore();
+    const { t } = useI18n();
     const { filteredProjects, selectedFilters, isLoading, error, tags } = storeToRefs(
       store
     );
@@ -56,6 +58,7 @@ export default defineComponent({
       isLoading,
       error,
       showAllProjects,
+      t,
     };
   },
 });
@@ -67,13 +70,10 @@ export default defineComponent({
     <div v-else-if="error" class="error">{{ error }}</div>
     <template v-else>
       <div class="px-6">
-        <h2 class="mb-8">Projects</h2>
+        <h2 class="mb-8">{{ t("projectsScreen.title") }}</h2>
 
         <p class="text-lg sm:text-xl mb-8 text-justify text-white-800">
-          Here, you'll find projects I've built or contributed to.
-          <br />
-          Use the filters below to explore projects based on the tech stack you're
-          interested in.
+          {{ t("projectsScreen.description") }}
         </p>
 
         <FilterPanel

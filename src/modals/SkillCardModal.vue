@@ -9,11 +9,11 @@
             </div>
           </div>
           <div class="skill-card-modal-title">
-            {{ skill?.title }}
+            {{ t(skill?.title) }}
           </div>
         </div>
         <div class="skill-card-modal-description">
-          {{ skill?.description }}
+          {{ t(skill?.description) }}
         </div>
         <div class="skill-card-modal-strategies">
           <div
@@ -22,7 +22,7 @@
             :key="strategy"
           >
             <span class="bullet-icon" aria-hidden="true">•</span>
-            <span>{{ strategy }}</span>
+            <span>{{ t(strategy) }}</span>
           </div>
         </div>
       </div>
@@ -37,6 +37,7 @@ import { defineComponent, computed } from "vue";
 import productDeliverySteps from "@/assets/product-delivery-steps.json";
 import SIcon from "@/components/ui/SIcon.vue";
 import { IconName } from "@/types/icons";
+import { useTranslation } from "@/composables/useTranslation";
 
 interface Skill {
   id: string;
@@ -61,6 +62,8 @@ export default defineComponent({
     },
   },
   setup(props, { emit }) {
+    const { t } = useTranslation();
+
     const closeModal = () => {
       emit("close");
     };
@@ -74,6 +77,7 @@ export default defineComponent({
     return {
       closeModal,
       skill,
+      t,
     };
   },
 });

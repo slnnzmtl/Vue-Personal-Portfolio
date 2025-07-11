@@ -3,6 +3,7 @@ import { defineComponent, ref } from "vue";
 import GlassMaterial from "../ui/GlassMaterial.vue";
 import { useRouter } from "vue-router";
 import ReadMore from "../ui/ReadMore.vue";
+import { useI18n } from "vue-i18n";
 
 export default defineComponent({
   name: "ServicesScreen",
@@ -12,22 +13,21 @@ export default defineComponent({
   },
   setup() {
     const router = useRouter();
+    const { t } = useI18n();
     const hovered = ref("");
     const active = ref(false);
 
     const services = [
       {
-        title: "Web Development",
-        description:
-          "Creating modern web applications and websites using the latest technologies",
+        title: t("services.webDevelopment.title"),
+        description: t("services.webDevelopment.description"),
         icon: "💻",
         path: "/services",
         name: "web-development",
       },
       {
-        title: "AI & Automation Systems",
-        description:
-          "Development of intelligent automation systems and artificial intelligence for your business",
+        title: t("services.aiAutomation.title"),
+        description: t("services.aiAutomation.description"),
         icon: "🤖",
         path: "/services",
         name: "ai-automation",

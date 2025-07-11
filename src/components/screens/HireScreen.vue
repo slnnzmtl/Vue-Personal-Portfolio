@@ -12,7 +12,7 @@ export default defineComponent({
 
 <template>
   <div class="hire-screen px-4 text-center mx-auto">
-    <ReadyToWorkTogether title="Ready to Work Together?">
+    <ReadyToWorkTogether>
       <div class="flex flex-col items-center">
         <HireMeButton class="w-max" />
       </div>

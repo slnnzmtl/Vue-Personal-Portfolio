@@ -1,10 +1,10 @@
 <template>
   <div class="skills-container">
     <div class="px-6">
-      <h2 class="mb-8">Technology stack</h2>
+      <h2 class="mb-8">{{$t('skillsScreen.title')}}</h2>
 
       <p class="text-lg sm:text-xl mb-8 text-justify text-white-800">
-        I work with many technologies, covering every detail of web development.
+        {{$t('skillsScreen.description')}}
       </p>
     </div>
 
