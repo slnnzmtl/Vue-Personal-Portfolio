@@ -1,6 +1,6 @@
 <template>
   <GlassMaterial
-    :class="['service-card p-6 mb-4', { 'has-link': hasLink }]"
+    :class="['service-card p-6', { 'has-link': hasLink }]"
     @click="handleClick"
     @mouseenter="onMouseEnter"
     @mouseleave="onMouseLeave"

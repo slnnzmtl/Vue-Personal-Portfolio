@@ -8,8 +8,8 @@
     </header>
 
     <div class="grid sm:grid-cols-2 gap-6">
-      <div id="web-development" class="category">
-        <h2 class="text-2xl font-bold mb-6 text-cyan">
+      <div id="web-development" class="category flex flex-col gap-6">
+        <h2 class="text-2xl font-bold text-cyan">
           {{ t("serviceView.webDevelopment.title") }}
         </h2>
 
@@ -50,8 +50,8 @@
         />
       </div>
 
-      <div id="ai-automation" class="category">
-        <h2 class="font-bold mb-6 text-cyan">
+      <div id="ai-automation" class="category flex flex-col gap-6">
+        <h2 class="font-bold text-cyan">
           {{ t("serviceView.aiAutomation.title") }}
         </h2>
 
@@ -83,8 +83,8 @@
       </div>
     </div>
 
-    <section class="mb-12 py-12">
-      <div class="mt-16 flex flex-col items-center gap-8">
+    <section class="my-36">
+      <div class="flex flex-col items-center gap-8">
         <h2 class="text-6xl font-bold mb-6 text-cyan">
           {{ t("serviceView.whyClients.title") }}
         </h2>
