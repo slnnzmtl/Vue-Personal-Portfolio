@@ -1,7 +1,9 @@
 <script lang="ts">
 import GlassMaterial from "@/components/ui/GlassMaterial.vue";
+import LanguageSwitcher from "@/components/ui/LanguageSwitcher.vue";
 import { useModalService } from "@/composables/useModal";
 import { useNavigation } from "@/composables/useNavigation";
+import { useTranslation } from "@/composables/useTranslation";
 import { ModalKey } from "@/modals/types";
 import { defineComponent, defineAsyncComponent, computed } from "vue";
 
@@ -15,6 +17,7 @@ export default defineComponent({
   components: {
     HireMeButton,
     GlassMaterial,
+    LanguageSwitcher,
   },
   setup() {
     const { openModal } = useModalService();
@@ -26,6 +29,7 @@ export default defineComponent({
       closeMenu,
       showMenu,
     } = useNavigation();
+    const { t } = useTranslation();
 
     const menuClasses = computed(() => ({
       "menu-open": isMenuOpen.value,
@@ -44,6 +48,7 @@ export default defineComponent({
       toggleMenu,
       closeMenu,
       onModalOpen,
+      t,
     };
   },
 });
@@ -59,17 +64,21 @@ export default defineComponent({
       </button>
 
       <div class="nav-links pl-4">
-        <router-link to="/" @click.stop="closeMenu"> Main </router-link>
-        <router-link to="/projects" @click.stop="closeMenu"> Portfolio </router-link>
-        <router-link to="/services" @click.stop="closeMenu"> Services </router-link>
+        <router-link to="/" @click.stop="closeMenu">{{ t('navigation.home') }}</router-link>
+        <router-link to="/projects" @click.stop="closeMenu">{{ t('navigation.projects') }}</router-link>
+        <router-link to="/services" @click.stop="closeMenu">{{ t('navigation.services') }}</router-link>
         <router-link
           to="/#hire-screen"
           active-class=""
           exact-active-class=""
           @click.stop="closeMenu"
         >
-          Contacts
+          {{ t('navigation.contact') }}
         </router-link>
+      </div>
+
+      <div class="language-switcher-container">
+        <LanguageSwitcher />
       </div>
 
       <div class="hire-button">
@@ -126,6 +135,12 @@ nav {
       right: 18px;
     }
 
+    .language-switcher-container {
+      position: absolute;
+      top: 10px;
+      right: 120px;
+    }
+
     &.menu-open {
       height: 100vh;
       padding-bottom: 2rem;
@@ -150,6 +165,14 @@ nav {
         width: 100%;
         margin: 0;
         inset: 0;
+        margin-top: 1rem;
+      }
+
+      .language-switcher-container {
+        position: relative;
+        display: flex;
+        justify-content: center;
+        width: 100%;
         margin-top: 1rem;
       }
     }
@@ -184,6 +207,10 @@ nav {
     transition: all 1s cubic-bezier(0.4, 0, 0.2, 1);
     border-radius: 30px;
     padding: 0 1rem;
+  }
+
+  .language-switcher-container {
+    margin-right: 1rem;
   }
 
   .burger-button {

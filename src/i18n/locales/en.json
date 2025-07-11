@@ -1,0 +1,71 @@
+{
+  "common": {
+    "readMore": "Read More",
+    "close": "Close",
+    "back": "Back",
+    "next": "Next",
+    "previous": "Previous",
+    "loading": "Loading...",
+    "error": "Error",
+    "success": "Success",
+    "cancel": "Cancel",
+    "confirm": "Confirm",
+    "save": "Save",
+    "edit": "Edit",
+    "delete": "Delete",
+    "search": "Search",
+    "filter": "Filter",
+    "reset": "Reset",
+    "submit": "Submit",
+    "contact": "Contact",
+    "about": "About",
+    "home": "Home",
+    "services": "Services",
+    "projects": "Projects",
+    "blog": "Blog",
+    "skills": "Skills"
+  },
+  "navigation": {
+    "home": "Home",
+    "about": "About",
+    "services": "Services",
+    "projects": "Projects",
+    "blog": "Blog",
+    "contact": "Contact"
+  },
+  "serviceCard": {
+    "title": "Service",
+    "description": "Service description"
+  },
+  "footer": {
+    "copyright": "© 2025 All rights reserved",
+    "privacy": "Privacy Policy",
+    "terms": "Terms of Service"
+  },
+  "forms": {
+    "name": "Name",
+    "email": "Email",
+    "message": "Message",
+    "phone": "Phone",
+    "company": "Company",
+    "subject": "Subject",
+    "send": "Send",
+    "required": "This field is required",
+    "invalidEmail": "Please enter a valid email address",
+    "messageSent": "Message sent successfully",
+    "messageError": "Failed to send message"
+  },
+  "consultation": {
+    "title": "Book a Consultation",
+    "description": "Get expert advice tailored to your needs",
+    "book": "Book Now",
+    "free": "Free",
+    "duration": "Duration: {duration} minutes"
+  },
+  "hire": {
+    "title": "Hire Me",
+    "description": "Let's work together on your next project",
+    "contact": "Get in Touch",
+    "available": "Available for hire"
+  }
+}
