@@ -62,8 +62,7 @@ export default defineComponent({
 
     const renderedContent = computed(() => {
       if (props.activeProject && props.activeProject.html) {
-        // return marked(t(props.activeProject.html));
-        return "";
+        return marked(t(props.activeProject.html));
       }
       return "";
     });
