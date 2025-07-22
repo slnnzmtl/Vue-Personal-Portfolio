@@ -7,7 +7,7 @@ services:
     ports:
       - "5173"
     environment:
-      - VIRTUAL_HOST=dev.slnnzmtl.xyz
+      - VIRTUAL_HOST=localhost,dev.slnnzmtl.xyz,stage.kazansky.dev
     networks:
       - nginx-proxy
     deploy:
