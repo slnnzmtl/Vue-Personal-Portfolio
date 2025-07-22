@@ -14,6 +14,7 @@ export default defineConfig({
     watch: {
       usePolling: true,
     },
+    allowHosts: ["localhost", "dev.slnnzmtl.xyz", "kazansky.dev", "stage.kazansky.dev"],
     cors: true,
     headers: {
       "Access-Control-Allow-Origin": "*",
