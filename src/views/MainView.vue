@@ -20,9 +20,6 @@
 import { defineComponent, ref, onMounted, defineAsyncComponent } from "vue";
 import FaceScreen from "@/components/screens/FaceScreen.vue";
 import { useProjectsStore } from "@/stores/projectsStore";
-import WorkflowScreen from "@/components/screens/WorkflowScreen.vue";
-import SkillsScreen from "@/components/screens/SkillsScreen.vue";
-import HireMeButton from "@/components/ui/buttons/HireMeButton.vue";
 import { useModalService } from "@/composables";
 import { ModalKey } from "@/modals/types";
 
@@ -33,6 +30,18 @@ const ProjectsScreen = defineAsyncComponent({
 const HireScreen = defineAsyncComponent(
   () => import("@/components/screens/HireScreen.vue")
 );
+
+const SkillsScreen = defineAsyncComponent({
+  loader: () => import("@/components/screens/SkillsScreen.vue"),
+});
+
+const WorkflowScreen = defineAsyncComponent({
+  loader: () => import("@/components/screens/WorkflowScreen.vue"),
+});
+
+const HireMeButton = defineAsyncComponent({
+  loader: () => import("@/components/ui/buttons/HireMeButton.vue"),
+});
 
 export default defineComponent({
   name: "MainView",

@@ -15,7 +15,7 @@ interface FooterService {
 
 const createState = (): FooterState => {
   const state: FooterState = {
-    isFooterVisible: ref(true),
+    isFooterVisible: ref(false),
   };
   return state;
 };

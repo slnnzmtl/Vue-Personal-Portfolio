@@ -1,12 +1,12 @@
 <script lang="ts">
 import { defineComponent } from "vue";
-import SocialLinks from "@/components/SocialLinks/SocialLinks.vue";
-import GlassMaterial from "@/components/ui/GlassMaterial.vue";
-import AuthorAvatar from "@/components/AuthorAvatar.vue";
 import { ModalKey } from "@/modals/types";
 import { useModalService } from "@/composables";
 import HireMeButton from "../ui/buttons/HireMeButton.vue";
 import SButton from "../ui/buttons/SButton.vue";
+import SocialLinks from "@/components/SocialLinks/SocialLinks.vue";
+import GlassMaterial from "@/components/ui/GlassMaterial.vue";
+import AuthorAvatar from "@/components/AuthorAvatar.vue";
 import ServicesScreen from "./ServicesScreen.vue";
 
 export default defineComponent({
@@ -104,6 +104,7 @@ export default defineComponent({
   @media (min-width: 1024px) {
     grid-template-columns: 30% 1fr;
     grid-template-rows: 1fr;
+    margin: 0;
   }
 
   &__position {
