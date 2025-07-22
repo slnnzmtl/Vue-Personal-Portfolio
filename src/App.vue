@@ -4,6 +4,7 @@ import { provideModalService } from "@/composables/useModal";
 import { provideNavigationService } from "@/composables/useNavigation";
 import { provideFooterService } from "@/composables/useFooter";
 import LoadingIndicator from "./components/ui/LoadingIndicator.vue";
+import { useRoute } from "vue-router";
 
 const BackgroundWrapper = defineAsyncComponent({
   loader: () => import("@/components/BackgroundWrapper.vue"),
@@ -36,17 +37,15 @@ export default defineComponent({
     const footerService = provideFooterService();
     const showModalProvider = ref(false);
     const { showFooter, isFooterVisible } = footerService;
+    const route = useRoute();
 
     onMounted(() => {
       window.dispatchEvent(new Event("scroll"));
 
       setTimeout(() => {
         showModalProvider.value = true;
-      }, 1500);
-
-      setTimeout(() => {
-        showFooter();
-      }, 5000);
+        route.name !== "projects" && showFooter();
+      }, 2000);
     });
 
     return {

@@ -141,7 +141,6 @@ export default defineComponent({
       }
 
       projectsStore.clearFilters();
-      showFooter();
     });
 
     const onScroll = (e: Event) => {

@@ -1,17 +1,27 @@
 <template>
   <div class="main-view flex flex-col gap-24 w-full">
     <FaceScreen class="mt-30 max-w-screen-2xl w-full mx-auto" />
-    <ProjectsScreen class="max-w-screen-2xl mx-auto" />
-    <WorkflowScreen class="max-w-screen-2xl w-full mx-auto" />
+    <ProjectsScreen class="max-w-screen-2xl mx-auto animate-fade-in" />
+    <WorkflowScreen
+      v-if="showWorkflowScreen"
+      class="max-w-screen-2xl w-full mx-auto animate-fade-in"
+    />
 
-    <HireMeButton @click="handleConsultationForm" class="w-max mx-auto" />
+    <HireMeButton
+      v-if="showWorkflowScreen"
+      @click="handleConsultationForm"
+      class="w-max mx-auto animate-fade-in"
+    />
 
-    <SkillsScreen class="max-w-screen-2xl w-full mx-auto" />
+    <SkillsScreen
+      v-if="showSkillsScreen"
+      class="max-w-screen-2xl w-full mx-auto animate-fade-in"
+    />
 
     <HireScreen
       v-if="showHireScreen"
-      class="max-w-screen-2xl w-full mx-auto"
-      id="hire-screen"
+      class="max-w-screen-2xl w-full mx-auto animate-fade-in"
+      id="hire-screen "
     />
   </div>
 </template>
@@ -60,6 +70,8 @@ export default defineComponent({
 
     const projectsStore = useProjectsStore();
     const showHireScreen = ref(false);
+    const showWorkflowScreen = ref(false);
+    const showSkillsScreen = ref(false);
 
     const loadProjects = async () => {
       await projectsStore.fetchProjects();
@@ -73,12 +85,22 @@ export default defineComponent({
       loadProjects();
 
       setTimeout(() => {
+        showWorkflowScreen.value = true;
+      }, 500);
+
+      setTimeout(() => {
+        showSkillsScreen.value = true;
+      }, 1000);
+
+      setTimeout(() => {
         showHireScreen.value = true;
-      }, 100);
+      }, 1000);
     });
 
     return {
       showHireScreen,
+      showWorkflowScreen,
+      showSkillsScreen,
       handleConsultationForm,
     };
   },
@@ -89,5 +111,20 @@ export default defineComponent({
 .main-view {
   position: relative;
   z-index: 1;
+}
+
+@keyframes fade-in {
+  from {
+    opacity: 0;
+    transform: translateY(2rem);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.animate-fade-in {
+  animation: fade-in 0.8s ease-out forwards;
 }
 </style>
