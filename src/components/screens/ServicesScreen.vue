@@ -60,7 +60,7 @@ export default defineComponent({
       onMouseEnter,
       onMouseLeave,
       isHovered,
-      t
+      t,
     };
   },
 });
@@ -69,13 +69,11 @@ export default defineComponent({
 <template>
   <section class="bg-background">
     <div class="mx-auto flex flex-col gap-12">
-      <!-- <h2 class="text-3xl md:text-4xl font-bold text-center px-4">What I am doing</h2> -->
-
       <div class="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-1 gap-6 mx-auto">
         <GlassMaterial
           v-for="service in services"
           :key="service.title"
-          class="service-card cursor-pointer p-6 text-center flex flex-col gap-3 xl:max-w-[350px]"
+          class="service-card cursor-pointer p-6 text-center flex flex-col gap-3 lg:max-w-[350px]"
           @click="handleCardClick(service)"
           @mouseenter="onMouseEnter(service.name)"
           @mouseleave="onMouseLeave"

@@ -59,7 +59,7 @@ export default defineComponent({
           empowering businesses to thrive in the digital age.
         </p> -->
 
-        <GlassMaterial class="max-w-[600px] p-4 mx-4 md:mx-0 mb-4 w-full lg:w-auto">
+        <GlassMaterial class="max-w-[600px] p-4 mb-4 w-full lg:w-auto">
           <SocialLinks title="Contact me:" />
         </GlassMaterial>
 

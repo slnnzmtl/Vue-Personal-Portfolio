@@ -58,10 +58,10 @@ export default defineComponent({
 </script>
 
 <template>
-  <div>
+  <div class="app-container">
     <BackgroundWrapper />
     <ModalProvider v-if="showModalProvider" />
-    <NavigationMenu class="animate-fade-in" />
+    <NavigationMenu />
 
     <LoadingIndicator v-if="!showModalProvider" />
 
@@ -89,6 +89,10 @@ export default defineComponent({
 :root {
   background-color: black;
   @extend %scrollbar-tidy;
+}
+
+.app-container {
+  overflow: hidden;
 }
 
 @keyframes fade-in {
